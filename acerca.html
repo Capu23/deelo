@@ -13,7 +13,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Poppins:wght@400;600;700&display=swap">
 <style>
 :root{--bg:#eef2f1;--paper:#fff;--ink:#17203a;--ink2:#4f5a73;--rule:#e1e6ec;--green:#17865a;--brand-navy:#1b2440;--brand-green:#46c48a}
-@media (prefers-color-scheme:dark){:root{--bg:#0c1220;--paper:#151d31;--ink:#e9edf7;--ink2:#a8b2c8;--rule:#243049;--green:#6fdcaa;--brand-navy:#d3dbef;--brand-green:#5fd39c;color-scheme:dark}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1220;--paper:#151d31;--ink:#e9edf7;--ink2:#a8b2c8;--rule:#243049;--green:#6fdcaa;--brand-navy:#d3dbef;--brand-green:#5fd39c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0c1220;--paper:#151d31;--ink:#e9edf7;--ink2:#a8b2c8;--rule:#243049;--green:#6fdcaa;--brand-navy:#d3dbef;--brand-green:#5fd39c;color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:'Poppins',system-ui,sans-serif;font-size:15.5px;line-height:1.65}
 .wrap{max-width:720px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
@@ -28,6 +29,7 @@ a{color:var(--green)}
 .back{display:inline-block;margin-top:22px;font-weight:600}
 small{color:var(--ink2)}
 </style>
+<script>try{var t=localStorage.getItem('deelo-tema');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 </head>
 <body>
 <div class="wrap">

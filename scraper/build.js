@@ -32,6 +32,7 @@ const REGLAS = [
   [/supervielle/, 'supervielle'], [/icbc/, 'icbc'], [/ciudad(?!ania)/, 'ciudad'], [/patagonia/, 'patagonia'],
   [/comafi/, 'comafi'], [/credicoop/, 'credicoop'], [/hipotecario/, 'hipotecario'], [/columbia/, 'columbia'],
   [/cuenta digital|carrefour banco|carrefour-credito|credito\.png/, 'carrefourbanco'],
+  [/^\s*(jumbo |disco )?prime\+?\s*$|^socios? prime/, 'prime'],
   [/cenco ?pay/, 'cencopay'], [/comunidad/, 'comunidadcoto'], [/visa.*nfc|nfc.*visa|logo_visa/, 'visanfc'], [/personal_pay/, 'personalpay'],
   [/jubilad|anses|mayores de 60/, 'anses'], [/tarjetascredito|con tarjetas de credito\.?$/, 'credito'],
 ];
@@ -114,6 +115,7 @@ for (const x of raw.promos) {
     if (ent === 'supervielle' && /jubilad/i.test(x.texto.slice(0, 200))) p.medio = 'Débito de jubilados Supervielle';
     if (/presencial/i.test(x.texto.slice(0, 300)) && !canal) p.canal = 'presencial';
     if (ent === 'anses' || /jubilad/i.test(x.texto.slice(0, 200))) p.req = 'jubilado';
+    if (/socios? prime\b|\bprime\+/i.test(x.texto) && ent !== 'prime') p.req = 'Prime';
     if (ent === 'modo') p.bancos = MODO;
     if (/plan (inicial|turbo|epico)/.test(norm(x.texto))) p.plan = 'naranja';
     add(p, x);

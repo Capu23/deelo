@@ -219,6 +219,13 @@
    "m": "TC",
    "c": "#5b6478",
    "hint": "Se activa sola si marcaste alguna tarjeta de crédito"
+  },
+  "prime": {
+   "n": "Prime+ (Jumbo y Disco)",
+   "t": "programa",
+   "m": "P+",
+   "c": "#5b2d8e",
+   "hint": "Suscripción de Cencosud: algunas promos son solo para socios"
   }
  },
  "tarjetas": {
