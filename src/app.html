@@ -103,7 +103,10 @@ dialog#authDlg::backdrop{background:rgba(12,18,32,.55);backdrop-filter:blur(2px)
 
 /* ---------- bottom nav (mobile) ---------- */
 .bottomNav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(12px);border-top:1px solid var(--rule);display:flex;justify-content:space-around;padding:6px max(16px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
-.bottomNav button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11.5px;font-weight:600;color:var(--ink3);padding:6px 14px;border-radius:12px;cursor:pointer}
+.bottomNav button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:600;color:var(--ink3);padding:6px 4px;border-radius:12px;cursor:pointer;flex:1;min-width:0;white-space:nowrap}
+.bottomNav .ico{position:relative;display:inline-grid}
+.cbadge{display:inline-grid;place-items:center;min-width:17px;height:17px;padding:0 4px;border-radius:99px;background:var(--green);color:var(--green-ink);font-size:10.5px;font-weight:800;line-height:1;margin-left:6px}
+.bottomNav .cbadge{position:absolute;top:-6px;right:-10px;margin:0;box-shadow:0 0 0 2px var(--paper)}
 .bottomNav svg{width:22px;height:22px}
 .bottomNav button[aria-current="page"]{color:var(--ink)}
 .bottomNav button[aria-current="page"] svg{color:var(--green)}
@@ -259,6 +262,31 @@ details.others[open] summary{margin-bottom:10px}
 .px.na{opacity:.55}
 .pxMore{border:0;background:none;color:var(--green-text);font-weight:600;font-size:13px;padding:10px 14px;cursor:pointer;width:100%;text-align:left;border-top:1px solid var(--rule)}
 
+/* ---------- carrito ---------- */
+.cadd{border:1.5px solid var(--green);background:transparent;color:var(--green-text);border-radius:999px;padding:6px 12px;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap}
+.qty{display:inline-flex;align-items:center;border:1.5px solid var(--green);border-radius:999px;overflow:hidden}
+.qty button{border:0;background:var(--green-soft);color:var(--green-text);width:30px;height:30px;font-size:17px;font-weight:700;cursor:pointer}
+.qty span{min-width:28px;text-align:center;font-weight:700;font-size:14px}
+.prod .acts{display:flex;justify-content:flex-end;padding:0 14px 12px}
+.rk{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:14px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center}
+.rk.best{border-color:var(--green);box-shadow:0 0 0 3px var(--green-soft),var(--shadow)}
+.rk .t{display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px;min-width:0}
+.rk .tot{text-align:right}
+.rk .tot b{font-size:21px;font-weight:800;letter-spacing:-.02em}
+.rk.best .tot b{color:var(--green-text)}
+.rk .tot s{display:block;font-size:12px;color:var(--ink3)}
+.rk .d{grid-column:1/-1;font-size:13px;color:var(--ink2);display:flex;flex-direction:column;gap:2px}
+.rk .d .g{color:var(--green-text);font-weight:600}
+.rk .d .w{color:var(--warn)}
+.split{background:var(--sunk);border-radius:var(--r);padding:12px 14px;font-size:13.5px;color:var(--ink2)}
+.split b{color:var(--ink)}
+.ci{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 14px;border-top:1px solid var(--rule)}
+.ci:first-child{border-top:0}
+.ci .cimg{width:44px;height:44px;border-radius:8px;background:var(--sunk);overflow:hidden;display:block}
+.ci img{width:44px;height:44px;object-fit:contain;background:#fff;display:block}
+.ci .nm{font-size:13.5px;font-weight:600;line-height:1.3}
+.ci .nm small{display:block;font-weight:500;color:var(--ink3);font-size:12px}
+
 /* ---------- mis tarjetas ---------- */
 .group{display:flex;flex-direction:column;gap:10px}
 .group h3{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3)}
@@ -342,6 +370,7 @@ details.others[open] summary{margin-bottom:10px}
       <button data-go="hoy">Mi semana</button>
       <button data-go="tarjetas">Mis tarjetas</button>
       <button data-go="precios">Precios</button>
+      <button data-go="carrito">Carrito<span class="cbadge" data-cbadge hidden></span></button>
       <button data-go="todas">Todas las promos</button>
     </nav>
     <div class="topRight">
@@ -415,6 +444,18 @@ details.others[open] summary{margin-bottom:10px}
     <div class="col" style="gap:10px" id="pxList"></div>
   </main>
 
+  <!-- ===== CARRITO ===== -->
+  <main id="view-carrito" class="col" style="gap:16px" hidden>
+    <div class="secHead">
+      <div class="col" style="gap:4px"><h2>Tu carrito</h2><p class="muted" style="font-size:13.5px" id="cxSub"></p></div>
+      <button class="btn ghost" id="cxVaciar" hidden>Vaciar</button>
+    </div>
+    <div class="fscroll" id="cxDays" role="group" aria-label="Día de compra"></div>
+    <div id="cxModo"></div>
+    <section class="col" style="gap:10px" id="cxRank" aria-label="Dónde te conviene"></section>
+    <section class="col" style="gap:10px"><h3 style="font-size:15px" id="cxItemsTitle">Productos</h3><div class="prod" id="cxItems"></div></section>
+  </main>
+
   <!-- ===== TODAS ===== -->
   <main id="view-todas" class="col" hidden>
     <div class="secHead"><h2>Todas las promos</h2><span class="count" id="allCount"></span></div>
@@ -439,6 +480,7 @@ details.others[open] summary{margin-bottom:10px}
   <button data-go="hoy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Mi semana</button>
   <button data-go="tarjetas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="13" rx="2.5"/><path d="M2.5 10.5h19M6 15h4"/></svg>Mis tarjetas</button>
   <button data-go="precios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>Precios</button>
+  <button data-go="carrito"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h2.6l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1l1.6-6.8H6.2"/></svg><span class="cbadge" data-cbadge hidden></span></span>Carrito</button>
   <button data-go="todas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Todas</button>
 </nav>
 
@@ -2889,7 +2931,7 @@ details.others[open] summary{margin-bottom:10px}
     save(); renderEnts(); renderAll();
     const again = document.getElementById(t.id); if(again) again.focus();
   });
-  document.getElementById('clearProfile').addEventListener('click', () => { P = {ents:{}, jubilado:false, online:false, supers:[]}; save(); renderEnts(); renderAll(); });
+  document.getElementById('clearProfile').addEventListener('click', () => { P = {ents:{}, jubilado:false, online:false, supers:[], carrito:P.carrito || []}; save(); renderEnts(); renderAll(); });
 
   // ---------- render: todas ----------
   let supFilter = null, dayFilter = 0, soloMias = null;
@@ -2950,11 +2992,17 @@ details.others[open] summary{margin-bottom:10px}
   // ---------- precios ----------
   let PX = null, pxCat = '', pxDay = null, pxCargando = false, pxModo = null; // pxModo: 'mias' (con mis tarjetas) | 'lista'
   const normTxt = t => String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  async function cargarPrecios(){
-    if(PX || pxCargando) return; pxCargando = true;
-    try{ const r = await fetch('data/precios.json', {cache:'no-cache'}); if(!r.ok) throw 0; PX = await r.json(); PX.productos.forEach(p => p.k = normTxt(p.n + ' ' + p.c)); }
-    catch(e){ document.getElementById('pxSub').textContent = 'No pudimos cargar los precios. Probá recargar la página.'; }
-    pxCargando = false; renderPrecios();
+  let pxProm = null;
+  function cargarPrecios(){
+    if(PX) return Promise.resolve();
+    if(pxProm) return pxProm;
+    pxCargando = true;
+    pxProm = (async () => {
+      try{ const r = await fetch('data/precios.json', {cache:'no-cache'}); if(!r.ok) throw 0; PX = await r.json(); PX.productos.forEach(p => p.k = normTxt(p.n + ' ' + p.c)); }
+      catch(e){ document.getElementById('pxSub').textContent = 'No pudimos cargar los precios. Probá recargar la página.'; document.getElementById('cxSub').textContent = 'No pudimos cargar los precios. Probá recargar la página.'; }
+      pxCargando = false; if(PX && !document.getElementById('view-precios').hidden) renderPrecios();
+    })();
+    return pxProm;
   }
   // Mejor descuento que podés usar en ese súper ese día (solo % por promo; no contempla topes ni exclusiones por producto).
   function mejorDescuento(s, d){
@@ -3004,7 +3052,7 @@ details.others[open] summary{margin-bottom:10px}
           <span class="w">${sbadge(x.s)}<span>${esc(D.supers[x.s].n)}${x === best ? '<span class="tag">Más barato</span>' : ''}<span class="why${x.pr ? '' : ' off'}">${!x.disp ? 'Sin stock online' : x.pr ? `−${x.pr.pct}% con ${esc(entName(x.pr))}${x.via ? ' (' + esc(x.via.map(b => D.entidades[b].n).join(', ')) + ')' : ''}` : pxModo === 'mias' ? 'Sin descuento con tus tarjetas ese día' : (x.lista ? 'En oferta del súper' : '')}</span></span></span>
           <span class="pr"><b>${fmt(x.fin)}</b>${x.pr || x.lista ? `<s>${fmt(x.pr ? x.precio : x.lista)}</s>` : ''}</span></a>`;
       return `<article class="prod"><div class="ph">${p.i ? `<img src="${esc(p.i.replace(/(\/ids\/\d+)\//, '$1-120-120/'))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<span class="ni"><b>${esc(p.n)}</b><small>${esc(p.c)} · ${fs.length} súper</small></span>${ahorro >= 1 ? `<span class="save" title="En ${esc(D.supers[best.s].n)}: ${fmt(orig)} → ${fmt(best.fin)}">Ahorrás<br><b>${fmt(ahorro)}</b><br><small>en ${esc(D.supers[best.s].n)}</small></span>` : ''}</div>
-        ${fs.slice(0, 4).map(row).join('')}${fs.length > 4 ? `<details><summary class="pxMore">Ver los ${fs.length}</summary>${fs.slice(4).map(row).join('')}</details>` : ''}</article>`;
+        ${fs.slice(0, 4).map(row).join('')}${fs.length > 4 ? `<details><summary class="pxMore">Ver los ${fs.length}</summary>${fs.slice(4).map(row).join('')}</details>` : ''}<div class="acts" style="padding-top:10px;border-top:1px solid var(--rule)">${qtyCtrl(p.e)}</div></article>`;
     }).join('') : `<div class="empty">No encontramos ese producto. Probá con otra palabra, por ejemplo la marca.</div>`);
   }
   let pxT = null;
@@ -3014,6 +3062,100 @@ details.others[open] summary{margin-bottom:10px}
     const xs = ev.target.closest('[data-pxs]'); if(xs){ const k = xs.dataset.pxs; if(!k) P.supers = []; else { const cur = (P.supers && P.supers.length) ? P.supers : []; P.supers = cur.includes(k) ? cur.filter(x => x !== k) : [...cur, k]; } save(); renderSupPrefs(); renderAll(); return; }
     const pm = ev.target.closest('[data-pm]'); if(pm){ pxModo = pm.dataset.pm; renderPrecios(); return; }
     const d = ev.target.closest('[data-pd]'); if(d){ const [y,m,dd] = d.dataset.pd.split('-').map(Number); pxDay = new Date(y, m-1, dd); renderPrecios(); }
+  });
+
+  // ---------- carrito ----------
+  // P.carrito: [{e: EAN, q: cantidad, n: nombre}] — se guarda con el perfil (y en la cuenta, si hay sesión)
+  const cart = () => (P.carrito = Array.isArray(P.carrito) ? P.carrito : []);
+  const cantidad = e => (cart().find(x => x.e === e) || {}).q || 0;
+  function setCant(e, q, nombre){
+    const c = cart(), it = c.find(x => x.e === e);
+    if(q <= 0) P.carrito = c.filter(x => x.e !== e);
+    else if(it) it.q = Math.min(q, 99);
+    else c.push({e, q: 1, n: nombre || ''});
+    save(); pintarBadge();
+  }
+  function pintarBadge(){
+    const n = cart().reduce((a,x) => a + x.q, 0);
+    document.querySelectorAll('[data-cbadge]').forEach(b => { b.hidden = !n; b.textContent = n > 99 ? '99+' : n; });
+  }
+  const qtyCtrl = e => { const q = cantidad(e); return q ? `<span class="qty"><button data-cq="${e}" data-d="-1" aria-label="Quitar uno">−</button><span>${q}</span><button data-cq="${e}" data-d="1" aria-label="Agregar uno">+</button></span>` : `<button class="cadd" data-cadd="${e}">+ Carrito</button>`; };
+  let cxDay = null;
+  // Mejor promo para un TOTAL de compra en ese súper: la que más ahorra respetando tope y mínimo.
+  function mejorPromoTotal(s, d, total){
+    if(pxModo !== 'mias' || !hasProfile()) return null;
+    let best = null;
+    D.promos.forEach(pr => {
+      if(!pr.sup.includes(s) || !aplicaEn(pr, d) || pr.canal === 'online') return;
+      const m = match(pr); if(!m.ok) return;
+      if(pr.min && total < pr.min) return;
+      let v = total * pr.pct / 100, cap = false;
+      if(pr.tope && typeof pr.tope === 'object' && v > pr.tope.m){ v = pr.tope.m; cap = true; }
+      if(!best || v > best.v) best = {pr, v, cap, via: m.via};
+    });
+    return best;
+  }
+  function renderCarrito(){
+    pintarBadge();
+    if(!PX){ document.getElementById('cxSub').textContent = 'Cargando precios…'; if(!pxProm) cargarPrecios().then(() => { if(PX) renderCarrito(); }); return; }
+    if(!cxDay) cxDay = new Date(TODAY);
+    if(!hasProfile()) pxModo = 'lista'; else if(!pxModo) pxModo = 'mias';
+    const items = cart().map(x => ({...x, p: PX.productos.find(p => p.e === x.e)})).filter(x => x.p);
+    const unidades = items.reduce((a,x) => a + x.q, 0);
+    document.getElementById('cxSub').textContent = items.length ? `${items.length} ${items.length === 1 ? 'producto' : 'productos'} · ${unidades} ${unidades === 1 ? 'unidad' : 'unidades'}` : 'Todavía no agregaste productos.';
+    document.getElementById('cxVaciar').hidden = !items.length;
+    const days = [...Array(7)].map((_,i) => addDays(mondayOf(TODAY), i)).filter(d => d >= TODAY || iso(d) === iso(TODAY));
+    document.getElementById('cxDays').innerHTML = items.length ? days.map(d => `<button class="fchip plain" data-cd="${iso(d)}" aria-pressed="${iso(d)===iso(cxDay)}">${iso(d)===iso(TODAY) ? 'Hoy' : DC[isoDow(d)] + ' ' + d.getDate()}</button>`).join('') : '';
+    document.getElementById('cxModo').innerHTML = items.length && hasProfile() ? `<div class="mineTog" role="group" aria-label="Qué precio usar"><button data-pm="mias" aria-pressed="${pxModo==='mias'}">Con mis tarjetas</button><button data-pm="lista" aria-pressed="${pxModo==='lista'}">Precio de lista</button></div>` : (items.length ? `<div class="banner"><span class="grow">Elegí tus tarjetas para ver el total <b>con tus descuentos</b>.</span><button class="btn green" data-go="tarjetas">Elegir</button></div>` : '');
+    const rank = document.getElementById('cxRank'), lista = document.getElementById('cxItems');
+    if(!items.length){
+      rank.innerHTML = `<div class="empty">Buscá productos en <b>Precios</b> y tocá <b>+ Carrito</b>. Acá te decimos en qué súper te conviene hacer toda la compra.<br><br><button class="btn green" data-go="precios">Ir a Precios</button></div>`;
+      lista.hidden = true; document.getElementById('cxItemsTitle').hidden = true; return;
+    }
+    lista.hidden = false; document.getElementById('cxItemsTitle').hidden = false;
+    // Totales por súper
+    const sups = Object.keys(PX.supers).filter(miSuper);
+    const res = sups.map(s => {
+      let sub = 0, tiene = 0; const faltan = [];
+      items.forEach(x => { const r = x.p.p[s]; if(r && r[2]){ sub += r[0] * x.q; tiene++; } else faltan.push(x.p.n); });
+      const pr = mejorPromoTotal(s, cxDay, sub);
+      return {s, sub, tiene, faltan, pr, fin: sub - (pr ? pr.v : 0)};
+    }).filter(r => r.tiene).sort((a,b) => (b.tiene - a.tiene) || (a.fin - b.fin));
+    const best = res[0];
+    const fmtPr = r => r.pr ? `<span class="g">−${fmt(r.pr.v)} con ${esc(entName(r.pr.pr))}${r.pr.via ? ' (' + esc(r.pr.via.map(b => D.entidades[b].n).join(', ')) + ')' : ''} · ${r.pr.pr.pct}%${r.pr.cap ? ', llegás al tope' : ''}</span>` : (pxModo === 'mias' && hasProfile() ? '<span>Sin descuento con tus tarjetas ese día</span>' : '');
+    rank.innerHTML = res.map((r,i) => `<div class="rk${i === 0 ? ' best' : ''}">
+        <span class="t">${sbadge(r.s,'lg')}<span>${esc(D.supers[r.s].n)}${i === 0 ? ' <span class="tag" style="font-size:10.5px;font-weight:700;text-transform:uppercase;background:var(--green);color:var(--green-ink);border-radius:999px;padding:2px 7px">Más conveniente</span>' : ''}</span></span>
+        <span class="tot"><b>${fmt(r.fin)}</b>${r.pr ? `<s>${fmt(r.sub)}</s>` : ''}</span>
+        <span class="d">${fmtPr(r)}${r.pr && r.pr.pr.tope && r.pr.pr.tope.p && ['mes','semana'].includes(r.pr.pr.tope.p) ? `<span class="muted">El tope de ${fmt(r.pr.pr.tope.m)} es por ${r.pr.pr.tope.p}: se comparte con otras compras.</span>` : ''}${r.pr && r.pr.pr.min ? `<span class="muted">Compra mínima ${fmt(r.pr.pr.min)}.</span>` : ''}
+          ${r.faltan.length ? `<span class="w">Tiene ${r.tiene} de ${items.length} · falta: ${esc(r.faltan.slice(0,3).join(', '))}${r.faltan.length > 3 ? ' y ' + (r.faltan.length - 3) + ' más' : ''}</span>` : `<span>Tiene los ${items.length} productos</span>`}</span>
+      </div>`).join('');
+    // Comprando cada cosa donde está más barata (sin topes)
+    let split = 0, donde = new Set(), cubiertos = 0;
+    items.forEach(x => {
+      let mejor = null;
+      sups.forEach(s => { const r = x.p.p[s]; if(!r || !r[2]) return; const d = pxModo === 'mias' ? mejorDescuento(s, cxDay) : null; const u = r[0] * (1 - (d ? d.pr.pct : 0)/100); if(!mejor || u < mejor.u) mejor = {u, s}; });
+      if(mejor){ split += mejor.u * x.q; donde.add(mejor.s); cubiertos++; }
+    });
+    if(best && donde.size > 1 && split < best.fin - 1) rank.innerHTML += `<div class="split">Si repartís la compra y llevás cada producto donde está más barato, pagarías <b>${fmt(split)}</b> (en ${[...donde].map(s => esc(D.supers[s].n)).join(', ')}). Es una estimación sin topes: sirve si igual pasás por varios súper.</div>`;
+    rank.innerHTML += `<p class="muted" style="font-size:12px">Precios online del ${PX.actualizado.split('-').reverse().join('/')}; en la sucursal pueden variar. Algunas promos excluyen productos puntuales (carnes, electro, ciertas bodegas).</p>`;
+    // Lista de productos
+    lista.innerHTML = items.map(x => {
+      const desde = Math.min(...Object.entries(x.p.p).filter(([s, r]) => miSuper(s) && r[2]).map(([,r]) => r[0]));
+      return `<div class="ci"><span class="cimg">${x.p.i ? `<img src="${esc(x.p.i.replace(/(\/ids\/\d+)\//, '$1-120-120/'))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}</span><span class="nm">${esc(x.p.n)}<small>${isFinite(desde) ? 'desde ' + fmt(desde) + ' c/u' : 'sin stock en tus súper'}</small></span>${qtyCtrl(x.e)}</div>`;
+    }).join('');
+  }
+  document.addEventListener('click', ev => {
+    const a = ev.target.closest('[data-cadd]'); if(a){ const p = PX && PX.productos.find(x => x.e === a.dataset.cadd); setCant(a.dataset.cadd, 1, p && p.n); a.outerHTML = qtyCtrl(a.dataset.cadd); if(!document.getElementById('view-carrito').hidden) renderCarrito(); return; }
+    const q = ev.target.closest('[data-cq]'); if(q){ const e = q.dataset.cq; setCant(e, cantidad(e) + Number(q.dataset.d)); const box = q.closest('.qty'); if(!document.getElementById('view-carrito').hidden) renderCarrito(); else if(box) box.outerHTML = qtyCtrl(e); return; }
+  });
+  document.getElementById('view-carrito').addEventListener('click', ev => {
+    const d = ev.target.closest('[data-cd]'); if(d){ const [y,m,dd] = d.dataset.cd.split('-').map(Number); cxDay = new Date(y, m-1, dd); renderCarrito(); return; }
+    const pm = ev.target.closest('[data-pm]'); if(pm){ pxModo = pm.dataset.pm; renderCarrito(); return; }
+  });
+  let vaciarPaso = 0;
+  document.getElementById('cxVaciar').addEventListener('click', ev => {
+    if(!vaciarPaso){ vaciarPaso = 1; ev.currentTarget.textContent = '¿Vaciar? Tocá de nuevo'; setTimeout(() => { vaciarPaso = 0; const b = document.getElementById('cxVaciar'); if(b) b.textContent = 'Vaciar'; }, 3000); return; }
+    vaciarPaso = 0; ev.currentTarget.textContent = 'Vaciar'; P.carrito = []; save(); renderCarrito();
   });
 
   // ---------- banners, perfil, footer ----------
@@ -3034,11 +3176,12 @@ details.others[open] summary{margin-bottom:10px}
   }
 
   // ---------- navegación ----------
-  const VIEWS = ['hoy','precios','tarjetas','todas'];
+  const VIEWS = ['hoy','precios','carrito','tarjetas','todas'];
   function show(v){
     if(!VIEWS.includes(v)) v = 'hoy';
     VIEWS.forEach(x => document.getElementById('view-'+x).hidden = x !== v);
     if(v === 'precios') renderPrecios();
+    if(v === 'carrito') renderCarrito();
     document.querySelectorAll('.deskNav button, .bottomNav button').forEach(b => b.setAttribute('aria-current', b.dataset.go === v ? 'page' : 'false'));
     if(location.hash.slice(1) !== v){ try{ history.replaceState(null, '', '#' + v); }catch(e){} }
     window.scrollTo(0, 0);
@@ -3078,12 +3221,12 @@ details.others[open] summary{margin-bottom:10px}
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', pintarTema);
   pintarTema();
 
-  function renderAll(){ renderChrome(); renderWeek(); renderAllTable(); if(PX) renderPrecios(); }
+  function renderAll(){ renderChrome(); renderWeek(); renderAllTable(); if(PX) renderPrecios(); pintarBadge(); if(!document.getElementById('view-carrito').hidden) renderCarrito(); }
   renderEnts(); renderAll();
   window.deelo = {
     estado: () => ({perfil:P, gasto}),
     aplicar(d){
-      if(d && d.perfil && d.perfil.ents){ P = {ents:d.perfil.ents, jubilado:!!d.perfil.jubilado, online:!!d.perfil.online, supers:Array.isArray(d.perfil.supers) ? d.perfil.supers : []}; store.set(KEY, P); }
+      if(d && d.perfil && d.perfil.ents){ P = {ents:d.perfil.ents, jubilado:!!d.perfil.jubilado, online:!!d.perfil.online, supers:Array.isArray(d.perfil.supers) ? d.perfil.supers : [], carrito:Array.isArray(d.perfil.carrito) ? d.perfil.carrito : (P.carrito || [])}; store.set(KEY, P); }
       if(d && typeof d.gasto === 'number' && d.gasto > 0){ gasto = d.gasto; store.set(KEY+'-gasto', gasto); }
       renderEnts(); renderAll();
     }
