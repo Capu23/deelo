@@ -2,7 +2,7 @@
 <html lang="es-AR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Descuentos del súper en CABA según tus bancos, tarjetas y billeteras. Mirá qué día y con qué medio de pago te conviene comprar en Coto, Jumbo, Disco, Vea, Carrefour, Día y ChangoMás.">
 <meta name="theme-color" content="#1b2440">
 <link rel="canonical" href="https://deelo.ar/">
@@ -90,7 +90,17 @@ a{color:var(--green-text)}
 .acctBtn{border:0;background:var(--navy);color:var(--on-navy);border-radius:999px;padding:8px 14px;font-weight:600;font-size:13px;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px}
 .acctBtn .av{width:22px;height:22px;border-radius:50%;background:var(--green);color:var(--green-ink);display:grid;place-items:center;font-size:11px;font-weight:700}
 .acctBtn.in{background:var(--paper);color:var(--ink);border:1px solid var(--rule);padding:4px 12px 4px 4px}
-@media (max-width:480px){.profileBtn .lbl{display:none}}
+@media (max-width:480px){
+  .profileBtn .lbl{display:none}
+  .acctBtn.in .lbl{display:none}
+  .acctBtn.in{padding:4px}
+  .topRight{gap:6px}
+  .logo{gap:7px}
+  .logo svg{width:38px;height:28px}
+  .logo-word{font-size:29px}
+  .themeBtn{width:34px;height:34px}
+  .acctBtn{padding:7px 12px}
+}
 dialog#authDlg{border:0;border-radius:22px;padding:24px 22px 22px;width:min(400px,calc(100vw - 32px));background:var(--paper);color:var(--ink);box-shadow:0 20px 60px -20px rgba(0,0,0,.5)}
 dialog#authDlg::backdrop{background:rgba(12,18,32,.55);backdrop-filter:blur(2px)}
 .dlgClose{position:absolute;top:10px;right:10px;margin:0}

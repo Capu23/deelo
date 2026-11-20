@@ -133,7 +133,7 @@ const msg = e => ERRORES[e && e.code] || 'Algo salió mal. Probá de nuevo en un
     }
     btn.classList.add('in');
     const ini = (u.displayName || u.email || '?').trim().charAt(0).toUpperCase();
-    btn.innerHTML = `<span class="av">${esc(ini)}</span>Mi cuenta`;
+    btn.innerHTML = `<span class="av">${esc(ini)}</span><span class="lbl">Mi cuenta</span>`; btn.setAttribute("aria-label", "Mi cuenta");
     try {
       const snap = await F.getDoc(ref(u));
       if (snap.exists() && snap.data().perfil) window.deelo && window.deelo.aplicar(snap.data());
