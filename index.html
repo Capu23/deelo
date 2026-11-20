@@ -677,6 +677,13 @@ details.others[open] summary{margin-bottom:10px}
    "m": "TC",
    "c": "#5b6478",
    "hint": "Se activa sola si marcaste alguna tarjeta de crédito"
+  },
+  "prime": {
+   "n": "Prime+ (Jumbo y Disco)",
+   "t": "programa",
+   "m": "P+",
+   "c": "#5b2d8e",
+   "hint": "Suscripción de Cencosud: algunas promos son solo para socios"
   }
  },
  "tarjetas": {
@@ -2685,6 +2692,7 @@ details.others[open] summary{margin-bottom:10px}
 
   function match(pr){
     if(pr.req === 'jubilado' && !P.jubilado) return {ok:false, why:'Solo jubilados'};
+    if(pr.req === 'Prime' && !P.ents.prime) return {ok:false, why:'Solo socios Prime'};
     if(pr.ent === 'anses') return {ok:!!P.jubilado, why:'Solo jubilados'};
     if(pr.ent === 'credito'){ const ok = Object.entries(P.ents).some(([k,e]) => (e.cards||[]).some(c => c !== 'debito') || ['naranjax','carrefourbanco','cencopay'].includes(k)); if(!ok) return {ok:false, why:'Con tarjeta de crédito'}; if(pr.canal === 'online' && !P.online) return {ok:false, why:'Solo online'}; return {ok:true}; }
     if(pr.bancos){
