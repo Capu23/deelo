@@ -216,6 +216,33 @@ details.others[open] summary{margin-bottom:10px}
 .tile .t3{font-size:11.5px;color:var(--ink3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tile.none b{color:var(--ink3)}
 
+/* ---------- precios ---------- */
+.pxSearch{display:flex;align-items:center;gap:10px;background:var(--paper);border:1.5px solid var(--rule);border-radius:14px;padding:0 14px;box-shadow:var(--shadow)}
+.pxSearch:focus-within{border-color:var(--green)}
+.pxSearch svg{width:20px;height:20px;color:var(--ink3);flex:none}
+.pxSearch input{flex:1;min-width:0;border:0;background:none;outline:none;font-size:16px;padding:13px 0;color:var(--ink)}
+.prod{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.prod .ph{display:flex;gap:12px;align-items:center;padding:12px 14px}
+.prod .ph img{width:56px;height:56px;object-fit:contain;border-radius:10px;background:#fff;flex:none}
+.prod .ph .ni{min-width:0}
+.prod .ph b{display:block;font-size:14.5px;line-height:1.3}
+.prod .ph small{color:var(--ink3);font-size:12px}
+.prod .save{margin-left:auto;text-align:right;flex:none;font-size:12px;color:var(--ink2)}
+.prod .save b{color:var(--green-text);font-size:14px}
+.px{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 14px;border-top:1px solid var(--rule);text-decoration:none;color:inherit}
+.px:hover{background:var(--sunk)}
+.px .w{display:flex;align-items:center;gap:8px;min-width:0;font-weight:600;font-size:14px}
+.px .w .why{display:block;font-weight:500;font-size:12px;color:var(--green-text)}
+.px .w .why.off{color:var(--ink3)}
+.px .pr{text-align:right;white-space:nowrap}
+.px .pr b{font-size:15.5px}
+.px .pr s{display:block;font-size:12px;color:var(--ink3)}
+.px.best{background:var(--green-soft)}
+.px.best .pr b{color:var(--green-text)}
+.px .tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:var(--green);color:var(--green-ink);border-radius:999px;padding:2px 7px;margin-left:4px}
+.px.na{opacity:.55}
+.pxMore{border:0;background:none;color:var(--green-text);font-weight:600;font-size:13px;padding:10px 14px;cursor:pointer;width:100%;text-align:left;border-top:1px solid var(--rule)}
+
 /* ---------- mis tarjetas ---------- */
 .group{display:flex;flex-direction:column;gap:10px}
 .group h3{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3)}
@@ -297,6 +324,7 @@ details.others[open] summary{margin-bottom:10px}
     <nav class="deskNav" aria-label="Secciones">
       <button data-go="hoy">Mi semana</button>
       <button data-go="tarjetas">Mis tarjetas</button>
+      <button data-go="precios">Precios</button>
       <button data-go="todas">Todas las promos</button>
     </nav>
     <div class="topRight">
@@ -352,6 +380,21 @@ details.others[open] summary{margin-bottom:10px}
     <div id="entGroups" class="col" style="gap:22px"></div>
   </main>
 
+  <!-- ===== PRECIOS ===== -->
+  <main id="view-precios" class="col" style="gap:16px" hidden>
+    <div class="secHead">
+      <div class="col" style="gap:4px"><h2>Compará precios</h2><p class="muted" style="font-size:13.5px" id="pxSub">Cargando precios…</p></div>
+    </div>
+    <div class="pxSearch">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="pxQ" type="search" placeholder="Buscá un producto: leche, yerba, detergente…" autocomplete="off" aria-label="Buscar producto">
+    </div>
+    <div class="fscroll" id="pxCats" role="group" aria-label="Categorías"></div>
+    <div class="fscroll" id="pxDays" role="group" aria-label="Día de compra"></div>
+    <div id="pxNote"></div>
+    <div class="col" style="gap:10px" id="pxList"></div>
+  </main>
+
   <!-- ===== TODAS ===== -->
   <main id="view-todas" class="col" hidden>
     <div class="secHead"><h2>Todas las promos</h2><span class="count" id="allCount"></span></div>
@@ -375,6 +418,7 @@ details.others[open] summary{margin-bottom:10px}
 <nav class="bottomNav" aria-label="Secciones">
   <button data-go="hoy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Mi semana</button>
   <button data-go="tarjetas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="13" rx="2.5"/><path d="M2.5 10.5h19M6 15h4"/></svg>Mis tarjetas</button>
+  <button data-go="precios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>Precios</button>
   <button data-go="todas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Todas</button>
 </nav>
 
@@ -2862,6 +2906,65 @@ details.others[open] summary{margin-bottom:10px}
     const rb = ev.target.closest('.prow>button'); if(rb && !ev.target.closest('a')){ const d = document.getElementById(rb.getAttribute('aria-controls')); const o = rb.getAttribute('aria-expanded') === 'true'; rb.setAttribute('aria-expanded', String(!o)); d.hidden = o; }
   });
 
+  // ---------- precios ----------
+  let PX = null, pxCat = '', pxDay = null, pxCargando = false;
+  const normTxt = t => String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  async function cargarPrecios(){
+    if(PX || pxCargando) return; pxCargando = true;
+    try{ const r = await fetch('data/precios.json', {cache:'no-cache'}); if(!r.ok) throw 0; PX = await r.json(); PX.productos.forEach(p => p.k = normTxt(p.n + ' ' + p.c)); }
+    catch(e){ document.getElementById('pxSub').textContent = 'No pudimos cargar los precios. Probá recargar la página.'; }
+    pxCargando = false; renderPrecios();
+  }
+  // Mejor descuento que podés usar en ese súper ese día (solo % por promo; no contempla topes ni exclusiones por producto).
+  function mejorDescuento(s, d){
+    if(!hasProfile()) return null;
+    let best = null;
+    D.promos.forEach(pr => { if(pr.sup.includes(s) && aplicaEn(pr, d) && pr.canal !== 'online' && match(pr).ok && (!best || pr.pct > best.pct)) best = pr; });
+    return best;
+  }
+  function renderPrecios(){
+    const sub = document.getElementById('pxSub');
+    if(!PX){ cargarPrecios(); return; }
+    if(!pxDay) pxDay = new Date(sel);
+    const f = PX.actualizado.split('-').reverse().join('/');
+    sub.innerHTML = `${PX.productos.length} productos en ${Object.keys(PX.supers).length} súper · precios online del ${f}. Coto llega pronto.`;
+    const cats = [...new Set(PX.productos.map(p => p.c))];
+    document.getElementById('pxCats').innerHTML = `<button class="fchip plain" data-pc="" aria-pressed="${!pxCat}">Todo</button>` + cats.map(c => `<button class="fchip plain" data-pc="${esc(c)}" aria-pressed="${pxCat===c}">${esc(c)}</button>`).join('');
+    const days = [...Array(7)].map((_,i) => addDays(mondayOf(TODAY), i)).filter(d => d >= TODAY || iso(d) === iso(TODAY));
+    document.getElementById('pxDays').innerHTML = days.map(d => `<button class="fchip plain" data-pd="${iso(d)}" aria-pressed="${iso(d)===iso(pxDay)}">${iso(d)===iso(TODAY) ? 'Hoy' : DC[isoDow(d)] + ' ' + d.getDate()}</button>`).join('');
+    document.getElementById('pxNote').innerHTML = hasProfile()
+      ? `<p class="muted" style="font-size:12.5px">Precio con tu mejor descuento en el local ese día. Es una estimación: no contempla topes ni productos excluidos de cada promo.</p>`
+      : `<div class="banner"><span class="grow">Elegí tus bancos y tarjetas para ver el precio <b>con tus descuentos</b>.</span><button class="btn green" data-go="tarjetas">Elegir</button></div>`;
+    const q = normTxt(document.getElementById('pxQ').value.trim()).split(/\s+/).filter(Boolean);
+    let list = PX.productos.filter(p => (!pxCat || p.c === pxCat) && q.every(w => p.k.includes(w)));
+    const desc = Object.fromEntries(Object.keys(PX.supers).map(s => [s, mejorDescuento(s, pxDay)]));
+    const filas = p => Object.entries(p.p).map(([s, [precio, lista, disp, slug]]) => {
+      const pr = desc[s], fin = pr ? precio * (1 - pr.pct/100) : precio;
+      return {s, precio, lista, disp, slug, pr, fin};
+    }).sort((a,b) => (b.disp - a.disp) || (a.fin - b.fin));
+    if(!q.length && !pxCat){
+      // Sin búsqueda: productos donde más diferencia hay entre súper
+      list = list.map(p => { const f = filas(p).filter(x => x.disp); return {p, d: f.length > 1 ? 1 - f[0].fin / f[f.length-1].fin : 0}; }).sort((a,b) => b.d - a.d).slice(0, 12).map(x => x.p);
+    }
+    const total = list.length; list = list.slice(0, 40);
+    const head = !q.length && !pxCat ? `<h3 style="font-size:15px">Donde más conviene comparar</h3>` : `<p class="muted" style="font-size:13px">${total} ${total === 1 ? 'producto' : 'productos'}${total > 40 ? ' · mostramos los primeros 40, afiná la búsqueda' : ''}</p>`;
+    document.getElementById('pxList').innerHTML = head + (list.length ? list.map(p => {
+      const fs = filas(p), ok = fs.filter(x => x.disp), best = ok[0], worst = ok[ok.length-1];
+      const ahorro = best && worst && worst !== best ? worst.fin - best.fin : 0;
+      const row = (x, i) => `<a class="px${x === best ? ' best' : ''}${x.disp ? '' : ' na'}" href="${esc(PX.supers[x.s] + '/' + x.slug + '/p')}" target="_blank" rel="noopener">
+          <span class="w">${sbadge(x.s)}<span>${esc(D.supers[x.s].n)}${x === best ? '<span class="tag">Más barato</span>' : ''}<span class="why${x.pr ? '' : ' off'}">${!x.disp ? 'Sin stock online' : x.pr ? `−${x.pr.pct}% con ${esc(entName(x.pr))}` : hasProfile() ? 'Sin descuento tuyo ese día' : (x.lista ? 'En oferta' : '')}</span></span></span>
+          <span class="pr"><b>${fmt(x.fin)}</b>${x.pr || x.lista ? `<s>${fmt(x.pr ? x.precio : x.lista)}</s>` : ''}</span></a>`;
+      return `<article class="prod"><div class="ph">${p.i ? `<img src="${esc(p.i.replace(/(\/ids\/\d+)\//, '$1-120-120/'))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<span class="ni"><b>${esc(p.n)}</b><small>${esc(p.c)} · ${fs.length} súper</small></span>${ahorro >= 1 ? `<span class="save">Ahorrás<br><b>${fmt(ahorro)}</b></span>` : ''}</div>
+        ${fs.slice(0, 4).map(row).join('')}${fs.length > 4 ? `<details><summary class="pxMore">Ver los ${fs.length}</summary>${fs.slice(4).map(row).join('')}</details>` : ''}</article>`;
+    }).join('') : `<div class="empty">No encontramos ese producto. Probá con otra palabra, por ejemplo la marca.</div>`);
+  }
+  let pxT = null;
+  document.getElementById('pxQ').addEventListener('input', () => { clearTimeout(pxT); pxT = setTimeout(renderPrecios, 150); });
+  document.getElementById('view-precios').addEventListener('click', ev => {
+    const c = ev.target.closest('[data-pc]'); if(c){ pxCat = c.dataset.pc; renderPrecios(); return; }
+    const d = ev.target.closest('[data-pd]'); if(d){ const [y,m,dd] = d.dataset.pd.split('-').map(Number); pxDay = new Date(y, m-1, dd); renderPrecios(); }
+  });
+
   // ---------- banners, perfil, footer ----------
   function renderChrome(){
     const ents = Object.keys(P.ents);
@@ -2880,10 +2983,11 @@ details.others[open] summary{margin-bottom:10px}
   }
 
   // ---------- navegación ----------
-  const VIEWS = ['hoy','tarjetas','todas'];
+  const VIEWS = ['hoy','precios','tarjetas','todas'];
   function show(v){
     if(!VIEWS.includes(v)) v = 'hoy';
     VIEWS.forEach(x => document.getElementById('view-'+x).hidden = x !== v);
+    if(v === 'precios') renderPrecios();
     document.querySelectorAll('.deskNav button, .bottomNav button').forEach(b => b.setAttribute('aria-current', b.dataset.go === v ? 'page' : 'false'));
     if(location.hash.slice(1) !== v){ try{ history.replaceState(null, '', '#' + v); }catch(e){} }
     window.scrollTo(0, 0);
@@ -2903,7 +3007,7 @@ details.others[open] summary{margin-bottom:10px}
   document.getElementById('gasto').addEventListener('blur', ev => { ev.target.value = gasto.toLocaleString('es-AR'); });
   window.addEventListener('hashchange', () => show(location.hash.slice(1)));
 
-  function renderAll(){ renderChrome(); renderWeek(); renderAllTable(); }
+  function renderAll(){ renderChrome(); renderWeek(); renderAllTable(); if(PX) renderPrecios(); }
   renderEnts(); renderAll();
   window.deelo = {
     estado: () => ({perfil:P, gasto}),
