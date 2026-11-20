@@ -2937,7 +2937,7 @@ details.others[open] summary{margin-bottom:10px}
   });
 
   // ---------- precios ----------
-  let PX = null, pxCat = '', pxDay = null, pxCargando = false;
+  let PX = null, pxCat = '', pxDay = null, pxCargando = false, pxModo = null; // pxModo: 'mias' (con mis tarjetas) | 'lista'
   const normTxt = t => String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   async function cargarPrecios(){
     if(PX || pxCargando) return; pxCargando = true;
@@ -2949,7 +2949,7 @@ details.others[open] summary{margin-bottom:10px}
   function mejorDescuento(s, d){
     if(!hasProfile()) return null;
     let best = null;
-    D.promos.forEach(pr => { if(pr.sup.includes(s) && aplicaEn(pr, d) && pr.canal !== 'online' && match(pr).ok && (!best || pr.pct > best.pct)) best = pr; });
+    D.promos.forEach(pr => { if(pr.sup.includes(s) && aplicaEn(pr, d) && pr.canal !== 'online'){ const m = match(pr); if(m.ok && (!best || pr.pct > best.pr.pct)) best = {pr, via: m.via}; } });
     return best;
   }
   function renderPrecios(){
@@ -2962,15 +2962,18 @@ details.others[open] summary{margin-bottom:10px}
     document.getElementById('pxCats').innerHTML = `<button class="fchip plain" data-pc="" aria-pressed="${!pxCat}">Todo</button>` + cats.map(c => `<button class="fchip plain" data-pc="${esc(c)}" aria-pressed="${pxCat===c}">${esc(c)}</button>`).join('');
     const days = [...Array(7)].map((_,i) => addDays(mondayOf(TODAY), i)).filter(d => d >= TODAY || iso(d) === iso(TODAY));
     document.getElementById('pxDays').innerHTML = days.map(d => `<button class="fchip plain" data-pd="${iso(d)}" aria-pressed="${iso(d)===iso(pxDay)}">${iso(d)===iso(TODAY) ? 'Hoy' : DC[isoDow(d)] + ' ' + d.getDate()}</button>`).join('');
+    if(!hasProfile()) pxModo = 'lista'; else if(!pxModo) pxModo = 'mias';
+    const misMedios = Object.keys(P.ents).map(k => D.entidades[k] ? D.entidades[k].n : k).concat(P.jubilado ? ['Jubilados'] : []);
     document.getElementById('pxNote').innerHTML = hasProfile()
-      ? `<p class="muted" style="font-size:12.5px">Precio con tu mejor descuento en el local ese día. Es una estimación: no contempla topes ni productos excluidos de cada promo.</p>`
-      : `<div class="banner"><span class="grow">Elegí tus bancos y tarjetas para ver el precio <b>con tus descuentos</b>.</span><button class="btn green" data-go="tarjetas">Elegir</button></div>`;
+      ? `<div class="col" style="gap:8px"><div class="mineTog" role="group" aria-label="Qué precio mostrar"><button data-pm="mias" aria-pressed="${pxModo==='mias'}">Con mis tarjetas</button><button data-pm="lista" aria-pressed="${pxModo==='lista'}">Precio de lista</button></div>
+        <p class="muted" style="font-size:12.5px">${pxModo === 'mias' ? `Calculado solo con tus medios: ${esc(misMedios.join(', '))}. <button class="linkBtn" data-go="tarjetas">Cambiar</button><br>Es el mejor descuento que podés usar en el local ese día; no contempla topes ni productos excluidos de cada promo.` : 'Precio online de cada súper, sin descuentos bancarios.'}</p></div>`
+      : `<div class="banner"><span class="grow">Elegí tus bancos y tarjetas para ver el precio <b>con tus descuentos</b>. Mientras tanto, ves el precio de lista.</span><button class="btn green" data-go="tarjetas">Elegir</button></div>`;
     const q = normTxt(document.getElementById('pxQ').value.trim()).split(/\s+/).filter(Boolean);
     let list = PX.productos.filter(p => (!pxCat || p.c === pxCat) && q.every(w => p.k.includes(w)));
-    const desc = Object.fromEntries(Object.keys(PX.supers).map(s => [s, mejorDescuento(s, pxDay)]));
+    const desc = Object.fromEntries(Object.keys(PX.supers).map(s => [s, pxModo === 'mias' ? mejorDescuento(s, pxDay) : null]));
     const filas = p => Object.entries(p.p).map(([s, [precio, lista, disp, slug]]) => {
-      const pr = desc[s], fin = pr ? precio * (1 - pr.pct/100) : precio;
-      return {s, precio, lista, disp, slug, pr, fin};
+      const dd = desc[s], pr = dd && dd.pr, fin = pr ? precio * (1 - pr.pct/100) : precio;
+      return {s, precio, lista, disp, slug, pr, via: dd && dd.via, fin};
     }).sort((a,b) => (b.disp - a.disp) || (a.fin - b.fin));
     if(!q.length && !pxCat){
       // Sin búsqueda: productos donde más diferencia hay entre súper
@@ -2982,7 +2985,7 @@ details.others[open] summary{margin-bottom:10px}
       const fs = filas(p), ok = fs.filter(x => x.disp), best = ok[0], worst = ok[ok.length-1];
       const ahorro = best && worst && worst !== best ? worst.fin - best.fin : 0;
       const row = (x, i) => `<a class="px${x === best ? ' best' : ''}${x.disp ? '' : ' na'}" href="${esc(PX.supers[x.s] + '/' + x.slug + '/p')}" target="_blank" rel="noopener">
-          <span class="w">${sbadge(x.s)}<span>${esc(D.supers[x.s].n)}${x === best ? '<span class="tag">Más barato</span>' : ''}<span class="why${x.pr ? '' : ' off'}">${!x.disp ? 'Sin stock online' : x.pr ? `−${x.pr.pct}% con ${esc(entName(x.pr))}` : hasProfile() ? 'Sin descuento tuyo ese día' : (x.lista ? 'En oferta' : '')}</span></span></span>
+          <span class="w">${sbadge(x.s)}<span>${esc(D.supers[x.s].n)}${x === best ? '<span class="tag">Más barato</span>' : ''}<span class="why${x.pr ? '' : ' off'}">${!x.disp ? 'Sin stock online' : x.pr ? `−${x.pr.pct}% con ${esc(entName(x.pr))}${x.via ? ' (' + esc(x.via.map(b => D.entidades[b].n).join(', ')) + ')' : ''}` : pxModo === 'mias' ? 'Sin descuento con tus tarjetas ese día' : (x.lista ? 'En oferta del súper' : '')}</span></span></span>
           <span class="pr"><b>${fmt(x.fin)}</b>${x.pr || x.lista ? `<s>${fmt(x.pr ? x.precio : x.lista)}</s>` : ''}</span></a>`;
       return `<article class="prod"><div class="ph">${p.i ? `<img src="${esc(p.i.replace(/(\/ids\/\d+)\//, '$1-120-120/'))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<span class="ni"><b>${esc(p.n)}</b><small>${esc(p.c)} · ${fs.length} súper</small></span>${ahorro >= 1 ? `<span class="save">Ahorrás<br><b>${fmt(ahorro)}</b></span>` : ''}</div>
         ${fs.slice(0, 4).map(row).join('')}${fs.length > 4 ? `<details><summary class="pxMore">Ver los ${fs.length}</summary>${fs.slice(4).map(row).join('')}</details>` : ''}</article>`;
@@ -2992,6 +2995,7 @@ details.others[open] summary{margin-bottom:10px}
   document.getElementById('pxQ').addEventListener('input', () => { clearTimeout(pxT); pxT = setTimeout(renderPrecios, 150); });
   document.getElementById('view-precios').addEventListener('click', ev => {
     const c = ev.target.closest('[data-pc]'); if(c){ pxCat = c.dataset.pc; renderPrecios(); return; }
+    const pm = ev.target.closest('[data-pm]'); if(pm){ pxModo = pm.dataset.pm; renderPrecios(); return; }
     const d = ev.target.closest('[data-pd]'); if(d){ const [y,m,dd] = d.dataset.pd.split('-').map(Number); pxDay = new Date(y, m-1, dd); renderPrecios(); }
   });
 
