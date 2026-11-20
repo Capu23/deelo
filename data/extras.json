@@ -1,0 +1,252 @@
+{
+ "nota": "Promos que no publica ningún sitio oficial de súper (notas de prensa, bancos). Se cargan a mano y vencen solas en vig.hasta.",
+ "promos": [
+  {
+   "id": "cotoapp-coto-mie",
+   "ent": "cotoapp",
+   "sup": [
+    "coto"
+   ],
+   "dias": [
+    3
+   ],
+   "pct": 25,
+   "tope": null,
+   "medio": "Pagando con la SuperApp de Coto, cualquier medio",
+   "tj": [],
+   "conf": "media",
+   "fu": [
+    "of-coto"
+   ],
+   "canal": "presencial",
+   "nota": "Está en los legales de Coto pero no en su lista de descuentos vigentes: confirmalo en la app.",
+   "vig": {
+    "desde": "2026-11-01",
+    "hasta": "2026-11-30"
+   }
+  },
+  {
+   "id": "bna-chango-lun",
+   "ent": "nacion",
+   "sup": [
+    "changomas"
+   ],
+   "dias": [
+    1
+   ],
+   "pct": 20,
+   "tope": {
+    "m": 25000,
+    "p": "mes"
+   },
+   "min": 75000,
+   "medio": "BNA+ MODO (presencial y online)",
+   "tj": [],
+   "conf": "media",
+   "fu": [
+    "eldestape-jub"
+   ],
+   "vig": {
+    "desde": "2026-11-01",
+    "hasta": "2026-11-30"
+   }
+  },
+  {
+   "id": "bna-chango-dom",
+   "ent": "nacion",
+   "sup": [
+    "changomas"
+   ],
+   "dias": [
+    7
+   ],
+   "pct": 20,
+   "tope": {
+    "m": 20000,
+    "p": "mes"
+   },
+   "min": 30000,
+   "medio": "BNA+ MODO",
+   "tj": [],
+   "conf": "media",
+   "fu": [
+    "eldestape-jub"
+   ],
+   "canal": "online",
+   "vig": {
+    "desde": "2026-11-01",
+    "hasta": "2026-11-30"
+   }
+  },
+  {
+   "id": "bp-chango-jue",
+   "ent": "provincia",
+   "sup": [
+    "changomas"
+   ],
+   "dias": [
+    4
+   ],
+   "pct": 20,
+   "tope": null,
+   "medio": "Saldo Cuenta DNI o Visa crédito por NFC",
+   "tj": [],
+   "conf": "media",
+   "fu": [
+    "eldestape-dni",
+    "cs-dni"
+   ],
+   "nota": "Incluye sucursales MasGO.",
+   "vig": {
+    "desde": "2026-11-01",
+    "hasta": "2026-11-30"
+   }
+  },
+  {
+   "id": "mp-chango-mar",
+   "ent": "mercadopago",
+   "sup": [
+    "changomas"
+   ],
+   "dias": [
+    2
+   ],
+   "pct": 15,
+   "tope": "app",
+   "medio": "QR Mercado Pago",
+   "tj": [],
+   "conf": "media",
+   "fu": [
+    "eldestape-mp"
+   ],
+   "vig": {
+    "desde": "2026-11-01",
+    "hasta": "2026-11-30"
+   }
+  },
+  {
+   "id": "sv-chango-mar",
+   "ent": "supervielle",
+   "sup": [
+    "changomas"
+   ],
+   "dias": [
+    2
+   ],
+   "pct": 20,
+   "tope": {
+    "m": 25000,
+    "p": "compra"
+   },
+   "medio": "Crédito Supervielle",
+   "tj": [
+    "visa",
+    "master"
+   ],
+   "conf": "baja",
+   "fu": [
+    "mdz-jub"
+   ],
+   "nota": "Las notas la presentan para jubilados que cobran en Supervielle.",
+   "vig": {
+    "desde": "2026-11-01",
+    "hasta": "2026-11-30"
+   }
+  },
+  {
+   "id": "anses-chango",
+   "ent": "anses",
+   "sup": [
+    "changomas"
+   ],
+   "dias": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "pct": 10,
+   "tope": {
+    "m": 15000,
+    "p": "mes"
+   },
+   "medio": "Jubilados ANSES",
+   "tj": [],
+   "conf": "media",
+   "fu": [
+    "diariouno-jub"
+   ],
+   "req": "jubilado",
+   "nota": "Días no confirmados.",
+   "vig": {
+    "desde": "2026-11-01",
+    "hasta": "2026-11-30"
+   }
+  },
+  {
+   "id": "bna-jub-5",
+   "ent": "nacion",
+   "sup": [
+    "carrefour",
+    "disco",
+    "vea",
+    "changomas",
+    "coto"
+   ],
+   "dias": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "pct": 5,
+   "tope": {
+    "m": 5000,
+    "p": "semana",
+    "extra": "y $20.000 por mes"
+   },
+   "medio": "BNA+ MODO, adicional a otras promos",
+   "tj": [],
+   "conf": "media",
+   "fu": [
+    "eldestape-bna",
+    "mdz-jub"
+   ],
+   "req": "jubilado",
+   "vig": {
+    "desde": "2026-11-01",
+    "hasta": "2026-11-30"
+   }
+  },
+  {
+   "id": "galicia-gen",
+   "ent": "galicia",
+   "sup": [
+    "coto",
+    "changomas"
+   ],
+   "dias": [],
+   "pct": 25,
+   "hasta": true,
+   "tope": {
+    "m": 20000,
+    "p": "mes"
+   },
+   "medio": "Tarjetas Galicia (Éminent tiene % más altos)",
+   "tj": [],
+   "conf": "baja",
+   "fu": [
+    "cs-galicia"
+   ],
+   "nota": "Las notas hablan de hasta 25% y 18 cuotas; en los sitios oficiales de los súper solo aparecen MODO y Visa NFC para Galicia.",
+   "vig": {
+    "desde": "2026-11-01",
+    "hasta": "2026-11-30"
+   }
+  }
+ ]
+}

@@ -1,0 +1,316 @@
+{
+ "supers": {
+  "jumbo": {
+   "n": "Jumbo",
+   "c": "#2e9e4f",
+   "m": "Ju"
+  },
+  "disco": {
+   "n": "Disco",
+   "c": "#d23a2f",
+   "m": "Di"
+  },
+  "vea": {
+   "n": "Vea",
+   "c": "#e07b1a",
+   "m": "Ve"
+  },
+  "coto": {
+   "n": "Coto",
+   "c": "#b3122e",
+   "m": "Co"
+  },
+  "carrefour": {
+   "n": "Carrefour",
+   "c": "#1f5fbf",
+   "m": "Ca"
+  },
+  "dia": {
+   "n": "Día",
+   "c": "#e2001a",
+   "m": "Dí"
+  },
+  "changomas": {
+   "n": "ChangoMás",
+   "c": "#6a3fb5",
+   "m": "CM"
+  }
+ },
+ "entidades": {
+  "nacion": {
+   "n": "Banco Nación",
+   "t": "banco",
+   "hint": "Promos vía app BNA+ (MODO)",
+   "m": "BN",
+   "c": "#1d6fb8"
+  },
+  "provincia": {
+   "n": "Banco Provincia / Cuenta DNI",
+   "t": "banco",
+   "hint": "Muchas promos se pagan con QR o NFC desde Cuenta DNI",
+   "m": "BP",
+   "c": "#00843d"
+  },
+  "galicia": {
+   "n": "Galicia",
+   "t": "banco",
+   "m": "Ga",
+   "c": "#f26722"
+  },
+  "santander": {
+   "n": "Santander",
+   "t": "banco",
+   "m": "Sa",
+   "c": "#e30613"
+  },
+  "bbva": {
+   "n": "BBVA",
+   "t": "banco",
+   "m": "BB",
+   "c": "#004481"
+  },
+  "macro": {
+   "n": "Macro",
+   "t": "banco",
+   "m": "Ma",
+   "c": "#1b3f8f"
+  },
+  "supervielle": {
+   "n": "Supervielle",
+   "t": "banco",
+   "m": "Sv",
+   "c": "#c8102e"
+  },
+  "icbc": {
+   "n": "ICBC",
+   "t": "banco",
+   "m": "IC",
+   "c": "#a4161a"
+  },
+  "ciudad": {
+   "n": "Banco Ciudad",
+   "t": "banco",
+   "m": "Ci",
+   "c": "#0093d0"
+  },
+  "patagonia": {
+   "n": "Patagonia",
+   "t": "banco",
+   "m": "Pa",
+   "c": "#0b4ea2"
+  },
+  "comafi": {
+   "n": "Comafi",
+   "t": "banco",
+   "m": "Cf",
+   "c": "#00975f"
+  },
+  "credicoop": {
+   "n": "Credicoop",
+   "t": "banco",
+   "m": "Cr",
+   "c": "#0d6e3b"
+  },
+  "hipotecario": {
+   "n": "Hipotecario",
+   "t": "banco",
+   "m": "Hi",
+   "c": "#f47b20"
+  },
+  "carrefourbanco": {
+   "n": "Tarjeta Carrefour (Carrefour Banco)",
+   "t": "tarjeta",
+   "m": "CB",
+   "c": "#1f5fbf"
+  },
+  "mercadopago": {
+   "n": "Mercado Pago",
+   "t": "billetera",
+   "m": "MP",
+   "c": "#009ee3"
+  },
+  "naranjax": {
+   "n": "Naranja X",
+   "t": "billetera",
+   "m": "NX",
+   "c": "#fe5000"
+  },
+  "personalpay": {
+   "n": "Personal Pay",
+   "t": "billetera",
+   "m": "PP",
+   "c": "#5c2d91"
+  },
+  "uala": {
+   "n": "Ualá",
+   "t": "billetera",
+   "m": "Ua",
+   "c": "#3f5bf6"
+  },
+  "clubln": {
+   "n": "Club La Nación",
+   "t": "programa",
+   "m": "LN",
+   "c": "#0b2d5b"
+  },
+  "modo": {
+   "n": "MODO",
+   "t": "red",
+   "hint": "Se activa solo: aplica con los bancos que marques",
+   "m": "MO",
+   "c": "#2b2d42"
+  },
+  "columbia": {
+   "n": "Banco Columbia",
+   "t": "banco",
+   "m": "Cl",
+   "c": "#0055a5"
+  },
+  "cencopay": {
+   "n": "Cenco Pay",
+   "t": "billetera",
+   "hint": "Billetera y tarjeta de Cencosud",
+   "m": "CP",
+   "c": "#d50032"
+  },
+  "cotoapp": {
+   "n": "Coto SuperApp",
+   "t": "programa",
+   "hint": "App de Coto: cualquiera la puede bajar",
+   "m": "SA",
+   "c": "#b3122e"
+  },
+  "visanfc": {
+   "n": "Visa sin contacto (NFC)",
+   "t": "red",
+   "hint": "Se activa sola: débito Visa de los bancos que marques",
+   "m": "VI",
+   "c": "#1a1f71"
+  },
+  "comunidadcoto": {
+   "n": "Comunidad Coto",
+   "t": "programa",
+   "hint": "Programa de clientes de Coto (gratis, con DNI)",
+   "m": "CC",
+   "c": "#8f0f24"
+  },
+  "anses": {
+   "n": "ANSES (jubilados)",
+   "t": "programa",
+   "m": "AN",
+   "c": "#0f6db3"
+  },
+  "credito": {
+   "n": "Cualquier tarjeta de crédito",
+   "t": "red",
+   "m": "TC",
+   "c": "#5b6478",
+   "hint": "Se activa sola si marcaste alguna tarjeta de crédito"
+  }
+ },
+ "tarjetas": {
+  "visa": "Crédito Visa",
+  "master": "Crédito Mastercard",
+  "amex": "Crédito Amex",
+  "debito": "Débito"
+ },
+ "fuentes": {
+  "eldestape-bna": {
+   "n": "El Destape · Guía Banco Nación nov 2026",
+   "u": "https://eldestapeweb.com/sociedad/guia-descuentos-banco-nacion-supermercados-noviembre-2026-obtenerlos-ahorrar-maximo-2026111885355"
+  },
+  "0221-bna": {
+   "n": "0221 · Banco Nación en noviembre",
+   "u": "https://www.0221.com.ar/promociones-y-descuentos/todos-los-descuentos-supermercados-banco-nacion-noviembre-que-dias-conviene-comprar-n136914"
+  },
+  "losandes-jumbo": {
+   "n": "Los Andes · Jumbo con MODO noviembre",
+   "u": "https://www.losandes.com.ar/economia/descuentos-jumbo-como-ahorrar-50000-modo-noviembre-n6012808"
+  },
+  "losandes-coto": {
+   "n": "Los Andes · Coto 25% sin tope",
+   "u": "https://www.losandes.com.ar/economia/coto-ofrece-25-reintegro-tope-que-bancos-permiten-ahorrar-25000-compra-n6013527"
+  },
+  "vadillo": {
+   "n": "Nación, Macro y Santander nov 2026",
+   "u": "https://mariovadillo.com.ar/banco-nacion-macro-y-santander-los-descuentos-de-noviembre-que-podes-aprovechar-hoy/"
+  },
+  "coto-tyc": {
+   "n": "Coto · Términos de descuentos",
+   "u": "https://www.coto.com.ar/terminos-descuentos"
+  },
+  "headtopics-bp": {
+   "n": "Banco Provincia nov 2026 día por día",
+   "u": "https://ar.headtopics.com/news/promociones-banco-provincia-noviembre-2026-gu-a-de-89855847"
+  },
+  "eldestape-dni": {
+   "n": "El Destape · Cuenta DNI sin tope nov",
+   "u": "http://www.eldestapeweb.com/sociedad/cuenta-dni-noviembre-cuales-supermercados-descuentos-tope-reintegro-aprovechar-beneficios-20261112152044"
+  },
+  "cs-dni": {
+   "n": "Calcular Sueldo · Cuenta DNI nov 2026",
+   "u": "https://calcularsueldo.com.ar/finanzas/16379/supermercados-cuenta-dni-noviembre-2026.html"
+  },
+  "cs-dia": {
+   "n": "Calcular Sueldo · Día nov 2026",
+   "u": "https://calcularsueldo.com.ar/finanzas/16411/promos-dia-noviembre-2026.html"
+  },
+  "cs-carrefour": {
+   "n": "Calcular Sueldo · Carrefour nov 2026",
+   "u": "https://calcularsueldo.com.ar/finanzas/16402/carrefour-todas-las-promociones-bancarias-de-noviembre-2026.html"
+  },
+  "cs-galicia": {
+   "n": "Calcular Sueldo · Galicia nov 2026",
+   "u": "https://calcularsueldo.com.ar/finanzas/16396/descuentos-supermercados-galicia-noviembre-2026.html"
+  },
+  "eldestape-mp": {
+   "n": "El Destape · Mercado Pago nov 2026",
+   "u": "https://www.eldestapeweb.com/sociedad/dias-hay-descuentos-mercado-pago-supermercados-noviembre-2026-obtenerlos-202611199120"
+  },
+  "naranjax": {
+   "n": "Naranja X · Promos AMBA",
+   "u": "https://www.naranjax.com/promociones-amba"
+  },
+  "convi-coto": {
+   "n": "Convi · Bancos en Coto (oct 2026)",
+   "u": "https://www.convi.ar/promos-bancarias/coto"
+  },
+  "mdz-jub": {
+   "n": "MDZ · Jubilados en supermercados",
+   "u": "https://www.mdzol.com/sociedad/2026/11/16/anses-cuales-son-los-descuentos-para-jubilados-en-supermercados-1995704.html"
+  },
+  "diariouno-jub": {
+   "n": "Diario Uno · Jubilados nov 2026",
+   "u": "https://www.diariouno.com.ar/sociedad/descuentos-jubilados-supermercados-noviembre-2026-rebajas-el-35-y-reintegros-40000-n1614054"
+  },
+  "eldestape-jub": {
+   "n": "El Destape · Jubilados ANSES nov 2026",
+   "u": "https://www.eldestapeweb.com/sociedad/descuentos-supermercados-jubilados-anses-noviembre-2026-obtenerlos-20261116102647"
+  },
+  "of-coto": {
+   "n": "Coto · Términos y condiciones (oficial)",
+   "u": "https://www.coto.com.ar/terminos-descuentos",
+   "of": true
+  },
+  "of-cenco": {
+   "n": "Jumbo/Disco/Vea · Descuentos del día (oficial)",
+   "u": "https://www.jumbo.com.ar/descuentos-del-dia",
+   "of": true
+  },
+  "of-carrefour": {
+   "n": "Carrefour · Descuentos bancarios (oficial)",
+   "u": "https://www.carrefour.com.ar/descuentos-bancarios",
+   "of": true
+  },
+  "of-dia": {
+   "n": "Día · Medios de pago y promociones (oficial)",
+   "u": "https://diaonline.supermercadosdia.com.ar/medios-de-pago-y-promociones",
+   "of": true
+  },
+  "of-coto-dia": {
+   "n": "Coto · Descuentos vigentes (oficial)",
+   "u": "https://www.coto.com.ar/descuentos",
+   "of": true
+  }
+ }
+}
