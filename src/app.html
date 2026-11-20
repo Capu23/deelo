@@ -384,6 +384,7 @@ details.others[open] summary{margin-bottom:10px}
       <div class="col" style="gap:4px"><h2>¿Con qué pagás?</h2><p class="muted" style="font-size:14px">Activá tus bancos y billeteras, y en cada banco tus tarjetas. Se guarda solo en este dispositivo.</p></div>
       <div style="display:flex;gap:8px"><button class="btn ghost" id="clearProfile">Borrar todo</button><button class="btn green" data-go="hoy">Ver mi semana</button></div>
     </div>
+    <section class="group"><h3>¿En qué súper comprás?</h3><p class="muted" style="font-size:13px;margin-top:-4px">Marcá los súper donde comprás y te mostramos solo esos en Mi semana y en Precios. Si no marcás ninguno, usamos todos.</p><div class="fscroll" style="flex-wrap:wrap" id="supPrefs" role="group" aria-label="Mis súper"></div></section>
     <div id="entGroups" class="col" style="gap:22px"></div>
   </main>
 
@@ -397,6 +398,7 @@ details.others[open] summary{margin-bottom:10px}
       <input id="pxQ" type="search" placeholder="Buscá un producto: leche, yerba, detergente…" autocomplete="off" aria-label="Buscar producto">
     </div>
     <div class="fscroll" id="pxCats" role="group" aria-label="Categorías"></div>
+    <div class="fscroll" id="pxSups" role="group" aria-label="Mis súper"></div>
     <div class="fscroll" id="pxDays" role="group" aria-label="Día de compra"></div>
     <div id="pxNote"></div>
     <div class="col" style="gap:10px" id="pxList"></div>
@@ -2696,9 +2698,11 @@ details.others[open] summary{margin-bottom:10px}
   }
   const optimo = pr => (pr.tope && typeof pr.tope === 'object') ? pr.tope.m / (pr.pct/100) : null;
   const visible = pr => P.online || pr.canal !== 'online';
+  // Súper donde compra la persona (vacío = todos)
+  const miSuper = s => !P.supers || !P.supers.length || P.supers.includes(s);
   function optionsFor(d){
     const out = [];
-    D.promos.forEach(pr => { if(aplicaEn(pr, d) && (hasProfile() || visible(pr))) pr.sup.forEach(s => out.push({pr, s, m: match(pr), a: ahorro(pr, gasto)})); });
+    D.promos.forEach(pr => { if(aplicaEn(pr, d) && (hasProfile() || visible(pr))) pr.sup.filter(miSuper).forEach(s => out.push({pr, s, m: match(pr), a: ahorro(pr, gasto)})); });
     const mine = hasProfile() ? out.filter(x => x.m.ok) : out;
     const rest = hasProfile() ? out.filter(x => !x.m.ok && visible(x.pr)) : [];
     const sort = arr => arr.sort((a,b) => (b.a.v - a.a.v) || (b.pr.pct - a.pr.pct));
@@ -2811,7 +2815,7 @@ details.others[open] summary{margin-bottom:10px}
 
   function renderTiles(){
     const days = [...Array(7)].map((_,i) => addDays(weekStart, i));
-    const html = Object.keys(D.supers).map(s => {
+    const html = Object.keys(D.supers).filter(miSuper).map(s => {
       const cand = new Map();
       days.forEach(d => optionsFor(d).mine.forEach(x => { if(x.s === s){ const c = cand.get(x.pr) || {x, ds:[]}; c.ds.push(d); cand.set(x.pr, c); } }));
       const best = [...cand.values()].sort((a,b) => (b.x.pr.pct - a.x.pr.pct) || (b.ds.length - a.ds.length))[0];
@@ -2830,7 +2834,12 @@ details.others[open] summary{margin-bottom:10px}
   function renderWeek(){ uid = 0; renderDays(); const o = optionsFor(sel); renderHero(o); renderList(o); renderTiles(); renderQuick(); }
 
   // ---------- render: tarjetas ----------
+  function renderSupPrefs(){
+    const el = document.getElementById('supPrefs'); if(!el) return;
+    el.innerHTML = Object.entries(D.supers).map(([k,sp]) => `<button class="fchip" data-msup="${k}" aria-pressed="${!!(P.supers && P.supers.length) && P.supers.includes(k)}">${sbadge(k)}${esc(sp.n)}</button>`).join('');
+  }
   function renderEnts(){
+    renderSupPrefs();
     const groups = [['banco','Bancos'],['billetera','Billeteras'],['tarjeta','Tarjetas de súper'],['programa','Programas y beneficios']];
     const html = groups.map(([t, title]) => {
       const items = Object.entries(D.entidades).filter(([k,e]) => e.t === t);
@@ -2846,6 +2855,12 @@ details.others[open] summary{margin-bottom:10px}
     }).join('');
     document.getElementById('entGroups').innerHTML = html;
   }
+  document.getElementById('supPrefs').addEventListener('click', ev => {
+    const b = ev.target.closest('[data-msup]'); if(!b) return;
+    const k = b.dataset.msup, cur = (P.supers && P.supers.length) ? P.supers : [];
+    P.supers = cur.includes(k) ? cur.filter(x => x !== k) : [...cur, k];
+    save(); renderSupPrefs(); renderAll();
+  });
   document.getElementById('entGroups').addEventListener('change', ev => {
     const t = ev.target;
     if(t.dataset.jub) P.jubilado = t.checked;
@@ -2855,7 +2870,7 @@ details.others[open] summary{margin-bottom:10px}
     save(); renderEnts(); renderAll();
     const again = document.getElementById(t.id); if(again) again.focus();
   });
-  document.getElementById('clearProfile').addEventListener('click', () => { P = {ents:{}, jubilado:false, online:false}; save(); renderEnts(); renderAll(); });
+  document.getElementById('clearProfile').addEventListener('click', () => { P = {ents:{}, jubilado:false, online:false, supers:[]}; save(); renderEnts(); renderAll(); });
 
   // ---------- render: todas ----------
   let supFilter = null, dayFilter = 0, soloMias = null;
@@ -2937,6 +2952,9 @@ details.others[open] summary{margin-bottom:10px}
     sub.innerHTML = `${PX.productos.length} productos en ${Object.keys(PX.supers).length} súper · precios online del ${f}. Coto llega pronto.`;
     const cats = [...new Set(PX.productos.map(p => p.c))];
     document.getElementById('pxCats').innerHTML = `<button class="fchip plain" data-pc="" aria-pressed="${!pxCat}">Todo</button>` + cats.map(c => `<button class="fchip plain" data-pc="${esc(c)}" aria-pressed="${pxCat===c}">${esc(c)}</button>`).join('');
+    const elegidos = P.supers && P.supers.length;
+    document.getElementById('pxSups').innerHTML = `<button class="fchip plain" data-pxs="" aria-pressed="${!elegidos}">Todos los súper</button>` +
+      Object.keys(PX.supers).sort((a,b) => (elegidos ? (P.supers.includes(b) - P.supers.includes(a)) : 0)).map(k => `<button class="fchip" data-pxs="${k}" aria-pressed="${!!elegidos && P.supers.includes(k)}">${sbadge(k)}${esc(D.supers[k].n)}</button>`).join('');
     const days = [...Array(7)].map((_,i) => addDays(mondayOf(TODAY), i)).filter(d => d >= TODAY || iso(d) === iso(TODAY));
     document.getElementById('pxDays').innerHTML = days.map(d => `<button class="fchip plain" data-pd="${iso(d)}" aria-pressed="${iso(d)===iso(pxDay)}">${iso(d)===iso(TODAY) ? 'Hoy' : DC[isoDow(d)] + ' ' + d.getDate()}</button>`).join('');
     if(!hasProfile()) pxModo = 'lista'; else if(!pxModo) pxModo = 'mias';
@@ -2946,9 +2964,9 @@ details.others[open] summary{margin-bottom:10px}
         <p class="muted" style="font-size:12.5px">${pxModo === 'mias' ? `Calculado solo con tus medios: ${esc(misMedios.join(', '))}. <button class="linkBtn" data-go="tarjetas">Cambiar</button><br>Es el mejor descuento que podés usar en el local ese día; no contempla topes ni productos excluidos de cada promo.` : 'Precio online de cada súper, sin descuentos bancarios.'}</p></div>`
       : `<div class="banner"><span class="grow">Elegí tus bancos y tarjetas para ver el precio <b>con tus descuentos</b>. Mientras tanto, ves el precio de lista.</span><button class="btn green" data-go="tarjetas">Elegir</button></div>`;
     const q = normTxt(document.getElementById('pxQ').value.trim()).split(/\s+/).filter(Boolean);
-    let list = PX.productos.filter(p => (!pxCat || p.c === pxCat) && q.every(w => p.k.includes(w)));
+    let list = PX.productos.filter(p => (!pxCat || p.c === pxCat) && q.every(w => p.k.includes(w)) && Object.keys(p.p).some(miSuper));
     const desc = Object.fromEntries(Object.keys(PX.supers).map(s => [s, pxModo === 'mias' ? mejorDescuento(s, pxDay) : null]));
-    const filas = p => Object.entries(p.p).map(([s, [precio, lista, disp, slug]]) => {
+    const filas = p => Object.entries(p.p).filter(([s]) => miSuper(s)).map(([s, [precio, lista, disp, slug]]) => {
       const dd = desc[s], pr = dd && dd.pr, fin = pr ? precio * (1 - pr.pct/100) : precio;
       return {s, precio, lista, disp, slug, pr, via: dd && dd.via, fin};
     }).sort((a,b) => (b.disp - a.disp) || (a.fin - b.fin));
@@ -2972,6 +2990,7 @@ details.others[open] summary{margin-bottom:10px}
   document.getElementById('pxQ').addEventListener('input', () => { clearTimeout(pxT); pxT = setTimeout(renderPrecios, 150); });
   document.getElementById('view-precios').addEventListener('click', ev => {
     const c = ev.target.closest('[data-pc]'); if(c){ pxCat = c.dataset.pc; renderPrecios(); return; }
+    const xs = ev.target.closest('[data-pxs]'); if(xs){ const k = xs.dataset.pxs; if(!k) P.supers = []; else { const cur = (P.supers && P.supers.length) ? P.supers : []; P.supers = cur.includes(k) ? cur.filter(x => x !== k) : [...cur, k]; } save(); renderSupPrefs(); renderAll(); return; }
     const pm = ev.target.closest('[data-pm]'); if(pm){ pxModo = pm.dataset.pm; renderPrecios(); return; }
     const d = ev.target.closest('[data-pd]'); if(d){ const [y,m,dd] = d.dataset.pd.split('-').map(Number); pxDay = new Date(y, m-1, dd); renderPrecios(); }
   });
@@ -3043,7 +3062,7 @@ details.others[open] summary{margin-bottom:10px}
   window.deelo = {
     estado: () => ({perfil:P, gasto}),
     aplicar(d){
-      if(d && d.perfil && d.perfil.ents){ P = {ents:d.perfil.ents, jubilado:!!d.perfil.jubilado, online:!!d.perfil.online}; store.set(KEY, P); }
+      if(d && d.perfil && d.perfil.ents){ P = {ents:d.perfil.ents, jubilado:!!d.perfil.jubilado, online:!!d.perfil.online, supers:Array.isArray(d.perfil.supers) ? d.perfil.supers : []}; store.set(KEY, P); }
       if(d && typeof d.gasto === 'number' && d.gasto > 0){ gasto = d.gasto; store.set(KEY+'-gasto', gasto); }
       renderEnts(); renderAll();
     }
