@@ -56,7 +56,8 @@ a{color:var(--green-text)}
 @media (min-width:900px){.deskNav{display:flex}}
 .profileBtn{white-space:nowrap;flex:none;display:flex;align-items:center;gap:8px;border:1px solid var(--rule);background:var(--paper);border-radius:999px;padding:5px 12px 5px 6px;cursor:pointer;font-size:13px;font-weight:600}
 .stack{display:flex}
-.stack .eb{margin-left:-6px;box-shadow:0 0 0 2px var(--paper)}
+.stack .eb{margin-left:-4px;box-shadow:0 0 0 2px var(--paper)}
+.stack .eb.more{background:var(--sunk);color:var(--ink2)}
 .stack .eb:first-child{margin-left:0}
 
 /* ---------- cuenta ---------- */
@@ -235,14 +236,46 @@ details.others[open] summary{margin-bottom:10px}
 .tog:has(input:focus-visible){outline:2.5px solid var(--green);outline-offset:2px}
 
 /* ---------- todas ---------- */
-.filters{display:flex;flex-wrap:wrap;gap:6px}
-.tablewrap{overflow-x:auto;background:var(--paper);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow)}
-table.all{border-collapse:collapse;width:100%;min-width:780px;font-size:13px}
-table.all th{text-align:left;font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);padding:12px;border-bottom:1px solid var(--rule);white-space:nowrap}
-table.all td{padding:10px 12px;border-top:1px solid var(--rule);vertical-align:middle}
-table.all td.n{white-space:nowrap;font-weight:600}
-table.all .ent-l{display:inline-flex;align-items:center;gap:6px}
-table.all tr.mine td:first-child{box-shadow:inset 3px 0 0 var(--green)}
+.fbar{display:flex;flex-direction:column;gap:8px}
+.fscroll{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px}
+.fscroll::-webkit-scrollbar{display:none}
+.fchip{flex:none;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);background:var(--paper);border-radius:999px;padding:6px 12px 6px 8px;font-size:13px;font-weight:600;color:var(--ink2);cursor:pointer;white-space:nowrap}
+.fchip.plain{padding:6px 12px}
+.fchip .sb{width:20px;height:20px;border-radius:6px;font-size:9px}
+.fchip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--on-navy)}
+.mineTog{display:inline-flex;background:var(--paper);border:1px solid var(--rule);border-radius:999px;padding:3px}
+.mineTog button{border:0;background:none;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--ink2);cursor:pointer}
+.mineTog button[aria-pressed="true"]{background:var(--green);color:var(--green-ink)}
+.groups{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;align-items:start}
+@media (min-width:900px){.groups{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.grp{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.grp>summary{list-style:none;display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer}
+.grp>summary::-webkit-details-marker{display:none}
+.grp>summary .nm{font-weight:700;font-size:16px;flex:1;min-width:0}
+.grp>summary .nm small{display:block;font-weight:500;font-size:12px;color:var(--ink3)}
+.grp>summary .best{font-weight:800;color:var(--green-text);font-size:15px}
+.grp>summary .chev{color:var(--ink3);transition:transform .15s}
+.grp[open]>summary .chev{transform:rotate(180deg)}
+.prow{border-top:1px solid var(--rule)}
+.prow>button{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 14px;cursor:pointer}
+.prow>button:focus-visible{outline:2.5px solid var(--green);outline-offset:-3px}
+.prow .pp{background:var(--green-soft);color:var(--green-text);border-radius:10px;text-align:center;font-weight:800;font-size:16px;padding:7px 0;line-height:1.05}
+.prow .pp small{display:block;font-size:9.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.prow.no .pp{background:var(--sunk);color:var(--ink2)}
+.prow .l1{display:flex;align-items:center;gap:6px;font-weight:600;font-size:14px;min-width:0}
+.prow .l1 span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.prow .l2{font-size:12.5px;color:var(--ink2);margin-top:2px;display:flex;flex-wrap:wrap;gap:2px 8px}
+.prow .st{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.prow .mark{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800}
+.prow .mark.ok{background:var(--green);color:var(--green-ink)}
+.prow .dot{width:8px;height:8px;border-radius:50%}
+.prow .dot.oficial{background:var(--green)}.prow .dot.media{background:var(--warn)}.prow .dot.baja{background:var(--bad)}
+.prow .det{padding:0 14px 12px 78px;font-size:13px;color:var(--ink2);display:flex;flex-direction:column;gap:6px}
+.prow .det .chips{display:flex;flex-wrap:wrap;gap:5px}
+@media (max-width:420px){.prow .det{padding-left:14px}}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--ink3)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:8px;height:8px;border-radius:50%;display:inline-block}
 
 .foot{font-size:12px;color:var(--ink3);display:flex;flex-direction:column;gap:6px;padding-top:6px;border-top:1px solid var(--rule)}
 @media (prefers-reduced-motion:no-preference){.day,.cp,.btn,.tog,.ent{transition:background .15s,border-color .15s,box-shadow .15s,transform .15s}.day:active,.btn:active{transform:scale(.97)}}
@@ -322,8 +355,13 @@ table.all tr.mine td:first-child{box-shadow:inset 3px 0 0 var(--green)}
   <!-- ===== TODAS ===== -->
   <main id="view-todas" class="col" hidden>
     <div class="secHead"><h2>Todas las promos</h2><span class="count" id="allCount"></span></div>
-    <div class="filters" id="superFilters"></div>
-    <div class="tablewrap"><table class="all" id="allTable"></table></div>
+    <div class="fbar">
+      <div class="fscroll" id="superFilters" role="group" aria-label="Filtrar por súper"></div>
+      <div class="fscroll" id="dayFilters" role="group" aria-label="Filtrar por día"></div>
+      <div id="mineFilter"></div>
+      <div class="legend" aria-hidden="true"><span><i style="background:var(--green)"></i>Oficial</span><span><i style="background:var(--warn)"></i>Confirmar en app</span><span><i style="background:var(--bad)"></i>Verificar</span><span><b style="color:var(--green-text)">✓</b> La podés usar</span></div>
+    </div>
+    <div class="groups" id="allGroups"></div>
   </main>
 
   <footer class="foot" id="foot"></footer>
@@ -2660,7 +2698,7 @@ table.all tr.mine td:first-child{box-shadow:inset 3px 0 0 var(--green)}
         ${opt ? `<div class="col" style="gap:4px"><span>Con ${fmt(gasto)} usás el ${Math.round(pctUse)}% del tope. Para aprovecharlo entero, gastá <b>${fmt(opt)}</b>${pr.tope.p==='mes' ? ' en el mes' : pr.tope.p==='semana' ? ' en la semana' : pr.tope.p==='dia' ? ' ese día' : ' en esa compra'}.</span><div class="meter"><i style="width:${pctUse}%"></i></div></div>` : ''}
         ${pr.tope && pr.tope.extra ? `<span>Tope adicional ${esc(pr.tope.extra)}.</span>` : ''}
         ${pr.nota ? `<span>${esc(pr.nota)}</span>` : ''}
-        <span class="muted">Vigencia: ${pr.fechas ? 'solo el ' + pr.fechas.map(ddmm).join(' y ') : 'hasta el ' + ddmm((pr.vig || VIG).hasta)}. Fuentes: ${fu}</span>
+        <span class="muted">Vigencia: ${pr.fechas ? 'solo el ' + pr.fechas.map(ddmm).join(' y ') : pr.vig ? 'hasta el ' + ddmm(pr.vig.hasta) : 'mientras el súper la publique (la revisamos cada lunes)'}. Fuentes: ${fu}</span>
       </div>
     </li>`;
   }
@@ -2704,7 +2742,7 @@ table.all tr.mine td:first-child{box-shadow:inset 3px 0 0 var(--green)}
         </div>
         <div class="save"><div class="k">Si gastás ${fmt(gasto)}</div><div class="v">Ahorrás ${fmt(b.a.v)}</div></div>
       </div>
-      <p class="cond">${esc(b.pr.medio)}${b.pr.min ? ' · mínimo ' + fmt(b.pr.min) : ''}${o.mine.length > 1 ? ` · y ${o.mine.length - 1} opción${o.mine.length > 2 ? 'es' : ''} más abajo` : ''}</p>`;
+      <p class="cond">${esc(b.pr.medio)}${b.pr.min ? ' · mínimo ' + fmt(b.pr.min) : ''}${o.mine.length > 1 ? ` · y ${o.mine.length - 1} ${o.mine.length > 2 ? 'opciones' : 'opción'} más abajo` : ''}</p>`;
   }
 
   function renderList(o){
@@ -2769,31 +2807,66 @@ table.all tr.mine td:first-child{box-shadow:inset 3px 0 0 var(--green)}
   document.getElementById('clearProfile').addEventListener('click', () => { P = {ents:{}, jubilado:false, online:false}; save(); renderEnts(); renderAll(); });
 
   // ---------- render: todas ----------
-  let supFilter = null;
+  let supFilter = null, dayFilter = 0, soloMias = null;
+  const diasTxt = pr => pr.fechas ? 'Solo ' + pr.fechas.map(ddmm).join(' y ') : pr.dias.length === 7 ? 'Todos los días' : pr.dias.length ? pr.dias.map(d => DC[d]).join(' · ') : 'Día a confirmar';
+  const estadoChip = pr => pr.conf === 'oficial' ? '<span class="chip ok">✓ Oficial</span>' : pr.conf === 'baja' ? '<span class="chip bad">Verificar</span>' : '<span class="chip warn">Confirmar en app</span>';
   function renderAllTable(){
-    document.getElementById('superFilters').innerHTML = [`<label class="tog"><input type="radio" name="sf" id="sf-all" value=""${!supFilter ? ' checked' : ''}>Todos</label>`]
-      .concat(Object.entries(D.supers).map(([k,s]) => `<label class="tog"><input type="radio" name="sf" id="sf-${k}" value="${k}"${supFilter===k ? ' checked' : ''}>${esc(s.n)}</label>`)).join('');
-    const list = D.promos.filter(pr => !supFilter || pr.sup.includes(supFilter)).map(pr => ({pr, m: match(pr)})).sort((a,b) => (b.m.ok - a.m.ok) || (b.pr.pct - a.pr.pct));
-    document.getElementById('allCount').textContent = list.length + ' promos' + (hasProfile() ? ' · ' + list.filter(x => x.m.ok).length + ' para vos' : '');
-    document.getElementById('allTable').innerHTML = `<thead><tr><th>Súper</th><th>%</th><th>Días</th><th>Banco / billetera</th><th>Cómo pagar</th><th>Tope</th><th>Estado</th><th>¿Para vos?</th></tr></thead><tbody>` +
-      list.map(({pr, m}) => `<tr class="${m.ok && hasProfile() ? 'mine' : ''}">
-        <td>${pr.sup.map(s => `<span class="ent-l">${sbadge(s)} ${esc(D.supers[s].n)}</span>`).join('<br>')}</td>
-        <td class="n">${pr.hasta ? 'hasta ' : ''}${pr.pct}%</td>
-        <td class="n">${pr.fechas ? pr.fechas.map(ddmm).join(' ') : pr.dias.length ? pr.dias.map(d => DC[d]).join(' ') : '—'}</td>
-        <td><span class="ent-l">${eb(pr.ent)} ${esc(entName(pr))}</span></td>
-        <td>${esc(pr.medio)}${pr.canal==='online' ? ' <span class="chip">Solo online</span>' : ''}</td>
-        <td class="n">${topeShort(pr).t}</td>
-        <td>${pr.conf === 'oficial' ? '<span class="chip ok">✓ Oficial</span>' : pr.conf === 'baja' ? '<span class="chip bad">Verificar</span>' : '<span class="chip warn">Confirmar</span>'}</td>
-        <td>${!hasProfile() ? '<span class="muted">—</span>' : m.ok ? '<b style="color:var(--green-text)">Sí</b>' : `<span class="muted">${esc(m.why || 'No')}</span>`}</td>
-      </tr>`).join('') + '</tbody>';
+    if(soloMias === null) soloMias = hasProfile();
+    if(!hasProfile()) soloMias = false;
+    const counts = {};
+    D.promos.forEach(pr => pr.sup.forEach(s => counts[s] = (counts[s]||0) + 1));
+    document.getElementById('superFilters').innerHTML = `<button class="fchip plain" data-sf="" aria-pressed="${!supFilter}">Todos</button>` +
+      Object.entries(D.supers).map(([k,s]) => `<button class="fchip" data-sf="${k}" aria-pressed="${supFilter===k}">${sbadge(k)}${esc(s.n)}</button>`).join('');
+    document.getElementById('dayFilters').innerHTML = `<button class="fchip plain" data-df="0" aria-pressed="${!dayFilter}">Cualquier día</button>` +
+      [1,2,3,4,5,6,7].map(d => `<button class="fchip plain" data-df="${d}" aria-pressed="${dayFilter===d}">${DIAS[d].charAt(0).toUpperCase() + DIAS[d].slice(1)}</button>`).join('');
+    document.getElementById('mineFilter').innerHTML = hasProfile()
+      ? `<div class="mineTog" role="group" aria-label="Qué promos mostrar"><button data-mf="1" aria-pressed="${soloMias}">Solo las mías</button><button data-mf="0" aria-pressed="${!soloMias}">Todas</button></div>`
+      : `<p class="muted" style="font-size:13px">Elegí tus bancos en <button class="linkBtn" data-go="tarjetas">Mis tarjetas</button> para ver cuáles podés usar.</p>`;
+    const vis = pr => (P.online || pr.canal !== 'online' || match(pr).ok);
+    const pasaDia = pr => !dayFilter || (pr.fechas ? pr.fechas.some(f => isoDow(new Date(f + 'T12:00:00')) === dayFilter) : pr.dias.includes(dayFilter));
+    let total = 0, mias = 0;
+    const html = Object.keys(D.supers).filter(s => !supFilter || s === supFilter).map(s => {
+      let rows = D.promos.filter(pr => pr.sup.includes(s) && pasaDia(pr) && vis(pr)).map(pr => ({pr, m: match(pr)}));
+      if(soloMias) rows = rows.filter(x => x.m.ok);
+      rows.sort((a,b) => (b.m.ok - a.m.ok) || (b.pr.pct - a.pr.pct));
+      total += rows.length; mias += rows.filter(x => x.m.ok).length;
+      if(!rows.length) return '';
+      const best = Math.max(...rows.map(x => x.pr.pct));
+      const open = supFilter || rows.length <= 4 || Object.keys(D.supers).filter(k => !supFilter || k === supFilter).length <= 2;
+      return `<details class="grp"${open || soloMias ? ' open' : ''}><summary>${sbadge(s,'lg')}<span class="nm">${esc(D.supers[s].n)}<small>${rows.length} ${rows.length === 1 ? 'promo' : 'promos'}${hasProfile() && !soloMias ? ' · ' + rows.filter(x => x.m.ok).length + ' para vos' : ''}</small></span><span class="best">hasta ${best}%</span><svg class="chev" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>` +
+        rows.map(({pr, m}, i) => {
+          const id = `pr-${s}-${i}`, tp = topeShort(pr);
+          const fu = (pr.fu||[]).map(f => D.fuentes[f] ? `<a href="${D.fuentes[f].u}" target="_blank" rel="noopener">${esc(D.fuentes[f].n)}</a>` : '').filter(Boolean).join(' · ');
+          return `<div class="prow${hasProfile() && !m.ok ? ' no' : ''}"><button aria-expanded="false" aria-controls="${id}">
+            <span class="pp">${pr.hasta ? '<small>hasta</small>' : ''}${pr.pct}%</span>
+            <span><span class="l1">${eb(pr.ent)}<span>${esc(entName(pr))}</span></span>
+              <span class="l2"><span>${esc(diasTxt(pr))}</span><span>${esc(tp.t)}</span>${pr.canal === 'online' ? '<span>Solo online</span>' : ''}${pr.req === 'jubilado' ? '<span>Jubilados</span>' : pr.req ? `<span>${esc(pr.req)}</span>` : ''}</span></span>
+            <span class="st">${hasProfile() && m.ok ? '<span class="mark ok" title="La podés usar">✓</span>' : ''}<span class="dot ${pr.conf}" title="${pr.conf === 'oficial' ? 'Oficial' : pr.conf === 'baja' ? 'Verificar' : 'Confirmar en app'}"></span></span>
+          </button>
+          <div class="det" id="${id}" hidden>
+            <span>${esc(pr.medio)}${pr.min ? ' · mínimo ' + fmt(pr.min) : ''}${m.via ? viaTxt(m) : ''}</span>
+            ${hasProfile() && !m.ok && m.why ? `<span><b>No la podés usar:</b> ${esc(m.why.charAt(0).toLowerCase() + m.why.slice(1))}.</span>` : ''}
+            ${pr.nota ? `<span>${esc(pr.nota)}</span>` : ''}
+            <span class="chips">${estadoChip(pr)}</span>
+            <span class="muted">Vigencia: ${pr.fechas ? 'solo el ' + pr.fechas.map(ddmm).join(' y ') : pr.vig ? 'hasta el ' + ddmm(pr.vig.hasta) : 'mientras el súper la publique (la revisamos cada lunes)'}. Fuentes: ${fu}</span>
+          </div></div>`;
+        }).join('') + '</details>';
+    }).join('');
+    document.getElementById('allGroups').innerHTML = html || `<div class="empty">No hay promos con estos filtros.</div>`;
+    document.getElementById('allCount').textContent = total + (total === 1 ? ' promo' : ' promos') + (hasProfile() && !soloMias ? ' · ' + mias + ' para vos' : '');
   }
-  document.getElementById('superFilters').addEventListener('change', ev => { supFilter = ev.target.value || null; renderAllTable(); });
+  document.getElementById('view-todas').addEventListener('click', ev => {
+    const sf = ev.target.closest('[data-sf]'); if(sf){ supFilter = sf.dataset.sf || null; renderAllTable(); return; }
+    const df = ev.target.closest('[data-df]'); if(df){ dayFilter = Number(df.dataset.df); renderAllTable(); return; }
+    const mf = ev.target.closest('[data-mf]'); if(mf){ soloMias = mf.dataset.mf === '1'; renderAllTable(); return; }
+    const rb = ev.target.closest('.prow>button'); if(rb && !ev.target.closest('a')){ const d = document.getElementById(rb.getAttribute('aria-controls')); const o = rb.getAttribute('aria-expanded') === 'true'; rb.setAttribute('aria-expanded', String(!o)); d.hidden = o; }
+  });
 
   // ---------- banners, perfil, footer ----------
   function renderChrome(){
     const ents = Object.keys(P.ents);
     document.getElementById('profileBtn').innerHTML = ents.length
-      ? `<span class="stack">${ents.slice(0,4).map(k => eb(k)).join('')}</span><span class="lbl">${ents.length} ${ents.length === 1 ? 'medio' : 'medios'}</span>`
+      ? `<span class="stack">${ents.slice(0,3).map(k => eb(k)).join('')}${ents.length > 3 ? `<i class="eb more" aria-hidden="true">+${ents.length - 3}</i>` : ''}</span><span class="lbl">${ents.length} ${ents.length === 1 ? 'medio' : 'medios'}</span>`
       : `<span class="eb" style="background:var(--green);color:var(--green-ink)">+</span><span class="lbl">Mis tarjetas</span>`;
     const b = [];
     const caidas = Object.entries(D.estado || {}).filter(([,v]) => v !== 'ok').map(([k]) => ({cencosud:'Jumbo/Disco/Vea', carrefour:'Carrefour', dia:'Día', 'coto-vigentes':'Coto', coto:'Coto (legales)'}[k] || k));
