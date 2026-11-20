@@ -79,6 +79,32 @@ a{color:var(--green-text)}
 .stack .eb{margin-left:-6px;box-shadow:0 0 0 2px var(--paper)}
 .stack .eb:first-child{margin-left:0}
 
+/* ---------- cuenta ---------- */
+.topRight{display:flex;align-items:center;gap:8px;flex:none}
+.acctBtn{border:0;background:var(--navy);color:var(--on-navy);border-radius:999px;padding:8px 14px;font-weight:600;font-size:13px;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.acctBtn .av{width:22px;height:22px;border-radius:50%;background:var(--green);color:var(--green-ink);display:grid;place-items:center;font-size:11px;font-weight:700}
+.acctBtn.in{background:var(--paper);color:var(--ink);border:1px solid var(--rule);padding:4px 12px 4px 4px}
+@media (max-width:480px){.profileBtn .lbl{display:none}}
+dialog#authDlg{border:0;border-radius:22px;padding:24px 22px 22px;width:min(400px,calc(100vw - 32px));background:var(--paper);color:var(--ink);box-shadow:0 20px 60px -20px rgba(0,0,0,.5)}
+dialog#authDlg::backdrop{background:rgba(12,18,32,.55);backdrop-filter:blur(2px)}
+.dlgClose{position:absolute;top:10px;right:10px;margin:0}
+.dlgClose button{border:0;background:var(--sunk);width:32px;height:32px;border-radius:50%;cursor:pointer;color:var(--ink2)}
+.auth{display:flex;flex-direction:column;gap:14px}
+.auth h2{font-size:21px;padding-right:30px}
+.auth p{color:var(--ink2);font-size:14px}
+.gbtn{display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid var(--rule);background:var(--paper);border-radius:12px;padding:11px;font-weight:600;cursor:pointer}
+.gbtn svg{width:18px;height:18px}
+.or{display:flex;align-items:center;gap:10px;color:var(--ink3);font-size:12px}
+.or::before,.or::after{content:"";flex:1;border-top:1px solid var(--rule)}
+.field{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:600;color:var(--ink2)}
+.field input{border:1px solid var(--rule);background:var(--sunk);border-radius:10px;padding:11px 12px;font-size:15px;color:var(--ink);outline:none}
+.field input:focus{border-color:var(--green)}
+.auth .err{color:var(--bad);font-size:13px;min-height:1em}
+.auth .ok{color:var(--green-text);font-size:13px}
+.linkBtn{border:0;background:none;color:var(--green-text);font-weight:600;cursor:pointer;padding:0;font-size:13px}
+.auth .row2{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.btn.danger{background:var(--bad-soft);color:var(--bad)}
+
 /* ---------- bottom nav (mobile) ---------- */
 .bottomNav{position:fixed;left:0;right:0;bottom:0;z-index:20;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(12px);border-top:1px solid var(--rule);display:flex;justify-content:space-around;padding:6px max(16px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
 .bottomNav button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11.5px;font-weight:600;color:var(--ink3);padding:6px 14px;border-radius:12px;cursor:pointer}
@@ -263,7 +289,10 @@ table.all tr.mine td:first-child{box-shadow:inset 3px 0 0 var(--green)}
       <button data-go="tarjetas">Mis tarjetas</button>
       <button data-go="todas">Todas las promos</button>
     </nav>
-    <button class="profileBtn" id="profileBtn" data-go="tarjetas"></button>
+    <div class="topRight">
+      <button class="profileBtn" id="profileBtn" data-go="tarjetas"></button>
+      <button class="acctBtn" id="acctBtn" hidden aria-haspopup="dialog">Ingresar</button>
+    </div>
   </header>
 
   <div id="banners" class="col"></div>
@@ -322,6 +351,11 @@ table.all tr.mine td:first-child{box-shadow:inset 3px 0 0 var(--green)}
 
   <footer class="foot" id="foot"></footer>
 </div>
+
+<dialog id="authDlg" aria-labelledby="authTitle">
+  <form method="dialog" class="dlgClose"><button aria-label="Cerrar">✕</button></form>
+  <div id="authBody"></div>
+</dialog>
 
 <nav class="bottomNav" aria-label="Secciones">
   <button data-go="hoy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Mi semana</button>
@@ -2552,7 +2586,9 @@ table.all tr.mine td:first-child{box-shadow:inset 3px 0 0 var(--green)}
   let P = store.get(KEY, null);
   if(!P || !P.ents) P = {ents:{}, jubilado:false, online:false};
   let gasto = store.get(KEY+'-gasto', 80000);
-  const save = () => store.set(KEY, P);
+  // Si hay sesión iniciada, deeloCuenta (script de cuentas) guarda el perfil también en la nube.
+  const sync = () => { try{ window.deeloCuenta && window.deeloCuenta.guardar({perfil:P, gasto}); }catch(e){} };
+  const save = () => { store.set(KEY, P); sync(); };
   const hasProfile = () => Object.keys(P.ents).length > 0 || P.jubilado;
 
   function match(pr){
@@ -2780,8 +2816,8 @@ table.all tr.mine td:first-child{box-shadow:inset 3px 0 0 var(--green)}
   function renderChrome(){
     const ents = Object.keys(P.ents);
     document.getElementById('profileBtn').innerHTML = ents.length
-      ? `<span class="stack">${ents.slice(0,4).map(k => eb(k)).join('')}</span>${ents.length} ${ents.length === 1 ? 'medio' : 'medios'}`
-      : `<span class="eb" style="background:var(--green);color:var(--green-ink)">+</span>Mis tarjetas`;
+      ? `<span class="stack">${ents.slice(0,4).map(k => eb(k)).join('')}</span><span class="lbl">${ents.length} ${ents.length === 1 ? 'medio' : 'medios'}</span>`
+      : `<span class="eb" style="background:var(--green);color:var(--green-ink)">+</span><span class="lbl">Mis tarjetas</span>`;
     const b = [];
     const caidas = Object.entries(D.estado || {}).filter(([,v]) => v !== 'ok').map(([k]) => ({cencosud:'Jumbo/Disco/Vea', carrefour:'Carrefour', dia:'Día', 'coto-vigentes':'Coto', coto:'Coto (legales)'}[k] || k));
     if(caidas.length) b.push(`<div class="banner warn"><span class="grow">No pudimos actualizar ${esc([...new Set(caidas)].join(', '))} en la última corrida: mostramos sus promos anteriores.</span></div>`);
@@ -2805,13 +2841,13 @@ table.all tr.mine td:first-child{box-shadow:inset 3px 0 0 var(--green)}
   document.addEventListener('click', ev => {
     const go = ev.target.closest('[data-go]'); if(go){ ev.preventDefault(); show(go.dataset.go); return; }
     const day = ev.target.closest('.day'); if(day){ const [y,m,d] = day.dataset.d.split('-').map(Number); sel = new Date(y, m-1, d); renderWeek(); return; }
-    const q = ev.target.closest('#quick button'); if(q){ gasto = Number(q.dataset.v); store.set(KEY+'-gasto', gasto); renderWeek(); return; }
+    const q = ev.target.closest('#quick button'); if(q){ gasto = Number(q.dataset.v); store.set(KEY+'-gasto', gasto); sync(); renderWeek(); return; }
     const body = ev.target.closest('.cp .body'); if(body && !ev.target.closest('a')){ const more = document.getElementById(body.getAttribute('aria-controls')); const open = body.getAttribute('aria-expanded') === 'true'; body.setAttribute('aria-expanded', String(!open)); more.hidden = open; }
   });
   document.getElementById('prevWeek').addEventListener('click', () => { weekStart = addDays(weekStart, -7); sel = addDays(sel, -7); renderWeek(); });
   document.getElementById('nextWeek').addEventListener('click', () => { weekStart = addDays(weekStart, 7); sel = addDays(sel, 7); renderWeek(); });
   document.getElementById('gasto').addEventListener('input', ev => {
-    const v = Number(ev.target.value.replace(/\D/g, '')) || 0; gasto = v; store.set(KEY+'-gasto', gasto);
+    const v = Number(ev.target.value.replace(/\D/g, '')) || 0; gasto = v; store.set(KEY+'-gasto', gasto); sync();
     const o = optionsFor(sel); uid = 0; renderHero(o); renderList(o); renderQuick();
   });
   document.getElementById('gasto').addEventListener('blur', ev => { ev.target.value = gasto.toLocaleString('es-AR'); });
@@ -2819,9 +2855,18 @@ table.all tr.mine td:first-child{box-shadow:inset 3px 0 0 var(--green)}
 
   function renderAll(){ renderChrome(); renderWeek(); renderAllTable(); }
   renderEnts(); renderAll();
+  window.deelo = {
+    estado: () => ({perfil:P, gasto}),
+    aplicar(d){
+      if(d && d.perfil && d.perfil.ents){ P = {ents:d.perfil.ents, jubilado:!!d.perfil.jubilado, online:!!d.perfil.online}; store.set(KEY, P); }
+      if(d && typeof d.gasto === 'number' && d.gasto > 0){ gasto = d.gasto; store.set(KEY+'-gasto', gasto); }
+      renderEnts(); renderAll();
+    }
+  };
   show(location.hash.slice(1) || 'hoy');
 })();
 </script>
 
+<script type="module" src="/src/cuenta.js"></script>
 </body>
 </html>
