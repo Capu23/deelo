@@ -764,6 +764,30 @@
    }
   },
   {
+   "id": "mercadopago-carrefour-5",
+   "ent": "mercadopago",
+   "sup": [
+    "carrefour"
+   ],
+   "dias": [
+    5
+   ],
+   "pct": 10,
+   "tope": null,
+   "medio": "QR Mercado Pago con dinero en cuenta",
+   "tj": [],
+   "nota": "Exclusivo con dinero en cuenta.",
+   "conf": "oficial",
+   "fu": [
+    "of-carrefour"
+   ],
+   "origen": "carrefour",
+   "vig": {
+    "desde": "2026-09-01",
+    "hasta": "2026-12-01"
+   }
+  },
+  {
    "id": "anses-carrefour-123-jubilado",
    "ent": "anses",
    "sup": [
@@ -783,30 +807,6 @@
    "tj": [],
    "nota": "Tope de devolución: $35.000. No incluye carnicería, huevos de gallina, ni electro",
    "req": "jubilado",
-   "conf": "oficial",
-   "fu": [
-    "of-carrefour"
-   ],
-   "origen": "carrefour",
-   "vig": {
-    "desde": "2026-09-01",
-    "hasta": "2026-12-01"
-   }
-  },
-  {
-   "id": "mercadopago-carrefour-5",
-   "ent": "mercadopago",
-   "sup": [
-    "carrefour"
-   ],
-   "dias": [
-    5
-   ],
-   "pct": 10,
-   "tope": null,
-   "medio": "QR Mercado Pago con dinero en cuenta",
-   "tj": [],
-   "nota": "Exclusivo con dinero en cuenta.",
    "conf": "oficial",
    "fu": [
     "of-carrefour"
