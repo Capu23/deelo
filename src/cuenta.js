@@ -45,6 +45,22 @@ const msg = e => ERRORES[e && e.code] || 'Algo salió mal. Probá de nuevo en un
   const btn = $('acctBtn'), dlg = $('authDlg'), body = $('authBody');
   let user = null, modo = 'ingresar', borrarPaso = 0;
   btn.hidden = false;
+  // Acciones de ingreso que usa la pantalla de inicio (bienvenida) de la página.
+  window.deeloAuth = {
+    msg,
+    async google(){
+      const prov = new A.GoogleAuthProvider();
+      try { await A.signInWithPopup(A.a, prov); }
+      catch (e) {
+        if (e.code === 'auth/popup-blocked' || e.code === 'auth/operation-not-supported-in-this-environment') { await A.signInWithRedirect(A.a, prov); return; }
+        throw e;
+      }
+    },
+    ingresar: (mail, pass) => A.signInWithEmailAndPassword(A.a, mail, pass),
+    crear: (mail, pass) => A.createUserWithEmailAndPassword(A.a, mail, pass),
+    reset: mail => A.sendPasswordResetEmail(A.a, mail),
+  };
+  window.dispatchEvent(new CustomEvent('deelo:auth-listo'));
   btn.addEventListener('click', () => { borrarPaso = 0; render(); dlg.showModal(); });
 
   const ref = u => F.doc(F.db, 'users', u.uid);
@@ -124,6 +140,8 @@ const msg = e => ERRORES[e && e.code] || 'Algo salió mal. Probá de nuevo en un
   A.getRedirectResult(A.a).catch(() => {});
   A.onAuthStateChanged(A.a, async u => {
     user = u;
+    window.deeloSesion = !!u;
+    window.dispatchEvent(new CustomEvent('deelo:sesion', { detail: { sesion: !!u } }));
     if (!u) {
       window.deeloCuenta = null;
       btn.classList.remove('in');
