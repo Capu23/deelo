@@ -18,6 +18,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<script data-goatcounter="https://deelo.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <title>deelo · Pagá menos. Siempre.</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -3207,6 +3208,8 @@ details.others[open] summary{margin-bottom:10px}
     if(v === 'carrito') renderCarrito();
     document.querySelectorAll('.deskNav button, .bottomNav button').forEach(b => b.setAttribute('aria-current', b.dataset.go === v ? 'page' : 'false'));
     if(location.hash.slice(1) !== v){ try{ history.replaceState(null, '', '#' + v); }catch(e){} }
+    if(show.listo){ try{ window.goatcounter && window.goatcounter.count && window.goatcounter.count({path: location.pathname + '#' + v, title: 'deelo · ' + v}); }catch(e){} }
+    show.listo = true;
     window.scrollTo(0, 0);
   }
   document.addEventListener('click', ev => {

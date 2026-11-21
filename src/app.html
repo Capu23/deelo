@@ -3184,6 +3184,8 @@ details.others[open] summary{margin-bottom:10px}
     if(v === 'carrito') renderCarrito();
     document.querySelectorAll('.deskNav button, .bottomNav button').forEach(b => b.setAttribute('aria-current', b.dataset.go === v ? 'page' : 'false'));
     if(location.hash.slice(1) !== v){ try{ history.replaceState(null, '', '#' + v); }catch(e){} }
+    if(show.listo){ try{ window.goatcounter && window.goatcounter.count && window.goatcounter.count({path: location.pathname + '#' + v, title: 'deelo · ' + v}); }catch(e){} }
+    show.listo = true;
     window.scrollTo(0, 0);
   }
   document.addEventListener('click', ev => {
