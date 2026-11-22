@@ -3152,11 +3152,11 @@ details.others[open] summary{margin-bottom:10px}
     document.getElementById('pxList').innerHTML = head + (list.length ? list.map(p => {
       const fs = filas(p), ok = fs.filter(x => x.disp), best = ok[0], worst = ok[ok.length-1];
       // Ahorro en el súper más conveniente: su precio original (el tachado) menos lo que pagás ahí.
-      const orig = best ? (best.pr ? best.precio : (best.lista || best.precio)) : 0;
+      const orig = best ? (best.lista || best.precio) : 0; // precio original, sin oferta del súper ni promo
       const ahorro = best ? orig - best.fin : 0;
       const row = (x, i) => `<a class="px${x === best ? ' best' : ''}${x.disp ? '' : ' na'}" href="${esc(PX.supers[x.s] + '/' + x.slug + '/p')}" target="_blank" rel="noopener">
-          <span class="w">${sbadge(x.s)}<span>${esc(D.supers[x.s].n)}${x === best ? '<span class="tag">Más barato</span>' : ''}<span class="why${x.pr ? '' : ' off'}"${x.via ? ` title="Con ${esc(x.via.map(b => D.entidades[b].n).join(', '))}"` : ''}>${!x.disp ? 'Sin stock online' : x.pr ? `−${x.pr.pct}% con ${esc(entName(x.pr))}` : pxModo === 'mias' ? 'Sin descuento' : (x.lista ? 'Oferta del súper' : '')}</span></span></span>
-          <span class="pr"><b>${fmt(x.fin)}</b>${x.pr || x.lista ? `<s>${fmt(x.pr ? x.precio : x.lista)}</s>` : ''}</span></a>`;
+          <span class="w">${sbadge(x.s)}<span>${esc(D.supers[x.s].n)}${x === best ? '<span class="tag">Más barato</span>' : ''}<span class="why${x.pr || x.lista ? '' : ' off'}"${x.via ? ` title="Con ${esc(x.via.map(b => D.entidades[b].n).join(', '))}"` : ''}>${!x.disp ? 'Sin stock online' : [x.lista ? `Oferta${x.pr ? '' : ' del súper'} −${Math.round((1 - x.precio / x.lista) * 100)}%` : '', x.pr ? `−${x.pr.pct}% con ${esc(entName(x.pr))}` : ''].filter(Boolean).join(' + ') || (pxModo === 'mias' ? 'Sin descuento' : '')}</span></span></span>
+          <span class="pr"><b>${fmt(x.fin)}</b>${x.pr || x.lista ? `<s>${fmt(x.lista || x.precio)}</s>` : ''}</span></a>`;
       return `<article class="prod"><div class="ph">${p.i ? `<img src="${esc(p.i.replace(/(\/ids\/\d+)\//, '$1-120-120/'))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<span class="ni"><b>${esc(p.n)}</b><small>${esc(p.c)} · ${fs.length} súper</small></span><span class="phR">${ahorro >= 1 ? `<span class="save" title="En ${esc(D.supers[best.s].n)}: ${fmt(orig)} → ${fmt(best.fin)}">Ahorrás<br><b>${fmt(ahorro)}</b></span>` : ''}${qtyCtrl(p.e)}</span></div>
         ${fs.slice(0, 4).map(row).join('')}${fs.length > 4 ? `<details><summary class="pxMore">Ver los ${fs.length}</summary>${fs.slice(4).map(row).join('')}</details>` : ''}</article>`;
     }).join('') : `<div class="empty">No encontramos ese producto. Probá con otra palabra, por ejemplo la marca.</div>`);
