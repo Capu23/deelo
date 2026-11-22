@@ -7,6 +7,7 @@
 // Uso (desde la carpeta del repo):
 //   node scraper/sepa.js                 descarga el último archivo de SEPA y lo procesa
 //   node scraper/sepa.js ruta/sepa.zip   usa un .zip que ya bajaste a mano
+//   node scraper/sepa.js ruta/carpeta    usa la carpeta donde lo descomprimiste
 // Después: git add data/precios-coto.json && git commit -m "Precios Coto" && git push
 const fs = require('fs');
 const os = require('os');
@@ -72,22 +73,36 @@ async function descargar(dir) {
 (async () => {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'sepa-'));
   try {
-    const zip = process.argv[2] ? path.resolve(process.argv[2]) : await descargar(tmp);
-    // El archivo grande trae un .zip por comercio. Buscamos el de Coto leyendo su comercio.csv.
-    const internos = listar(zip).split(/\r?\n/).filter(n => /\.zip$/i.test(n));
-    if (!internos.length) throw new Error('El .zip no tiene el formato esperado de SEPA.');
-    let dirCoto = null;
-    for (const n of internos) {
-      const d = path.join(tmp, 'c' + internos.indexOf(n));
+    const arg = process.argv[2] ? path.resolve(process.argv[2].replace(/^["']|["']$/g, '')) : await descargar(tmp);
+    if (!fs.existsSync(arg)) throw new Error(`No existe: ${arg}`);
+    // SEPA trae un .zip por comercio (dentro de un .zip grande, o ya descomprimidos en una carpeta).
+    // Buscamos el de Coto leyendo su comercio.csv.
+    const esCoto = file => { const t = fs.readFileSync(file, 'utf8'); return t.replace(/\D/g, '').includes(COTO_CUIT) || /\bcoto\b/i.test(t); };
+    const buscar = (dir, ext) => fs.readdirSync(dir, { withFileTypes: true }).flatMap(e => {
+      const f = path.join(dir, e.name);
+      return e.isDirectory() ? buscar(f, ext) : ext.test(e.name) ? [f] : [];
+    });
+    let internos;
+    if (fs.statSync(arg).isDirectory()) {
+      // ¿Ya están descomprimidos los de cada comercio?
+      const csv = buscar(arg, /^comercio\.csv$/i).find(esCoto);
+      if (csv) internos = [];
+      var dirCoto = csv ? path.dirname(csv) : null;
+      if (!dirCoto) internos = buscar(arg, /\.zip$/i);
+    } else {
+      internos = listar(arg).split(/\r?\n/).filter(n => /\.zip$/i.test(n)).map(n => ({ outer: arg, n }));
+    }
+    if (!dirCoto && !internos.length) throw new Error('No encontré los .zip de SEPA ahí.');
+    for (const [i, it] of (dirCoto ? [] : internos).entries()) {
+      const d = path.join(tmp, 'c' + i);
       fs.mkdirSync(d);
-      extraer(zip, d, n);
-      const inner = path.join(d, n);
-      const lista = listar(inner).split(/\r?\n/);
-      const com = lista.find(x => /comercio\.csv$/i.test(x));
+      let inner = it;
+      if (typeof it === 'object') { extraer(it.outer, d, it.n); inner = path.join(d, it.n); }
+      const com = listar(inner).split(/\r?\n/).find(x => /comercio\.csv$/i.test(x));
       if (!com) { fs.rmSync(d, { recursive: true }); continue; }
       extraer(inner, d, com);
-      const txt = fs.readFileSync(path.join(d, com), 'utf8');
-      if (txt.replace(/\D/g, '').includes(COTO_CUIT) || /\bcoto\b/i.test(txt)) {
+      if (esCoto(path.join(d, com))) {
+        console.log('Coto está en', path.basename(typeof it === 'object' ? it.n : it));
         extraer(inner, d);
         dirCoto = path.dirname(path.join(d, com));
         break;
@@ -130,7 +145,7 @@ async function descargar(dir) {
     };
     fs.writeFileSync(path.join(ROOT, 'data/precios-coto.json'), JSON.stringify(data));
     console.log(`Listo: ${Object.keys(precios).length} de ${canasta.length} productos con precio en Coto (${data.sucursal}).`);
-    console.log('Ahora: git add data/precios-coto.json && git commit -m "Precios Coto" && git push');
+    console.log('Archivo generado:', path.join(ROOT, 'data', 'precios-coto.json'));
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
   }
