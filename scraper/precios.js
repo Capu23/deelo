@@ -9,6 +9,16 @@ const canasta = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/canasta.json'),
 const sups = Object.keys(SUPERS);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
+// Coto no es VTEX: sus precios salen de SEPA (scraper/sepa.js, corre en una compu en Argentina).
+// Solo se usan si tienen menos de 15 días.
+const COTO_URL = 'https://www.cotodigital.com.ar/sitios/cdigi/categoria?Ntt=';
+let coto = null;
+try {
+  const c = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/precios-coto.json'), 'utf8'));
+  if ((Date.now() - new Date(c.actualizado)) / 864e5 < 15) coto = c;
+  else console.log('precios-coto.json tiene más de 15 días: no se usa.');
+} catch { console.log('Sin data/precios-coto.json: Coto queda afuera.'); }
+
 (async () => {
   const out = [];
   const errores = Object.fromEntries(sups.map(s => [s, 0]));
@@ -31,11 +41,13 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
       precios[s] = [r.precio, r.lista || 0, r.disponible ? 1 : 0, slug];
       if (!img && r.img) img = r.img.replace(/-\d+-\d+\//, '-200-200/');
     }
+    if (coto && coto.p[p.ean]) precios.coto = [coto.p[p.ean][0], coto.p[p.ean][1], 1, COTO_URL + p.ean];
     if (Object.keys(precios).length >= 2) out.push({ e: p.ean, n: p.nombre, c: p.categoria, i: img, p: precios });
   }
   const data = {
     actualizado: new Date().toISOString().slice(0, 10),
-    supers: Object.fromEntries(sups.map(s => [s, SUPERS[s]])),
+    supers: { ...Object.fromEntries(sups.map(s => [s, SUPERS[s]])), ...(coto ? { coto: 'https://www.cotodigital.com.ar' } : {}) },
+    ...(coto ? { coto: { actualizado: coto.actualizado, sucursal: coto.sucursal } } : {}),
     nota: 'Precios online de cada súper (pueden variar por sucursal). Formato de p: [precio, precio de lista si hay rebaja, disponible, slug].',
     sinPrecio: errores,
     productos: out,
