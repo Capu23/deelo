@@ -18,6 +18,10 @@ const { execFileSync } = require('child_process');
 const ROOT = path.join(__dirname, '..');
 const API = 'https://datos.produccion.gob.ar/api/3/action/package_show?id=sepa-precios';
 const COTO_CUIT = '30548083156';
+// En SEPA, Coto es el comercio 12 (archivo sepa_1_comercio-sepa-12_<fecha>.zip). Se prueba primero;
+// si cambia de número, igual lo encuentra leyendo el comercio.csv de cada uno.
+const COTO_ID = /comercio-sepa-12[_.]/i;
+const cotoPrimero = (a, b) => COTO_ID.test(String(b.n || b)) - COTO_ID.test(String(a.n || a));
 const canasta = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/canasta.json'), 'utf8')).productos;
 const norm = e => String(e || '').replace(/\D/g, '').replace(/^0+/, '');
 const QUIERO = new Map(canasta.map(p => [norm(p.ean), p.ean]));
@@ -88,9 +92,9 @@ async function descargar(dir) {
       const csv = buscar(arg, /^comercio\.csv$/i).find(esCoto);
       if (csv) internos = [];
       var dirCoto = csv ? path.dirname(csv) : null;
-      if (!dirCoto) internos = buscar(arg, /\.zip$/i);
+      if (!dirCoto) internos = buscar(arg, /\.zip$/i).sort(cotoPrimero);
     } else {
-      internos = listar(arg).split(/\r?\n/).filter(n => /\.zip$/i.test(n)).map(n => ({ outer: arg, n }));
+      internos = listar(arg).split(/\r?\n/).filter(n => /\.zip$/i.test(n)).map(n => ({ outer: arg, n })).sort(cotoPrimero);
     }
     if (!dirCoto && !internos.length) throw new Error('No encontré los .zip de SEPA ahí.');
     for (const [i, it] of (dirCoto ? [] : internos).entries()) {
