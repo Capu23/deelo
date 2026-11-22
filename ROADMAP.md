@@ -10,6 +10,7 @@ _Última revisión: 22/11/2026_
 ### 1. Precios de Coto 🔨
 - ✅ Script `scraper/sepa.js`: baja SEPA (Precios Claros), toma una sucursal de Coto en CABA y escribe `data/precios-coto.json`.
 - ✅ El comparador y el carrito suman Coto si el archivo tiene menos de 15 días.
+- ✅ Promos por cantidad (2x1, 2da al 80%, llevando 3): se muestran aparte en Precios y el carrito las aplica cuando llevás la cantidad.
 - ⏭️ Primera corrida real desde una compu en Argentina (SEPA bloquea conexiones de afuera).
 - 💭 Cómo se actualiza cada semana: a mano desde la compu, o automático (ver punto 3).
 

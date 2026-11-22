@@ -20,8 +20,17 @@ const COTO_CUIT = '30548083156';
 const canasta = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/canasta.json'), 'utf8')).productos;
 const norm = e => String(e || '').replace(/\D/g, '').replace(/^0+/, '');
 const QUIERO = new Map(canasta.map(p => [norm(p.ean), p.ean]));
-// Promos que exigen llevar más de una unidad: no se muestran como precio del producto.
-const MULTI = /\d\s*x\s*\d|2d[oa]|segund|llev|unid|comb|pack/i;
+// Promos que exigen llevar más de una unidad (2x1, 2da al 80%, llevando 3…): no son el precio del producto,
+// se guardan aparte con la cantidad mínima para que el carrito las aplique cuando corresponde.
+const MULTI = /\d\s*x\s*\d|\d\s*(d[oa]|°|º|ra|er)\b|segund|tercer|llev|unid|comb|pack/i;
+const cantidad = t => {
+  let m;
+  if ((m = t.match(/(\d+)\s*x\s*\d/i))) return +m[1];
+  if ((m = t.match(/llev\w*\s*(\d+)/i))) return +m[1];
+  if ((m = t.match(/(\d+)\s*(d[oa]|°|º|ra|er)\b/i))) return +m[1];
+  if (/tercer/i.test(t)) return 3;
+  return 2;
+};
 
 const run = (cmd, a) => execFileSync(cmd, a, { stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 1 << 28 }).toString();
 // `tar` abre .zip en Windows y macOS; en Linux (GNU tar) no, así que ahí se usa `unzip`.
@@ -102,8 +111,12 @@ async function descargar(dir) {
       const lista = num(f.productos_precio_lista);
       if (!lista) continue;
       const promo = num(f.productos_precio_unitario_promo1);
-      const vale = promo && promo < lista && !MULTI.test(f.productos_leyenda_promo1 || '');
-      (porSuc[f.id_sucursal] ||= {})[ean] = vale ? [promo, lista] : [lista, 0];
+      const ley = (f.productos_leyenda_promo1 || '').trim();
+      const multi = promo && promo < lista && MULTI.test(ley);
+      const simple = promo && promo < lista && !multi;
+      (porSuc[f.id_sucursal] ||= {})[ean] = simple ? [promo, lista]
+        : multi ? [lista, 0, { t: ley.slice(0, 40), u: promo, n: Math.min(cantidad(ley), 12) }]
+        : [lista, 0];
     }
     // Usamos una sola sucursal (la que tiene más productos de la canasta) para que los precios sean coherentes.
     const [idSuc, precios] = Object.entries(porSuc).sort((a, b) => Object.keys(b[1]).length - Object.keys(a[1]).length)[0] || [];
@@ -112,7 +125,7 @@ async function descargar(dir) {
       actualizado: new Date().toISOString().slice(0, 10),
       fuente: 'SEPA · Precios Claros (Secretaría de Comercio)',
       sucursal: (sucs[idSuc] && sucs[idSuc].n) || idSuc,
-      nota: 'Precio en góndola de una sucursal de Coto en CABA. Formato de p: [precio, precio de lista si hay rebaja].',
+      nota: 'Precio en góndola de una sucursal de Coto en CABA. Formato de p: [precio, precio de lista si hay rebaja, promo por cantidad {t: leyenda, u: precio c/u, n: unidades}].',
       p: precios,
     };
     fs.writeFileSync(path.join(ROOT, 'data/precios-coto.json'), JSON.stringify(data));
