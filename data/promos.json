@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-20",
+ "actualizado": "2026-11-23",
  "periodo": "Noviembre 2026",
  "vigencia": {
   "desde": "2020-06-01",
@@ -1264,28 +1264,6 @@
    "origen": "dia"
   },
   {
-   "id": "mercadopago-coto-67-presencial",
-   "ent": "mercadopago",
-   "sup": [
-    "coto"
-   ],
-   "dias": [
-    6,
-    7
-   ],
-   "pct": 20,
-   "tope": "app",
-   "medio": "Utilizando todos los medios de pago dentro de la app",
-   "tj": [],
-   "canal": "presencial",
-   "nota": "No válido para venta online (Coto Digital).",
-   "conf": "oficial",
-   "fu": [
-    "of-coto-dia"
-   ],
-   "origen": "coto-vigentes"
-  },
-  {
    "id": "visanfc-coto-4-presencial",
    "ent": "visanfc",
    "sup": [
@@ -1379,28 +1357,6 @@
    "tj": [],
    "canal": "presencial",
    "nota": "Sin tope de reintegro.",
-   "conf": "oficial",
-   "fu": [
-    "of-coto-dia"
-   ],
-   "origen": "coto-vigentes"
-  },
-  {
-   "id": "credicoop-coto-67-presencial",
-   "ent": "credicoop",
-   "sup": [
-    "coto"
-   ],
-   "dias": [
-    6,
-    7
-   ],
-   "pct": 30,
-   "tope": null,
-   "medio": "Abonando con tarjetas de débito y crédito Cabal Credicoop exclusivo desde APP BANCA CREDICOOP con MODO",
-   "tj": [],
-   "canal": "presencial",
-   "nota": "Sin tope de reintegro. Válido para el Sábado 21/11/2026 y Domingo 22/11/2026.",
    "conf": "oficial",
    "fu": [
     "of-coto-dia"
@@ -1507,32 +1463,6 @@
    "origen": "coto-vigentes"
   },
   {
-   "id": "credicoop-coto-67-presencial-plan-sueldo",
-   "ent": "credicoop",
-   "sup": [
-    "coto"
-   ],
-   "dias": [
-    6,
-    7
-   ],
-   "pct": 10,
-   "tope": {
-    "m": 5000,
-    "p": null
-   },
-   "medio": "Abonando con tarjetas de débito y crédito Cabal Credicoop exclusivo desde APP BANCA CREDICOOP con MODO",
-   "tj": [],
-   "canal": "presencial",
-   "nota": "Acumula con promoción Credicoop Sábado 21/11/2026 y Domingo 22/11/2026. 10% de descuento adicional si cobrás tu sueldo en Credicoop con tope $ 5.000 por cuenta. Válido para el Sábado 21/11/2026 y Domingo 22/11/2026.",
-   "req": "Plan sueldo",
-   "conf": "oficial",
-   "fu": [
-    "of-coto-dia"
-   ],
-   "origen": "coto-vigentes"
-  },
-  {
    "id": "supervielle-coto-2-presencial",
    "ent": "supervielle",
    "sup": [
@@ -1547,27 +1477,6 @@
    "tj": [],
    "canal": "presencial",
    "nota": "Sin tope de reintegro. No acumula con promo Modo martes. Aplica para compras presenciales en un pago, en los productos sin oferta.",
-   "conf": "oficial",
-   "fu": [
-    "of-coto-dia"
-   ],
-   "origen": "coto-vigentes"
-  },
-  {
-   "id": "credito-coto-5-presencial",
-   "ent": "credito",
-   "sup": [
-    "coto"
-   ],
-   "dias": [
-    5
-   ],
-   "pct": 15,
-   "tope": null,
-   "medio": "En un pago con tarjetas de crédito.",
-   "tj": [],
-   "canal": "presencial",
-   "nota": "Sin tope de reintegro.",
    "conf": "oficial",
    "fu": [
     "of-coto-dia"

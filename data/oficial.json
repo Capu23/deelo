@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-20T15:41:58.720Z",
+ "generado": "2026-11-23T22:35:47.559Z",
  "fuentes": {
   "cencosud": {
    "ok": true,
@@ -15,7 +15,7 @@
   },
   "cotoVigentes": {
    "ok": true,
-   "n": 39
+   "n": 35
   },
   "coto": {
    "ok": true,
@@ -1926,28 +1926,6 @@
    "super": [
     "coto"
    ],
-   "id": "540",
-   "icono": "logo_mercadopago.png",
-   "descripcion": "Exclusivo en sucursales. Utilizando todos los medios de pago dentro de la app",
-   "observacion": "No válido para venta online (Coto Digital). Aplican exclusiones. Ver legal.",
-   "diasTexto": "Sabado y Domingo",
-   "titulo": "mercadopago 20%",
-   "pct": 20,
-   "dias": [
-    6,
-    7
-   ],
-   "tope": "desconocido",
-   "min": null,
-   "online": "solo-presencial",
-   "texto": "Exclusivo en sucursales. Utilizando todos los medios de pago dentro de la app No válido para venta online (Coto Digital). Aplican exclusiones. Ver legal.",
-   "url": "https://www.coto.com.ar/descuentos"
-  },
-  {
-   "fuente": "coto-vigentes",
-   "super": [
-    "coto"
-   ],
    "id": "527",
    "icono": "logo_visa1.png",
    "descripcion": "Exclusivo en sucursales. En compras presenciales pagando desde tu celular CON VISA DÉBITO NFC con Bancos seleccionados.",
@@ -2028,28 +2006,6 @@
    "min": null,
    "online": "solo-presencial",
    "texto": "Exclusivo en sucursales. En un pago con tarjetas de Visa débito. Sin tope de reintegro. Aplican exclusiones. Ver legales.",
-   "url": "https://www.coto.com.ar/descuentos"
-  },
-  {
-   "fuente": "coto-vigentes",
-   "super": [
-    "coto"
-   ],
-   "id": "450",
-   "icono": "logo_credicoop.png",
-   "descripcion": "Exclusivo en sucursales. Abonando con tarjetas de débito y crédito Cabal Credicoop exclusivo desde APP BANCA CREDICOOP con MODO",
-   "observacion": "Sin tope de reintegro. Válido para el Sábado 21/11/2026 y Domingo 22/11/2026. Aplican exclusiones. Ver legales.",
-   "diasTexto": "Sabado y Domingo",
-   "titulo": "credicoop 30%",
-   "pct": 30,
-   "dias": [
-    6,
-    7
-   ],
-   "tope": null,
-   "min": null,
-   "online": "solo-presencial",
-   "texto": "Exclusivo en sucursales. Abonando con tarjetas de débito y crédito Cabal Credicoop exclusivo desde APP BANCA CREDICOOP con MODO Sin tope de reintegro. Válido para el Sábado 21/11/2026 y Domingo 22/11/2026. Aplican exclusiones. Ver legales.",
    "url": "https://www.coto.com.ar/descuentos"
   },
   {
@@ -2141,31 +2097,6 @@
    "super": [
     "coto"
    ],
-   "id": "451",
-   "icono": "logo_credicoop.png",
-   "descripcion": "PLAN SUELDO Exclusivo en sucursales. Abonando con tarjetas de débito y crédito Cabal Credicoop exclusivo desde APP BANCA CREDICOOP con MODO",
-   "observacion": "Acumula con promoción Credicoop Sábado 21/11/2026 y Domingo 22/11/2026. 10% de descuento adicional si cobrás tu sueldo en Credicoop con tope $ 5.000 por cuenta. Válido para el Sábado 21/11/2026 y Domingo 22/11/2026. Ver legales.",
-   "diasTexto": "Sabado y Domingo",
-   "titulo": "credicoop 10%",
-   "pct": 10,
-   "dias": [
-    6,
-    7
-   ],
-   "tope": {
-    "m": 5000,
-    "p": null
-   },
-   "min": null,
-   "online": "solo-presencial",
-   "texto": "PLAN SUELDO Exclusivo en sucursales. Abonando con tarjetas de débito y crédito Cabal Credicoop exclusivo desde APP BANCA CREDICOOP con MODO Acumula con promoción Credicoop Sábado 21/11/2026 y Domingo 22/11/2026. 10% de descuento adicional si cobrás tu sueldo en Credicoop con tope $ 5.000 por cuenta. Válido para el Sábado 21/11/2026 y Domingo 22/11/2026. Ver legales.",
-   "url": "https://www.coto.com.ar/descuentos"
-  },
-  {
-   "fuente": "coto-vigentes",
-   "super": [
-    "coto"
-   ],
    "id": "466",
    "icono": "logo_supervielle2.png",
    "descripcion": "Exclusivo en sucursales. Pagando con MODO desde la app de Supervielle con tarjetas de débito y crédito del banco",
@@ -2199,27 +2130,6 @@
    "min": null,
    "online": "solo-presencial",
    "texto": "Exclusivo en sucursales. En un pago con tarjetas de crédito y débito. Sin tope de reintegro. Aplican exclusiones. Ver legal.",
-   "url": "https://www.coto.com.ar/descuentos"
-  },
-  {
-   "fuente": "coto-vigentes",
-   "super": [
-    "coto"
-   ],
-   "id": "479",
-   "icono": "logo_tarjetascredito2.png",
-   "descripcion": "Exclusivo en sucursales. En un pago con tarjetas de crédito.",
-   "observacion": "Sin tope de reintegro. Aplican exclusiones. Ver legal.",
-   "diasTexto": "Viernes",
-   "titulo": "tarjetascredito2 15%",
-   "pct": 15,
-   "dias": [
-    5
-   ],
-   "tope": null,
-   "min": null,
-   "online": "solo-presencial",
-   "texto": "Exclusivo en sucursales. En un pago con tarjetas de crédito. Sin tope de reintegro. Aplican exclusiones. Ver legal.",
    "url": "https://www.coto.com.ar/descuentos"
   },
   {
@@ -3214,15 +3124,18 @@
     "coto"
    ],
    "titulo": "DESCUENTOS SÁBADO Y DOMINGO",
-   "pct": 15,
+   "pct": 20,
    "dias": [],
    "fechas": [],
    "adicional": null,
-   "tope": null,
+   "tope": {
+    "m": 5000,
+    "p": "compra"
+   },
    "min": 150000,
    "vigencia": null,
    "online": null,
-   "texto": "DESCUENTOS VÁLIDOS EN LA REPÚBLICA ARGENTINA DESDE EL 14 HASTA EL 15 DE NOVIEMBRE DE 2026 VÁLIDO PARA SUCURSALES COTO DE CABA, BUENOS AIRES, NEUQUÉN, MENDOZA, ENTRE RÍOS Y SANTA FE. NO ACUMULABLE CON OTRAS PROMOCIONES VIGENTES. (1) BENEFICIO VÁLIDO EXCLUSIVAMENTE EN LA REPÚBLICA ARGENTINA PARA PAGOS REALIZADOS A TRAVÉS DEL SERVICIO DE PROCESAMIENTO DE PAGOS DE MERCADO PAGO OPERADO POR MERCADOLIBRE S.R.L. (“MERCADO PAGO”) A TRAVÉS DEL ESCANEO DEL CÓDIGO QR CON LA APP DE MERCADO PAGO (LA “APP”), UTILIZANDO TODOS LOS MEDIOS DE PAGO DENTRO DE LA APP. EL BENEFICIO CONSISTE EN UN 15% DE DESCUENTO, SIN TOPE DE REINTEGRO, EN LAS COMPRAS EN TODAS LAS SUCURSALES DE COTO C.I.C.S.A (EL “BENEFICIO”). EL BENEFICIO ESTARÁ A CARGO DE COTO C.I.C.S.A Y SE REALIZARÁ EN LÍNEA DE CAJAS SOBRE EL PRECIO DE CONTADO. INCLUYE ELECTRODOMÉSTICOS, NEUMÁTICOS Y RODADOS. MERCADO PAGO NO ES UNA ENTIDAD FINANCIERA. LOS FONDOS EN CUENTAS DE PAGO NO SON DEPÓSITOS GARANTIZADOS. MERCADOLIBRE S.R.L. CUIT 30-70308853-4, CASEROS 3039, PISO 2º, CABA”. APLICAN EXCLUSIONES. (2) VALIDO EN COMPRAS A PARTIR DE $150.000 PAGANDO CON QR DE MERCADO PAGO. CFTNA: COSTO FINANCIERO TOTAL NOMINAL ANUAL. CFTNA:0%. TASA FIJA NOMINAL Y EFECTIVA ANUAL 0%. VÁLIDO PARA COMPRAS DESDE $150.000 CON LA TARJETA DE CRÉDITO MERCADO PAGO EN UN QR DE MERCADO PAGO. OTORGAMIENTO DE LA TARJETA SUJETO A EVALUACIÓN CREDITICIA. MÁS INFORMACIÓN CONSULTÁ EN MERCADOPAGO.COM.AR/CUENTA. (3) VÁLIDO PARA SUCURSALES COTO DE CABA, BUENOS AIRES, NEUQUÉN, MENDO",
+   "texto": "DESCUENTOS VÁLIDOS EN LA REPÚBLICA ARGENTINA DESDE EL 21 HASTA EL 22 DE NOVIEMBRE DE 2026 VÁLIDO PARA SUCURSALES COTO DE CABA, BUENOS AIRES, NEUQUÉN, MENDOZA, ENTRE RÍOS Y SANTA FE. NO ACUMULABLE CON OTRAS PROMOCIONES VIGENTES. (1) BENEFICIO VÁLIDO EXCLUSIVAMENTE EN LA REPÚBLICA ARGENTINA PARA PAGOS REALIZADOS A TRAVÉS DEL SERVICIO DE PROCESAMIENTO DE PAGOS DE MERCADO PAGO OPERADO POR MERCADOLIBRE S.R.L. (“MERCADO PAGO”) A TRAVÉS DEL ESCANEO DEL CÓDIGO QR CON LA APP DE MERCADO PAGO (LA “APP”), UTILIZANDO TODOS LOS MEDIOS DE PAGO DENTRO DE LA APP. EL BENEFICIO CONSISTE EN UN 20% DE DESCUENTO, SIN TOPE DE REINTEGRO, EN LAS COMPRAS EN TODAS LAS SUCURSALES DE COTO C.I.C.S.A (EL “BENEFICIO”). EL BENEFICIO ESTARÁ A CARGO DE COTO C.I.C.S.A Y SE REALIZARÁ EN LÍNEA DE CAJAS SOBRE EL PRECIO DE CONTADO. INCLUYE ELECTRODOMÉSTICOS, NEUMÁTICOS Y RODADOS. MERCADO PAGO NO ES UNA ENTIDAD FINANCIERA. LOS FONDOS EN CUENTAS DE PAGO NO SON DEPÓSITOS GARANTIZADOS. MERCADOLIBRE S.R.L. CUIT 30-70308853-4, CASEROS 3039, PISO 2º, CABA”. APLICAN EXCLUSIONES. (2) VALIDO EN COMPRAS A PARTIR DE $150.000 PAGANDO CON QR DE MERCADO PAGO. CFTNA: COSTO FINANCIERO TOTAL NOMINAL ANUAL. CFTNA:0%. TASA FIJA NOMINAL Y EFECTIVA ANUAL 0%. VÁLIDO PARA COMPRAS DESDE $150.000 CON LA TARJETA DE CRÉDITO MERCADO PAGO EN UN QR DE MERCADO PAGO. OTORGAMIENTO DE LA TARJETA SUJETO A EVALUACIÓN CREDITICIA. MÁS INFORMACIÓN CONSULTÁ EN MERCADOPAGO.COM.AR/CUENTA. (3) VÁLIDO PARA SUCURSALES COTO DE CABA, BUENOS AIRES, NEUQUÉN, MENDO",
    "url": "https://www.coto.com.ar/terminos-descuentos"
   },
   {
