@@ -58,7 +58,7 @@ a{color:var(--green-text)}
 .logo-word{font-family:var(--f-brand);font-weight:600;font-size:34px;letter-spacing:-.02em;line-height:1;color:var(--brand-navy)}
 .tagline{display:none;color:var(--ink2);font-size:13px;line-height:1.3;border-left:1px solid var(--rule);padding-left:12px;margin-left:4px}
 .tagline b{display:block;color:var(--ink);font-size:14px}
-@media (min-width:700px){.tagline{display:block;max-width:300px}}
+@media (min-width:1320px){.tagline{display:block;max-width:300px}}
 .deskNav{display:none;gap:4px;background:var(--paper);border:1px solid var(--rule);border-radius:999px;padding:4px}
 .deskNav button{white-space:nowrap;border:0;background:none;padding:8px 16px;border-radius:999px;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink2)}
 .deskNav button[aria-current="page"]{background:var(--navy);color:var(--on-navy)}
@@ -69,6 +69,47 @@ a{color:var(--green-text)}
 .stack .eb.more{background:var(--sunk);color:var(--ink2)}
 .stack .eb:first-child{margin-left:0}
 
+
+/* ---------- planes ---------- */
+.plHead{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px}
+.plHead p{color:var(--ink2);font-size:14px;margin-top:4px;max-width:52ch}
+.plCiclo{display:inline-flex;background:var(--sunk);border:1px solid var(--rule);border-radius:999px;padding:3px}
+.plCiclo button{border:0;background:none;border-radius:999px;padding:7px 14px;font-weight:600;font-size:13px;color:var(--ink2);cursor:pointer;white-space:nowrap}
+.plCiclo button[aria-pressed="true"]{background:var(--navy);color:var(--on-navy)}
+.plCiclo small{font-weight:700;color:var(--green-text);margin-left:4px}
+.plCiclo button[aria-pressed="true"] small{color:var(--brand-green)}
+.plGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;align-items:stretch}
+.plan{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0;position:relative}
+.plan.dest{border:1.5px solid var(--navy)}
+.plan .badge{position:absolute;top:-11px;left:16px;background:var(--navy);color:var(--on-navy);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:3px 10px}
+.plan .badge.soon{background:var(--sunk);color:var(--ink2);border:1px solid var(--rule)}
+.plan h3{font-size:18px;font-weight:700;letter-spacing:-.01em}
+.plan .para{color:var(--ink2);font-size:13px;min-height:2.9em}
+.plan .precio{display:flex;align-items:baseline;gap:4px}
+.plan .precio b{font-size:30px;font-weight:700;letter-spacing:-.02em}
+.plan .precio span{color:var(--ink3);font-size:13px}
+.plan .eq{color:var(--green-text);font-size:12.5px;font-weight:600;min-height:1.2em;margin-top:-8px}
+.plan ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:13.5px;flex:1}
+.plan li{display:grid;grid-template-columns:18px 1fr;gap:8px;align-items:start}
+.plan li::before{content:"";width:16px;height:16px;margin-top:2px;border-radius:50%;background:var(--green-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.8' fill='none' stroke='%230f8f5b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.plan li.no{color:var(--ink3)}
+.plan li.no::before{background:var(--sunk) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M5 8h6' stroke='%238b93a5' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.plan .btn{width:100%;justify-content:center;text-align:center}
+.plan .btn[disabled]{opacity:.55;cursor:not-allowed}
+.plTablaWrap{overflow-x:auto;border:1px solid var(--rule);border-radius:var(--r)}
+.plTabla{border-collapse:collapse;width:100%;min-width:620px;font-size:13.5px}
+.plTabla th,.plTabla td{padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;vertical-align:middle}
+.plTabla th:first-child,.plTabla td:first-child{text-align:left;color:var(--ink)}
+.plTabla thead th{background:var(--sunk);font-size:13px;font-weight:700}
+.plTabla tbody tr:last-child td{border-bottom:0}
+.plTabla .si{color:var(--green-text);font-weight:700}
+.plTabla .nn{color:var(--ink3)}
+.plNota{color:var(--ink3);font-size:12.5px}
+.plFaq{display:grid;gap:8px}
+.plFaq details{border:1px solid var(--rule);border-radius:var(--r-sm);padding:12px 14px;background:var(--paper)}
+.plFaq summary{font-weight:600;cursor:pointer;font-size:14px}
+.plFaq p{color:var(--ink2);font-size:13.5px;margin-top:8px}
+@media (max-width:420px){.bottomNav button{font-size:10px;padding:6px 2px}}
 
 /* ---------- inicio (bienvenida) ---------- */
 .hola{position:fixed;inset:0;z-index:40;background:radial-gradient(120% 70% at 50% 0%,color-mix(in srgb,var(--green) 22%,var(--bg)) 0%,var(--bg) 60%);overflow-y:auto;display:flex;justify-content:center;padding:max(28px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 28px max(16px,env(safe-area-inset-left,0px))}
@@ -463,6 +504,7 @@ details.others[open] summary{margin-bottom:10px}
       <button data-go="precios">Precios</button>
       <button data-go="carrito">Carrito<span class="cbadge" data-cbadge hidden></span></button>
       <button data-go="todas">Todas las promos</button>
+      <button data-go="planes">Planes</button>
     </nav>
     <div class="topRight">
       <button class="profileBtn" id="profileBtn" data-go="tarjetas"></button>
@@ -547,6 +589,26 @@ details.others[open] summary{margin-bottom:10px}
   </main>
 
   <!-- ===== TODAS ===== -->
+  <main id="view-planes" class="col" style="gap:22px" hidden>
+    <div class="plHead">
+      <div><h2>Planes</h2><p>Empezá con lo esencial y sumá avisos, alertas de precio y herramientas para toda la casa cuando lo necesites.</p></div>
+      <div class="plCiclo" role="group" aria-label="Forma de pago"><button data-ciclo="mes" aria-pressed="true">Mensual</button><button data-ciclo="anio" aria-pressed="false">Anual<small>2 meses gratis</small></button></div>
+    </div>
+    <div class="plGrid" id="plGrid"></div>
+    <div class="col" style="gap:10px">
+      <h3 style="font-size:16px">Compará los planes</h3>
+      <div class="plTablaWrap"><table class="plTabla" id="plTabla"></table></div>
+    </div>
+    <div class="plFaq">
+      <h3 style="font-size:16px">Preguntas frecuentes</h3>
+      <details><summary>¿Cómo se paga?</summary><p>Con Mercado Pago: tarjeta de débito, crédito o dinero en cuenta. Se renueva solo cada mes o cada año.</p></details>
+      <details><summary>¿Puedo cancelar cuando quiera?</summary><p>Sí, desde tu cuenta y sin llamar a nadie. Seguís con el plan hasta que termine el período que pagaste.</p></details>
+      <details><summary>¿Cómo funciona el plan Familiar?</summary><p>Invitás hasta 4 personas de tu casa. Comparten la lista de compras y deelo suma los topes de las tarjetas de todos para decirte quién conviene que pague.</p></details>
+      <details><summary>¿deelo cobra comisión a los súper o bancos?</summary><p>No. deelo no está afiliado a ningún súper, banco ni billetera: los planes son lo que lo mantiene independiente.</p></details>
+    </div>
+    <p class="plNota">Planes en desarrollo: todavía no se cobra nada. Precios en pesos argentinos, con impuestos incluidos.</p>
+  </main>
+
   <main id="view-todas" class="col" hidden>
     <div class="secHead"><h2>Todas las promos</h2><span class="count" id="allCount"></span></div>
     <div class="fbar">
@@ -567,10 +629,11 @@ details.others[open] summary{margin-bottom:10px}
 </dialog>
 
 <nav class="bottomNav" aria-label="Secciones">
-  <button data-go="hoy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Mi semana</button>
-  <button data-go="tarjetas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="13" rx="2.5"/><path d="M2.5 10.5h19M6 15h4"/></svg>Mis tarjetas</button>
+  <button data-go="hoy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Semana</button>
+  <button data-go="tarjetas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="13" rx="2.5"/><path d="M2.5 10.5h19M6 15h4"/></svg>Tarjetas</button>
   <button data-go="precios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>Precios</button>
   <button data-go="carrito"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h2.6l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1l1.6-6.8H6.2"/></svg><span class="cbadge" data-cbadge hidden></span></span>Carrito</button>
+  <button data-go="planes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8-4.3-4.1 5.9-.9z"/></svg>Planes</button>
   <button data-go="todas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Todas</button>
 </nav>
 
@@ -3177,7 +3240,7 @@ details.others[open] summary{margin-bottom:10px}
   }
 
   // ---------- navegación ----------
-  const VIEWS = ['hoy','precios','carrito','tarjetas','todas'];
+  const VIEWS = ['hoy','precios','carrito','tarjetas','todas','planes'];
   function show(v){
     if(!VIEWS.includes(v)) v = 'hoy';
     VIEWS.forEach(x => document.getElementById('view-'+x).hidden = x !== v);
@@ -3205,6 +3268,47 @@ details.others[open] summary{margin-bottom:10px}
   window.addEventListener('hashchange', () => show(location.hash.slice(1)));
 
   try{ localStorage.removeItem('deelo-tema'); }catch(e){}
+
+
+  // ---------- planes (en desarrollo: no se cobra nada todavía) ----------
+  const PLANES = [
+    {k:'basico', n:'Básico', para:'Lo esencial para ahorrar en el súper.', m:1000, items:['Descuentos de la semana con tus tarjetas','Comparador de precios con tus descuentos','1 carrito: dónde conviene comprar todo','Tu cuenta en todos tus dispositivos'], no:['Con anuncios'], cta:'Empezar'},
+    {k:'plus', n:'Plus', para:'deelo te avisa solo cuándo y dónde conviene.', m:7000, dest:'Más elegido', items:['Todo lo de Básico, sin anuncios','Aviso del día con tu mejor descuento','Alertas cuando baja un producto que seguís','Historial de precios: subió o bajó','Control de topes de tus tarjetas','Listas de compras ilimitadas','Elegí tu sucursal o barrio'], cta:'Probar Plus'},
+    {k:'familiar', n:'Familiar', para:'Plus para toda la casa.', m:10000, items:['Todo lo de Plus, para hasta 5 personas','Lista de compras compartida en tiempo real','Topes de las tarjetas de toda la casa','Quién conviene que pague, según su tarjeta'], cta:'Probar Familiar'},
+    {k:'pro', n:'Pro', para:'Para comercios y compras grandes.', m:30000, soon:true, items:['Todo lo de Familiar','Varias sucursales o equipos','Exportar precios y compras','Acceso a datos de precios'], cta:'Próximamente'},
+  ];
+  const PL_TABLA = [
+    ['Descuentos de la semana con mis tarjetas', 1,1,1,1],
+    ['Comparador de precios con mis descuentos', 1,1,1,1],
+    ['Carrito: dónde conviene comprar', '1 carrito','Ilimitadas','Compartidas','✓'],
+    ['Cuenta en todos tus dispositivos', 1,1,1,1],
+    ['Sin anuncios', 0,1,1,1],
+    ['Aviso del día', 0,1,1,1],
+    ['Alertas de baja de precio', 0,1,1,1],
+    ['Historial de precios', 0,1,1,1],
+    ['Control de topes', 0,'Mis tarjetas','Toda la casa','✓'],
+    ['Elegir sucursal o barrio', 0,1,1,1],
+    ['Personas', '1','1','Hasta 5','Equipos'],
+    ['Exportar y datos de precios', 0,0,0,1],
+  ];
+  let plCiclo = 'mes';
+  const plPrecio = m => plCiclo === 'mes' ? m : m * 10;
+  function renderPlanes(){
+    document.querySelectorAll('[data-ciclo]').forEach(b => b.setAttribute('aria-pressed', b.dataset.ciclo === plCiclo));
+    document.getElementById('plGrid').innerHTML = PLANES.map(p => `<article class="plan${p.dest ? ' dest' : ''}">
+        ${p.dest ? `<span class="badge">${esc(p.dest)}</span>` : p.soon ? '<span class="badge soon">Próximamente</span>' : ''}
+        <h3>${esc(p.n)}</h3><p class="para">${esc(p.para)}</p>
+        <div class="precio"><b>${fmt(plPrecio(p.m))}</b><span>/${plCiclo === 'mes' ? 'mes' : 'año'}</span></div>
+        <div class="eq">${plCiclo === 'anio' ? `Equivale a ${fmt(Math.round(p.m * 10 / 12))} por mes` : ''}</div>
+        <ul>${p.items.map(i => `<li>${esc(i)}</li>`).join('')}${(p.no||[]).map(i => `<li class="no">${esc(i)}</li>`).join('')}</ul>
+        <button class="btn${p.dest ? '' : ' ghost'}" disabled title="Todavía no está disponible">${esc(p.soon ? 'Próximamente' : p.cta)}</button>
+      </article>`).join('');
+    const cel = v => v === 1 ? '<span class="si" aria-label="Incluido">✓</span>' : v === 0 ? '<span class="nn" aria-label="No incluido">—</span>' : esc(v);
+    document.getElementById('plTabla').innerHTML = `<thead><tr><th scope="col">Incluye</th>${PLANES.map(p => `<th scope="col">${esc(p.n)}<br><span class="muted" style="font-weight:500">${fmt(plPrecio(p.m))}/${plCiclo === 'mes' ? 'mes' : 'año'}</span></th>`).join('')}</tr></thead>
+      <tbody>${PL_TABLA.map(([t, ...v]) => `<tr><td>${esc(t)}</td>${v.map(x => `<td>${cel(x)}</td>`).join('')}</tr>`).join('')}</tbody>`;
+  }
+  document.getElementById('view-planes').addEventListener('click', ev => { const c = ev.target.closest('[data-ciclo]'); if(c){ plCiclo = c.dataset.ciclo; renderPlanes(); } });
+  renderPlanes();
 
   function renderAll(){ renderChrome(); renderWeek(); renderAllTable(); if(PX) renderPrecios(); pintarBadge(); if(!document.getElementById('view-carrito').hidden) renderCarrito(); }
   renderEnts(); renderAll();
