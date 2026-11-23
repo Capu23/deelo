@@ -7,6 +7,8 @@
 // Uso (desde la carpeta del repo):
 //   node scraper/sepa.js                 descarga el último archivo de SEPA y lo procesa
 //   node scraper/sepa.js ruta/sepa.zip   usa un .zip que ya bajaste a mano
+//   node scraper/sepa.js ruta/carpeta    usa la carpeta donde lo descomprimiste
+//   node scraper/sepa.js ruta/productos.csv   usa directo el CSV de Coto (columnas separadas por |)
 // Después: git add data/precios-coto.json && git commit -m "Precios Coto" && git push
 const fs = require('fs');
 const os = require('os');
@@ -17,11 +19,24 @@ const { execFileSync } = require('child_process');
 const ROOT = path.join(__dirname, '..');
 const API = 'https://datos.produccion.gob.ar/api/3/action/package_show?id=sepa-precios';
 const COTO_CUIT = '30548083156';
+// En SEPA, Coto es el comercio 12 (archivo sepa_1_comercio-sepa-12_<fecha>.zip). Se prueba primero;
+// si cambia de número, igual lo encuentra leyendo el comercio.csv de cada uno.
+const COTO_ID = /comercio-sepa-12[_.]/i;
+const cotoPrimero = (a, b) => COTO_ID.test(String(b.n || b)) - COTO_ID.test(String(a.n || a));
 const canasta = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/canasta.json'), 'utf8')).productos;
 const norm = e => String(e || '').replace(/\D/g, '').replace(/^0+/, '');
 const QUIERO = new Map(canasta.map(p => [norm(p.ean), p.ean]));
-// Promos que exigen llevar más de una unidad: no se muestran como precio del producto.
-const MULTI = /\d\s*x\s*\d|2d[oa]|segund|llev|unid|comb|pack/i;
+// Promos que exigen llevar más de una unidad (2x1, 2da al 80%, llevando 3…): no son el precio del producto,
+// se guardan aparte con la cantidad mínima para que el carrito las aplique cuando corresponde.
+const MULTI = /\d\s*x\s*\d|\d\s*(d[oa]|°|º|ra|er)\b|segund|tercer|llev|unid|comb|pack/i;
+const cantidad = t => {
+  let m;
+  if ((m = t.match(/(\d+)\s*x\s*\d/i))) return +m[1];
+  if ((m = t.match(/llev\w*\s*(\d+)/i))) return +m[1];
+  if ((m = t.match(/(\d+)\s*(d[oa]|°|º|ra|er)\b/i))) return +m[1];
+  if (/tercer/i.test(t)) return 3;
+  return 2;
+};
 
 const run = (cmd, a) => execFileSync(cmd, a, { stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 1 << 28 }).toString();
 // `tar` abre .zip en Windows y macOS; en Linux (GNU tar) no, así que ahí se usa `unzip`.
@@ -63,22 +78,42 @@ async function descargar(dir) {
 (async () => {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'sepa-'));
   try {
-    const zip = process.argv[2] ? path.resolve(process.argv[2]) : await descargar(tmp);
-    // El archivo grande trae un .zip por comercio. Buscamos el de Coto leyendo su comercio.csv.
-    const internos = listar(zip).split(/\r?\n/).filter(n => /\.zip$/i.test(n));
-    if (!internos.length) throw new Error('El .zip no tiene el formato esperado de SEPA.');
-    let dirCoto = null;
-    for (const n of internos) {
-      const d = path.join(tmp, 'c' + internos.indexOf(n));
+    const arg = process.argv[2] ? path.resolve(process.argv[2].replace(/^["']|["']$/g, '')) : await descargar(tmp);
+    if (!fs.existsSync(arg)) throw new Error(`No existe: ${arg}`);
+    // SEPA trae un .zip por comercio (dentro de un .zip grande, o ya descomprimidos en una carpeta).
+    // Buscamos el de Coto leyendo su comercio.csv.
+    const esCoto = file => { const t = fs.readFileSync(file, 'utf8'); return t.replace(/\D/g, '').includes(COTO_CUIT) || /\bcoto\b/i.test(t); };
+    const buscar = (dir, ext) => fs.readdirSync(dir, { withFileTypes: true }).flatMap(e => {
+      const f = path.join(dir, e.name);
+      return e.isDirectory() ? buscar(f, ext) : ext.test(e.name) ? [f] : [];
+    });
+    let internos;
+    if (/\.csv$/i.test(arg)) {
+      // Le pasaron directo el productos.csv de Coto: usamos su carpeta.
+      internos = [];
+      var dirCoto = path.dirname(arg);
+    } else if (fs.statSync(arg).isDirectory()) {
+      // ¿Ya están descomprimidos los de cada comercio?
+      const csv = buscar(arg, /^comercio\.csv$/i).find(esCoto);
+      if (csv) internos = [];
+      dirCoto = csv ? path.dirname(csv) : null;
+      // Carpeta con productos.csv pero sin comercio.csv: la tomamos como la de Coto.
+      if (!dirCoto) { const pc = buscar(arg, /^productos\.csv$/i); if (pc.length === 1) dirCoto = path.dirname(pc[0]); }
+      if (!dirCoto) internos = buscar(arg, /\.zip$/i).sort(cotoPrimero);
+    } else {
+      internos = listar(arg).split(/\r?\n/).filter(n => /\.zip$/i.test(n)).map(n => ({ outer: arg, n })).sort(cotoPrimero);
+    }
+    if (!dirCoto && !internos.length) throw new Error('No encontré los .zip de SEPA ahí.');
+    for (const [i, it] of (dirCoto ? [] : internos).entries()) {
+      const d = path.join(tmp, 'c' + i);
       fs.mkdirSync(d);
-      extraer(zip, d, n);
-      const inner = path.join(d, n);
-      const lista = listar(inner).split(/\r?\n/);
-      const com = lista.find(x => /comercio\.csv$/i.test(x));
+      let inner = it;
+      if (typeof it === 'object') { extraer(it.outer, d, it.n); inner = path.join(d, it.n); }
+      const com = listar(inner).split(/\r?\n/).find(x => /comercio\.csv$/i.test(x));
       if (!com) { fs.rmSync(d, { recursive: true }); continue; }
       extraer(inner, d, com);
-      const txt = fs.readFileSync(path.join(d, com), 'utf8');
-      if (txt.replace(/\D/g, '').includes(COTO_CUIT) || /\bcoto\b/i.test(txt)) {
+      if (esCoto(path.join(d, com))) {
+        console.log('Coto está en', path.basename(typeof it === 'object' ? it.n : it));
         extraer(inner, d);
         dirCoto = path.dirname(path.join(d, com));
         break;
@@ -89,7 +124,9 @@ async function descargar(dir) {
 
     // Sucursales de CABA (si no hay, todas).
     const sucs = {};
-    for await (const s of filas(path.join(dirCoto, 'sucursales.csv'))) {
+    const fSuc = path.join(dirCoto, 'sucursales.csv');
+    if (!fs.existsSync(fSuc)) console.log('No está sucursales.csv al lado: uso todas las sucursales.');
+    if (fs.existsSync(fSuc)) for await (const s of filas(fSuc)) {
       sucs[s.id_sucursal] = { n: s.sucursales_nombre, caba: /AR-C|capital|c\.?a\.?b\.?a|ciudad aut/i.test(s.sucursales_provincia + ' ' + s.sucursales_localidad) };
     }
     const hayCaba = Object.values(sucs).some(s => s.caba);
@@ -102,22 +139,37 @@ async function descargar(dir) {
       const lista = num(f.productos_precio_lista);
       if (!lista) continue;
       const promo = num(f.productos_precio_unitario_promo1);
-      const vale = promo && promo < lista && !MULTI.test(f.productos_leyenda_promo1 || '');
-      (porSuc[f.id_sucursal] ||= {})[ean] = vale ? [promo, lista] : [lista, 0];
+      const ley = (f.productos_leyenda_promo1 || '').trim();
+      const multi = promo && promo < lista && MULTI.test(ley);
+      const simple = promo && promo < lista && !multi;
+      (porSuc[f.id_sucursal] ||= {})[ean] = simple ? [promo, lista]
+        : multi ? [lista, 0, { t: ley.slice(0, 40), u: promo, n: Math.min(cantidad(ley), 12) }]
+        : [lista, 0];
     }
-    // Usamos una sola sucursal (la que tiene más productos de la canasta) para que los precios sean coherentes.
-    const [idSuc, precios] = Object.entries(porSuc).sort((a, b) => Object.keys(b[1]).length - Object.keys(a[1]).length)[0] || [];
-    if (!idSuc) throw new Error('No encontré precios de la canasta en Coto.');
+    // Todas las sucursales de CABA: por producto, el precio que más se repite entre las que lo tienen
+    // (si empatan, el más bajo). Así se cubren más productos que con una sola sucursal.
+    const nSuc = Object.keys(porSuc).length;
+    if (!nSuc) throw new Error('No encontré precios de la canasta en Coto.');
+    const porEan = {};
+    for (const prods of Object.values(porSuc)) for (const [ean, v] of Object.entries(prods)) (porEan[ean] ||= []).push(v);
+    const precios = {};
+    for (const [ean, vs] of Object.entries(porEan)) {
+      const cuenta = new Map();
+      for (const v of vs) { const k = JSON.stringify(v); cuenta.set(k, (cuenta.get(k) || 0) + 1); }
+      const [k] = [...cuenta].sort((x, y) => (y[1] - x[1]) || (JSON.parse(x[0])[0] - JSON.parse(y[0])[0]))[0];
+      precios[ean] = JSON.parse(k);
+    }
     const data = {
       actualizado: new Date().toISOString().slice(0, 10),
       fuente: 'SEPA · Precios Claros (Secretaría de Comercio)',
-      sucursal: (sucs[idSuc] && sucs[idSuc].n) || idSuc,
-      nota: 'Precio en góndola de una sucursal de Coto en CABA. Formato de p: [precio, precio de lista si hay rebaja].',
+      sucursales: nSuc,
+      sucursal: hayCaba ? `${nSuc} sucursales de CABA` : `${nSuc} sucursales`,
+      nota: 'Precio en góndola más común entre las sucursales de Coto en CABA. Formato de p: [precio, precio de lista si hay rebaja, promo por cantidad {t: leyenda, u: precio c/u, n: unidades}].',
       p: precios,
     };
     fs.writeFileSync(path.join(ROOT, 'data/precios-coto.json'), JSON.stringify(data));
     console.log(`Listo: ${Object.keys(precios).length} de ${canasta.length} productos con precio en Coto (${data.sucursal}).`);
-    console.log('Ahora: git add data/precios-coto.json && git commit -m "Precios Coto" && git push');
+    console.log('Archivo generado:', path.join(ROOT, 'data', 'precios-coto.json'));
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
   }

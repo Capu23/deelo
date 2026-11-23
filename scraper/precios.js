@@ -41,13 +41,16 @@ try {
       precios[s] = [r.precio, r.lista || 0, r.disponible ? 1 : 0, slug];
       if (!img && r.img) img = r.img.replace(/-\d+-\d+\//, '-200-200/');
     }
-    if (coto && coto.p[p.ean]) precios.coto = [coto.p[p.ean][0], coto.p[p.ean][1], 1, COTO_URL + p.ean];
+    if (coto && coto.p[p.ean]) {
+      const [pc, lc, m] = coto.p[p.ean];
+      precios.coto = [pc, lc, 1, COTO_URL + p.ean, ...(m ? [m] : [])];
+    }
     if (Object.keys(precios).length >= 2) out.push({ e: p.ean, n: p.nombre, c: p.categoria, i: img, p: precios });
   }
   const data = {
     actualizado: new Date().toISOString().slice(0, 10),
     supers: { ...Object.fromEntries(sups.map(s => [s, SUPERS[s]])), ...(coto ? { coto: 'https://www.cotodigital.com.ar' } : {}) },
-    ...(coto ? { coto: { actualizado: coto.actualizado, sucursal: coto.sucursal } } : {}),
+    ...(coto ? { coto: { actualizado: coto.actualizado, sucursal: coto.sucursal, sucursales: coto.sucursales } } : {}),
     nota: 'Precios online de cada súper (pueden variar por sucursal). Formato de p: [precio, precio de lista si hay rebaja, disponible, slug].',
     sinPrecio: errores,
     productos: out,

@@ -289,6 +289,8 @@ details.others[open] summary{margin-bottom:10px}
 .px .w>span{min-width:0}
 .px .w .why{display:block;font-weight:500;font-size:12px;color:var(--green-text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .px .w .why.off{color:var(--ink3)}
+.px .w .why.multi{color:var(--ink2);font-weight:600}
+.px .w .why.multi::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:5px;vertical-align:1px}
 .px .pr{text-align:right;white-space:nowrap}
 .px .pr b{font-size:15.5px}
 .px .pr s{display:block;font-size:12px;color:var(--ink3)}
@@ -3098,7 +3100,7 @@ details.others[open] summary{margin-bottom:10px}
     if(!PX){ cargarPrecios(); return; }
     if(!pxDay) pxDay = new Date(sel);
     const f = PX.actualizado.split('-').reverse().join('/');
-    sub.innerHTML = `${PX.productos.length} productos en ${Object.keys(PX.supers).length} súper · precios online del ${f}${PX.coto ? ` · Coto: góndola de ${esc(PX.coto.sucursal)} (Precios Claros)` : ' · Coto llega pronto'}.`;
+    sub.innerHTML = `${PX.productos.length} productos en ${Object.keys(PX.supers).length} súper · precios online del ${f}${PX.coto ? ` · Coto: ${PX.coto.sucursales ? `precio de góndola más común en ${esc(PX.coto.sucursal)}` : `góndola de la sucursal ${esc(PX.coto.sucursal.toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase()))}`} (Precios Claros)` : ' · Coto llega pronto'}.`;
     const cats = [...new Set(PX.productos.map(p => p.c))];
     document.getElementById('pxCats').innerHTML = `<button class="fchip plain" data-pc="" aria-pressed="${!pxCat}">Todo</button>` + cats.map(c => `<button class="fchip plain" data-pc="${esc(c)}" aria-pressed="${pxCat===c}">${esc(c)}</button>`).join('');
     const elegidos = P.supers && P.supers.length;
@@ -3115,9 +3117,9 @@ details.others[open] summary{margin-bottom:10px}
     const q = normTxt(document.getElementById('pxQ').value.trim()).split(/\s+/).filter(Boolean);
     let list = PX.productos.filter(p => (!pxCat || p.c === pxCat) && q.every(w => p.k.includes(w)) && Object.keys(p.p).some(miSuper));
     const desc = Object.fromEntries(Object.keys(PX.supers).map(s => [s, pxModo === 'mias' ? mejorDescuento(s, pxDay) : null]));
-    const filas = p => Object.entries(p.p).filter(([s]) => miSuper(s)).map(([s, [precio, lista, disp, slug]]) => {
+    const filas = p => Object.entries(p.p).filter(([s]) => miSuper(s)).map(([s, [precio, lista, disp, slug, m]]) => {
       const dd = desc[s], pr = dd && dd.pr, fin = pr ? precio * (1 - pr.pct/100) : precio;
-      return {s, precio, lista, disp, slug, pr, via: dd && dd.via, fin};
+      return {s, precio, lista, disp, slug, m, pr, via: dd && dd.via, fin};
     }).sort((a,b) => (b.disp - a.disp) || (a.fin - b.fin));
     if(!q.length && !pxCat){
       // Sin búsqueda: productos donde más diferencia hay entre súper
@@ -3131,7 +3133,7 @@ details.others[open] summary{margin-bottom:10px}
       const orig = best ? (best.lista || best.precio) : 0; // precio original, sin oferta del súper ni promo
       const ahorro = best ? orig - best.fin : 0;
       const row = (x, i) => `<a class="px${x === best ? ' best' : ''}${x.disp ? '' : ' na'}" href="${esc(/^https?:/.test(x.slug) ? x.slug : PX.supers[x.s] + '/' + x.slug + '/p')}" target="_blank" rel="noopener">
-          <span class="w">${sbadge(x.s)}<span>${esc(D.supers[x.s].n)}${x === best ? '<span class="tag">Más barato</span>' : ''}<span class="why${x.pr || x.lista ? '' : ' off'}"${x.via ? ` title="Con ${esc(x.via.map(b => D.entidades[b].n).join(', '))}"` : ''}>${!x.disp ? 'Sin stock online' : [x.lista ? `Oferta${x.pr ? '' : ' del súper'} −${Math.round((1 - x.precio / x.lista) * 100)}%` : '', x.pr ? `−${x.pr.pct}% con ${esc(entName(x.pr))}` : ''].filter(Boolean).join(' + ') || (pxModo === 'mias' ? 'Sin descuento' : '')}</span></span></span>
+          <span class="w">${sbadge(x.s)}<span>${esc(D.supers[x.s].n)}${x === best ? '<span class="tag">Más barato</span>' : ''}<span class="why${x.pr || x.lista ? '' : ' off'}"${x.via ? ` title="Con ${esc(x.via.map(b => D.entidades[b].n).join(', '))}"` : ''}>${!x.disp ? 'Sin stock online' : [x.lista ? `Oferta${x.pr ? '' : ' del súper'} −${Math.round((1 - x.precio / x.lista) * 100)}%` : '', x.pr ? `−${x.pr.pct}% con ${esc(entName(x.pr))}` : ''].filter(Boolean).join(' + ') || (x.m ? '' : pxModo === 'mias' ? 'Sin descuento' : '')}</span>${x.disp && x.m ? `<span class="why multi">${esc(x.m.t)}: ${fmt(x.m.u * (x.pr ? 1 - x.pr.pct/100 : 1))} c/u llevando ${x.m.n}</span>` : ''}</span></span>
           <span class="pr"><b>${fmt(x.fin)}</b>${x.pr || x.lista ? `<s>${fmt(x.lista || x.precio)}</s>` : ''}</span></a>`;
       return `<article class="prod"><div class="ph">${p.i ? `<img src="${esc(p.i.replace(/(\/ids\/\d+)\//, '$1-120-120/'))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<span class="ni"><b>${esc(p.n)}</b><small>${esc(p.c)} · ${fs.length} súper</small></span><span class="phR">${ahorro >= 1 ? `<span class="save" title="En ${esc(D.supers[best.s].n)}: ${fmt(orig)} → ${fmt(best.fin)}">Ahorrás<br><b>${fmt(ahorro)}</b></span>` : ''}${qtyCtrl(p.e)}</span></div>
         ${fs.slice(0, 4).map(row).join('')}${fs.length > 4 ? `<details><summary class="pxMore">Ver los ${fs.length}</summary>${fs.slice(4).map(row).join('')}</details>` : ''}</article>`;
@@ -3147,6 +3149,8 @@ details.others[open] summary{margin-bottom:10px}
   });
 
   // ---------- carrito ----------
+  // Costo de q unidades: si hay promo por cantidad (2x1, 2da al 80%…) se aplica a cada grupo completo.
+  const costo = (r, q) => { const m = r[4]; if(!m || q < m.n) return r[0] * q; const g = Math.floor(q / m.n) * m.n; return g * m.u + (q - g) * r[0]; };
   // P.carrito: [{e: EAN, q: cantidad, n: nombre}] — se guarda con el perfil (y en la cuenta, si hay sesión)
   const cart = () => (P.carrito = Array.isArray(P.carrito) ? P.carrito : []);
   const cantidad = e => (cart().find(x => x.e === e) || {}).q || 0;
@@ -3198,24 +3202,24 @@ details.others[open] summary{margin-bottom:10px}
     // Totales por súper
     const sups = Object.keys(PX.supers).filter(miSuper);
     const res = sups.map(s => {
-      let sub = 0, tiene = 0; const faltan = [];
-      items.forEach(x => { const r = x.p.p[s]; if(r && r[2]){ sub += r[0] * x.q; tiene++; } else faltan.push(x.p.n); });
+      let sub = 0, tiene = 0; const faltan = [], promosQ = [];
+      items.forEach(x => { const r = x.p.p[s]; if(r && r[2]){ sub += costo(r, x.q); if(r[4] && x.q >= r[4].n) promosQ.push(x.p.n); tiene++; } else faltan.push(x.p.n); });
       const pr = mejorPromoTotal(s, cxDay, sub);
-      return {s, sub, tiene, faltan, pr, fin: sub - (pr ? pr.v : 0)};
+      return {s, sub, tiene, faltan, promosQ, pr, fin: sub - (pr ? pr.v : 0)};
     }).filter(r => r.tiene).sort((a,b) => (b.tiene - a.tiene) || (a.fin - b.fin));
     const best = res[0];
     const fmtPr = r => r.pr ? `<span class="g">−${fmt(r.pr.v)} con ${esc(entName(r.pr.pr))}${r.pr.via ? ' (' + esc(r.pr.via.map(b => D.entidades[b].n).join(', ')) + ')' : ''} · ${r.pr.pr.pct}%${r.pr.cap ? ', llegás al tope' : ''}</span>` : (pxModo === 'mias' && hasProfile() ? '<span>Sin descuento con tus tarjetas ese día</span>' : '');
     rank.innerHTML = res.map((r,i) => `<div class="rk${i === 0 ? ' best' : ''}">
         <span class="t">${sbadge(r.s,'lg')}<span>${esc(D.supers[r.s].n)}${i === 0 ? ' <span class="tag" style="font-size:10.5px;font-weight:700;text-transform:uppercase;background:var(--green);color:var(--green-ink);border-radius:999px;padding:2px 7px">Más conveniente</span>' : ''}</span></span>
         <span class="tot"><b>${fmt(r.fin)}</b>${r.pr ? `<s>${fmt(r.sub)}</s>` : ''}</span>
-        <span class="d">${fmtPr(r)}${r.pr && r.pr.pr.tope && r.pr.pr.tope.p && ['mes','semana'].includes(r.pr.pr.tope.p) ? `<span class="muted">El tope de ${fmt(r.pr.pr.tope.m)} es por ${r.pr.pr.tope.p}: se comparte con otras compras.</span>` : ''}${r.pr && r.pr.pr.min ? `<span class="muted">Compra mínima ${fmt(r.pr.pr.min)}.</span>` : ''}
+        <span class="d">${fmtPr(r)}${r.pr && r.pr.pr.tope && r.pr.pr.tope.p && ['mes','semana'].includes(r.pr.pr.tope.p) ? `<span class="muted">El tope de ${fmt(r.pr.pr.tope.m)} es por ${r.pr.pr.tope.p}: se comparte con otras compras.</span>` : ''}${r.pr && r.pr.pr.min ? `<span class="muted">Compra mínima ${fmt(r.pr.pr.min)}.</span>` : ''}${r.promosQ.length ? `<span class="g">Incluye promo por cantidad en ${esc(r.promosQ.slice(0,2).join(', '))}${r.promosQ.length > 2 ? ' y ' + (r.promosQ.length - 2) + ' más' : ''}</span>` : ''}
           ${r.faltan.length ? `<span class="w">Tiene ${r.tiene} de ${items.length} · falta: ${esc(r.faltan.slice(0,3).join(', '))}${r.faltan.length > 3 ? ' y ' + (r.faltan.length - 3) + ' más' : ''}</span>` : `<span>Tiene los ${items.length} productos</span>`}</span>
       </div>`).join('');
     // Comprando cada cosa donde está más barata (sin topes)
     let split = 0, donde = new Set(), cubiertos = 0;
     items.forEach(x => {
       let mejor = null;
-      sups.forEach(s => { const r = x.p.p[s]; if(!r || !r[2]) return; const d = pxModo === 'mias' ? mejorDescuento(s, cxDay) : null; const u = r[0] * (1 - (d ? d.pr.pct : 0)/100); if(!mejor || u < mejor.u) mejor = {u, s}; });
+      sups.forEach(s => { const r = x.p.p[s]; if(!r || !r[2]) return; const d = pxModo === 'mias' ? mejorDescuento(s, cxDay) : null; const u = costo(r, x.q) / x.q * (1 - (d ? d.pr.pct : 0)/100); if(!mejor || u < mejor.u) mejor = {u, s}; });
       if(mejor){ split += mejor.u * x.q; donde.add(mejor.s); cubiertos++; }
     });
     if(best && donde.size > 1 && split < best.fin - 1) rank.innerHTML += `<div class="split">Si repartís la compra y llevás cada producto donde está más barato, pagarías <b>${fmt(split)}</b> (en ${[...donde].map(s => esc(D.supers[s].n)).join(', ')}). Es una estimación sin topes: sirve si igual pasás por varios súper.</div>`;
