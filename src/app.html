@@ -3100,7 +3100,7 @@ details.others[open] summary{margin-bottom:10px}
     if(!PX){ cargarPrecios(); return; }
     if(!pxDay) pxDay = new Date(sel);
     const f = PX.actualizado.split('-').reverse().join('/');
-    sub.innerHTML = `${PX.productos.length} productos en ${Object.keys(PX.supers).length} súper · precios online del ${f}${PX.coto ? ` · Coto: góndola de ${esc(PX.coto.sucursal)} (Precios Claros)` : ' · Coto llega pronto'}.`;
+    sub.innerHTML = `${PX.productos.length} productos en ${Object.keys(PX.supers).length} súper · precios online del ${f}${PX.coto ? ` · Coto: góndola de la sucursal ${esc(PX.coto.sucursal.toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase()))} (Precios Claros)` : ' · Coto llega pronto'}.`;
     const cats = [...new Set(PX.productos.map(p => p.c))];
     document.getElementById('pxCats').innerHTML = `<button class="fchip plain" data-pc="" aria-pressed="${!pxCat}">Todo</button>` + cats.map(c => `<button class="fchip plain" data-pc="${esc(c)}" aria-pressed="${pxCat===c}">${esc(c)}</button>`).join('');
     const elegidos = P.supers && P.supers.length;
