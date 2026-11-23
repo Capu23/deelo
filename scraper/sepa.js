@@ -8,6 +8,7 @@
 //   node scraper/sepa.js                 descarga el último archivo de SEPA y lo procesa
 //   node scraper/sepa.js ruta/sepa.zip   usa un .zip que ya bajaste a mano
 //   node scraper/sepa.js ruta/carpeta    usa la carpeta donde lo descomprimiste
+//   node scraper/sepa.js ruta/productos.csv   usa directo el CSV de Coto (columnas separadas por |)
 // Después: git add data/precios-coto.json && git commit -m "Precios Coto" && git push
 const fs = require('fs');
 const os = require('os');
@@ -87,11 +88,17 @@ async function descargar(dir) {
       return e.isDirectory() ? buscar(f, ext) : ext.test(e.name) ? [f] : [];
     });
     let internos;
-    if (fs.statSync(arg).isDirectory()) {
+    if (/\.csv$/i.test(arg)) {
+      // Le pasaron directo el productos.csv de Coto: usamos su carpeta.
+      internos = [];
+      var dirCoto = path.dirname(arg);
+    } else if (fs.statSync(arg).isDirectory()) {
       // ¿Ya están descomprimidos los de cada comercio?
       const csv = buscar(arg, /^comercio\.csv$/i).find(esCoto);
       if (csv) internos = [];
-      var dirCoto = csv ? path.dirname(csv) : null;
+      dirCoto = csv ? path.dirname(csv) : null;
+      // Carpeta con productos.csv pero sin comercio.csv: la tomamos como la de Coto.
+      if (!dirCoto) { const pc = buscar(arg, /^productos\.csv$/i); if (pc.length === 1) dirCoto = path.dirname(pc[0]); }
       if (!dirCoto) internos = buscar(arg, /\.zip$/i).sort(cotoPrimero);
     } else {
       internos = listar(arg).split(/\r?\n/).filter(n => /\.zip$/i.test(n)).map(n => ({ outer: arg, n })).sort(cotoPrimero);
@@ -117,7 +124,9 @@ async function descargar(dir) {
 
     // Sucursales de CABA (si no hay, todas).
     const sucs = {};
-    for await (const s of filas(path.join(dirCoto, 'sucursales.csv'))) {
+    const fSuc = path.join(dirCoto, 'sucursales.csv');
+    if (!fs.existsSync(fSuc)) console.log('No está sucursales.csv al lado: uso todas las sucursales.');
+    if (fs.existsSync(fSuc)) for await (const s of filas(fSuc)) {
       sucs[s.id_sucursal] = { n: s.sucursales_nombre, caba: /AR-C|capital|c\.?a\.?b\.?a|ciudad aut/i.test(s.sucursales_provincia + ' ' + s.sucursales_localidad) };
     }
     const hayCaba = Object.values(sucs).some(s => s.caba);
