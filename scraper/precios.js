@@ -50,7 +50,7 @@ try {
   const data = {
     actualizado: new Date().toISOString().slice(0, 10),
     supers: { ...Object.fromEntries(sups.map(s => [s, SUPERS[s]])), ...(coto ? { coto: 'https://www.cotodigital.com.ar' } : {}) },
-    ...(coto ? { coto: { actualizado: coto.actualizado, sucursal: coto.sucursal } } : {}),
+    ...(coto ? { coto: { actualizado: coto.actualizado, sucursal: coto.sucursal, sucursales: coto.sucursales } } : {}),
     nota: 'Precios online de cada súper (pueden variar por sucursal). Formato de p: [precio, precio de lista si hay rebaja, disponible, slug].',
     sinPrecio: errores,
     productos: out,

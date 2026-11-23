@@ -146,14 +146,25 @@ async function descargar(dir) {
         : multi ? [lista, 0, { t: ley.slice(0, 40), u: promo, n: Math.min(cantidad(ley), 12) }]
         : [lista, 0];
     }
-    // Usamos una sola sucursal (la que tiene más productos de la canasta) para que los precios sean coherentes.
-    const [idSuc, precios] = Object.entries(porSuc).sort((a, b) => Object.keys(b[1]).length - Object.keys(a[1]).length)[0] || [];
-    if (!idSuc) throw new Error('No encontré precios de la canasta en Coto.');
+    // Todas las sucursales de CABA: por producto, el precio que más se repite entre las que lo tienen
+    // (si empatan, el más bajo). Así se cubren más productos que con una sola sucursal.
+    const nSuc = Object.keys(porSuc).length;
+    if (!nSuc) throw new Error('No encontré precios de la canasta en Coto.');
+    const porEan = {};
+    for (const prods of Object.values(porSuc)) for (const [ean, v] of Object.entries(prods)) (porEan[ean] ||= []).push(v);
+    const precios = {};
+    for (const [ean, vs] of Object.entries(porEan)) {
+      const cuenta = new Map();
+      for (const v of vs) { const k = JSON.stringify(v); cuenta.set(k, (cuenta.get(k) || 0) + 1); }
+      const [k] = [...cuenta].sort((x, y) => (y[1] - x[1]) || (JSON.parse(x[0])[0] - JSON.parse(y[0])[0]))[0];
+      precios[ean] = JSON.parse(k);
+    }
     const data = {
       actualizado: new Date().toISOString().slice(0, 10),
       fuente: 'SEPA · Precios Claros (Secretaría de Comercio)',
-      sucursal: (sucs[idSuc] && sucs[idSuc].n) || idSuc,
-      nota: 'Precio en góndola de una sucursal de Coto en CABA. Formato de p: [precio, precio de lista si hay rebaja, promo por cantidad {t: leyenda, u: precio c/u, n: unidades}].',
+      sucursales: nSuc,
+      sucursal: hayCaba ? `${nSuc} sucursales de CABA` : `${nSuc} sucursales`,
+      nota: 'Precio en góndola más común entre las sucursales de Coto en CABA. Formato de p: [precio, precio de lista si hay rebaja, promo por cantidad {t: leyenda, u: precio c/u, n: unidades}].',
       p: precios,
     };
     fs.writeFileSync(path.join(ROOT, 'data/precios-coto.json'), JSON.stringify(data));
