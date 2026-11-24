@@ -274,6 +274,18 @@ details.others[open] summary{margin-bottom:10px}
 .tile.none b{color:var(--ink3)}
 
 /* ---------- precios ---------- */
+.pxTop{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.pxTop .pxSearch,.pxTop #pxDays{align-self:stretch;min-width:0}
+.pxFBtn{flex:none;display:flex;align-items:center;gap:7px;border:1px solid var(--rule);background:var(--paper);border-radius:999px;padding:7px 14px;font-weight:600;font-size:13.5px;color:var(--ink);cursor:pointer;white-space:nowrap}
+.pxFBtn .ch{width:14px;height:14px;transition:transform .15s}
+.pxFBtn[aria-expanded="true"] .ch{transform:rotate(180deg)}
+.pxFBtn svg{width:18px;height:18px}
+.pxFBtn[aria-expanded="true"]{border-color:var(--navy);background:var(--navy);color:var(--on-navy)}
+.pxFBtn .n{display:inline-grid;place-items:center;min-width:19px;height:19px;padding:0 5px;border-radius:99px;background:var(--navy);color:var(--on-navy);font-size:11px;font-weight:700}
+.pxFBtn[aria-expanded="true"] .n{background:var(--on-navy);color:var(--navy)}
+.pxFiltros{display:flex;flex-direction:column;gap:12px;padding:14px;border:1px solid var(--rule);border-radius:var(--r);background:var(--sunk)}
+.pxFG{display:flex;flex-direction:column;gap:6px;min-width:0}
+.pxFL{font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
 .pxSearch{display:flex;align-items:center;gap:10px;background:var(--paper);border:1.5px solid var(--rule);border-radius:14px;padding:0 14px;box-shadow:var(--shadow)}
 .pxSearch:focus-within{border-color:var(--green)}
 .pxSearch svg{width:20px;height:20px;color:var(--ink3);flex:none}
@@ -523,13 +535,19 @@ details.others[open] summary{margin-bottom:10px}
     <div class="secHead">
       <div class="col" style="gap:4px"><h2>Compará precios</h2><p class="muted" style="font-size:13.5px" id="pxSub">Cargando precios…</p></div>
     </div>
-    <div class="pxSearch">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      <input id="pxQ" type="search" placeholder="Buscá un producto: leche, yerba, detergente…" autocomplete="off" aria-label="Buscar producto">
+    <div class="pxTop">
+      <div class="pxSearch">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input id="pxQ" type="search" placeholder="Buscá un producto: leche, yerba, detergente…" autocomplete="off" aria-label="Buscar producto">
+      </div>
+      <div class="fscroll" id="pxDays" role="group" aria-label="Día de compra"></div>
+      <button class="pxFBtn" id="pxFBtn" type="button" aria-expanded="false" aria-controls="pxFiltros"></button>
     </div>
-    <div class="fscroll" id="pxCats" role="group" aria-label="Categorías"></div>
-    <div class="fscroll" id="pxSups" role="group" aria-label="Mis súper"></div>
-    <div class="fscroll" id="pxDays" role="group" aria-label="Día de compra"></div>
+    <div class="pxFiltros" id="pxFiltros" hidden>
+      <div class="pxFG"><span class="pxFL">Tipo de producto</span><div class="fscroll" id="pxCats" role="group" aria-label="Tipo de producto"></div></div>
+      <div class="pxFG"><span class="pxFL">Supermercados</span><div class="fscroll" id="pxSups" role="group" aria-label="Supermercados"></div></div>
+      <div class="pxFG" id="pxModoG"><span class="pxFL">Precio</span><div id="pxModo"></div></div>
+    </div>
     <div id="pxNote"></div>
     <div class="col" style="gap:10px" id="pxList"></div>
   </main>
@@ -3014,8 +3032,7 @@ details.others[open] summary{margin-bottom:10px}
     const sub = document.getElementById('pxSub');
     if(!PX){ cargarPrecios(); return; }
     if(!pxDay) pxDay = new Date(sel);
-    const f = PX.actualizado.split('-').reverse().join('/');
-    sub.innerHTML = `${PX.productos.length} productos en ${Object.keys(PX.supers).length} súper · precios online del ${f}${PX.coto ? ` · Coto: ${PX.coto.sucursales ? `precio de góndola más común en ${esc(PX.coto.sucursal)}` : `góndola de la sucursal ${esc(PX.coto.sucursal.toLowerCase().replace(/(^|\s)\S/g, c => c.toUpperCase()))}`} (Precios Claros)` : ' · Coto llega pronto'}.`;
+    sub.textContent = ''; sub.hidden = true;
     const cats = [...new Set(PX.productos.map(p => p.c))];
     document.getElementById('pxCats').innerHTML = `<button class="fchip plain" data-pc="" aria-pressed="${!pxCat}">Todo</button>` + cats.map(c => `<button class="fchip plain" data-pc="${esc(c)}" aria-pressed="${pxCat===c}">${esc(c)}</button>`).join('');
     const elegidos = P.supers && P.supers.length;
@@ -3025,9 +3042,12 @@ details.others[open] summary{margin-bottom:10px}
     document.getElementById('pxDays').innerHTML = days.map(d => `<button class="fchip plain" data-pd="${iso(d)}" aria-pressed="${iso(d)===iso(pxDay)}">${iso(d)===iso(TODAY) ? 'Hoy' : DC[isoDow(d)] + ' ' + d.getDate()}</button>`).join('');
     if(!hasProfile()) pxModo = 'lista'; else if(!pxModo) pxModo = 'mias';
     const misMedios = Object.keys(P.ents).map(k => D.entidades[k] ? D.entidades[k].n : k).concat(P.jubilado ? ['Jubilados'] : []);
-    document.getElementById('pxNote').innerHTML = hasProfile()
+    document.getElementById('pxModoG').hidden = !hasProfile();
+    document.getElementById('pxModo').innerHTML = hasProfile()
       ? `<div class="col" style="gap:8px"><div class="mineTog" role="group" aria-label="Qué precio mostrar"><button data-pm="mias" aria-pressed="${pxModo==='mias'}">Con mis tarjetas</button><button data-pm="lista" aria-pressed="${pxModo==='lista'}">Precio de lista</button></div>
-        <p class="muted" style="font-size:12.5px">${pxModo === 'mias' ? `<span title="Es el mejor descuento que podés usar en el local ese día; no contempla topes ni productos excluidos de cada promo.">Con tus medios: ${esc(misMedios.join(', '))} · </span><button class="linkBtn" data-go="tarjetas">Cambiar</button>` : 'Precio online de cada súper, sin descuentos bancarios.'}</p></div>`
+        <p class="muted" style="font-size:12.5px">${pxModo === 'mias' ? `<span title="Es el mejor descuento que podés usar en el local ese día; no contempla topes ni productos excluidos de cada promo.">Con tus medios: ${esc(misMedios.join(', '))} · </span><button class="linkBtn" data-go="tarjetas">Cambiar</button>` : 'Precio online de cada súper, sin descuentos bancarios.'}</p></div>` : '';
+    pintarFiltrosBtn();
+    document.getElementById('pxNote').innerHTML = hasProfile() ? ''
       : `<div class="banner"><span class="grow">Elegí tus bancos y tarjetas para ver el precio <b>con tus descuentos</b>. Mientras tanto, ves el precio de lista.</span><button class="btn green" data-go="tarjetas">Elegir</button></div>`;
     const q = normTxt(document.getElementById('pxQ').value.trim()).split(/\s+/).filter(Boolean);
     let list = PX.productos.filter(p => (!pxCat || p.c === pxCat) && q.every(w => p.k.includes(w)) && Object.keys(p.p).some(miSuper));
@@ -3054,6 +3074,17 @@ details.others[open] summary{margin-bottom:10px}
         ${fs.slice(0, 4).map(row).join('')}${fs.length > 4 ? `<details><summary class="pxMore">Ver los ${fs.length}</summary>${fs.slice(4).map(row).join('')}</details>` : ''}</article>`;
     }).join('') : `<div class="empty">No encontramos ese producto. Probá con otra palabra, por ejemplo la marca.</div>`);
   }
+  // Filtros de Precios: se muestran u ocultan con un botón; se recuerda la elección en este dispositivo.
+  let pxFAbiertos = store.get('deelo-px-filtros', false);
+  function pintarFiltrosBtn(){
+    const n = (pxCat ? 1 : 0) + ((P.supers && P.supers.length) ? 1 : 0) + (hasProfile() && pxModo === 'lista' ? 1 : 0);
+    const b = document.getElementById('pxFBtn');
+    b.setAttribute('aria-expanded', pxFAbiertos);
+    b.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg><span class="t">${pxFAbiertos ? 'Ocultar filtros' : 'Ver filtros'}</span>${n ? `<span class="n" aria-label="${n} activos">${n}</span>` : ''}<svg class="ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>`;
+    b.setAttribute('aria-label', (pxFAbiertos ? 'Ocultar filtros' : 'Ver filtros') + (n ? `, ${n} activos` : ''));
+    document.getElementById('pxFiltros').hidden = !pxFAbiertos;
+  }
+  document.getElementById('pxFBtn').addEventListener('click', () => { pxFAbiertos = !pxFAbiertos; store.set('deelo-px-filtros', pxFAbiertos); pintarFiltrosBtn(); });
   let pxT = null;
   document.getElementById('pxQ').addEventListener('input', () => { clearTimeout(pxT); pxT = setTimeout(renderPrecios, 150); });
   document.getElementById('view-precios').addEventListener('click', ev => {
