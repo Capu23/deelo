@@ -132,7 +132,10 @@ async function descargar(dir) {
     const hayCaba = Object.values(sucs).some(s => s.caba);
     const porSuc = {};
     for await (const f of filas(path.join(dirCoto, 'productos.csv'))) {
-      const ean = QUIERO.get(norm(f.id_producto)) || QUIERO.get(norm(f.productos_ean));
+      // Guardamos todos los productos de Coto con código de barras válido (no solo los de la lista actual),
+      // así Coto cuenta como cadena al armar la lista y no hay que volver a correr esto si la lista cambia.
+      const crudo = norm(f.id_producto) || norm(f.productos_ean);
+      const ean = QUIERO.get(norm(f.id_producto)) || QUIERO.get(norm(f.productos_ean)) || (/^\d{8,14}$/.test(crudo) ? crudo : null);
       if (!ean) continue;
       const s = sucs[f.id_sucursal];
       if (hayCaba && !(s && s.caba)) continue;
@@ -168,7 +171,7 @@ async function descargar(dir) {
       p: precios,
     };
     fs.writeFileSync(path.join(ROOT, 'data/precios-coto.json'), JSON.stringify(data));
-    console.log(`Listo: ${Object.keys(precios).length} de ${canasta.length} productos con precio en Coto (${data.sucursal}).`);
+    console.log(`Listo: ${Object.keys(precios).length} productos de Coto con precio (${Object.keys(precios).filter(e => QUIERO.has(norm(e))).length} de los ${canasta.length} de la lista actual) · ${data.sucursal}.`);
     console.log('Archivo generado:', path.join(ROOT, 'data', 'precios-coto.json'));
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
