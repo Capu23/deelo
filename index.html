@@ -400,6 +400,9 @@ details.others[open] summary{margin-bottom:10px}
 .rk .d{grid-column:1/-1;font-size:13px;color:var(--ink2);display:flex;flex-direction:column;gap:2px}
 .rk .d .g{color:var(--green-text);font-weight:600}
 .rk .d .w{color:var(--warn)}
+.rk .mapa{grid-column:1/-1;justify-self:start;display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:7px 12px;border:1px solid var(--rule);border-radius:999px;font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;background:var(--paper)}
+.rk .mapa:hover{background:var(--sunk)}
+.rk .mapa svg{width:16px;height:16px;color:var(--green-text)}
 .split{background:var(--sunk);border-radius:var(--r);padding:12px 14px;font-size:13.5px;color:var(--ink2)}
 .split b{color:var(--ink)}
 .ci{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 14px;border-top:1px solid var(--rule)}
@@ -3228,6 +3231,9 @@ details.others[open] summary{margin-bottom:10px}
     });
     return best;
   }
+  // Google Maps busca la cadena cerca de la ubicación del usuario (en el celular abre la app de Maps).
+  const MAPA_Q = {jumbo:'Jumbo supermercado', disco:'Disco supermercado', vea:'Supermercado Vea', coto:'Coto supermercado', carrefour:'Carrefour supermercado', dia:'Supermercado Día', changomas:'ChangoMás'};
+  const mapaUrl = s => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(MAPA_Q[s] || (D.supers[s] ? D.supers[s].n : s));
   function renderCarrito(){
     renderListas();
     pintarBadge();
@@ -3262,6 +3268,7 @@ details.others[open] summary{margin-bottom:10px}
         <span class="tot"><b>${fmt(r.fin)}</b>${r.pr ? `<s>${fmt(r.sub)}</s>` : ''}</span>
         <span class="d">${fmtPr(r)}${r.pr && r.pr.pr.tope && r.pr.pr.tope.p && ['mes','semana'].includes(r.pr.pr.tope.p) ? `<span class="muted">El tope de ${fmt(r.pr.pr.tope.m)} es por ${r.pr.pr.tope.p}: se comparte con otras compras.</span>` : ''}${r.pr && r.pr.pr.min ? `<span class="muted">Compra mínima ${fmt(r.pr.pr.min)}.</span>` : ''}${r.promosQ.length ? `<span class="g">Incluye promo por cantidad en ${esc(r.promosQ.slice(0,2).join(', '))}${r.promosQ.length > 2 ? ' y ' + (r.promosQ.length - 2) + ' más' : ''}</span>` : ''}
           ${r.faltan.length ? `<span class="w">Tiene ${r.tiene} de ${items.length} · falta: ${esc(r.faltan.slice(0,3).join(', '))}${r.faltan.length > 3 ? ' y ' + (r.faltan.length - 3) + ' más' : ''}</span>` : `<span>Tiene los ${items.length} productos</span>`}</span>
+        <a class="mapa" href="${mapaUrl(r.s)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Ver sucursales cercanas</a>
       </div>`).join('');
     // Comprando cada cosa donde está más barata (sin topes)
     let split = 0, donde = new Set(), cubiertos = 0;
