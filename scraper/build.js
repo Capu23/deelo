@@ -232,7 +232,7 @@ app = app.replace(/(<script id="promo-data" type="application\/json">\n)[\s\S]*?
 fs.writeFileSync(appPath, app);
 const cut = app.indexOf('</style>') + '</style>'.length;
 const head = fs.readFileSync(path.join(ROOT, 'src/head.html'), 'utf8'); // metadatos para Google y vista previa al compartir
-fs.writeFileSync(path.join(ROOT, 'index.html'), head + app.slice(0, cut).replace(/<title>[^<]*<\/title>/, '<title>deelo · Pagá menos. Siempre.</title>') + '\n</head>\n<body>\n' + app.slice(cut) + '\n<script type="module" src="/src/cuenta.js"></script>\n</body>\n</html>\n');
+fs.writeFileSync(path.join(ROOT, 'index.html'), head + app.slice(0, cut).replace(/<title>[^<]*<\/title>/, '<title>deelo · Pagá menos, siempre.</title>') + '\n</head>\n<body>\n' + app.slice(cut) + '\n<script type="module" src="/src/cuenta.js"></script>\n</body>\n</html>\n');
 
 console.log(`promos: ${promos.length} (${promos.length - extrasVig.length} oficiales, ${extrasVig.length} manuales)`);
 console.log('fuentes:', JSON.stringify(data.estado));
