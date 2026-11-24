@@ -194,6 +194,12 @@
    "marca": "Nescafé"
   },
   {
+   "ean": "7793890262476",
+   "nombre": "Pan blanco en rodajas finas Lactal bolsa 550 grs",
+   "categoria": "Almacén",
+   "marca": "Lactal"
+  },
+  {
    "ean": "7793890258769",
    "nombre": "Pan Blanco Lactal 315 grs",
    "categoria": "Almacén",
@@ -212,6 +218,12 @@
    "marca": "Lactal"
   },
   {
+   "ean": "7793890258776",
+   "nombre": "Pan salvado Lactal 330 grs",
+   "categoria": "Almacén",
+   "marca": "Lactal"
+  },
+  {
    "ean": "7790580138738",
    "nombre": "Polenta instantánea Presto Pronta en bolsa 490 g.",
    "categoria": "Almacén",
@@ -222,18 +234,6 @@
    "nombre": "Postre Exquisita de dulce de leche 80 g.",
    "categoria": "Almacén",
    "marca": "Exquisita"
-  },
-  {
-   "ean": "7790580146115",
-   "nombre": "Puré de tomate Arcor brik 520 g.",
-   "categoria": "Almacén",
-   "marca": "Arcor"
-  },
-  {
-   "ean": "7790580138868",
-   "nombre": "Puré de tomate La Campagnola tetra 530 g.",
-   "categoria": "Almacén",
-   "marca": "La Campagnola"
   },
   {
    "ean": "7790072002080",
@@ -392,6 +392,12 @@
    "marca": "Coca Cola"
   },
   {
+   "ean": "7790895068096",
+   "nombre": "Gaseosa cola Coca Cola Zero 2,5 lts",
+   "categoria": "Bebidas",
+   "marca": "Coca Cola"
+  },
+  {
    "ean": "7790639003437",
    "nombre": "Gaseosa cola Cunnington classic pet 2,25 lts",
    "categoria": "Bebidas",
@@ -504,6 +510,12 @@
    "nombre": "Leche descremada uat Tregar brik 1 l.",
    "categoria": "Lácteos y frescos",
    "marca": "Tregar"
+  },
+  {
+   "ean": "7790742192301",
+   "nombre": "Leche entera Casanto 3 ultra para sachet 1 l.",
+   "categoria": "Lácteos y frescos",
+   "marca": "Casanto"
   },
   {
    "ean": "7790742335401",
@@ -872,60 +884,6 @@
    "marca": "Natura"
   },
   {
-   "ean": "7791675000503",
-   "nombre": "Aceitunas verdes Castel dp 180 g.",
-   "categoria": "Almacén",
-   "marca": "Castell"
-  },
-  {
-   "ean": "7791675303000",
-   "nombre": "Aceitunas verdes Castell descarozadas 300 g.",
-   "categoria": "Almacén",
-   "marca": "Castell"
-  },
-  {
-   "ean": "7791675000978",
-   "nombre": "Aceitunas verdes Castell en rodajas 300 g.",
-   "categoria": "Almacén",
-   "marca": "Castell"
-  },
-  {
-   "ean": "7791675304007",
-   "nombre": "Aceitunas verdes Castell rellenas dp 180 g.",
-   "categoria": "Almacén",
-   "marca": "Castell"
-  },
-  {
-   "ean": "7791675902616",
-   "nombre": "Aceitunas verdes descarozadas Castell 80 grs",
-   "categoria": "Almacén",
-   "marca": "Castell"
-  },
-  {
-   "ean": "7791675909554",
-   "nombre": "Aceitunas verdes descarozadas suave Castell dp 150 grs",
-   "categoria": "Almacén",
-   "marca": "Castell"
-  },
-  {
-   "ean": "7791675909578",
-   "nombre": "Aceitunas verdes rellenas Castell dp 125 grs",
-   "categoria": "Almacén",
-   "marca": "Castell"
-  },
-  {
-   "ean": "7791675909721",
-   "nombre": "Aceitunas verdes XL Castell dp 160 grs",
-   "categoria": "Almacén",
-   "marca": "Castell"
-  },
-  {
-   "ean": "7791675909738",
-   "nombre": "Aceitunas verdes XL descarozadas Castell dp 130 grs",
-   "categoria": "Almacén",
-   "marca": "Castell"
-  },
-  {
    "ean": "7790070228031",
    "nombre": "Aceto balsámico Cocinero modena pet 250 cc.",
    "categoria": "Almacén",
@@ -1116,12 +1074,6 @@
    "nombre": "Arroz parboil Gallo oro en bolsa 500 g",
    "categoria": "Almacén",
    "marca": "Gallo"
-  },
-  {
-   "ean": "7790580132392",
-   "nombre": "Arvejas secas remojadas Arcor 300 g.",
-   "categoria": "Almacén",
-   "marca": "Arcor"
   },
   {
    "ean": "7792180143921",
@@ -1548,12 +1500,6 @@
    "nombre": "Chicles Beldent Menta Refrescante 6 uni",
    "categoria": "Almacén",
    "marca": "Beldent"
-  },
-  {
-   "ean": "7790310985359",
-   "nombre": "Chizitos Cheetos ondulados queso crema 43 grs",
-   "categoria": "Almacén",
-   "marca": "Cheetos"
   },
   {
    "ean": "7790310985670",
@@ -2612,18 +2558,6 @@
    "marca": "Kinder"
   },
   {
-   "ean": "7790580132453",
-   "nombre": "lentejas secas remojadas Arcor en lata 300 g.",
-   "categoria": "Almacén",
-   "marca": "Arcor"
-  },
-  {
-   "ean": "7790580131364",
-   "nombre": "Lomito de atún al natural La Campagnola 170 grs",
-   "categoria": "Almacén",
-   "marca": "La Campagnola"
-  },
-  {
    "ean": "7790070317452",
    "nombre": "Lucchettinis Lucchetti jamón y queso 500 g.",
    "categoria": "Almacén",
@@ -3092,12 +3026,6 @@
    "marca": "Artesano"
   },
   {
-   "ean": "7793890262476",
-   "nombre": "Pan blanco en rodajas finas Lactal bolsa 550 grs",
-   "categoria": "Almacén",
-   "marca": "Lactal"
-  },
-  {
    "ean": "7793890262643",
    "nombre": "Pan cereales y semillas Fargo bolsa 400 grs",
    "categoria": "Almacén",
@@ -3266,12 +3194,6 @@
    "marca": "Fargo"
   },
   {
-   "ean": "7793890258776",
-   "nombre": "Pan salvado Lactal 330 grs",
-   "categoria": "Almacén",
-   "marca": "Lactal"
-  },
-  {
    "ean": "7790310988220",
    "nombre": "Papas fritas acanaladas Lays asado de tira 77 grs",
    "categoria": "Almacén",
@@ -3312,12 +3234,6 @@
    "nombre": "Papas fritas Lays ondas Flamin' Hot 70 grs",
    "categoria": "Almacén",
    "marca": "Lays"
-  },
-  {
-   "ean": "7790310985366",
-   "nombre": "Papas fritas Pehuamar 135 g.",
-   "categoria": "Almacén",
-   "marca": "Pehuamar"
   },
   {
    "ean": "7896004009162",
@@ -3542,10 +3458,16 @@
    "marca": "Maggi"
   },
   {
-   "ean": "7793360000157",
-   "nombre": "Puré de tomate Salsati 520 g.",
+   "ean": "7790580146115",
+   "nombre": "Puré de Tomate Clásico 520 Grs Arcor",
    "categoria": "Almacén",
-   "marca": "BC"
+   "marca": "LA CAMPAGNOLA"
+  },
+  {
+   "ean": "7790580138868",
+   "nombre": "Puré de Tomate Clásico 530 Grs La Campagnola",
+   "categoria": "Almacén",
+   "marca": "LA CAMPAGNOLA"
   },
   {
    "ean": "7891079012208",
@@ -3716,12 +3638,6 @@
    "marca": "Sakura"
   },
   {
-   "ean": "7794000008052",
-   "nombre": "Salsa filetto Knorr 340 g.",
-   "categoria": "Almacén",
-   "marca": "Knorr"
-  },
-  {
    "ean": "7791866000480",
    "nombre": "Salsa golf Natura 250 cc.",
    "categoria": "Almacén",
@@ -3732,48 +3648,6 @@
    "nombre": "Salsa guacamole Tau en botella 290 grs",
    "categoria": "Almacén",
    "marca": "Tau"
-  },
-  {
-   "ean": "7794000008038",
-   "nombre": "Salsa guiso y arroces Knorr 340 g.",
-   "categoria": "Almacén",
-   "marca": "Knorr"
-  },
-  {
-   "ean": "7790070335340",
-   "nombre": "Salsa mediterranea Rina Matarazzo 340 g.",
-   "categoria": "Almacén",
-   "marca": "Matarazzo"
-  },
-  {
-   "ean": "7790580144197",
-   "nombre": "Salsa napolitana La Campagnola en frasco 350 grs",
-   "categoria": "Almacén",
-   "marca": "La Campagnola"
-  },
-  {
-   "ean": "7794000007987",
-   "nombre": "Salsa pizza Knorr 340 g.",
-   "categoria": "Almacén",
-   "marca": "Knorr"
-  },
-  {
-   "ean": "7790070335333",
-   "nombre": "Salsa pomarola Rina Matarazzo 340 g.",
-   "categoria": "Almacén",
-   "marca": "Matarazzo"
-  },
-  {
-   "ean": "7794000008007",
-   "nombre": "Salsa pomarola tradicional Knorr 340 g.",
-   "categoria": "Almacén",
-   "marca": "Knorr"
-  },
-  {
-   "ean": "7794000008045",
-   "nombre": "Salsa pomodoro con zapallo Knorr 340 g.",
-   "categoria": "Almacén",
-   "marca": "Knorr"
   },
   {
    "ean": "7460123477814",
@@ -3996,18 +3870,6 @@
    "nombre": "Tic Tac Naranja 16 grs",
    "categoria": "Almacén",
    "marca": "Tic Tac"
-  },
-  {
-   "ean": "7793360105944",
-   "nombre": "Tomate cubeteado La Campagnola 400 g.",
-   "categoria": "Almacén",
-   "marca": "BC"
-  },
-  {
-   "ean": "7790580567903",
-   "nombre": "Tomate perita Arcor 400 g.",
-   "categoria": "Almacén",
-   "marca": "Arcor"
   },
   {
    "ean": "7790070432872",
@@ -4814,6 +4676,12 @@
    "marca": "Red Bull"
   },
   {
+   "ean": "90415418",
+   "nombre": "Bebida energizante Red Bull Sugar Free 250 ml",
+   "categoria": "Bebidas",
+   "marca": "Red Bull"
+  },
+  {
    "ean": "9002490288341",
    "nombre": "Bebida energizante Red Bull Summer Pomerlo en lata 250 ml",
    "categoria": "Bebidas",
@@ -4974,6 +4842,12 @@
    "nombre": "Cerveza blanca Brahma en lata 710 ml",
    "categoria": "Bebidas",
    "marca": "Brahma"
+  },
+  {
+   "ean": "7793147570866",
+   "nombre": "Cerveza blanca Golsch 473 ml",
+   "categoria": "Bebidas",
+   "marca": "Grolsch"
   },
   {
    "ean": "7793147573386",
@@ -5248,12 +5122,6 @@
   {
    "ean": "7790895012273",
    "nombre": "Gaseosa cola Coca Cola Zero 1,25 lts",
-   "categoria": "Bebidas",
-   "marca": "Coca Cola"
-  },
-  {
-   "ean": "7790895068096",
-   "nombre": "Gaseosa cola Coca Cola Zero 2,5 lts",
    "categoria": "Bebidas",
    "marca": "Coca Cola"
   },
@@ -5592,6 +5460,12 @@
    "nombre": "Jugo pera Fruggina botella 250 ml.",
    "categoria": "Bebidas",
    "marca": "Fruggina"
+  },
+  {
+   "ean": "7798259439605",
+   "nombre": "Jugo Pura frutta kids de manzana tetra 250 ml.",
+   "categoria": "Bebidas",
+   "marca": "Pura Fruta"
   },
   {
    "ean": "7622202311482",
@@ -6872,16 +6746,16 @@
    "marca": "La Serenísima"
   },
   {
+   "ean": "7798095172049",
+   "nombre": "Leche en polvo deslactosada Purísima 400 g.",
+   "categoria": "Lácteos y frescos",
+   "marca": "Purísima"
+  },
+  {
    "ean": "7790742437709",
    "nombre": "Leche en polvo Protein La Serenisima 400 grs",
    "categoria": "Lácteos y frescos",
    "marca": "La Serenísima"
-  },
-  {
-   "ean": "7790742192301",
-   "nombre": "Leche entera Casanto 3 ultra para sachet 1 l.",
-   "categoria": "Lácteos y frescos",
-   "marca": "Casanto"
   },
   {
    "ean": "7790742357205",
@@ -7330,6 +7204,12 @@
   {
    "ean": "7791337010468",
    "nombre": "Sachet yogur descremado sabor vainilla La Serenísima Nutrición Activa 900 grs",
+   "categoria": "Lácteos y frescos",
+   "marca": "La Serenísima"
+  },
+  {
+   "ean": "7791337010376",
+   "nombre": "Sachet yogur entero sabor durazno La Serenísima Nutrición Activa 900 grs",
    "categoria": "Lácteos y frescos",
    "marca": "La Serenísima"
   },
@@ -8440,12 +8320,6 @@
   {
    "ean": "7793253003555",
    "nombre": "Limpiador líquido aromatizante Poett flores de primavera 1.8 lts.",
-   "categoria": "Limpieza",
-   "marca": "Poett"
-  },
-  {
-   "ean": "7793253003517",
-   "nombre": "Limpiador líquido aromatizante Poett frescura de lavanda 1.8 lts.",
    "categoria": "Limpieza",
    "marca": "Poett"
   },
@@ -11192,108 +11066,6 @@
    "marca": "Natura"
   },
   {
-   "ean": "7792070001300",
-   "nombre": "Aceituna verde Cebila doy pack 100 g.",
-   "categoria": "Almacén",
-   "marca": "Cébila"
-  },
-  {
-   "ean": "7790199603078",
-   "nombre": "Aceitunas en rodajas Morixe dp 300 g.",
-   "categoria": "Almacén",
-   "marca": "Morixe"
-  },
-  {
-   "ean": "7791675908946",
-   "nombre": "Aceitunas negras Castell descarozadas dp 80 g.",
-   "categoria": "Almacén",
-   "marca": "Castell"
-  },
-  {
-   "ean": "7791675000572",
-   "nombre": "Aceitunas negras Castell doy pack 180 g.",
-   "categoria": "Almacén",
-   "marca": "Castell"
-  },
-  {
-   "ean": "7791675909165",
-   "nombre": "Aceitunas negras premiun Castell en frasco 190 g.",
-   "categoria": "Almacén",
-   "marca": "Castell"
-  },
-  {
-   "ean": "7791675909745",
-   "nombre": "Aceitunas negras XL Castell 280 grs",
-   "categoria": "Almacén",
-   "marca": "Castell"
-  },
-  {
-   "ean": "7791675350011",
-   "nombre": "Aceitunas verdes Castell 100 g.",
-   "categoria": "Almacén",
-   "marca": "Castell"
-  },
-  {
-   "ean": "7791675908410",
-   "nombre": "Aceitunas verdes Castell doy pack 90 g.",
-   "categoria": "Almacén",
-   "marca": "Castell"
-  },
-  {
-   "ean": "7798153550369",
-   "nombre": "Aceitunas verdes con carozo Malagueña 335 grs",
-   "categoria": "Almacén",
-   "marca": "Malagueña"
-  },
-  {
-   "ean": "7798153550352",
-   "nombre": "Aceitunas verdes descarozadas Malagueña 335 grs",
-   "categoria": "Almacén",
-   "marca": "Malagueña"
-  },
-  {
-   "ean": "7791675909684",
-   "nombre": "Aceitunas verdes descarozadas picante Castell 80 grs",
-   "categoria": "Almacén",
-   "marca": "Castell"
-  },
-  {
-   "ean": "7798153550345",
-   "nombre": "Aceitunas verdes en rodajas Malagueña 335 grs",
-   "categoria": "Almacén",
-   "marca": "Malagueña"
-  },
-  {
-   "ean": "7792070071716",
-   "nombre": "Aceitunas verdes en rodajas Nucete dp 220 grs",
-   "categoria": "Almacén",
-   "marca": "Nucete"
-  },
-  {
-   "ean": "7792070071686",
-   "nombre": "Aceitunas verdes Nucete dp 220 grs",
-   "categoria": "Almacén",
-   "marca": "Nucete"
-  },
-  {
-   "ean": "7798153550338",
-   "nombre": "Aceitunas verdes rellenas de morrón Malagueña 335 grs",
-   "categoria": "Almacén",
-   "marca": "Malagueña"
-  },
-  {
-   "ean": "7792070071709",
-   "nombre": "Aceitunas verdes rellenas Nucete dp 220 grs",
-   "categoria": "Almacén",
-   "marca": "Nucete"
-  },
-  {
-   "ean": "7791675909752",
-   "nombre": "Aceitunas verdes XL rellenas morrón Castell 280 grs",
-   "categoria": "Almacén",
-   "marca": "Castell"
-  },
-  {
    "ean": "7790139101763",
    "nombre": "Aceto balsámico Casalta clásico pet 500 cc.",
    "categoria": "Almacén",
@@ -11404,6 +11176,12 @@
   {
    "ean": "7790070418289",
    "nombre": "Alfajor arroz chocolate blanco Chocoarroz 22 g",
+   "categoria": "Almacén",
+   "marca": "Chocoarroz"
+  },
+  {
+   "ean": "7790070418227",
+   "nombre": "Alfajor arroz dulce leche Chocoarroz 6 22 g",
    "categoria": "Almacén",
    "marca": "Chocoarroz"
   },
@@ -11544,6 +11322,12 @@
    "nombre": "Alfajor mousse chocolate negro Toddy 50 grs",
    "categoria": "Almacén",
    "marca": "Toddy"
+  },
+  {
+   "ean": "7790040659605",
+   "nombre": "Alfajor negro block Cofler 60 g.",
+   "categoria": "Almacén",
+   "marca": "Cofler"
   },
   {
    "ean": "7798359560445",
@@ -11834,52 +11618,10 @@
    "marca": "Gallo"
   },
   {
-   "ean": "7790790120257",
-   "nombre": "Arvejas secas Inca remojadas lata 350 g.",
+   "ean": "7790580132392",
+   "nombre": "Arvejas Secas 300 Grs Arcor",
    "categoria": "Almacén",
-   "marca": "Inca"
-  },
-  {
-   "ean": "7792350067019",
-   "nombre": "Arvejas secas remojadas Inalpa lata 300 g.",
-   "categoria": "Almacén",
-   "marca": "Inalpa"
-  },
-  {
-   "ean": "7792350067163",
-   "nombre": "Arvejas secas remojadas Inalpa sin sal vida 300 g.",
-   "categoria": "Almacén",
-   "marca": "Inalpa"
-  },
-  {
-   "ean": "7793360132384",
-   "nombre": "Arvejas secas remojadas La Campagnola 300 g.",
-   "categoria": "Almacén",
-   "marca": "La Campagnola"
-  },
-  {
-   "ean": "7792350067118",
-   "nombre": "Arvejas y choclo secos remojados Inalpa 300 g.",
-   "categoria": "Almacén",
-   "marca": "Inalpa"
-  },
-  {
-   "ean": "7793360129957",
-   "nombre": "Atun al natural La Campagnola desmenuzado del mar 170 g.",
-   "categoria": "Almacén",
-   "marca": "La Campagnola"
-  },
-  {
-   "ean": "7793360129940",
-   "nombre": "Atun en aceite La Campagnola desmenuzado del mar 170 g.",
-   "categoria": "Almacén",
-   "marca": "La Campagnola"
-  },
-  {
-   "ean": "7790580131357",
-   "nombre": "Atún en aceite La campagnola lomitos 170 g.",
-   "categoria": "Almacén",
-   "marca": "La Campagnola"
+   "marca": "ARCOR"
   },
   {
    "ean": "7790580156152",
@@ -12236,6 +11978,12 @@
    "marca": "Bon O Bon"
   },
   {
+   "ean": "7790070105998",
+   "nombre": "Bizcochos de arroz dulce Gallo bolsa 150 grs",
+   "categoria": "Almacén",
+   "marca": "Gallo"
+  },
+  {
    "ean": "7790070418425",
    "nombre": "Bizcochos de arroz dulce Gallo snacks en bolsa 100 g.",
    "categoria": "Almacén",
@@ -12418,6 +12166,12 @@
   {
    "ean": "7790580156046",
    "nombre": "Bombones choco leche Aguila Chocolatier 38 grs",
+   "categoria": "Almacén",
+   "marca": "Aguila"
+  },
+  {
+   "ean": "7790580155773",
+   "nombre": "Bombones de chocolate rellenos con pasta de avellanas Aguila 100 grs",
    "categoria": "Almacén",
    "marca": "Aguila"
   },
@@ -13352,6 +13106,12 @@
    "marca": "La Parmesana"
   },
   {
+   "ean": "7790310985359",
+   "nombre": "Chizitos Cheetos ondulados queso crema 43 grs",
+   "categoria": "Almacén",
+   "marca": "Cheetos"
+  },
+  {
    "ean": "7790310985748",
    "nombre": "Chizitos de maíz sabor a queso Cheetos original 229 g",
    "categoria": "Almacén",
@@ -13362,30 +13122,6 @@
    "nombre": "Chizitos de maíz sabor a queso Cheetos original 85 g",
    "categoria": "Almacén",
    "marca": "Cheetos"
-  },
-  {
-   "ean": "7790790120806",
-   "nombre": "Choclo crema blanca Inca en lata 350 g.",
-   "categoria": "Almacén",
-   "marca": "Inca"
-  },
-  {
-   "ean": "7793360984907",
-   "nombre": "Choclo cremoso amarillo La Campagnola 300 g.",
-   "categoria": "Almacén",
-   "marca": "La Campagnola"
-  },
-  {
-   "ean": "7790580980801",
-   "nombre": "Choclo cremoso Arcor amarillo en lata 300 g.",
-   "categoria": "Almacén",
-   "marca": "Arcor"
-  },
-  {
-   "ean": "7790580132422",
-   "nombre": "Choclo en granos Arcor amarillo lata 300 g.",
-   "categoria": "Almacén",
-   "marca": "Arcor"
   },
   {
    "ean": "77991430",
@@ -13772,16 +13508,16 @@
    "marca": "Rocklets"
   },
   {
-   "ean": "7790580421007",
-   "nombre": "Confites Rocklets 20 g.",
+   "ean": "7790580415808",
+   "nombre": "Confites Rocklets 120 g.",
    "categoria": "Almacén",
    "marca": "Rocklets"
   },
   {
-   "ean": "40000002666",
-   "nombre": "Confites Skittles sour acido 51 grs",
+   "ean": "7790580421007",
+   "nombre": "Confites Rocklets 20 g.",
    "categoria": "Almacén",
-   "marca": "Skittles"
+   "marca": "Rocklets"
   },
   {
    "ean": "22000018489",
@@ -14052,12 +13788,6 @@
    "nombre": "Especias parrilla chimichurri Alicante 25 grs",
    "categoria": "Almacén",
    "marca": "Alicante"
-  },
-  {
-   "ean": "7793360129889",
-   "nombre": "Extracto de tomate La campagnola 180 g.",
-   "categoria": "Almacén",
-   "marca": "La Campagnola"
   },
   {
    "ean": "7793890260724",
@@ -14618,12 +14348,6 @@
    "marca": "Macrobiótica"
   },
   {
-   "ean": "7790538010345",
-   "nombre": "Galletitas de arroz sin sellos multicereal Macrobiotica 102 g.",
-   "categoria": "Almacén",
-   "marca": "Macrobiótica"
-  },
-  {
    "ean": "7622202843556",
    "nombre": "Galletitas de avena y cacao Cerealitas 243 grs",
    "categoria": "Almacén",
@@ -15074,12 +14798,6 @@
    "marca": "Maná"
   },
   {
-   "ean": "7792350067071",
-   "nombre": "Garbanzos Inalpa secos remojados lata 300 g.",
-   "categoria": "Almacén",
-   "marca": "Inalpa"
-  },
-  {
    "ean": "7891000392775",
    "nombre": "Garoto bombones surtidos caja 250 grs",
    "categoria": "Almacén",
@@ -15238,6 +14956,12 @@
   {
    "ean": "7790580139421",
    "nombre": "Gomitas Jelly Beans Mogul Mundial 50 grs",
+   "categoria": "Almacén",
+   "marca": "Mogul"
+  },
+  {
+   "ean": "7790580155124",
+   "nombre": "Gomitas ladrillitos sabor tutti frutti Mogul 100 grs",
    "categoria": "Almacén",
    "marca": "Mogul"
   },
@@ -15506,30 +15230,6 @@
    "marca": "La Campagnola"
   },
   {
-   "ean": "7790580132538",
-   "nombre": "Jardinera de verdura Arcor en laa 300 g.",
-   "categoria": "Almacén",
-   "marca": "Arcor"
-  },
-  {
-   "ean": "7792350067170",
-   "nombre": "Jardinera de verduras Inalpa Vida sin sal 300 g",
-   "categoria": "Almacén",
-   "marca": "Inalpa"
-  },
-  {
-   "ean": "7792350067026",
-   "nombre": "Jardinera Inalpa hortalizas y legumbres lata 300 g.",
-   "categoria": "Almacén",
-   "marca": "Inalpa"
-  },
-  {
-   "ean": "7793360132520",
-   "nombre": "Jardinera La Campagnola 300 g.",
-   "categoria": "Almacén",
-   "marca": "La Campagnola"
-  },
-  {
    "ean": "7790139100926",
    "nombre": "Jugo de limón Favinco pet 500 cc.",
    "categoria": "Almacén",
@@ -15620,6 +15320,12 @@
    "marca": "Nestlé"
   },
   {
+   "ean": "7790580132453",
+   "nombre": "Lentejas Arcor X300g",
+   "categoria": "Almacén",
+   "marca": "ARCOR"
+  },
+  {
    "ean": "7798048720396",
    "nombre": "Lentejas Olinto bolsa 400 g",
    "categoria": "Almacén",
@@ -15632,22 +15338,16 @@
    "marca": "Egran"
   },
   {
-   "ean": "7792350067064",
-   "nombre": "Lentejas secas remojadas Inalpa lata 300 g.",
-   "categoria": "Almacén",
-   "marca": "Inalpa"
-  },
-  {
    "ean": "7791476033014",
    "nombre": "Lentejones secos Egran 400 g",
    "categoria": "Almacén",
    "marca": "Egran"
   },
   {
-   "ean": "7790360984241",
-   "nombre": "Lomito de atún en aceite Swift en lata 170 grs",
+   "ean": "7790580131364",
+   "nombre": "Lomo de Atún al Natural 170 Grs La Campagnola",
    "categoria": "Almacén",
-   "marca": "Swift"
+   "marca": "LA CAMPAGNOLA"
   },
   {
    "ean": "7790070320117",
@@ -15676,6 +15376,18 @@
   {
    "ean": "7793890262018",
    "nombre": "Madalena Bimbo chocolate rellena con DDL 39 grs",
+   "categoria": "Almacén",
+   "marca": "Bimbo"
+  },
+  {
+   "ean": "7793890261912",
+   "nombre": "Madalena Bimbo vainilla 240 grs",
+   "categoria": "Almacén",
+   "marca": "Bimbo"
+  },
+  {
+   "ean": "7793890261929",
+   "nombre": "Madalena Bimbo vainilla rellena con DDL 234 grs",
    "categoria": "Almacén",
    "marca": "Bimbo"
   },
@@ -15944,18 +15656,6 @@
    "marca": "Taragui"
   },
   {
-   "ean": "7790387800104",
-   "nombre": "Mate cocido saquitos diamantados Unión x 100 uni",
-   "categoria": "Almacén",
-   "marca": "Unión"
-  },
-  {
-   "ean": "7790387800081",
-   "nombre": "Mate cocido Unión filtro diamantado x 25 uni",
-   "categoria": "Almacén",
-   "marca": "Unión"
-  },
-  {
    "ean": "7791620187730",
    "nombre": "Mayonesa  d´ Fiesta 500 cc.",
    "categoria": "Almacén",
@@ -16108,12 +15808,6 @@
   {
    "ean": "7793046007784",
    "nombre": "Mermelada de membrillo Dr. Cormillot light 390 g.",
-   "categoria": "Almacén",
-   "marca": "Dr. Cormillot"
-  },
-  {
-   "ean": "7793046007715",
-   "nombre": "Mermelada Dr. Cormillot de durazno light frasco 390 g.",
    "categoria": "Almacén",
    "marca": "Dr. Cormillot"
   },
@@ -16642,6 +16336,12 @@
   {
    "ean": "7790070417572",
    "nombre": "Oblea de arroz con chocolate Gallo 20 g. x 6 uni",
+   "categoria": "Almacén",
+   "marca": "Gallo"
+  },
+  {
+   "ean": "7790070431929",
+   "nombre": "Oblea de arroz yogur con frutilla Gallo x6 20 g.",
    "categoria": "Almacén",
    "marca": "Gallo"
   },
@@ -17180,6 +16880,12 @@
    "marca": "Lays"
   },
   {
+   "ean": "7790310985366",
+   "nombre": "Papas fritas Pehuamar 135 g.",
+   "categoria": "Almacén",
+   "marca": "Pehuamar"
+  },
+  {
    "ean": "7790310985373",
    "nombre": "Papas fritas Pehuamar 230 g.",
    "categoria": "Almacén",
@@ -17196,12 +16902,6 @@
    "nombre": "Papas fritas sabor a ketchup Lays 77 g.",
    "categoria": "Almacén",
    "marca": "Lays"
-  },
-  {
-   "ean": "7793126002135",
-   "nombre": "Papas fritas sin sal agregadas Gauchitas 80 grs",
-   "categoria": "Almacén",
-   "marca": "Gauchitas"
   },
   {
    "ean": "7794520869317",
@@ -17226,12 +16926,6 @@
    "nombre": "Pasas de uva con chocolate Bariloche bolsa 120 g.",
    "categoria": "Almacén",
    "marca": "Bariloche"
-  },
-  {
-   "ean": "7790580119980",
-   "nombre": "Passata de tomate La Campagnola 570 grs",
-   "categoria": "Almacén",
-   "marca": "La Campagnola"
   },
   {
    "ean": "7794000009516",
@@ -17292,18 +16986,6 @@
    "nombre": "Picadillo de carne Swift 90 g.",
    "categoria": "Almacén",
    "marca": "Swift"
-  },
-  {
-   "ean": "7792070071754",
-   "nombre": "Pickles en vinagre Nucete dp 220 grs",
-   "categoria": "Almacén",
-   "marca": "Nucete"
-  },
-  {
-   "ean": "7792070000686",
-   "nombre": "Pickles Nucete 220 g.",
-   "categoria": "Almacén",
-   "marca": "Nucete"
   },
   {
    "ean": "7790150565469",
@@ -17426,24 +17108,6 @@
    "marca": "Egran"
   },
   {
-   "ean": "7792350067095",
-   "nombre": "Porotos colorados Inalpa secos remojados 300 g.",
-   "categoria": "Almacén",
-   "marca": "Inalpa"
-  },
-  {
-   "ean": "7792350067101",
-   "nombre": "Porotos negros secos remojados Inalpa 300 g.",
-   "categoria": "Almacén",
-   "marca": "Inalpa"
-  },
-  {
-   "ean": "7790790120332",
-   "nombre": "Porotos secos remojados Inca 350 g.",
-   "categoria": "Almacén",
-   "marca": "Inca"
-  },
-  {
    "ean": "7790580129538",
    "nombre": "Postre chocolate Godet sobre 60 g.",
    "categoria": "Almacén",
@@ -17488,6 +17152,12 @@
   {
    "ean": "7792360092728",
    "nombre": "Postre de maní Nugatón 100 g.",
+   "categoria": "Almacén",
+   "marca": "Nugatón"
+  },
+  {
+   "ean": "7792360092711",
+   "nombre": "Postre de maní Nugatón 75 g.",
    "categoria": "Almacén",
    "marca": "Nugatón"
   },
@@ -17630,12 +17300,6 @@
    "marca": "La Campagnola"
   },
   {
-   "ean": "7790580650919",
-   "nombre": "Pulpa de tomate Arcor 520 g. sin TACC",
-   "categoria": "Almacén",
-   "marca": "Arcor"
-  },
-  {
    "ean": "8445290992765",
    "nombre": "Puré de Papas 4 Quesos 100 grs",
    "categoria": "Almacén",
@@ -17660,16 +17324,10 @@
    "marca": "Mamá Cocina"
   },
   {
-   "ean": "7790790019063",
-   "nombre": "Puré de tomate Inca tetra 520 g.",
+   "ean": "7793360000157",
+   "nombre": "Puré de Tomate Listas 520 Grs Salsati",
    "categoria": "Almacén",
-   "marca": "Inca"
-  },
-  {
-   "ean": "7790070100313",
-   "nombre": "Puré de tomate Rina Matarazzo Passata 500 grs",
-   "categoria": "Almacén",
-   "marca": "Rina"
+   "marca": "SALSATI"
   },
   {
    "ean": "7790070105660",
@@ -18044,22 +17702,28 @@
    "marca": "Dos Anclas"
   },
   {
-   "ean": "7790580133184",
-   "nombre": "Salsa filetto Arcor doy pack 340 g.",
+   "ean": "7790070335340",
+   "nombre": "Salsa de Tomate Mediterránea 340 Grs Rina",
    "categoria": "Almacén",
-   "marca": "Arcor"
+   "marca": "RINA"
   },
   {
-   "ean": "7790580133177",
-   "nombre": "Salsa filetto La Campagnola doy pack 340 g.",
+   "ean": "7794000008007",
+   "nombre": "Salsa de Tomate Pomarola 340 Grs Knorr",
    "categoria": "Almacén",
-   "marca": "La Campagnola"
+   "marca": "KNORR"
   },
   {
-   "ean": "7790070335326",
-   "nombre": "Salsa filetto Rina Matarazzo 340 g.",
+   "ean": "7794000008045",
+   "nombre": "Salsa de Tomate Pomodoro sabor Zapallo 340 Grs Knorr",
    "categoria": "Almacén",
-   "marca": "Matarazzo"
+   "marca": "KNORR"
+  },
+  {
+   "ean": "7794000008052",
+   "nombre": "Salsa de Tomate Sabor Filetto 340 Grs Knorr",
+   "categoria": "Almacén",
+   "marca": "KNORR"
   },
   {
    "ean": "7798334803598",
@@ -18068,46 +17732,34 @@
    "marca": "Kansas"
   },
   {
-   "ean": "7790580134440",
-   "nombre": "Salsa italiana La Campagnola doy pack 340 g.",
-   "categoria": "Almacén",
-   "marca": "La Campagnola"
-  },
-  {
    "ean": "7798334803642",
    "nombre": "Salsa ketchup Kansas botella chica 295 grs",
    "categoria": "Almacén",
    "marca": "Kansas"
   },
   {
-   "ean": "7790580133153",
-   "nombre": "Salsa pizza Arcor doy pack 340 g.",
+   "ean": "7794000008038",
+   "nombre": "Salsa Knorr Guisos Y Arroces 340 G",
    "categoria": "Almacén",
-   "marca": "Arcor"
+   "marca": "KNORR"
   },
   {
-   "ean": "7794000007994",
-   "nombre": "Salsa pizza Knorr 200 g.",
+   "ean": "7794000007987",
+   "nombre": "Salsa Knorr Pizza 340 Gr",
    "categoria": "Almacén",
-   "marca": "Knorr"
+   "marca": "KNORR"
   },
   {
-   "ean": "7790580133139",
-   "nombre": "Salsa pomarola Arcor doy pack 340 g.",
+   "ean": "7790580144197",
+   "nombre": "Salsa Napol Premium X 350 Gr La Campagnola",
    "categoria": "Almacén",
-   "marca": "Arcor"
+   "marca": "LA CAMPAGNOLA"
   },
   {
-   "ean": "7794000008014",
-   "nombre": "Salsa pomarola balance Knorr 340 g.",
+   "ean": "7790070335333",
+   "nombre": "Salsa Pomarola 340 Grs Rina",
    "categoria": "Almacén",
-   "marca": "Knorr"
-  },
-  {
-   "ean": "7790580134495",
-   "nombre": "Salsa portuguesa Arcor doy pack 340 g.",
-   "categoria": "Almacén",
-   "marca": "Arcor"
+   "marca": "RINA"
   },
   {
    "ean": "7791564136702",
@@ -18120,12 +17772,6 @@
    "nombre": "Salsa sabor Oliva 350 Grs La Campagnola",
    "categoria": "Almacén",
    "marca": "LA CAMPAGNOLA"
-  },
-  {
-   "ean": "7790580134518",
-   "nombre": "Salsa tuco Arcor doy pack 340 g.",
-   "categoria": "Almacén",
-   "marca": "Arcor"
   },
   {
    "ean": "7460123477616",
@@ -18860,12 +18506,6 @@
    "marca": "Inti Zen"
   },
   {
-   "ean": "7790387001792",
-   "nombre": "Té verde en saquitos Taragüi 40 u.",
-   "categoria": "Almacén",
-   "marca": "Taragui"
-  },
-  {
    "ean": "7790480089871",
    "nombre": "Té verde Green Hills saquitos momentos x 25 uni",
    "categoria": "Almacén",
@@ -18902,46 +18542,16 @@
    "marca": "Tic Tac"
   },
   {
-   "ean": "7790580147266",
-   "nombre": "Tomate cubeteado Salsati 400 grs",
+   "ean": "7793360105944",
+   "nombre": "Tomate Cubeteado La Campagnola 400 Gr",
    "categoria": "Almacén",
-   "marca": "Salsati"
+   "marca": "SALSATI"
   },
   {
-   "ean": "7798132920794",
-   "nombre": "Tomate perita Alco cubeteado 400 g.",
+   "ean": "7790580567903",
+   "nombre": "Tomates Perita 400 Grs Arcor",
    "categoria": "Almacén",
-   "marca": "Alco"
-  },
-  {
-   "ean": "7790580567101",
-   "nombre": "Tomate perita cubeteado Arcor 400 g.",
-   "categoria": "Almacén",
-   "marca": "Arcor"
-  },
-  {
-   "ean": "7790790120738",
-   "nombre": "Tomate perita Inca 400 g.",
-   "categoria": "Almacén",
-   "marca": "Inca"
-  },
-  {
-   "ean": "7793360000089",
-   "nombre": "Tomate perita La campagnola 400 g.",
-   "categoria": "Almacén",
-   "marca": "La Campagnola"
-  },
-  {
-   "ean": "7798132920763",
-   "nombre": "Tomate perita pelado Alco 400 g.",
-   "categoria": "Almacén",
-   "marca": "Alco"
-  },
-  {
-   "ean": "7790580147242",
-   "nombre": "Tomate perita pelado Salsati 400 g.",
-   "categoria": "Almacén",
-   "marca": "Salsati"
+   "marca": "ARCOR"
   },
   {
    "ean": "7790070432889",
@@ -19176,6 +18786,18 @@
    "nombre": "Vainillas Pozo 80 g.",
    "categoria": "Almacén",
    "marca": "Pozo"
+  },
+  {
+   "ean": "7793890258691",
+   "nombre": "Vainillas Valente 12 uni",
+   "categoria": "Almacén",
+   "marca": "Valente"
+  },
+  {
+   "ean": "7793890258707",
+   "nombre": "Vainillas Valente 36 uni",
+   "categoria": "Almacén",
+   "marca": "Valente"
   },
   {
    "ean": "7793890258738",
@@ -19536,6 +19158,12 @@
    "nombre": "Jabón de tocador Palmolive kids 85 grs",
    "categoria": "Bebés",
    "marca": "Palmolive"
+  },
+  {
+   "ean": "7791520077278",
+   "nombre": "Jabón de tocador Veritas glicerina bebé x3 120 g.",
+   "categoria": "Bebés",
+   "marca": "Véritas"
   },
   {
    "ean": "7891150065291",
@@ -20096,6 +19724,12 @@
    "marca": "Zummy"
   },
   {
+   "ean": "7798262020210",
+   "nombre": "Puré mix frutal Zummy pouch 110 g",
+   "categoria": "Bebés",
+   "marca": "Zummy"
+  },
+  {
    "ean": "7798181641428",
    "nombre": "Sancor Bebé 1 ADV Brick 500 ml",
    "categoria": "Bebés",
@@ -20322,12 +19956,6 @@
    "nombre": "Agua de mesa sin gas Silva Sapori bidón 5 lts",
    "categoria": "Bebidas",
    "marca": "Silva"
-  },
-  {
-   "ean": "7792799000073",
-   "nombre": "Agua mineral con gas Eco de los Andes 1,5 lts",
-   "categoria": "Bebidas",
-   "marca": "Eco De Los Andes"
   },
   {
    "ean": "7792799000035",
@@ -20604,12 +20232,6 @@
    "nombre": "Agua saborizada sin gas H2OH de pomelo 2 lts",
    "categoria": "Bebidas",
    "marca": "H2oh!"
-  },
-  {
-   "ean": "7799155001682",
-   "nombre": "Agua saborizada sin gas Levite sabor limonada pet 500 ml",
-   "categoria": "Bebidas",
-   "marca": "Levité"
   },
   {
    "ean": "7799155001774",
@@ -20930,12 +20552,6 @@
    "marca": "Red Bull"
   },
   {
-   "ean": "90415418",
-   "nombre": "Bebida energizante Red Bull Sugar Free 250 ml",
-   "categoria": "Bebidas",
-   "marca": "Red Bull"
-  },
-  {
    "ean": "9002490258313",
    "nombre": "Bebida energizante Red Bull Watermelon 250 ml",
    "categoria": "Bebidas",
@@ -21102,12 +20718,6 @@
    "nombre": "Cerveza blanca Dry Asahi porrón 330 ml",
    "categoria": "Bebidas",
    "marca": "Asahi"
-  },
-  {
-   "ean": "7793147570866",
-   "nombre": "Cerveza blanca Golsch 473 ml",
-   "categoria": "Bebidas",
-   "marca": "Grolsch"
   },
   {
    "ean": "7793147574109",
@@ -21668,6 +21278,12 @@
    "marca": "Manaos"
   },
   {
+   "ean": "7791813424055",
+   "nombre": "Gaseosa cola Pepsi Black pet 3 lts",
+   "categoria": "Bebidas",
+   "marca": "Pepsi"
+  },
+  {
    "ean": "7791813888406",
    "nombre": "Gaseosa cola regular N Pepsi pet 500 cc.",
    "categoria": "Bebidas",
@@ -21846,6 +21462,12 @@
    "nombre": "Gaseosa pomelo Paso de los Toros sin azúcar pet 1,5 lts",
    "categoria": "Bebidas",
    "marca": "Paso De Los Toros"
+  },
+  {
+   "ean": "7790895643903",
+   "nombre": "Gaseosa pomelo Schweppes Zero 310 ml",
+   "categoria": "Bebidas",
+   "marca": "Schweppes"
   },
   {
    "ean": "7790895648014",
@@ -22298,6 +21920,18 @@
    "marca": "Hi-C"
   },
   {
+   "ean": "7790895643507",
+   "nombre": "Jugo Hi-C naranja 2,25 lts.",
+   "categoria": "Bebidas",
+   "marca": "Hi-C"
+  },
+  {
+   "ean": "7798085681209",
+   "nombre": "Jugo limonada con menta Citric tetra 1 l.",
+   "categoria": "Bebidas",
+   "marca": "Citric"
+  },
+  {
    "ean": "7798259439087",
    "nombre": "Jugo naranja Pura Frutta tetra 1 l.",
    "categoria": "Bebidas",
@@ -22382,10 +22016,10 @@
    "marca": "Smudis"
   },
   {
-   "ean": "7798259439605",
-   "nombre": "Jugo Pura frutta kids de manzana tetra 250 ml.",
+   "ean": "7798085681216",
+   "nombre": "Jugo pomelo con menta y jengibre Citric tetra 1 l.",
    "categoria": "Bebidas",
-   "marca": "Pura Fruta"
+   "marca": "Citric"
   },
   {
    "ean": "7798259439629",
@@ -24992,6 +24626,60 @@
    "marca": "Forno de Minas"
   },
   {
+   "ean": "7791675909578",
+   "nombre": "Aceituna Verde Rellenas Castell 125 G",
+   "categoria": "Lácteos y frescos",
+   "marca": "CASTELL"
+  },
+  {
+   "ean": "7791675303000",
+   "nombre": "Aceitunas Castell Descarozadas 150 Gr",
+   "categoria": "Lácteos y frescos",
+   "marca": "CASTELL"
+  },
+  {
+   "ean": "7791675304007",
+   "nombre": "Aceitunas Castell Rellenas Con Morrón 180 Gr",
+   "categoria": "Lácteos y frescos",
+   "marca": "CASTELL"
+  },
+  {
+   "ean": "7791675000503",
+   "nombre": "Aceitunas Castell Verdes 180 Gr",
+   "categoria": "Lácteos y frescos",
+   "marca": "CASTELL"
+  },
+  {
+   "ean": "7791675902616",
+   "nombre": "Aceitunas Castell Verdes Descarozadas 80 Gr",
+   "categoria": "Lácteos y frescos",
+   "marca": "CASTELL"
+  },
+  {
+   "ean": "7791675909721",
+   "nombre": "Aceitunas Verdes Castell Olivas 160 Gr",
+   "categoria": "Lácteos y frescos",
+   "marca": "CASTELL"
+  },
+  {
+   "ean": "7791675909738",
+   "nombre": "Aceitunas Verdes Castell Olivas Descarozadas 130 Gr",
+   "categoria": "Lácteos y frescos",
+   "marca": "CASTELL"
+  },
+  {
+   "ean": "7791675909554",
+   "nombre": "Aceitunas Verdes Descarozadas X 150 Gr Castell",
+   "categoria": "Lácteos y frescos",
+   "marca": "CASTELL"
+  },
+  {
+   "ean": "7791675000978",
+   "nombre": "Aceitunas Verdes en Rodajas 150 Grs Castell",
+   "categoria": "Lácteos y frescos",
+   "marca": "CASTELL"
+  },
+  {
    "ean": "7791337009790",
    "nombre": "Actimel sabor naranja vitamina C 100 grs",
    "categoria": "Lácteos y frescos",
@@ -25244,6 +24932,12 @@
    "marca": "La Lechera"
   },
   {
+   "ean": "7790398000265",
+   "nombre": "La Paulina crema para batir 200 grs",
+   "categoria": "Lácteos y frescos",
+   "marca": "La Paulina"
+  },
+  {
    "ean": "7790398000272",
    "nombre": "La Paulina crema para batir 350 grs",
    "categoria": "Lácteos y frescos",
@@ -25378,12 +25072,6 @@
   {
    "ean": "7798095171370",
    "nombre": "Leche en polvo descremada Purísima plus 800 g.",
-   "categoria": "Lácteos y frescos",
-   "marca": "Purísima"
-  },
-  {
-   "ean": "7798095172049",
-   "nombre": "Leche en polvo deslactosada Purísima 400 g.",
    "categoria": "Lácteos y frescos",
    "marca": "Purísima"
   },
@@ -25548,12 +25236,6 @@
    "nombre": "Margarina en pan Margadan 500 g.",
    "categoria": "Lácteos y frescos",
    "marca": "Margadan"
-  },
-  {
-   "ean": "7798124852881",
-   "nombre": "Mortadela de cerdo feteado Trozer 200 grs",
-   "categoria": "Lácteos y frescos",
-   "marca": "Trozer"
   },
   {
    "ean": "7798013106910",
@@ -25874,6 +25556,12 @@
    "marca": "La Serenísima"
   },
   {
+   "ean": "7798403210135",
+   "nombre": "Queso reggianito Nonna Pia 250 g.",
+   "categoria": "Lácteos y frescos",
+   "marca": "Nonna Pia"
+  },
+  {
    "ean": "7791564136573",
    "nombre": "Queso untable cremoso Adler con salame 190 g",
    "categoria": "Lácteos y frescos",
@@ -25976,12 +25664,6 @@
    "marca": "Tregar"
   },
   {
-   "ean": "7791337010376",
-   "nombre": "Sachet yogur entero sabor durazno La Serenísima Nutrición Activa 900 grs",
-   "categoria": "Lácteos y frescos",
-   "marca": "La Serenísima"
-  },
-  {
    "ean": "7790625005292",
    "nombre": "Salame Lario 150 g.",
    "categoria": "Lácteos y frescos",
@@ -26076,6 +25758,12 @@
    "nombre": "Tapa para empanada sin tacc La salteña mas crocante 12 uni",
    "categoria": "Lácteos y frescos",
    "marca": "La Salteña"
+  },
+  {
+   "ean": "7791869000029",
+   "nombre": "Tapa para pascualina horno Signo de Oro 400 grs",
+   "categoria": "Lácteos y frescos",
+   "marca": "Signo de Oro"
   },
   {
    "ean": "7790070622006",
@@ -26544,6 +26232,12 @@
    "nombre": "Yogur natural con granola Manfrey en pote 172 g.",
    "categoria": "Lácteos y frescos",
    "marca": "Manfrey"
+  },
+  {
+   "ean": "7798136871832",
+   "nombre": "Yogur natural estilo griego Dahi sin azúcar pote 500 grs",
+   "categoria": "Lácteos y frescos",
+   "marca": "Dahi"
   },
   {
    "ean": "7790787960361",
@@ -28034,6 +27728,12 @@
    "marca": "Poett"
   },
   {
+   "ean": "7793253003517",
+   "nombre": "Limpiador líquido aromatizante Poett frescura de lavanda 1.8 lts.",
+   "categoria": "Limpieza",
+   "marca": "Poett"
+  },
+  {
    "ean": "7793253003500",
    "nombre": "Limpiador líquido aromatizante Poett frescura de lavanda 900 ml.",
    "categoria": "Limpieza",
@@ -29194,12 +28894,6 @@
   {
    "ean": "7790990002230",
    "nombre": "Zorro Polvo AE Clásico 800 grs",
-   "categoria": "Limpieza",
-   "marca": "Zorro"
-  },
-  {
-   "ean": "7790990003848",
-   "nombre": "Zorro Polvo BE Bicarbonato 800 grs",
    "categoria": "Limpieza",
    "marca": "Zorro"
   },
@@ -32984,12 +32678,6 @@
    "marca": "Saint Tropez"
   },
   {
-   "ean": "7791520077278",
-   "nombre": "Jabón de tocador Veritas glicerina bebé x3 120 g.",
-   "categoria": "Perfumería",
-   "marca": "Véritas"
-  },
-  {
    "ean": "7791293051208",
    "nombre": "Jabon en Barra Dove Original Individual 90 grs",
    "categoria": "Perfumería",
@@ -33686,6 +33374,12 @@
    "marca": "Venus"
   },
   {
+   "ean": "7506309841762",
+   "nombre": "Máquina de afeitar para mujer Gillette Venus Original con 3 hojas 1 uni",
+   "categoria": "Perfumería",
+   "marca": "Venus"
+  },
+  {
    "ean": "70330728509",
    "nombre": "Máquina de afeitar sensitive Bic x 5 uni",
    "categoria": "Perfumería",
@@ -33786,6 +33480,12 @@
    "nombre": "Mousse capilar new Roby 190 cc.",
    "categoria": "Perfumería",
    "marca": "Roby"
+  },
+  {
+   "ean": "42494874",
+   "nombre": "Nivea Sun protector solar en barra FPS 50+ 15 grs",
+   "categoria": "Perfumería",
+   "marca": "Nivea"
   },
   {
    "ean": "7891000410141",
@@ -34946,6 +34646,12 @@
    "marca": "Herbal Essences"
   },
   {
+   "ean": "7500435256605",
+   "nombre": "Shampoo anti caida Head Shoulders con romero 650 ml",
+   "categoria": "Perfumería",
+   "marca": "Head & Shoulders"
+  },
+  {
    "ean": "7500435231244",
    "nombre": "Shampoo anti comezón Head Shoulders 180 cc.",
    "categoria": "Perfumería",
@@ -35266,12 +34972,6 @@
   {
    "ean": "7500435162586",
    "nombre": "Shampoo Head & Shoulders protección caida 650 cc.",
-   "categoria": "Perfumería",
-   "marca": "Head & Shoulders"
-  },
-  {
-   "ean": "7500435138017",
-   "nombre": "Shampoo Head & Shoulders purificación capilar 180 cc.",
    "categoria": "Perfumería",
    "marca": "Head & Shoulders"
   },
