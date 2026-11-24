@@ -91,6 +91,25 @@ a{color:var(--green-text)}
 .lsX{border:1px solid var(--rule);background:var(--paper);color:var(--ink3);border-radius:999px;min-width:32px;height:32px;padding:0 9px;cursor:pointer;font-size:12.5px;font-weight:600}
 .lsX.conf{color:var(--bad);border-color:var(--bad)}
 .lsOk{font-size:13px;color:var(--green-text);font-weight:600}
+.lsVer{position:fixed;inset:0;z-index:45;background:var(--bg);overflow-y:auto;padding:max(12px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lsVerIn{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.lsVerHead{display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:1}
+.lsVerHead h2{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lsProg{height:6px;border-radius:99px;background:var(--sunk);overflow:hidden}
+.lsProg i{display:block;height:100%;background:var(--green);border-radius:99px;transition:width .2s}
+.lsChk{list-style:none;margin:0;padding:0;border:1px solid var(--rule);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.lsChk li+li{border-top:1px solid var(--rule)}
+.lsChk label{display:grid;grid-template-columns:28px 44px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 14px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.lsChk input{width:24px;height:24px;accent-color:var(--green);margin:0}
+.lsChk .cimg{width:44px;height:44px;border-radius:8px;background:var(--sunk);overflow:hidden;display:block}
+.lsChk .cimg img{width:44px;height:44px;object-fit:contain;background:#fff;display:block}
+.lsChk .nm{font-size:14.5px;font-weight:600;line-height:1.3}
+.lsChk .nm small{display:block;font-weight:500;font-size:12px;color:var(--ink3);margin-top:2px}
+.lsChk .q{font-weight:700;font-size:15px;white-space:nowrap}
+.lsChk li.ok .nm,.lsChk li.ok .q{color:var(--ink3);text-decoration:line-through}
+.lsChk li.ok .cimg{opacity:.45}
+.lsVerPie{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap}
+body.conLista{overflow:hidden}
 /* ---------- menú Más ---------- */
 .masWrap{position:relative}
 .masBtn{display:flex;align-items:center;gap:4px;white-space:nowrap;border:0;background:none;padding:8px 14px;border-radius:999px;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink2)}
@@ -640,6 +659,15 @@ details.others[open] summary{margin-bottom:10px}
   <form method="dialog" class="dlgClose"><button aria-label="Cerrar">✕</button></form>
   <div id="authBody"></div>
 </dialog>
+
+<section class="lsVer" id="lsVer" hidden role="dialog" aria-modal="true" aria-labelledby="lsVerTit">
+  <div class="lsVerIn">
+    <header class="lsVerHead"><div class="col" style="gap:2px;min-width:0"><h2 id="lsVerTit"></h2><p class="muted" id="lsVerSub" style="font-size:13px"></p></div><button class="btn ghost sm" id="lsVerCerrar" type="button">Cerrar</button></header>
+    <div class="lsProg" aria-hidden="true"><i id="lsVerBar"></i></div>
+    <ul class="lsChk" id="lsVerItems"></ul>
+    <div class="lsVerPie"><button class="btn ghost sm" id="lsVerReset" type="button">Desmarcar todo</button><button class="btn green sm" id="lsVerCarrito" type="button">Ver en qué súper conviene</button></div>
+  </div>
+</section>
 
 <nav class="bottomNav" aria-label="Secciones">
   <button data-go="hoy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Mi semana</button>
@@ -3277,7 +3305,7 @@ details.others[open] summary{margin-bottom:10px}
     if(L.length) h += `<h3 class="lsTit">Mis listas <small>${L.length} ${L.length === 1 ? 'lista' : 'listas'}</small></h3><div class="lsGrid">${L.map(l => {
         const cc = lsConf && lsConf.id === l.id ? lsConf.tipo : '';
         return `<div class="ls${l.id === P.listaActual ? ' on' : ''}"><span class="t"><b>${esc(l.n)}</b><small>${l.items.length} ${l.items.length === 1 ? 'producto' : 'productos'} · ${l.items.reduce((a,x) => a + x.q, 0)} u. · ${fechaCorta(l.f)}</small></span>
-          <span class="a">${l.id === P.listaActual ? '<span class="lsOk">En el carrito</span>' : `<button class="btn ${cc === 'cargar' ? 'green' : 'ghost'} sm" data-ls="cargar" data-id="${l.id}">${cc === 'cargar' ? '¿Reemplazar carrito?' : 'Cargar'}</button>`}<button class="lsX${cc === 'borrar' ? ' conf' : ''}" data-ls="borrar" data-id="${l.id}" aria-label="Borrar la lista ${esc(l.n)}">${cc === 'borrar' ? '¿Borrar?' : '✕'}</button></span></div>`;
+          <span class="a"><button class="btn ghost sm" data-ls="ver" data-id="${l.id}">Ver</button>${l.id === P.listaActual ? '' : `<button class="btn ${cc === 'cargar' ? 'green' : 'ghost'} sm" data-ls="cargar" data-id="${l.id}">${cc === 'cargar' ? '¿Reemplazar carrito?' : 'Cargar'}</button>`}<button class="lsX${cc === 'borrar' ? ' conf' : ''}" data-ls="borrar" data-id="${l.id}" aria-label="Borrar la lista ${esc(l.n)}">${cc === 'borrar' ? '¿Borrar?' : '✕'}</button></span></div>`;
       }).join('')}</div>`;
     el.innerHTML = h; el.hidden = !h;
     if(lsForm){ const i = document.getElementById('lsNombre'); if(i){ i.focus(); } }
@@ -3286,6 +3314,7 @@ details.others[open] summary{margin-bottom:10px}
   document.getElementById('cxListas').addEventListener('click', ev => {
     const b = ev.target.closest('[data-ls]'); if(!b) return;
     const L = listas(), id = b.dataset.id, l = L.find(x => x.id === id), t = b.dataset.ls;
+    if(t === 'ver' && l){ abrirLista(l.id); return; }
     if(t === 'nueva'){ lsForm = true; lsConf = null; renderListas(); return; }
     if(t === 'cancelar'){ lsForm = false; renderListas(); return; }
     if(t === 'actualizar'){ const a = L.find(x => x.id === P.listaActual); if(a){ a.items = copiaCarrito(); a.f = iso(TODAY); save(); lsAviso('Lista actualizada'); } return; }
@@ -3305,6 +3334,38 @@ details.others[open] summary{margin-bottom:10px}
     const l = {id: Date.now().toString(36), n, items: copiaCarrito(), f: iso(TODAY)};
     L.unshift(l); P.listaActual = l.id; lsForm = false; save(); lsAviso('Lista guardada');
   });
+
+  // Lista del súper: se abre una lista guardada a pantalla completa y se van tildando los productos.
+  // Lo tildado se guarda en la lista (l.ok), así no se pierde si se bloquea el celular.
+  let lsVerId = null, lsWake = null;
+  function pintarLista(){
+    const l = listas().find(x => x.id === lsVerId); if(!l) return cerrarLista();
+    const ok = new Set(l.ok || []), n = l.items.length, k = l.items.filter(x => ok.has(x.e)).length;
+    document.getElementById('lsVerTit').textContent = l.n;
+    document.getElementById('lsVerSub').textContent = k === n && n ? '¡Listo! Tenés todo.' : `${k} de ${n} ${n === 1 ? 'producto' : 'productos'}`;
+    document.getElementById('lsVerBar').style.width = (n ? k / n * 100 : 0) + '%';
+    const orden = [...l.items].sort((a,b) => ok.has(a.e) - ok.has(b.e));
+    document.getElementById('lsVerItems').innerHTML = orden.map(x => {
+      const p = PX && PX.productos.find(y => y.e === x.e);
+      const img = p && p.i ? `<img src="${esc(p.i.replace(/(\/ids\/\d+)\//, '$1-120-120/'))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '';
+      return `<li class="${ok.has(x.e) ? 'ok' : ''}"><label><input type="checkbox" data-chk="${esc(x.e)}" ${ok.has(x.e) ? 'checked' : ''}><span class="cimg">${img}</span><span class="nm">${esc((p && p.n) || x.n || x.e)}${p ? `<small>${esc(p.c)}</small>` : ''}</span><span class="q">×${x.q}</span></label></li>`;
+    }).join('');
+  }
+  async function abrirLista(id){
+    lsVerId = id; if(!PX) await cargarPrecios().catch(() => {});
+    document.getElementById('lsVer').hidden = false; document.body.classList.add('conLista'); pintarLista();
+    try{ if(navigator.wakeLock) lsWake = await navigator.wakeLock.request('screen'); }catch(e){} // pantalla prendida mientras comprás
+  }
+  function cerrarLista(){ lsVerId = null; document.getElementById('lsVer').hidden = true; document.body.classList.remove('conLista'); try{ lsWake && lsWake.release(); }catch(e){} lsWake = null; }
+  document.getElementById('lsVerItems').addEventListener('change', ev => {
+    const c = ev.target.closest('[data-chk]'); const l = listas().find(x => x.id === lsVerId); if(!c || !l) return;
+    const ok = new Set(l.ok || []); c.checked ? ok.add(c.dataset.chk) : ok.delete(c.dataset.chk); l.ok = [...ok]; save();
+    setTimeout(pintarLista, 180);
+  });
+  document.getElementById('lsVerCerrar').addEventListener('click', cerrarLista);
+  document.getElementById('lsVerReset').addEventListener('click', () => { const l = listas().find(x => x.id === lsVerId); if(l){ l.ok = []; save(); pintarLista(); } });
+  document.getElementById('lsVerCarrito').addEventListener('click', () => { const l = listas().find(x => x.id === lsVerId); if(!l) return; P.carrito = l.items.map(x => ({e:x.e, q:x.q, n:x.n})); P.listaActual = l.id; save(); pintarBadge(); cerrarLista(); show('carrito'); });
+  document.addEventListener('keydown', ev => { if(ev.key === 'Escape' && lsVerId) cerrarLista(); });
   let vaciarPaso = 0;
   document.getElementById('cxVaciar').addEventListener('click', ev => {
     if(!vaciarPaso){ vaciarPaso = 1; ev.currentTarget.textContent = '¿Vaciar? Tocá de nuevo'; setTimeout(() => { vaciarPaso = 0; const b = document.getElementById('cxVaciar'); if(b) b.textContent = 'Vaciar'; }, 3000); return; }
