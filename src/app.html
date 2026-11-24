@@ -53,12 +53,6 @@ a{color:var(--green-text)}
 
 /* ---------- inicio (bienvenida) ---------- */
 .hola{position:fixed;inset:0;z-index:40;background:radial-gradient(120% 70% at 50% 0%,color-mix(in srgb,var(--green) 22%,var(--bg)) 0%,var(--bg) 60%);overflow-y:auto;display:flex;justify-content:center;padding:max(28px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 28px max(16px,env(safe-area-inset-left,0px))}
-.holaBg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
-.holaBg span{position:absolute;font-weight:800;font-size:15px;color:var(--green-text);background:var(--paper);border:1px solid var(--rule);border-radius:999px;padding:6px 12px;opacity:.55;transform:rotate(-6deg)}
-.holaBg span:nth-child(even){transform:rotate(5deg)}
-@media (max-width:700px){.holaBg .ancha{display:none}}
-@media (prefers-reduced-motion:no-preference){.holaBg span{animation:flota 7s ease-in-out infinite}.holaBg span:nth-child(2n){animation-delay:-3s}.holaBg span:nth-child(3n){animation-delay:-5s}}
-@keyframes flota{50%{translate:0 -10px}}
 .holaIn{position:relative;width:100%;max-width:400px;margin:auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
 .holaLogo{display:flex;align-items:center;gap:10px}
 .holaLogo svg{width:62px;height:45px}
@@ -73,14 +67,14 @@ a{color:var(--green-text)}
 .pn{width:34px;height:34px;border-radius:50%;background:var(--green-soft);color:var(--green-text);display:grid;place-items:center;font-weight:700;font-size:15px}
 .hola h1{font-size:28px;font-weight:800;letter-spacing:-.02em;margin-top:4px}
 .holaFrase{color:var(--ink2);font-size:16px;line-height:1.45;max-width:30ch}
-.holaCard{width:100%;margin-top:10px;background:var(--paper);border:1px solid var(--rule);border-radius:22px;padding:20px;box-shadow:0 16px 40px -28px rgba(20,26,46,.22);display:flex;flex-direction:column;gap:12px;text-align:left}
-.holaCard form,#holaPaso1{display:flex;flex-direction:column;gap:10px}
-.hBtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border-radius:14px;padding:14px;font-weight:600;font-size:15.5px;cursor:pointer}
-.hBtn svg{width:20px;height:20px}
+.holaCard{width:100%;max-width:330px;margin-top:8px;background:var(--paper);border:1px solid var(--rule);border-radius:18px;padding:16px;box-shadow:0 16px 40px -28px rgba(20,26,46,.22);display:flex;flex-direction:column;gap:12px;text-align:left}
+.holaCard form,#holaPaso1{display:flex;flex-direction:column;gap:8px}
+.hBtn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;border-radius:11px;padding:11px;font-weight:600;font-size:14px;cursor:pointer}
+.hBtn svg{width:17px;height:17px}
 .hG{background:var(--paper);border:1px solid var(--rule);color:var(--ink)}
 .hG:hover{background:var(--sunk)}
 .hP{background:var(--navy);border:0;color:var(--on-navy)}
-.hIn{width:100%;border:1px solid var(--rule);background:var(--sunk);border-radius:14px;padding:14px;font-size:16px;color:var(--ink);outline:none}
+.hIn{width:100%;border:1px solid var(--rule);background:var(--sunk);border-radius:11px;padding:10px 12px;font-size:16px;color:var(--ink);outline:none}
 .hIn:focus{border-color:var(--green);background:var(--paper)}
 .hMail{font-size:14px;color:var(--ink2)}
 .hMail span{font-weight:600;color:var(--ink)}
@@ -403,12 +397,6 @@ details.others[open] summary{margin-bottom:10px}
 
 
 <section class="hola" id="hola" hidden aria-labelledby="holaTitulo">
-  <div class="holaBg" aria-hidden="true">
-    <span style="top:7%;left:6%">25% Coto</span><span style="top:13%;right:5%">40% Jumbo</span>
-    <span style="top:2%;left:42%">20% Día</span><span class="ancha" style="top:44%;right:4%">30% Carrefour</span>
-    <span style="bottom:22%;left:3%">35% Coto</span><span style="bottom:10%;right:6%">25% Disco</span>
-    <span style="bottom:3%;left:28%">20% Vea</span>
-  </div>
   <div class="holaIn" id="holaLogin">
     <div class="holaLogo"><svg viewBox="0 0 66 48" aria-hidden="true">
         <rect x="18" y="3" width="40" height="22" rx="3.5" transform="rotate(-7 38 14)" fill="var(--brand-navy)"/>
@@ -3270,7 +3258,7 @@ details.others[open] summary{margin-bottom:10px}
   // Segundo paso de la bienvenida: qué es deelo y el botón para elegir bancos y tarjetas.
   function abrirIntro(){
     document.getElementById('holaLogin').hidden = true; document.getElementById('holaIntro').hidden = false;
-    hola.querySelector('.holaBg').hidden = true; hola.scrollTop = 0;
+    hola.scrollTop = 0;
     hola.setAttribute('aria-labelledby', 'holaIntroTit');
   }
   window.addEventListener('deelo:sesion', ev => { if(ev.detail.sesion && !hola.hidden && document.getElementById('holaIntro').hidden){ if(hasProfile()) cerrarHola('hoy'); else abrirIntro(); } });
