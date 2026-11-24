@@ -34,6 +34,8 @@ a{color:var(--green-text)}
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .logo{display:flex;align-items:center;gap:9px;text-decoration:none}
 .logo svg{width:46px;height:34px;flex:none}
+.beta{align-self:center;transform:translateY(-9px);font-family:var(--f-body);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;line-height:1;color:var(--ink2);background:var(--sunk);border:1px solid var(--rule);border-radius:999px;padding:3px 6px;margin-top:1px}
+.holaLogo .beta{font-size:12px;padding:4px 8px;margin-top:0;transform:translateY(-16px);letter-spacing:.08em;font-family:var(--f-body);color:var(--ink2)}
 .logo-word{font-family:var(--f-brand);font-weight:600;font-size:34px;letter-spacing:-.02em;line-height:1;color:var(--brand-navy)}
 .tagline{display:none;color:var(--ink2);font-size:13px;line-height:1.3;border-left:1px solid var(--rule);padding-left:12px;margin-left:4px}
 .tagline b{display:block;color:var(--ink);font-size:14px}
@@ -405,7 +407,7 @@ details.others[open] summary{margin-bottom:10px}
         <rect x="8.5" y="21" width="9" height="5" rx="1" fill="var(--brand-navy)"/>
         <rect x="22" y="21" width="32" height="23" rx="3.5" fill="var(--bg)" stroke="var(--brand-green)" stroke-width="3.6"/>
         <path d="M30.5 32.5l5 4.5 9-9" fill="none" stroke="var(--brand-green)" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg><span>deelo</span></div>
+      </svg><span>deelo</span><span class="beta">Beta</span></div>
     <h1 id="holaTitulo">Pagá menos. Siempre.</h1>
     <p class="holaFrase">Tus descuentos en un solo lugar.</p>
     <div class="holaCard">
@@ -435,7 +437,7 @@ details.others[open] summary{margin-bottom:10px}
 
 <div class="wrap">
   <header class="top">
-    <a class="logo" href="#hoy" aria-label="deelo, inicio">
+    <a class="logo" href="#hoy" aria-label="deelo beta, inicio">
       <svg viewBox="0 0 66 48" aria-hidden="true">
         <rect x="18" y="3" width="40" height="22" rx="3.5" transform="rotate(-7 38 14)" fill="var(--brand-navy)"/>
         <rect x="4" y="14" width="32" height="22" rx="3.5" fill="var(--bg)" stroke="var(--brand-green)" stroke-width="3.6"/>
@@ -443,7 +445,7 @@ details.others[open] summary{margin-bottom:10px}
         <rect x="22" y="21" width="32" height="23" rx="3.5" fill="var(--bg)" stroke="var(--brand-green)" stroke-width="3.6"/>
         <path d="M30.5 32.5l5 4.5 9-9" fill="none" stroke="var(--brand-green)" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <span class="logo-word">deelo</span>
+      <span class="logo-word">deelo</span><span class="beta" title="deelo está en versión de prueba: puede haber errores en promos o precios">Beta</span>
       <span class="tagline"><b>Pagá menos. Siempre.</b>Encontrá cómo te conviene pagar según tus bancos y promos.</span>
     </a>
     <nav class="deskNav" aria-label="Secciones">
