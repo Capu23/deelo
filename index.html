@@ -72,6 +72,18 @@ a{color:var(--green-text)}
 .stack .eb:first-child{margin-left:0}
 
 
+/* ---------- menú Más ---------- */
+.masWrap{position:relative}
+.masBtn{display:flex;align-items:center;gap:4px;white-space:nowrap;border:0;background:none;padding:8px 14px;border-radius:999px;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink2)}
+.masBtn .ch{width:14px;height:14px;transition:transform .15s}
+.masBtn[aria-expanded="true"] .ch{transform:rotate(180deg)}
+.masBtn[aria-current="page"]{background:var(--navy);color:var(--on-navy)}
+.masMenu{position:absolute;top:calc(100% + 8px);right:0;z-index:30;min-width:200px;background:var(--paper);border:1px solid var(--rule);border-radius:14px;box-shadow:0 12px 32px -14px rgba(20,26,46,.3);padding:6px;display:flex;flex-direction:column}
+.masMenu[hidden]{display:none}
+.masMenu button{border:0;background:none;text-align:left;padding:11px 12px;border-radius:10px;font-weight:600;font-size:15px;color:var(--ink);cursor:pointer}
+.masMenu button:hover,.masMenu button[aria-current="page"]{background:var(--sunk)}
+.masMenu.abajo{position:fixed;top:auto;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+@media (min-width:900px){.masMenu.abajo{display:none!important}}
 /* ---------- inicio (bienvenida) ---------- */
 .hola{position:fixed;inset:0;z-index:40;background:radial-gradient(120% 70% at 50% 0%,color-mix(in srgb,var(--green) 22%,var(--bg)) 0%,var(--bg) 60%);overflow-y:auto;display:flex;justify-content:center;padding:max(28px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 28px max(16px,env(safe-area-inset-left,0px))}
 .holaIn{position:relative;width:100%;max-width:400px;margin:auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
@@ -495,10 +507,10 @@ details.others[open] summary{margin-bottom:10px}
     </a>
     <nav class="deskNav" aria-label="Secciones">
       <button data-go="hoy">Mi semana</button>
-      <button data-go="tarjetas">Mis tarjetas</button>
       <button data-go="precios">Precios</button>
       <button data-go="carrito">Carrito<span class="cbadge" data-cbadge hidden></span></button>
-      <button data-go="todas">Todas las promos</button>
+      <div class="masWrap"><button class="masBtn" type="button" data-mas="mDesk" aria-haspopup="true" aria-expanded="false">Más<svg class="ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="masMenu" id="mDesk" hidden><button data-go="tarjetas">Mis tarjetas</button><button data-go="todas">Todas las promos</button></div></div>
     </nav>
     <div class="topRight">
       <button class="profileBtn" id="profileBtn" data-go="tarjetas"></button>
@@ -611,11 +623,11 @@ details.others[open] summary{margin-bottom:10px}
 
 <nav class="bottomNav" aria-label="Secciones">
   <button data-go="hoy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Mi semana</button>
-  <button data-go="tarjetas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="13" rx="2.5"/><path d="M2.5 10.5h19M6 15h4"/></svg>Mis tarjetas</button>
   <button data-go="precios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>Precios</button>
   <button data-go="carrito"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h2.6l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1l1.6-6.8H6.2"/></svg><span class="cbadge" data-cbadge hidden></span></span>Carrito</button>
-  <button data-go="todas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Todas</button>
+  <button type="button" data-mas="mBottom" aria-haspopup="true" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></svg>Más</button>
 </nav>
+<div class="masMenu abajo" id="mBottom" hidden><button data-go="tarjetas">Mis tarjetas</button><button data-go="todas">Todas las promos</button></div>
 
 <script id="promo-data" type="application/json">
 {
@@ -3244,13 +3256,20 @@ details.others[open] summary{margin-bottom:10px}
     document.body.dataset.vista = v;
     if(v === 'precios') renderPrecios();
     if(v === 'carrito') renderCarrito();
-    document.querySelectorAll('.deskNav button, .bottomNav button').forEach(b => b.setAttribute('aria-current', b.dataset.go === v ? 'page' : 'false'));
+    document.querySelectorAll('.deskNav button, .bottomNav button, .masMenu button').forEach(b => b.setAttribute('aria-current', b.dataset.go === v ? 'page' : 'false'));
+    document.querySelectorAll('[data-mas]').forEach(b => b.setAttribute('aria-current', ['tarjetas','todas'].includes(v) ? 'page' : 'false'));
+    cerrarMas();
     if(location.hash.slice(1) !== v){ try{ history.replaceState(null, '', '#' + v); }catch(e){} }
     if(show.listo){ try{ window.goatcounter && window.goatcounter.count && window.goatcounter.count({path: location.pathname + '#' + v, title: 'deelo · ' + v}); }catch(e){} }
     show.listo = true;
     window.scrollTo(0, 0);
   }
+  function cerrarMas(){ document.querySelectorAll('.masMenu').forEach(m => m.hidden = true); document.querySelectorAll('[data-mas]').forEach(b => b.setAttribute('aria-expanded', 'false')); }
+  document.addEventListener('keydown', ev => { if(ev.key === 'Escape') cerrarMas(); });
   document.addEventListener('click', ev => {
+    const mas = ev.target.closest('[data-mas]');
+    if(mas){ const m = document.getElementById(mas.dataset.mas), abrir = m.hidden; cerrarMas(); m.hidden = !abrir; mas.setAttribute('aria-expanded', abrir); return; }
+    if(!ev.target.closest('.masMenu')) cerrarMas();
     const go = ev.target.closest('[data-go]'); if(go){ ev.preventDefault(); show(go.dataset.go); return; }
     const day = ev.target.closest('.day'); if(day){ const [y,m,d] = day.dataset.d.split('-').map(Number); sel = new Date(y, m-1, d); renderWeek(); return; }
     const q = ev.target.closest('#quick button'); if(q){ gasto = Number(q.dataset.v); store.set(KEY+'-gasto', gasto); sync(); renderWeek(); return; }
