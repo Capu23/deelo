@@ -486,7 +486,7 @@ details.others[open] summary{margin-bottom:10px}
       <button data-go="precios">Precios</button>
       <button data-go="carrito">Carrito<span class="cbadge" data-cbadge hidden></span></button>
       <div class="masWrap"><button class="masBtn" type="button" data-mas="mDesk" aria-haspopup="true" aria-expanded="false">Más<svg class="ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
-        <div class="masMenu" id="mDesk" hidden><button data-go="tarjetas">Mis tarjetas</button><button data-go="todas">Todas las promos</button></div></div>
+        <div class="masMenu" id="mDesk" hidden><button data-go="tarjetas">Mi billetera</button><button data-go="todas">Todas las promos</button></div></div>
     </nav>
     <div class="topRight">
       <button class="profileBtn" id="profileBtn" data-go="tarjetas"></button>
@@ -603,7 +603,7 @@ details.others[open] summary{margin-bottom:10px}
   <button data-go="carrito"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h2.6l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1l1.6-6.8H6.2"/></svg><span class="cbadge" data-cbadge hidden></span></span>Carrito</button>
   <button type="button" data-mas="mBottom" aria-haspopup="true" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></svg>Más</button>
 </nav>
-<div class="masMenu abajo" id="mBottom" hidden><button data-go="tarjetas">Mis tarjetas</button><button data-go="todas">Todas las promos</button></div>
+<div class="masMenu abajo" id="mBottom" hidden><button data-go="tarjetas">Mi billetera</button><button data-go="todas">Todas las promos</button></div>
 
 <script id="promo-data" type="application/json">
 {
@@ -2978,7 +2978,7 @@ details.others[open] summary{margin-bottom:10px}
       [1,2,3,4,5,6,7].map(d => `<button class="fchip plain" data-df="${d}" aria-pressed="${dayFilter===d}">${DIAS[d].charAt(0).toUpperCase() + DIAS[d].slice(1)}</button>`).join('');
     document.getElementById('mineFilter').innerHTML = hasProfile()
       ? `<div class="mineTog" role="group" aria-label="Qué promos mostrar"><button data-mf="1" aria-pressed="${soloMias}">Solo las mías</button><button data-mf="0" aria-pressed="${!soloMias}">Todas</button></div>`
-      : `<p class="muted" style="font-size:13px">Elegí tus bancos en <button class="linkBtn" data-go="tarjetas">Mis tarjetas</button> para ver cuáles podés usar.</p>`;
+      : `<p class="muted" style="font-size:13px">Elegí tus bancos en <button class="linkBtn" data-go="tarjetas">Mi billetera</button> para ver cuáles podés usar.</p>`;
     const vis = pr => (P.online || pr.canal !== 'online' || match(pr).ok);
     const pasaDia = pr => !dayFilter || (pr.fechas ? pr.fechas.some(f => isoDow(new Date(f + 'T12:00:00')) === dayFilter) : pr.dias.includes(dayFilter));
     let total = 0, mias = 0;
@@ -3212,7 +3212,7 @@ details.others[open] summary{margin-bottom:10px}
     const ents = Object.keys(P.ents);
     document.getElementById('profileBtn').innerHTML = ents.length
       ? `<span class="stack">${ents.slice(0,3).map(k => eb(k)).join('')}${ents.length > 3 ? `<i class="eb more" aria-hidden="true">+${ents.length - 3}</i>` : ''}</span><span class="lbl">${ents.length} ${ents.length === 1 ? 'medio' : 'medios'}</span>`
-      : `<span class="eb" style="background:var(--green);color:var(--green-ink)">+</span><span class="lbl">Mis tarjetas</span>`;
+      : `<span class="eb" style="background:var(--green);color:var(--green-ink)">+</span><span class="lbl">Mi billetera</span>`;
     const b = [];
     const caidas = Object.entries(D.estado || {}).filter(([,v]) => v !== 'ok').map(([k]) => ({cencosud:'Jumbo/Disco/Vea', carrefour:'Carrefour', dia:'Día', 'coto-vigentes':'Coto', coto:'Coto (legales)'}[k] || k));
     if(caidas.length) b.push(`<div class="banner warn"><span class="grow">No pudimos actualizar ${esc([...new Set(caidas)].join(', '))} en la última corrida: mostramos sus promos anteriores.</span></div>`);
