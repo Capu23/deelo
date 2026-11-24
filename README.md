@@ -1,4 +1,4 @@
-# deelo · Pagá menos. Siempre.
+# deelo · Pagá menos, siempre.
 
 Descuentos del súper en CABA según tus bancos, tarjetas y billeteras. **https://deelo.ar**
 

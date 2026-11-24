@@ -12,14 +12,14 @@
 <meta property="og:site_name" content="deelo">
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://deelo.ar/">
-<meta property="og:title" content="deelo · Pagá menos. Siempre.">
+<meta property="og:title" content="deelo · Pagá menos, siempre.">
 <meta property="og:description" content="Tus descuentos en un solo lugar: promos de bancos y billeteras en el súper, según cómo pagás.">
 <meta property="og:image" content="https://deelo.ar/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <script data-goatcounter="https://deelo.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-<title>deelo · Pagá menos. Siempre.</title>
+<title>deelo · Pagá menos, siempre.</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Poppins:wght@400;500;600;700;800&display=swap">
@@ -74,16 +74,18 @@ a{color:var(--green-text)}
 
 /* ---------- inicio (bienvenida) ---------- */
 .hola{position:fixed;inset:0;z-index:40;background:radial-gradient(120% 70% at 50% 0%,color-mix(in srgb,var(--green) 22%,var(--bg)) 0%,var(--bg) 60%);overflow-y:auto;display:flex;justify-content:center;padding:max(28px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 28px max(16px,env(safe-area-inset-left,0px))}
-.holaBg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
-.holaBg span{position:absolute;font-weight:800;font-size:15px;color:var(--green-text);background:var(--paper);border:1px solid var(--rule);border-radius:999px;padding:6px 12px;opacity:.55;transform:rotate(-6deg)}
-.holaBg span:nth-child(even){transform:rotate(5deg)}
-@media (max-width:700px){.holaBg .ancha{display:none}}
-@media (prefers-reduced-motion:no-preference){.holaBg span{animation:flota 7s ease-in-out infinite}.holaBg span:nth-child(2n){animation-delay:-3s}.holaBg span:nth-child(3n){animation-delay:-5s}}
-@keyframes flota{50%{translate:0 -10px}}
 .holaIn{position:relative;width:100%;max-width:400px;margin:auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
 .holaLogo{display:flex;align-items:center;gap:10px}
 .holaLogo svg{width:62px;height:45px}
 .holaLogo span{font-family:var(--f-brand);font-weight:600;font-size:52px;letter-spacing:-.02em;color:var(--brand-navy);line-height:1}
+#holaLogin{padding-bottom:6vh}
+/* Logo y slogan unos 30 px más arriba que la caja de ingreso */
+#holaLogin .holaLogo,#holaLogin h1{position:relative;top:-30px}
+#holaLogin .holaLogo{margin-bottom:5.4px;gap:12px}
+#holaLogin h1{font-size:22.5px}
+#holaLogin .holaLogo svg{width:74px;height:54px}
+#holaLogin .holaLogo span{font-size:62px}
+#holaLogin .holaLogo .beta{font-size:15.2px;transform:translateY(-19px)}
 .holaLogo.chico svg{width:44px;height:32px}
 .holaLogo.chico span{font-size:36px}
 .holaLead{font-size:19px;line-height:1.45;color:var(--ink2);max-width:28ch;text-wrap:balance;margin-top:4px}
@@ -94,14 +96,14 @@ a{color:var(--green-text)}
 .pn{width:34px;height:34px;border-radius:50%;background:var(--green-soft);color:var(--green-text);display:grid;place-items:center;font-weight:700;font-size:15px}
 .hola h1{font-size:28px;font-weight:800;letter-spacing:-.02em;margin-top:4px}
 .holaFrase{color:var(--ink2);font-size:16px;line-height:1.45;max-width:30ch}
-.holaCard{width:100%;margin-top:10px;background:var(--paper);border:1px solid var(--rule);border-radius:22px;padding:20px;box-shadow:0 16px 40px -28px rgba(20,26,46,.22);display:flex;flex-direction:column;gap:12px;text-align:left}
-.holaCard form,#holaPaso1{display:flex;flex-direction:column;gap:10px}
-.hBtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border-radius:14px;padding:14px;font-weight:600;font-size:15.5px;cursor:pointer}
-.hBtn svg{width:20px;height:20px}
+.holaCard{width:100%;max-width:330px;margin-top:8px;background:var(--paper);border:1px solid var(--rule);border-radius:18px;padding:16px;box-shadow:0 16px 40px -28px rgba(20,26,46,.22);display:flex;flex-direction:column;gap:12px;text-align:left}
+.holaCard form,#holaPaso1{display:flex;flex-direction:column;gap:8px}
+.hBtn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;border-radius:11px;padding:11px;font-weight:600;font-size:14px;cursor:pointer}
+.hBtn svg{width:17px;height:17px}
 .hG{background:var(--paper);border:1px solid var(--rule);color:var(--ink)}
 .hG:hover{background:var(--sunk)}
 .hP{background:var(--navy);border:0;color:var(--on-navy)}
-.hIn{width:100%;border:1px solid var(--rule);background:var(--sunk);border-radius:14px;padding:14px;font-size:16px;color:var(--ink);outline:none}
+.hIn{width:100%;border:1px solid var(--rule);background:var(--sunk);border-radius:11px;padding:10px 12px;font-size:16px;color:var(--ink);outline:none}
 .hIn:focus{border-color:var(--green);background:var(--paper)}
 .hMail{font-size:14px;color:var(--ink2)}
 .hMail span{font-weight:600;color:var(--ink)}
@@ -427,12 +429,6 @@ details.others[open] summary{margin-bottom:10px}
 
 
 <section class="hola" id="hola" hidden aria-labelledby="holaTitulo">
-  <div class="holaBg" aria-hidden="true">
-    <span style="top:7%;left:6%">25% Coto</span><span style="top:13%;right:5%">40% Jumbo</span>
-    <span style="top:2%;left:42%">20% Día</span><span class="ancha" style="top:44%;right:4%">30% Carrefour</span>
-    <span style="bottom:22%;left:3%">35% Coto</span><span style="bottom:10%;right:6%">25% Disco</span>
-    <span style="bottom:3%;left:28%">20% Vea</span>
-  </div>
   <div class="holaIn" id="holaLogin">
     <div class="holaLogo"><svg viewBox="0 0 66 48" aria-hidden="true">
         <rect x="18" y="3" width="40" height="22" rx="3.5" transform="rotate(-7 38 14)" fill="var(--brand-navy)"/>
@@ -441,7 +437,7 @@ details.others[open] summary{margin-bottom:10px}
         <rect x="22" y="21" width="32" height="23" rx="3.5" fill="var(--bg)" stroke="var(--brand-green)" stroke-width="3.6"/>
         <path d="M30.5 32.5l5 4.5 9-9" fill="none" stroke="var(--brand-green)" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
       </svg><span>deelo</span><span class="beta">(Beta)</span></div>
-    <h1 id="holaTitulo">Pagá menos. Siempre.</h1>
+    <h1 id="holaTitulo">Pagá menos, siempre.</h1>
     <div class="holaCard">
       <div id="holaPaso1">
         <button class="hBtn hG" id="holaGoogle" type="button"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>Continuar con Google</button>
@@ -495,7 +491,7 @@ details.others[open] summary{margin-bottom:10px}
         <path d="M30.5 32.5l5 4.5 9-9" fill="none" stroke="var(--brand-green)" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       <span class="logo-word">deelo</span><span class="beta" title="deelo está en versión de prueba: puede haber errores en promos o precios">(Beta)</span>
-      <span class="tagline"><b>Pagá menos. Siempre.</b>Encontrá cómo te conviene pagar según tus bancos y promos.</span>
+      <span class="tagline"><b>Pagá menos, siempre.</b>Encontrá cómo te conviene pagar según tus bancos y promos.</span>
     </a>
     <nav class="deskNav" aria-label="Secciones">
       <button data-go="hoy">Mi semana</button>
@@ -3294,7 +3290,7 @@ details.others[open] summary{margin-bottom:10px}
   // Segundo paso de la bienvenida: qué es deelo y el botón para elegir bancos y tarjetas.
   function abrirIntro(){
     document.getElementById('holaLogin').hidden = true; document.getElementById('holaIntro').hidden = false;
-    hola.querySelector('.holaBg').hidden = true; hola.scrollTop = 0;
+    hola.scrollTop = 0;
     hola.setAttribute('aria-labelledby', 'holaIntroTit');
   }
   window.addEventListener('deelo:sesion', ev => { if(ev.detail.sesion && !hola.hidden && document.getElementById('holaIntro').hidden){ if(hasProfile()) cerrarHola('hoy'); else abrirIntro(); } });
