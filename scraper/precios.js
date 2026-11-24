@@ -52,7 +52,8 @@ try {
     for (const [s, r] of Object.entries(res[p.ean])) {
       if (!r.precio) continue;
       const slug = r.url.slice(SUPERS[s].length + 1, -2);
-      precios[s] = [r.precio, r.lista || 0, r.disponible ? 1 : 0, slug];
+      // 5º elemento: promo por cantidad {t: texto, n: unidades, u: precio c/u} (como en Coto).
+      precios[s] = [r.precio, r.lista || 0, r.disponible ? 1 : 0, slug, ...(r.promo ? [r.promo] : [])];
       if (!img && r.img) img = r.img.replace(/-\d+-\d+\//, '-200-200/');
     }
     if (coto && coto.p[p.ean]) {
