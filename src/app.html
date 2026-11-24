@@ -3070,8 +3070,20 @@ details.others[open] summary{margin-bottom:10px}
       return {s, precio, lista, disp, slug, m, pr, via: dd && dd.via, fin};
     }).sort((a,b) => (b.disp - a.disp) || (a.fin - b.fin));
     if(!q.length && !pxCat){
-      // Sin búsqueda: productos donde más diferencia hay entre súper
-      list = list.map(p => { const f = filas(p).filter(x => x.disp); return {p, d: f.length > 1 ? 1 - f[0].fin / f[f.length-1].fin : 0}; }).sort((a,b) => b.d - a.d).slice(0, 12).map(x => x.p);
+      // Sin búsqueda: productos de todos los días donde más diferencia hay entre súper.
+      // Se descartan los de temporada, los que están en pocos súper y las diferencias sospechosas (más del 60%),
+      // y se toman como mucho 2 por categoría para que la lista sea variada.
+      const TEMPORADA = /halloween|navid|navide|pascua|huevo de chocolate|pan dulce|panettone|budin|turr[oó]n|garrapi|sidra|ana[aá]na fizz|fiesta|carnaval|d[ií]a del (padre|ni[nñ]o|madre)|san valent/i;
+      // Primero los básicos de la compra de todas las semanas.
+      const BASICOS = /^(leche (entera|descremada|parcial|en polvo|larga)|leche$|yerba|aceite|arroz|fideos?|harina|az[uú]car|caf[eé]|t[eé] |mate cocido|galletitas|pur[eé] de tomate|at[uú]n|mayonesa|dulce de leche|yogur|manteca|queso|crema de leche|gaseosa|agua mineral|cerveza|detergente|lavandina|jab[oó]n|suavizante|papel higi[eé]nico|rollo de cocina|shampoo|acondicionador|pasta dental|desodorante|pa[nñ]ales|toallitas|huevos|pan lactal|polenta|lentejas|sal )/i; const _x = /(leche|yerba|aceite|arroz|fideos?|harina|az[uú]car|caf[eé]|t[eé] |mate cocido|galletitas|pur[eé] de tomate|at[uú]n|mayonesa|dulce de leche|yogur|manteca|queso|crema de leche|gaseosa|agua mineral|cerveza|detergente|lavandina|jab[oó]n|suavizante|papel higi[eé]nico|rollo de cocina|shampoo|acondicionador|pasta dental|desodorante|pa[nñ]ales|toallitas|huevos|pan lactal|polenta|lentejas|sal )/i;
+      const cuenta = {};
+      list = list.filter(p => !TEMPORADA.test(p.n))
+        .map(p => { const f = filas(p).filter(x => x.disp); return {p, n: f.length, d: f.length > 1 ? 1 - f[0].fin / f[f.length-1].fin : 0}; })
+        .filter(x => x.n >= 4 && x.d >= 0.08 && x.d <= 0.6)
+        .map(x => ({...x, b: BASICOS.test(x.p.n) ? 1 : 0}))
+        .sort((a,b) => (b.b - a.b) || (b.d - a.d))
+        .filter(x => (cuenta[x.p.c] = (cuenta[x.p.c] || 0) + 1) <= 2)
+        .slice(0, 12).map(x => x.p);
     }
     const total = list.length; list = list.slice(0, 40);
     const head = !q.length && !pxCat ? `<h3 style="font-size:15px">Donde más conviene comparar</h3>` : `<p class="muted" style="font-size:13px">${total} ${total === 1 ? 'producto' : 'productos'}${total > 40 ? ' · mostramos los primeros 40, afiná la búsqueda' : ''}</p>`;
