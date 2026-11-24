@@ -49,4 +49,4 @@ async function vtexPorEan(sup, ean) {
   const p = Array.isArray(d) && d[0] ? normalizar(sup, d[0]) : null;
   return p && p.precio ? p : null;
 }
-module.exports = { SUPERS, vtexBuscar, vtexPorEan };
+module.exports = { SUPERS, vtexBuscar, vtexPorEan, getJSON: get, normalizar };

@@ -17,7 +17,7 @@ concurrency:
 jobs:
   actualizar:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
 
@@ -38,7 +38,11 @@ jobs:
 
       - name: Traer precios de la canasta (Jumbo, Disco, Vea, Carrefour, Día, ChangoMás)
         continue-on-error: true   # si falla, la página sigue con los precios de la semana anterior
-        run: node scraper/precios.js
+        run: |
+          # Recorre el catálogo completo de cada súper (unos 25 min), renueva la lista de productos
+          # (en 3 o más cadenas, sin marcas propias) y saca los precios de ese recorrido.
+          node scraper/catalogo.js && node scraper/canasta.js 3 || echo "catálogo falló: se mantiene la canasta anterior"
+          node scraper/precios.js
 
       - name: Guardar si hubo cambios
         run: |
