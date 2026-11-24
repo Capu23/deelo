@@ -63,6 +63,14 @@ a{color:var(--green-text)}
 .holaLogo{display:flex;align-items:center;gap:10px}
 .holaLogo svg{width:62px;height:45px}
 .holaLogo span{font-family:var(--f-brand);font-weight:600;font-size:52px;letter-spacing:-.02em;color:var(--brand-navy);line-height:1}
+.holaLogo.chico svg{width:44px;height:32px}
+.holaLogo.chico span{font-size:36px}
+.holaLead{font-size:19px;line-height:1.45;color:var(--ink2);max-width:28ch;text-wrap:balance;margin-top:4px}
+.holaLead b{color:var(--ink);font-weight:700}
+.pasos{list-style:none;margin:6px 0 4px;padding:0;display:flex;flex-direction:column;gap:10px;width:100%;text-align:left}
+.pasos li{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:14px;font-size:14.5px;color:var(--ink2);line-height:1.45}
+.pasos b{color:var(--ink);font-weight:600}
+.pn{width:34px;height:34px;border-radius:50%;background:var(--green-soft);color:var(--green-text);display:grid;place-items:center;font-weight:700;font-size:15px}
 .hola h1{font-size:28px;font-weight:800;letter-spacing:-.02em;margin-top:4px}
 .holaFrase{color:var(--ink2);font-size:16px;line-height:1.45;max-width:30ch}
 .holaCard{width:100%;margin-top:10px;background:var(--paper);border:1px solid var(--rule);border-radius:22px;padding:20px;box-shadow:0 16px 40px -28px rgba(20,26,46,.22);display:flex;flex-direction:column;gap:12px;text-align:left}
@@ -85,6 +93,7 @@ a{color:var(--green-text)}
 .hLegal{font-size:12px;color:var(--ink3);max-width:34ch}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 body.conHola{overflow:hidden}
+body[data-vista="tarjetas"] #banners{display:none}
 
 /* ---------- cuenta ---------- */
 .topRight{display:flex;align-items:center;gap:8px;flex:none}
@@ -400,7 +409,7 @@ details.others[open] summary{margin-bottom:10px}
     <span style="bottom:22%;left:3%">35% Coto</span><span style="bottom:10%;right:6%">25% Disco</span>
     <span style="bottom:3%;left:28%">20% Vea</span>
   </div>
-  <div class="holaIn">
+  <div class="holaIn" id="holaLogin">
     <div class="holaLogo"><svg viewBox="0 0 66 48" aria-hidden="true">
         <rect x="18" y="3" width="40" height="22" rx="3.5" transform="rotate(-7 38 14)" fill="var(--brand-navy)"/>
         <rect x="4" y="14" width="32" height="22" rx="3.5" fill="var(--bg)" stroke="var(--brand-green)" stroke-width="3.6"/>
@@ -409,7 +418,6 @@ details.others[open] summary{margin-bottom:10px}
         <path d="M30.5 32.5l5 4.5 9-9" fill="none" stroke="var(--brand-green)" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
       </svg><span>deelo</span><span class="beta">(Beta)</span></div>
     <h1 id="holaTitulo">Pagá menos. Siempre.</h1>
-    <p class="holaFrase">Tus descuentos en un solo lugar.</p>
     <div class="holaCard">
       <div id="holaPaso1">
         <button class="hBtn hG" id="holaGoogle" type="button"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>Continuar con Google</button>
@@ -432,6 +440,23 @@ details.others[open] summary{margin-bottom:10px}
     </div>
     <button class="hSkip" id="holaSkip" type="button">Seguir sin cuenta →</button>
     <p class="hLegal">Al continuar aceptás el <a href="/acerca.html">aviso legal y la política de privacidad</a>. deelo no está afiliado a ningún súper ni banco.</p>
+  </div>
+  <div class="holaIn holaIntro" id="holaIntro" hidden>
+    <div class="holaLogo chico"><svg viewBox="0 0 66 48" aria-hidden="true">
+        <rect x="18" y="3" width="40" height="22" rx="3.5" transform="rotate(-7 38 14)" fill="var(--brand-navy)"/>
+        <rect x="4" y="14" width="32" height="22" rx="3.5" fill="var(--bg)" stroke="var(--brand-green)" stroke-width="3.6"/>
+        <rect x="8.5" y="21" width="9" height="5" rx="1" fill="var(--brand-navy)"/>
+        <rect x="22" y="21" width="32" height="23" rx="3.5" fill="var(--bg)" stroke="var(--brand-green)" stroke-width="3.6"/>
+        <path d="M30.5 32.5l5 4.5 9-9" fill="none" stroke="var(--brand-green)" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg><span>deelo</span></div>
+    <p class="holaLead" id="holaIntroTit"><b>Todos tus descuentos en un solo lugar.</b></p>
+    <ol class="pasos">
+      <li><span class="pn">1</span><span><b>Elegís tus bancos, tarjetas y billeteras</b>, y los súper donde comprás.</span></li>
+      <li><span class="pn">2</span><span><b>Cada día ves dónde y con qué pagar</b>, con cuánto ahorrás en pesos y el tope de cada promo.</span></li>
+      <li><span class="pn">3</span><span><b>Comparás precios de miles de productos</b> y armás tu carrito en el súper que más conviene.</span></li>
+    </ol>
+    <button class="hBtn hP" id="holaElegir" type="button">Elegir mis bancos y tarjetas</button>
+    <button class="hSkip" id="holaAhoraNo" type="button">Ahora no, ver las promos de hoy</button>
   </div>
 </section>
 
@@ -3195,6 +3220,7 @@ details.others[open] summary{margin-bottom:10px}
   function show(v){
     if(!VIEWS.includes(v)) v = 'hoy';
     VIEWS.forEach(x => document.getElementById('view-'+x).hidden = x !== v);
+    document.body.dataset.vista = v;
     if(v === 'precios') renderPrecios();
     if(v === 'carrito') renderCarrito();
     document.querySelectorAll('.deskNav button, .bottomNav button').forEach(b => b.setAttribute('aria-current', b.dataset.go === v ? 'page' : 'false'));
@@ -3241,7 +3267,15 @@ details.others[open] summary{margin-bottom:10px}
   function cerrarHola(destino){ hola.hidden = true; document.body.classList.remove('conHola'); store.set('deelo-hola-vista', true); if(destino) show(destino); }
   const errHola = t => { document.getElementById('holaErr').textContent = t || ''; };
   if(!hasProfile() && !holaVista() && !window.deeloSesion) abrirHola();
-  window.addEventListener('deelo:sesion', ev => { if(ev.detail.sesion && !hola.hidden) cerrarHola(hasProfile() ? 'hoy' : 'tarjetas'); });
+  // Segundo paso de la bienvenida: qué es deelo y el botón para elegir bancos y tarjetas.
+  function abrirIntro(){
+    document.getElementById('holaLogin').hidden = true; document.getElementById('holaIntro').hidden = false;
+    hola.querySelector('.holaBg').hidden = true; hola.scrollTop = 0;
+    hola.setAttribute('aria-labelledby', 'holaIntroTit');
+  }
+  window.addEventListener('deelo:sesion', ev => { if(ev.detail.sesion && !hola.hidden && document.getElementById('holaIntro').hidden){ if(hasProfile()) cerrarHola('hoy'); else abrirIntro(); } });
+  document.getElementById('holaElegir').addEventListener('click', () => cerrarHola('tarjetas'));
+  document.getElementById('holaAhoraNo').addEventListener('click', () => cerrarHola('hoy'));
   // Si en 4 s no cargó el servicio de cuentas, el ingreso no está disponible (por ejemplo, en la vista previa).
   setTimeout(() => { if(!window.deeloAuth){ ['holaPaso1','holaPaso2'].forEach(id => document.getElementById(id).hidden = true); document.getElementById('holaSinAuth').hidden = false; } }, 4000);
   const auth = () => window.deeloAuth;
@@ -3275,6 +3309,6 @@ details.others[open] summary{margin-bottom:10px}
     try{ await auth().reset(document.getElementById('holaMailTxt').textContent); errHola(''); document.getElementById('holaErr').textContent = ''; alertaOk('Te mandamos un correo para elegir una contraseña nueva.'); }catch(e){ errHola(auth().msg(e)); }
   });
   function alertaOk(t){ const e = document.getElementById('holaErr'); e.style.color = 'var(--green-text)'; e.textContent = t; setTimeout(() => { e.style.color = ''; }, 6000); }
-  document.getElementById('holaSkip').addEventListener('click', () => cerrarHola('tarjetas'));
+  document.getElementById('holaSkip').addEventListener('click', abrirIntro);
 })();
 </script>
