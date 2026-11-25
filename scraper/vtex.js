@@ -25,6 +25,27 @@ async function get(url) {
   }
   return null;
 }
+
+// Promos por cantidad (2x1, 3x2, "2do al 70%"…). Carrefour las informa por producto en los teasers
+// ("PROMO-3x2 … -Reg-3-100-…": 3 unidades, 100% de descuento en una), y su carrito las aplica.
+const ORD = n => n === 2 ? '2da' : n === 3 ? '3ra' : n + 'ta';
+function promoCantidad(p, o, precio) {
+  if (!precio) return null;
+  const cands = [];
+  const add = (n, pagas, t) => { if (n >= 2 && n <= 6 && pagas > 0 && pagas < n) cands.push({ t, n, u: Math.round(precio * pagas / n * 100) / 100 }); };
+  for (const te of [...(o.Teasers || []), ...(o.PromotionTeasers || [])]) {
+    const nom = te['<Name>k__BackingField'] || te.Name || '';
+    if (/tarjeta|banco|visa|master|cuenta|mi crf\b.*%/i.test(nom) && !/reg-\d/i.test(nom)) continue;
+    const m = nom.match(/reg-(\d+)-(\d+)/i);
+    if (m) { const n = +m[1], pct = +m[2]; add(n, n - pct / 100, pct === 100 ? `${n}x${n - 1}` : `${ORD(n)} al ${pct}%`); }
+  }
+  // Las colecciones de Cencosud, Día y ChangoMás ("3x2 en Galletitas", "2do al 70%") no sirven: quedan
+  // colecciones viejas o con condiciones (Prime, Cencopay) y el carrito no aplica esas promos. Por ahora
+  // solo se toman los teasers de Carrefour, que el carrito confirma. Ver hoja de ruta.
+  if (!cands.length) return null;
+  cands.sort((a, b) => a.u - b.u);
+  return cands[0].u < precio ? cands[0] : null;
+}
 function normalizar(sup, p) {
   const it = (p.items || [])[0]; if (!it) return null;
   const sel = (it.sellers || []).find(s => s.sellerDefault) || (it.sellers || [])[0];
@@ -38,6 +59,7 @@ function normalizar(sup, p) {
     disponible: (o.AvailableQuantity || 0) > 0 && precio > 0,
     url: SUPERS[sup] + '/' + (p.linkText || '') + '/p',
     img: ((it.images || [])[0] || {}).imageUrl || '',
+    promo: promoCantidad(p, o, precio > 0 ? precio : 0),
   };
 }
 async function vtexBuscar(sup, termino, n = 10) {
@@ -49,4 +71,4 @@ async function vtexPorEan(sup, ean) {
   const p = Array.isArray(d) && d[0] ? normalizar(sup, d[0]) : null;
   return p && p.precio ? p : null;
 }
-module.exports = { SUPERS, vtexBuscar, vtexPorEan, getJSON: get, normalizar };
+module.exports = { SUPERS, vtexBuscar, vtexPorEan, getJSON: get, normalizar, promoCantidad };
