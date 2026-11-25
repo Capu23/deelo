@@ -20,9 +20,8 @@ for (const [s, ps] of Object.entries(crudo)) for (const [e, p] of Object.entries
   if (!p.precio || !/^\d{8,14}$/.test(e)) continue;
   (por[e] ||= {})[s] = p;
 }
-// Coto (SEPA) también cuenta como cadena si ya tenemos su precio.
-let coto = {};
-try { coto = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/precios-coto.json'), 'utf8')).p; } catch {}
+// Coto (su web o SEPA, ver coto.js) también cuenta como cadena si ya tenemos su precio.
+const coto = (require('./coto').cargarCoto() || { p: {} }).p;
 
 const productos = [];
 let propias = 0;
