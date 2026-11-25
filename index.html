@@ -404,7 +404,7 @@ details.others[open] summary{margin-bottom:10px}
 .px.best{background:var(--green-soft)}
 .px.best .pr b{color:var(--green-text)}
 .px .tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;background:var(--green-soft);color:var(--green-text);border-radius:999px;padding:2px 7px;margin-left:4px}
-.px.na{opacity:.55}
+.px.na{opacity:1}
 .pxMore{border:0;background:none;color:var(--green-text);font-weight:600;font-size:13px;padding:10px 14px;cursor:pointer;width:100%;text-align:left;border-top:1px solid var(--rule)}
 
 /* ---------- carrito ---------- */
@@ -3181,7 +3181,7 @@ details.others[open] summary{margin-bottom:10px}
       const dd = desc[s], pb = dd && dd.pr, conBanco = pb ? (lista || precio) * (1 - pb.pct/100) : Infinity;
       const pr = conBanco < precio ? pb : null, fin = pr ? conBanco : precio;
       return {s, precio, lista, disp, slug, m, pr, via: pr && dd.via, fin, pierde: !pr && pb ? pb : null};
-    }).sort((a,b) => (b.disp - a.disp) || (a.fin - b.fin));
+    }).sort((a,b) => a.fin - b.fin);
     if(!q.length && !pxCat){
       // Sin búsqueda: productos de todos los días donde más diferencia hay entre súper.
       // Se descartan los de temporada, los que están en pocos súper y las diferencias sospechosas (más del 60%),
@@ -3201,15 +3201,15 @@ details.others[open] summary{margin-bottom:10px}
     const total = list.length; list = list.slice(0, 40);
     const head = !q.length && !pxCat ? `<h3 style="font-size:15px">Donde más conviene comparar</h3>` : `<p class="muted" style="font-size:13px">${total} ${total === 1 ? 'producto' : 'productos'}${total > 40 ? ' · mostramos los primeros 40, afiná la búsqueda' : ''}</p>`;
     document.getElementById('pxList').innerHTML = head + (list.length ? list.map(p => {
-      const fs = filas(p), ok = fs.filter(x => x.disp), best = ok[0], worst = ok[ok.length-1];
+      const fs = filas(p), ok = fs, best = ok[0], worst = ok[ok.length-1];
       // Ahorro en el súper más conveniente: su precio original (el tachado) menos lo que pagás ahí.
       const orig = best ? (best.lista || best.precio) : 0; // precio original, sin oferta del súper ni promo
       const ahorro = best ? orig - best.fin : 0;
       const row = (x, i) => `<a class="px${x === best ? ' best' : ''}${x.disp ? '' : ' na'}" href="${esc(/^https?:/.test(x.slug) ? x.slug : PX.supers[x.s] + '/' + x.slug + '/p')}" target="_blank" rel="noopener">
-          <span class="w">${sbadge(x.s)}<span>${esc(D.supers[x.s].n)}${x === best ? '<span class="tag">Más barato</span>' : ''}<span class="why${x.pr || x.lista ? '' : ' off'}"${x.via ? ` title="Con ${esc(x.via.map(b => D.entidades[b].n).join(', '))}"` : ''}>${!x.disp ? 'Sin stock online' : (x.pr ? `−${x.pr.pct}% con ${esc(entName(x.pr))}` : x.lista ? `Oferta del súper −${Math.floor((1 - x.precio / x.lista) * 100 + 0.05)}%${x.pierde ? ` · mejor que tu −${x.pierde.pct}%` : ''}` : '') || (x.m ? '' : pxModo === 'mias' ? 'Sin descuento' : '')}</span>${x.disp && x.m ? `<span class="why multi">${esc(x.m.t)}: ${fmt(x.m.u)} c/u llevando ${x.m.n}</span>` : ''}</span></span>
+          <span class="w">${sbadge(x.s)}<span>${esc(D.supers[x.s].n)}${x === best ? '<span class="tag">Más barato</span>' : ''}<span class="why${x.pr || x.lista ? '' : ' off'}"${x.via ? ` title="Con ${esc(x.via.map(b => D.entidades[b].n).join(', '))}"` : ''}>${!x.disp ? '' : (x.pr ? `−${x.pr.pct}% con ${esc(entName(x.pr))}` : x.lista ? `Oferta del súper −${Math.floor((1 - x.precio / x.lista) * 100 + 0.05)}%${x.pierde ? ` · mejor que tu −${x.pierde.pct}%` : ''}` : '') || (x.m ? '' : pxModo === 'mias' ? 'Sin descuento' : '')}</span>${x.disp && x.m ? `<span class="why multi">${esc(x.m.t)}: ${fmt(x.m.u)} c/u llevando ${x.m.n}</span>` : ''}</span></span>
           <span class="pr"><b>${fmt(x.fin)}</b>${x.pr || x.lista ? `<s>${fmt(x.lista || x.precio)}</s>` : ''}</span></a>`;
-      return `<article class="prod"><div class="ph">${p.i ? `<img src="${esc(p.i.replace(/(\/ids\/\d+)\//, '$1-120-120/'))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<span class="ni"><b>${esc(p.n)}</b><small>${esc(p.c)} · ${fs.length} súper</small></span><span class="phR">${ahorro >= 1 ? `<span class="save" title="En ${esc(D.supers[best.s].n)}: ${fmt(orig)} → ${fmt(best.fin)}">Ahorrás<br><b>${fmt(ahorro)}</b></span>` : ''}${qtyCtrl(p.e)}</span></div>
-        ${fs.slice(0, 4).map(row).join('')}${fs.length > 4 ? `<details><summary class="pxMore">Ver los ${fs.length}</summary>${fs.slice(4).map(row).join('')}</details>` : ''}${(() => { const n = similares(p).length; return n ? `<button class="vsBtn" data-vs="${esc(p.e)}" type="button"><b>VS</b> similares <span>${n}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>` : ''; })()}</article>`;
+      return `<article class="prod"><div class="ph">${p.i ? `<img src="${esc(p.i.replace(/(\/ids\/\d+)\//, '$1-120-120/'))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<span class="ni"><b>${esc(p.n)}</b><small>${esc(p.c)}</small></span><span class="phR">${ahorro >= 1 ? `<span class="save" title="En ${esc(D.supers[best.s].n)}: ${fmt(orig)} → ${fmt(best.fin)}">Ahorrás<br><b>${fmt(ahorro)}</b></span>` : ''}${qtyCtrl(p.e)}</span></div>
+        ${fs.map(row).join('')}${(() => { const n = similares(p).length; return n ? `<button class="vsBtn" data-vs="${esc(p.e)}" type="button"><b>VS</b> similares <span>${n}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>` : ''; })()}</article>`;
     }).join('') : `<div class="empty">No encontramos ese producto. Probá con otra palabra, por ejemplo la marca.</div>`);
   }
   // Filtros de Precios: se muestran u ocultan con un botón; se recuerda la elección en este dispositivo.
