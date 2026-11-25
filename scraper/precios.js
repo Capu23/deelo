@@ -12,9 +12,9 @@ const sups = Object.keys(SUPERS);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const SOLO_COTO = process.argv.includes('--solo-coto');
 
-// Coto no es VTEX: sus precios salen de su web (coto-precios.js) o de SEPA (sepa.js), ver scraper/coto.js.
+// Coto no es VTEX: sus precios salen de su web (coto-precios.js), ver scraper/coto.js.
 const coto = require('./coto').cargarCoto();
-if (coto) console.log(`Coto: ${Object.keys(coto.p).length} precios (${coto.fuente}, ${coto.actualizado})`);
+if (coto) console.log(`Coto: ${Object.keys(coto.p).length} precios de su web (${coto.actualizado})`);
 
 (async () => {
   const out = [];
@@ -79,7 +79,7 @@ if (coto) console.log(`Coto: ${Object.keys(coto.p).length} precios (${coto.fuent
   const data = {
     actualizado: fechaPrevia || new Date().toISOString().slice(0, 10), // con --solo-coto, la fecha de los VTEX no cambia
     supers: { ...Object.fromEntries(sups.map(s => [s, SUPERS[s]])), ...(coto ? { coto: 'https://www.cotodigital.com.ar' } : {}) },
-    ...(coto ? { coto: { actualizado: coto.actualizado, sucursal: coto.sucursal, sucursales: coto.sucursales, fuente: coto.fuente } } : {}),
+    ...(coto ? { coto: { actualizado: coto.actualizado, sucursal: coto.sucursal } } : {}),
     nota: 'Precios online de cada súper (pueden variar por sucursal). Formato de p: [precio, precio de lista si hay rebaja, disponible, slug].',
     sinPrecio: sinPrecioPrevio || errores,
     productos: out,

@@ -17,6 +17,8 @@ Descuentos del súper en CABA según tus bancos, tarjetas y billeteras. **https:
 | `scraper/vtex.js` | Consultas al catálogo público de los súper VTEX (Jumbo, Disco, Vea, Carrefour, Día, ChangoMás). |
 | `scraper/canasta.js` | Arma `data/canasta.json`: los productos que compara deelo, por código de barras. Se corre a mano para renovar o ampliar la canasta. |
 | `scraper/precios.js` | Trae el precio de cada producto de la canasta en cada súper → `data/precios.json` (corre todos los lunes). |
+| `scraper/coto-precios.js` | Precios y ofertas de todo el catálogo de Coto desde su web (menos Hogar, Textil, Aire Libre y la marca Coto) → `data/coto-precios.json`. Solo anda desde Argentina: se corre a mano, y después `node scraper/precios.js --solo-coto` los pasa a `data/precios.json`. Vencen a los 15 días. |
+| `scraper/coto-ofertas.js` | Solo la sección de ofertas de la web de Coto → `data/coto-ofertas.json`. |
 | `scraper/build.js` | Convierte eso al formato de la página, suma los extras y regenera `index.html`. |
 | `CNAME` | Dominio de GitHub Pages (`deelo.ar`). |
 

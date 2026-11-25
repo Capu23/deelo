@@ -1,5 +1,5 @@
 // Ofertas de Coto (2x1, "Llevando 2 70% 2da", "25%Dto", rebajas) con EAN.
-// SEPA trae el precio de Coto pero no estas ofertas.
+// (scraper/coto-precios.js trae todo el catálogo con sus ofertas; este trae solo la sección de ofertas.)
 //
 // Usa el mismo JSON que pide la página www.coto.com.ar/productos/ofertas/todas-las-ofertas
 // a su buscador (api.coto.com.ar, Constructor.io). La clave pública del buscador se lee

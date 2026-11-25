@@ -20,7 +20,7 @@ for (const [s, ps] of Object.entries(crudo)) for (const [e, p] of Object.entries
   if (!p.precio || !/^\d{8,14}$/.test(e)) continue;
   (por[e] ||= {})[s] = p;
 }
-// Coto (su web o SEPA, ver coto.js) también cuenta como cadena si ya tenemos su precio.
+// Coto (su web, ver coto.js) también cuenta como cadena si ya tenemos su precio.
 const coto = (require('./coto').cargarCoto() || { p: {} }).p;
 
 const productos = [];
