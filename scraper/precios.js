@@ -9,40 +9,35 @@ const canasta = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/canasta.json'),
 const sups = Object.keys(SUPERS);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-// Coto no es VTEX: sus precios salen de SEPA (scraper/sepa.js, corre en una compu en Argentina).
-// Solo se usan si tienen menos de 15 días.
-const COTO_URL = 'https://www.cotodigital.com.ar/sitios/cdigi/categoria?Ntt=';
-let coto = null;
-try {
-  const c = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/precios-coto.json'), 'utf8'));
-  if ((Date.now() - new Date(c.actualizado)) / 864e5 < 15) coto = c;
-  else console.log('precios-coto.json tiene más de 15 días: no se usa.');
-} catch { console.log('Sin data/precios-coto.json: Coto queda afuera.'); }
-
-// Ofertas de Coto de su web (data/coto-ofertas.json, se arma desde Argentina). Pisan el precio de SEPA del
-// producto: "25%Dto"/"Oferta" son rebajas directas; "Llevando 2 2x1", "Llevando 2 70% 2da" y
-// "Llevando 3 25%Dto" son promos por cantidad. Se ignoran las de cuotas ("1 Pago 20%", electro).
-let cotoOf = {};
-try {
-  const c = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/coto-ofertas.json'), 'utf8'));
-  if ((Date.now() - new Date(c.actualizado)) / 864e5 < 15) {
-    for (const o of c.ofertas) {
-      if (!o.ean || !(o.precio > 0) || !(o.precioOferta > 0) || o.precioOferta >= o.precio || /pago/i.test(o.texto)) continue;
-      let promo = null, m;
-      const n = o.unidades || ((m = o.texto.match(/llevando\s*(\d+)/i)) ? +m[1] : 0);
-      if (n > 1) {
-        let t;
-        if ((m = o.texto.match(/(\d)\s*x\s*(\d)/i))) t = `${m[1]}x${m[2]}`;
-        else if ((m = o.texto.match(/(\d{2,3})\s*%\s*(\d)\s*d/i))) t = `${m[2] === '2' ? '2da' : m[2] + 'ra'} al ${m[1]}%`;
-        else if ((m = o.texto.match(/(\d{1,3})\s*%/))) t = `−${m[1]}% llevando ${n}`;
-        else t = `Llevando ${n}`;
-        promo = { t, n, u: Math.round(o.precioOferta * 100) / 100 };
-      }
-      cotoOf[o.ean] = promo ? [o.precio, 0, 1, o.url, promo] : [o.precioOferta, o.precio, 1, o.url];
+// Coto no es VTEX: sus precios salen de su web, con un archivo que se arma desde Argentina.
+// - data/coto-catalogo.json: catálogo completo ({productos:[{ean, precio, precioOferta?, texto?, unidades?, url}]}).
+// - data/coto-ofertas.json: solo lo que está en oferta ({ofertas:[…]}, mismo formato). Se usa si no hay catálogo.
+// Ofertas: "25%Dto"/"Oferta" son rebajas directas; "Llevando 2 2x1", "Llevando 2 70% 2da" y "Llevando 3 25%Dto"
+// son promos por cantidad. Se ignoran las de cuotas ("1 Pago 20%", electro). Solo se usan con menos de 15 días.
+let cotoOf = {}, cotoInfo = null;
+for (const [archivo, campo] of [['coto-catalogo.json', 'productos'], ['coto-ofertas.json', 'ofertas']]) {
+  let c; try { c = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', archivo), 'utf8')); } catch { continue; }
+  if ((Date.now() - new Date(c.actualizado)) / 864e5 >= 15) { console.log(archivo, 'tiene más de 15 días: no se usa.'); continue; }
+  for (const o of c[campo] || []) {
+    if (!o.ean || !(o.precio > 0)) continue;
+    const oferta = o.precioOferta > 0 && o.precioOferta < o.precio && o.texto && !/pago/i.test(o.texto);
+    let promo = null, m;
+    const n = oferta ? (o.unidades || ((m = o.texto.match(/llevando\s*(\d+)/i)) ? +m[1] : 0)) : 0;
+    if (n > 1) {
+      let t;
+      if ((m = o.texto.match(/(\d)\s*x\s*(\d)/i))) t = `${m[1]}x${m[2]}`;
+      else if ((m = o.texto.match(/(\d{2,3})\s*%\s*(\d)\s*d/i))) t = `${m[2] === '2' ? '2da' : m[2] + 'ra'} al ${m[1]}%`;
+      else if ((m = o.texto.match(/(\d{1,3})\s*%/))) t = `−${m[1]}% llevando ${n}`;
+      else t = `Llevando ${n}`;
+      promo = { t, n, u: Math.round(o.precioOferta * 100) / 100 };
     }
-    console.log('ofertas de Coto (web):', Object.keys(cotoOf).length);
-  } else console.log('coto-ofertas.json tiene más de 15 días: no se usa.');
-} catch {}
+    cotoOf[o.ean] = promo ? [o.precio, 0, 1, o.url, promo] : oferta ? [o.precioOferta, o.precio, 1, o.url] : [o.precio, 0, 1, o.url];
+  }
+  cotoInfo = { archivo, actualizado: c.actualizado, sucursal: c.sucursal };
+  console.log(`Coto desde ${archivo}:`, Object.keys(cotoOf).length, 'productos');
+  break;
+}
+if (!cotoInfo) console.log('Sin datos de Coto vigentes: Coto queda afuera.');
 
 (async () => {
   const out = [];
@@ -82,10 +77,6 @@ try {
       if (!img && r.img) img = r.img.replace(/-\d+-\d+\//, '-200-200/');
     }
     if (cotoOf[p.ean]) precios.coto = cotoOf[p.ean];
-    else if (coto && coto.p[p.ean]) {
-      const [pc, lc, m] = coto.p[p.ean];
-      precios.coto = [pc, lc, 1, COTO_URL + p.ean, ...(m ? [m] : [])];
-    }
     // Validación: si un súper tiene un precio absurdo frente a los demás (menos de un tercio o más del triple
     // de la mediana), suele ser un error de carga (otra presentación, precio por unidad, etc.): se descarta.
     const vals = Object.values(precios).map(v => v[0]).sort((a, b) => a - b);
@@ -95,8 +86,8 @@ try {
   }
   const data = {
     actualizado: new Date().toISOString().slice(0, 10),
-    supers: { ...Object.fromEntries(sups.map(s => [s, SUPERS[s]])), ...(coto || Object.keys(cotoOf).length ? { coto: 'https://www.cotodigital.com.ar' } : {}) },
-    ...(coto ? { coto: { actualizado: coto.actualizado, sucursal: coto.sucursal, sucursales: coto.sucursales } } : {}),
+    supers: { ...Object.fromEntries(sups.map(s => [s, SUPERS[s]])), ...(cotoInfo ? { coto: 'https://www.coto.com.ar' } : {}) },
+    ...(cotoInfo ? { coto: cotoInfo } : {}),
     nota: 'Precios online de cada súper (pueden variar por sucursal). Formato de p: [precio, precio de lista si hay rebaja, disponible, slug].',
     sinPrecio: errores,
     productos: out,
