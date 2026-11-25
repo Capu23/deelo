@@ -89,6 +89,28 @@ a{color:var(--green-text)}
 .lsChk li.ok .cimg{opacity:.45}
 .lsVerPie{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap}
 body.conLista{overflow:hidden}
+/* ---------- VS similares ---------- */
+.vsBtn{display:flex;align-items:center;gap:6px;width:100%;border:0;border-top:1px solid var(--rule);background:var(--paper);padding:11px 14px;font-weight:600;font-size:13.5px;color:var(--ink);cursor:pointer;text-align:left}
+.vsBtn b{background:var(--navy);color:var(--on-navy);border-radius:6px;padding:1px 6px;font-size:11.5px;letter-spacing:.04em}
+.vsBtn span{margin-left:auto;font-size:12px;color:var(--ink3);font-weight:600}
+.vsBtn svg{width:16px;height:16px;color:var(--ink3)}
+.vsBtn:hover{background:var(--sunk)}
+.vsTag{background:var(--navy);color:var(--on-navy);border-radius:7px;padding:1px 8px;font-size:17px;margin-right:4px}
+.vsList{list-style:none;margin:0;padding:0;border:1px solid var(--rule);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.vsList li{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 14px}
+.vsList li+li{border-top:1px solid var(--rule)}
+.vsList li.base{background:var(--sunk)}
+.vsList .cimg{width:52px;height:52px;border-radius:10px;background:var(--sunk);overflow:hidden;display:block}
+.vsList .cimg img{width:52px;height:52px;object-fit:contain;background:#fff;display:block}
+.vsList .nm{font-size:13.5px;font-weight:600;line-height:1.3;min-width:0}
+.vsList .nm small{display:block;font-weight:500;font-size:12px;color:var(--ink3);margin-top:3px}
+.vsList .nm .yo{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2);background:var(--paper);border:1px solid var(--rule);border-radius:999px;padding:1px 6px;margin-bottom:3px}
+.vsList .pz{display:flex;flex-direction:column;align-items:flex-end;gap:3px;text-align:right}
+.vsList .pz b{font-size:16px}
+.vsList .pz .x{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--ink3);white-space:nowrap}
+.vsList .pz .d{font-size:12px;font-weight:700;white-space:nowrap}
+.vsList .pz .d.mas{color:var(--green-text)}.vsList .pz .d.menos{color:var(--bad)}
+.vsList li.top .pz b{color:var(--green-text)}
 /* ---------- menú Más ---------- */
 .masWrap{position:relative}
 .masBtn{display:flex;align-items:center;gap:4px;white-space:nowrap;border:0;background:none;padding:8px 14px;border-radius:999px;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink2)}
@@ -638,6 +660,14 @@ details.others[open] summary{margin-bottom:10px}
   <form method="dialog" class="dlgClose"><button aria-label="Cerrar">✕</button></form>
   <div id="authBody"></div>
 </dialog>
+
+<section class="lsVer" id="vsVer" hidden role="dialog" aria-modal="true" aria-labelledby="vsTit">
+  <div class="lsVerIn">
+    <header class="lsVerHead"><div class="col" style="gap:2px;min-width:0"><h2 id="vsTit"><b class="vsTag">VS</b> similares</h2><p class="muted" id="vsSub" style="font-size:13px"></p></div><button class="btn ghost sm" id="vsCerrar" type="button">Cerrar</button></header>
+    <ul class="vsList" id="vsItems"></ul>
+    <p class="muted" style="font-size:12px" id="vsNota"></p>
+  </div>
+</section>
 
 <section class="lsVer" id="lsVer" hidden role="dialog" aria-modal="true" aria-labelledby="lsVerTit">
   <div class="lsVerIn">
@@ -3149,7 +3179,7 @@ details.others[open] summary{margin-bottom:10px}
           <span class="w">${sbadge(x.s)}<span>${esc(D.supers[x.s].n)}${x === best ? '<span class="tag">Más barato</span>' : ''}<span class="why${x.pr || x.lista ? '' : ' off'}"${x.via ? ` title="Con ${esc(x.via.map(b => D.entidades[b].n).join(', '))}"` : ''}>${!x.disp ? 'Sin stock online' : (x.pr ? `−${x.pr.pct}% con ${esc(entName(x.pr))}` : x.lista ? `Oferta del súper −${Math.floor((1 - x.precio / x.lista) * 100 + 0.05)}%${x.pierde ? ` · mejor que tu −${x.pierde.pct}%` : ''}` : '') || (x.m ? '' : pxModo === 'mias' ? 'Sin descuento' : '')}</span>${x.disp && x.m ? `<span class="why multi">${esc(x.m.t)}: ${fmt(x.m.u)} c/u llevando ${x.m.n}</span>` : ''}</span></span>
           <span class="pr"><b>${fmt(x.fin)}</b>${x.pr || x.lista ? `<s>${fmt(x.lista || x.precio)}</s>` : ''}</span></a>`;
       return `<article class="prod"><div class="ph">${p.i ? `<img src="${esc(p.i.replace(/(\/ids\/\d+)\//, '$1-120-120/'))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<span class="ni"><b>${esc(p.n)}</b><small>${esc(p.c)} · ${fs.length} súper</small></span><span class="phR">${ahorro >= 1 ? `<span class="save" title="En ${esc(D.supers[best.s].n)}: ${fmt(orig)} → ${fmt(best.fin)}">Ahorrás<br><b>${fmt(ahorro)}</b></span>` : ''}${qtyCtrl(p.e)}</span></div>
-        ${fs.slice(0, 4).map(row).join('')}${fs.length > 4 ? `<details><summary class="pxMore">Ver los ${fs.length}</summary>${fs.slice(4).map(row).join('')}</details>` : ''}</article>`;
+        ${fs.slice(0, 4).map(row).join('')}${fs.length > 4 ? `<details><summary class="pxMore">Ver los ${fs.length}</summary>${fs.slice(4).map(row).join('')}</details>` : ''}${(() => { const n = similares(p).length; return n ? `<button class="vsBtn" data-vs="${esc(p.e)}" type="button"><b>VS</b> similares <span>${n}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>` : ''; })()}</article>`;
     }).join('') : `<div class="empty">No encontramos ese producto. Probá con otra palabra, por ejemplo la marca.</div>`);
   }
   // Filtros de Precios: se muestran u ocultan con un botón; se recuerda la elección en este dispositivo.
@@ -3163,6 +3193,50 @@ details.others[open] summary{margin-bottom:10px}
     document.getElementById('pxFiltros').hidden = !pxFAbiertos;
   }
   document.getElementById('pxFBtn').addEventListener('click', () => { pxFAbiertos = !pxFAbiertos; store.set('deelo-px-filtros', pxFAbiertos); pintarFiltrosBtn(); });
+
+  // ---------- VS similares ----------
+  // Misma subcategoría del súper (g), misma clase de medida y tamaño a ±15%. Se ordenan por precio por kilo/litro/unidad.
+  const SIM_TOL = 0.15;
+  function similares(p){
+    if(!PX || p.g === undefined || !p.t) return [];
+    if(!PX._porG){ PX._porG = {}; PX.productos.forEach(q => { if(q.g !== undefined && q.t) (PX._porG[q.g] ||= []).push(q); }); }
+    return (PX._porG[p.g] || []).filter(q => q !== p && q.t[1] === p.t[1] && Math.abs(q.t[0] - p.t[0]) / p.t[0] <= SIM_TOL && Object.keys(q.p).some(miSuper));
+  }
+  // Precio final más bajo del producto en tus súper (oferta del súper o descuento del banco, el mayor).
+  function mejorDe(q){
+    let b = null;
+    for(const [s, [precio, lista, disp]] of Object.entries(q.p)){
+      if(!miSuper(s) || !disp) continue;
+      const dd = pxModo === 'mias' ? mejorDescuento(s, pxDay || new Date(sel)) : null;
+      const fin = Math.min(precio, dd ? (lista || precio) * (1 - dd.pr.pct/100) : Infinity);
+      if(!b || fin < b.fin) b = {s, fin};
+    }
+    return b;
+  }
+  const fmtN = n => (Math.round(n * 100) / 100).toLocaleString('es-AR');
+  const tamTxt = t => t[1] === 'g' ? (t[0] >= 1000 ? fmtN(t[0]/1000) + ' kg' : fmtN(t[0]) + ' g') : t[1] === 'ml' ? (t[0] >= 1000 ? fmtN(t[0]/1000) + ' L' : fmtN(t[0]) + ' ml') : t[0] + (t[0] === 1 ? ' unidad' : ' unidades');
+  const porU = (fin, t) => t[1] === 'u' ? fin / t[0] : fin / t[0] * 1000;
+  const uTxt = t => t[1] === 'g' ? '/kg' : t[1] === 'ml' ? '/L' : ' c/u';
+  let vsBase = null;
+  function pintarVs(){
+    const p = PX && PX.productos.find(x => x.e === vsBase); if(!p) return;
+    const filas = [p, ...similares(p)].map(q => { const b = mejorDe(q); return b && {q, b, u: porU(b.fin, q.t)}; }).filter(Boolean).sort((a,b) => a.u - b.u);
+    const base = filas.find(x => x.q === p);
+    document.getElementById('vsSub').textContent = `${PX.grupos ? PX.grupos[p.g] : p.c} · ${tamTxt(p.t)} (±15%) · ${filas.length} productos`;
+    document.getElementById('vsItems').innerHTML = filas.map((x, i) => {
+      const img = x.q.i ? `<img src="${esc(x.q.i.replace(/(\/ids\/\d+)\//, '$1-120-120/'))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '';
+      const dif = base && x !== base ? Math.round((x.u / base.u - 1) * 100) : 0;
+      return `<li class="${x === base ? 'base' : ''}${i === 0 ? ' top' : ''}"><span class="cimg">${img}</span>
+        <span class="nm">${x === base ? '<span class="yo">Este producto</span><br>' : ''}${esc(x.q.n)}<small>${tamTxt(x.q.t)} · ${fmt(x.u)}${uTxt(x.q.t)}</small></span>
+        <span class="pz"><b>${fmt(x.b.fin)}</b><span class="x">${sbadge(x.b.s)}${esc(D.supers[x.b.s].n)}</span>${x !== base && dif ? `<span class="d ${dif < 0 ? 'mas' : 'menos'}">${dif < 0 ? '' : '+'}${dif}%${uTxt(x.q.t)}</span>` : ''}${qtyCtrl(x.q.e)}</span></li>`;
+    }).join('');
+    document.getElementById('vsNota').textContent = (pxModo === 'mias' && hasProfile() ? 'Precio más bajo con tus tarjetas en tus súper' : 'Precio de lista más bajo en tus súper') + '. Ordenado por precio por kilo, litro o unidad. El % compara contra este producto.';
+  }
+  function abrirVs(e){ vsBase = e; document.getElementById('vsVer').hidden = false; document.body.classList.add('conLista'); pintarVs(); document.getElementById('vsVer').scrollTop = 0; }
+  function cerrarVs(){ vsBase = null; document.getElementById('vsVer').hidden = true; if(document.getElementById('lsVer').hidden) document.body.classList.remove('conLista'); }
+  document.getElementById('vsCerrar').addEventListener('click', cerrarVs);
+  document.addEventListener('keydown', ev => { if(ev.key === 'Escape' && vsBase) cerrarVs(); });
+  document.addEventListener('click', ev => { const b = ev.target.closest('[data-vs]'); if(b) abrirVs(b.dataset.vs); });
   let pxT = null;
   document.getElementById('pxQ').addEventListener('input', () => { clearTimeout(pxT); pxT = setTimeout(renderPrecios, 150); });
   // Enter o la lupa: busca ya y cierra el teclado del celular.
