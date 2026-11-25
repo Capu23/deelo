@@ -17,7 +17,7 @@ function tamano(nombre) {
   let m;
   // Packs: "6 x 354 ml" o "354 ml x 6"
   if ((m = s.match(new RegExp(`\\b(\\d{1,2})\\s*x\\s*(\\d+(?:[.,]\\d+)?)\\s*${U}\\b`, 'i')))) { const t = medida(m[2], m[3]); if (t) return [Math.round(t[0] * +m[1] * 100) / 100, t[1]]; }
-  if ((m = s.match(new RegExp(`\\b(\\d+(?:[.,]\\d+)?)\\s*${U}\\.?\\s*x\\s*(\\d{1,2})\\b(?!\\s*${U})`, 'i')))) { const t = medida(m[1], m[2]); if (t && +m[3] > 1) return [Math.round(t[0] * +m[3] * 100) / 100, t[1]]; }
+  if ((m = s.match(new RegExp(`\\b(\\d+(?:[.,]\\d+)?)\\s*${U}\\.?\\s*x\\s*(\\d{1,2})\\s*(?:u|un|uni|unid|unidades|latas?|botellas?|botellitas?)?\\b(?!\\s*${U})`, 'i')))) { const t = medida(m[1], m[2]); if (t && +m[3] > 1) return [Math.round(t[0] * +m[3] * 100) / 100, t[1]]; }
   // Peso o volumen simple (se toma el último que aparece)
   const todos = [...s.matchAll(new RegExp(`(\\d+(?:[.,]\\d+)?)\\s*${U}\\b\\.?`, 'gi'))];
   if (todos.length) { const x = todos[todos.length - 1]; const t = medida(x[1], x[2]); if (t && t[0] > 0) return t; }
@@ -29,3 +29,34 @@ function tamano(nombre) {
   return null;
 }
 module.exports = { tamano };
+
+// Clave para "VS similares": el tipo de producto (primera palabra del nombre) y las variantes que no se pueden
+// mezclar (con o sin alcohol, girasol o maíz, entera o descremada, talle del pañal…). Dos productos son
+// comparables solo si tienen la misma clave, además de la misma subcategoría y un tamaño parecido.
+const sinTildes = s => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const FAMILIAS = [
+  ['alcohol', [[/sin alcohol|\b0[.,]0\b|\bcero alcohol/, 'sin']]],
+  ['azucar', [[/\bzero\b|sin azucar|\bdiet\b|\blight\b|\blite\b|reducid[oa] en azucar|\bligth\b/, 'sin']]],
+  ['aceite', [[/girasol/, 'girasol'], [/\bmaiz\b/, 'maiz'], [/oliva/, 'oliva'], [/canola/, 'canola'], [/\bsoja\b/, 'soja'], [/mezcla|\bmezclas\b/, 'mezcla'], [/\bcoco\b/, 'coco'], [/arroz/, 'arroz']]],
+  ['leche', [[/parcialmente descremad|semi ?descremad/, 'parcial'], [/descremad/, 'descremada'], [/\bentera\b/, 'entera']]],
+  ['lactosa', [[/sin lactosa|deslactosad|lactose free|0% lactosa/, 'sin']]],
+  ['tacc', [[/sin tacc|sin gluten|gluten free/, 'sin']]],
+  ['gas', [[/sin gas/, 'sin'], [/con gas|gasificad/, 'con']]],
+  ['yerba', [[/sin palo|despalad/, 'sinpalo'], [/compuesta|hierbas|\bsaborizada/, 'compuesta']]],
+  ['cafe', [[/capsul/, 'capsula'], [/en grano|granos/, 'grano'], [/instantane|soluble/, 'instantaneo'], [/molido/, 'molido']]],
+  ['arroz', [[/integral/, 'integral'], [/parboil/, 'parboil'], [/doble carolina|carolina/, 'carolina'], [/largo fino|\bfino\b/, 'fino'], [/yamani/, 'yamani']]],
+  ['talle', [[/talle\s*(xxxg|xxg|xg|rn|pp|p|m|g)\b/, m => 't' + m[1]], [/\b(xxxg|xxg|xg)\b/, m => 't' + m[1]]]],
+  ['vino', [[/\bmalbec\b/, 'malbec'], [/cabernet/, 'cabernet'], [/\bblanco\b|chardonnay|torrontes|sauvignon blanc/, 'blanco'], [/rosado|\brose\b/, 'rosado'], [/espumante|champa/, 'espumante']]],
+  ['sabor', [[/chocolat|cacao/, 'chocolate']]],
+  ['agua', [[/saborizad/, 'saborizada']]],
+];
+function claveSimilar(nombre) {
+  const s = ' ' + sinTildes(nombre).replace(/[^a-z0-9.,% ]/g, ' ').replace(/\s+/g, ' ') + ' ';
+  const tipo = (s.trim().split(' ')[0] || '').replace(/s$/, '');
+  const partes = [tipo];
+  for (const [fam, reglas] of FAMILIAS) {
+    for (const [re, val] of reglas) { const m = s.match(re); if (m) { partes.push(fam + ':' + (typeof val === 'function' ? val(m) : val)); break; } }
+  }
+  return partes.join('|');
+}
+module.exports.claveSimilar = claveSimilar;

@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { SUPERS, vtexPorEan } = require('./vtex');
-const { tamano } = require('./tamano');
+const { tamano, claveSimilar } = require('./tamano');
 
 const ROOT = path.join(__dirname, '..');
 const canasta = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/canasta.json'), 'utf8')).productos;
@@ -42,7 +42,7 @@ if (!cotoInfo) console.log('Sin datos de Coto vigentes: Coto queda afuera.');
 
 (async () => {
   const out = [];
-  const grupos = [], grupoIdx = new Map();
+  const grupos = [], grupoIdx = new Map(), claves = [], claveIdx = new Map();
   let descartados = 0;
   const errores = Object.fromEntries(sups.map(s => [s, 0]));
   // Un "carril" por súper en paralelo; dentro de cada súper, de a una consulta con una pausa corta.
@@ -90,7 +90,8 @@ if (!cotoInfo) console.log('Sin datos de Coto vigentes: Coto queda afuera.');
     const sc = (ref && ref.cats && ref.cats[0]) || (refC && refC.cats && refC.cats[0] && 'c:' + refC.cats[0]) || '';
     let g; if (sc) { g = grupoIdx.get(sc); if (g === undefined) { g = grupos.length; grupos.push(sc); grupoIdx.set(sc, g); } }
     const t = tamano(p.nombre);
-    out.push({ e: p.ean, n: p.nombre, c: p.categoria, i: img, ...(g !== undefined ? { g } : {}), ...(t ? { t } : {}), p: precios });
+    const kk = claveSimilar(p.nombre); let k = claveIdx.get(kk); if (k === undefined) { k = claves.length; claves.push(kk); claveIdx.set(kk, k); }
+    out.push({ e: p.ean, n: p.nombre, c: p.categoria, i: img, ...(g !== undefined ? { g } : {}), ...(t ? { t } : {}), v: k, p: precios });
   }
   const data = {
     actualizado: new Date().toISOString().slice(0, 10),
@@ -98,7 +99,8 @@ if (!cotoInfo) console.log('Sin datos de Coto vigentes: Coto queda afuera.');
     ...(cotoInfo ? { coto: cotoInfo } : {}),
     nota: 'Precios online de cada súper (pueden variar por sucursal). Formato de p: [precio, precio de lista si hay rebaja, disponible, slug].',
     sinPrecio: errores,
-    // g: índice en grupos (subcategoría) · t: [tamaño, 'g' | 'ml' | 'u']
+    // g: índice en grupos (subcategoría) · t: [tamaño, 'g' | 'ml' | 'u'] · v: índice en claves (tipo y variantes)
+    claves,
     grupos: grupos.map(x => x.replace(/^c:/, '').split('/').filter(Boolean).pop() || x),
     productos: out,
   };

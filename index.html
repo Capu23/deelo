@@ -132,6 +132,11 @@ body.conLista{overflow:hidden}
 .vsList .pz .d{font-size:12px;font-weight:700;white-space:nowrap}
 .vsList .pz .d.mas{color:var(--green-text)}.vsList .pz .d.menos{color:var(--bad)}
 .vsList li.top .pz b{color:var(--green-text)}
+.vsFijo{position:sticky;top:58px;z-index:1;background:var(--bg);padding-bottom:4px;display:flex;flex-direction:column;gap:8px}
+.vsFijo .vsList{border-color:var(--navy);box-shadow:0 8px 18px -14px rgba(20,26,46,.35)}
+.vsFijo .vsList li.base{background:var(--paper)}
+.vsCmp{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink3);margin:4px 2px 0}
+.vsList li.vacio{display:block;color:var(--ink3);font-size:13.5px}
 /* ---------- menú Más ---------- */
 .masWrap{position:relative}
 .masBtn{display:flex;align-items:center;gap:4px;white-space:nowrap;border:0;background:none;padding:8px 14px;border-radius:999px;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink2)}
@@ -688,6 +693,7 @@ details.others[open] summary{margin-bottom:10px}
 <section class="lsVer" id="vsVer" hidden role="dialog" aria-modal="true" aria-labelledby="vsTit">
   <div class="lsVerIn">
     <header class="lsVerHead"><div class="col" style="gap:2px;min-width:0"><h2 id="vsTit"><b class="vsTag">VS</b> similares</h2><p class="muted" id="vsSub" style="font-size:13px"></p></div><button class="btn ghost sm" id="vsCerrar" type="button">Cerrar</button></header>
+    <div class="vsFijo"><ul class="vsList" id="vsBase"></ul><p class="vsCmp">Similares, del más barato al más caro por kilo o litro</p></div>
     <ul class="vsList" id="vsItems"></ul>
     <p class="muted" style="font-size:12px" id="vsNota"></p>
   </div>
@@ -3219,12 +3225,13 @@ details.others[open] summary{margin-bottom:10px}
   document.getElementById('pxFBtn').addEventListener('click', () => { pxFAbiertos = !pxFAbiertos; store.set('deelo-px-filtros', pxFAbiertos); pintarFiltrosBtn(); });
 
   // ---------- VS similares ----------
-  // Misma subcategoría del súper (g), misma clase de medida y tamaño a ±15%. Se ordenan por precio por kilo/litro/unidad.
+  // Misma subcategoría del súper (g), mismo tipo y variantes (v: con/sin alcohol, girasol/maíz, talle…), misma clase
+  // de medida y tamaño a ±15%. Se ordenan por precio por kilo/litro/unidad; el producto elegido queda fijo arriba.
   const SIM_TOL = 0.15;
   function similares(p){
     if(!PX || p.g === undefined || !p.t) return [];
     if(!PX._porG){ PX._porG = {}; PX.productos.forEach(q => { if(q.g !== undefined && q.t) (PX._porG[q.g] ||= []).push(q); }); }
-    return (PX._porG[p.g] || []).filter(q => q !== p && q.t[1] === p.t[1] && Math.abs(q.t[0] - p.t[0]) / p.t[0] <= SIM_TOL && Object.keys(q.p).some(miSuper));
+    return (PX._porG[p.g] || []).filter(q => q !== p && q.v === p.v && q.t[1] === p.t[1] && Math.abs(q.t[0] - p.t[0]) / p.t[0] <= SIM_TOL && Object.keys(q.p).some(miSuper));
   }
   // Precio final más bajo del producto en tus súper (oferta del súper o descuento del banco, el mayor).
   function mejorDe(q){
@@ -3247,14 +3254,17 @@ details.others[open] summary{margin-bottom:10px}
     const filas = [p, ...similares(p)].map(q => { const b = mejorDe(q); return b && {q, b, u: porU(b.fin, q.t)}; }).filter(Boolean).sort((a,b) => a.u - b.u);
     const base = filas.find(x => x.q === p);
     document.getElementById('vsSub').textContent = `${PX.grupos ? PX.grupos[p.g] : p.c} · ${tamTxt(p.t)} (±15%) · ${filas.length} productos`;
-    document.getElementById('vsItems').innerHTML = filas.map((x, i) => {
+    const otros = filas.filter(x => x !== base);
+    const fila = (x, i) => {
       const img = x.q.i ? `<img src="${esc(x.q.i.replace(/(\/ids\/\d+)\//, '$1-120-120/'))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '';
       const dif = base && x !== base ? Math.round((x.u / base.u - 1) * 100) : 0;
-      return `<li class="${x === base ? 'base' : ''}${i === 0 ? ' top' : ''}"><span class="cimg">${img}</span>
+      return `<li class="${x === base ? 'base' : ''}${i === 0 && x.u < (base ? base.u : Infinity) ? ' top' : ''}"><span class="cimg">${img}</span>
         <span class="nm">${x === base ? '<span class="yo">Este producto</span><br>' : ''}${esc(x.q.n)}<small>${tamTxt(x.q.t)} · ${fmt(x.u)}${uTxt(x.q.t)}</small></span>
         <span class="pz"><b>${fmt(x.b.fin)}</b><span class="x">${sbadge(x.b.s)}${esc(D.supers[x.b.s].n)}</span>${x !== base && dif ? `<span class="d ${dif < 0 ? 'mas' : 'menos'}">${dif < 0 ? '' : '+'}${dif}%${uTxt(x.q.t)}</span>` : ''}${qtyCtrl(x.q.e)}</span></li>`;
-    }).join('');
-    document.getElementById('vsNota').textContent = (pxModo === 'mias' && hasProfile() ? 'Precio más bajo con tus tarjetas en tus súper' : 'Precio de lista más bajo en tus súper') + '. Ordenado por precio por kilo, litro o unidad. El % compara contra este producto.';
+    };
+    document.getElementById('vsBase').innerHTML = base ? fila(base, -1) : '';
+    document.getElementById('vsItems').innerHTML = otros.length ? otros.map(fila).join('') : '<li class="vacio">No hay similares en tus súper.</li>';
+    document.getElementById('vsNota').textContent = (pxModo === 'mias' && hasProfile() ? 'Precio más bajo con tus tarjetas en tus súper' : 'Precio de lista más bajo en tus súper') + '. El % compara el precio por kilo, litro o unidad contra tu producto. Similares: mismo tipo y variante, y tamaño a ±15%.';
   }
   function abrirVs(e){ vsBase = e; document.getElementById('vsVer').hidden = false; document.body.classList.add('conLista'); pintarVs(); document.getElementById('vsVer').scrollTop = 0; }
   function cerrarVs(){ vsBase = null; document.getElementById('vsVer').hidden = true; if(document.getElementById('lsVer').hidden) document.body.classList.remove('conLista'); }
