@@ -36,7 +36,7 @@ jobs:
       - name: Armar los datos de la página
         run: node scraper/build.js
 
-      - name: Traer precios de la canasta (Jumbo, Disco, Vea, Carrefour, Día, ChangoMás)
+      - name: Traer precios de la canasta (Jumbo, Disco, Vea, Carrefour, Día y Coto)
         continue-on-error: true   # si falla, la página sigue con los precios de la semana anterior
         run: |
           # Recorre el catálogo completo de cada súper (unos 25 min), renueva la lista de productos

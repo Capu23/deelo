@@ -7,16 +7,16 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const MIN_CADENAS = Number(process.argv[2]) || 3;
 // Jumbo, Disco y Vea son la misma empresa (Cencosud): cuentan como una sola cadena.
-const CADENA = { jumbo: 'cencosud', disco: 'cencosud', vea: 'cencosud', carrefour: 'carrefour', dia: 'dia', changomas: 'changomas', coto: 'coto' };
+const CADENA = { jumbo: 'cencosud', disco: 'cencosud', vea: 'cencosud', carrefour: 'carrefour', dia: 'dia', coto: 'coto' };
 // Marcas propias o genéricas de los súper: no tienen con qué compararse.
 const PROPIA = /^(vea|jumbo|disco|cuisine ?& ?co|carrefour.*|d[ií]a|great value|equate|sin marca\.?|gen[eé]rico|elaboraci[oó]n propia|la panader[ií]a|bell.?s|check|coto)$/i;
 const PROPIA_NOMBRE = /cuisine ?& ?co|carrefour|\bd[ií]a\b|\bcoto\b|great value/i;
 // Para el nombre y la categoría, preferimos el súper con nombres más prolijos.
-const ORDEN = ['carrefour', 'jumbo', 'disco', 'vea', 'changomas', 'dia'];
+const ORDEN = ['carrefour', 'jumbo', 'disco', 'vea', 'dia'];
 
 const crudo = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/catalogo-crudo.json'), 'utf8')).supers;
 const por = {};
-for (const [s, ps] of Object.entries(crudo)) for (const [e, p] of Object.entries(ps)) {
+for (const [s, ps] of Object.entries(crudo)) if (CADENA[s]) for (const [e, p] of Object.entries(ps)) {
   if (!p.precio || !/^\d{8,14}$/.test(e)) continue;
   (por[e] ||= {})[s] = p;
 }

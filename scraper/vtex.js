@@ -6,7 +6,6 @@ const SUPERS = {
   vea: 'https://www.vea.com.ar',
   carrefour: 'https://www.carrefour.com.ar',
   dia: 'https://diaonline.supermercadosdia.com.ar',
-  changomas: 'https://www.masonline.com.ar',
 };
 let _req;
 async function get(url) {
@@ -39,7 +38,7 @@ function promoCantidad(p, o, precio) {
     const m = nom.match(/reg-(\d+)-(\d+)/i);
     if (m) { const n = +m[1], pct = +m[2]; add(n, n - pct / 100, pct === 100 ? `${n}x${n - 1}` : `${ORD(n)} al ${pct}%`); }
   }
-  // Las colecciones de Cencosud, Día y ChangoMás ("3x2 en Galletitas", "2do al 70%") no sirven: quedan
+  // Las colecciones de Cencosud y Día ("3x2 en Galletitas", "2do al 70%") no sirven: quedan
   // colecciones viejas o con condiciones (Prime, Cencopay) y el carrito no aplica esas promos. Por ahora
   // solo se toman los teasers de Carrefour, que el carrito confirma. Ver hoja de ruta.
   if (!cands.length) return null;
