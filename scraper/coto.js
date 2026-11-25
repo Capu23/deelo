@@ -1,4 +1,4 @@
-// Precios de Coto para precios.js y canasta.js, desde data/coto-precios.json (scraper/coto-precios.js,
+// Precios de Coto para precios.js y canasta.js, desde data/coto-catalogo.json (scraper/coto-precios.js,
 // la web de Coto). Ese archivo se genera en una compu en Argentina; solo se usa si tiene menos de MAX_DIAS días.
 // Devuelve { actualizado, sucursal, p: { ean: [precio, lista, url, promo?] } } o null.
 //   lista = precio sin la rebaja (0 si no hay rebaja directa).
@@ -6,14 +6,14 @@
 const fs = require('fs');
 const path = require('path');
 
-const ARCHIVO = path.join(__dirname, '..', 'data', 'coto-precios.json');
+const ARCHIVO = path.join(__dirname, '..', 'data', 'coto-catalogo.json');
 const MAX_DIAS = 15;
 
 function cargarCoto() {
   let w;
-  try { w = JSON.parse(fs.readFileSync(ARCHIVO, 'utf8')); } catch { console.log('Sin data/coto-precios.json: Coto queda afuera.'); return null; }
+  try { w = JSON.parse(fs.readFileSync(ARCHIVO, 'utf8')); } catch { console.log('Sin data/coto-catalogo.json: Coto queda afuera.'); return null; }
   if ((Date.now() - new Date(w.actualizado)) / 864e5 >= MAX_DIAS) {
-    console.log(`coto-precios.json es del ${w.actualizado} (más de ${MAX_DIAS} días): Coto queda afuera.`);
+    console.log(`coto-catalogo.json es del ${w.actualizado} (más de ${MAX_DIAS} días): Coto queda afuera.`);
     return null;
   }
   const p = {};

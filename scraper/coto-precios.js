@@ -9,8 +9,8 @@
 // Uso (desde la raíz del repo):  node scraper/coto-precios.js
 //   --sucursal 200   sucursal de Coto cuyos precios se leen (200 es la que muestra la web por defecto)
 //
-// Escribe data/coto-precios.json:
-//   {"actualizado":"AAAA-MM-DD","productos":[{"ean","nombre","marca","categoria","precio","precioOferta"?,"texto"?,"unidades"?, ...}]}
+// Escribe data/coto-catalogo.json:
+//   {"actualizado":"AAAA-MM-DD","sucursal":"200","productos":[{"ean","nombre","precio","precioOferta"?,"texto"?,"unidades"?,"url", + marca, categoria, pesable, plu…}]}
 //   precio = precio regular por unidad. Si hay oferta: precioOferta = precio por unidad con la oferta
 //   (en "2x1" o "70% 2da" es el promedio por unidad llevando las `unidades` que pide la oferta) y texto = cómo la muestra Coto.
 
@@ -19,7 +19,7 @@ const path = require('path');
 
 const WEB = 'https://www.coto.com.ar';
 const API = 'https://api.coto.com.ar/api/v1/ms-digital-sitio-bff-web/api/v1/products/categories/';
-const OUT = path.join(__dirname, '..', 'data', 'coto-precios.json');
+const OUT = path.join(__dirname, '..', 'data', 'coto-catalogo.json');
 const POR_PAGINA = 200;
 const SALTEAR = ['Hogar', 'Textil', 'Aire Libre']; // no son de súper
 // Marca propia de Coto: "COTO", "ESTANCIAS COTO" y sus líneas de elaboración propia (no "COTONETES").
@@ -84,7 +84,9 @@ function producto(r, categoria) {
   const precio = (desc && (plata(desc.regularPriceText) ?? plata(desc.regularPrice))) ?? precioSuc?.listPrice ?? d.product_list_price ?? null;
   if (!ean || !precio) return null;
 
-  const o = { ean, nombre, marca, categoria, precio };
+  // Primero los campos que lee deelo (ean, nombre, precio, [precioOferta, texto, unidades], url); después datos de más.
+  const o = { ean, nombre, precio };
+  const mas = { marca, categoria };
   const precioOferta = desc ? plata(desc.discountPrice) : null;
   if (precioOferta != null && precioOferta < precio) {
     const llevando = clean(desc.takingText);
@@ -98,13 +100,13 @@ function producto(r, categoria) {
     o.texto = [llevando, descuento].filter(Boolean).join(' ') || 'Oferta';
     if (unidades > 1) o.unidades = unidades;
     const extra = extras.filter(x => x.discountText).map(x => ({ texto: clean(x.discountText), precio: plata(x.discountPrice) }));
-    if (extra.length) o.extra = extra; // p. ej. "+10%" adicional
-    if (desc.comments) o.condiciones = clean(desc.comments);
+    if (extra.length) mas.extra = extra; // p. ej. "+10%" adicional
+    if (desc.comments) mas.condiciones = clean(desc.comments);
   }
-  o.pesable = !!d.product_weighable;
-  o.plu = String(d.sku_plu || '');
   o.url = `${WEB}/productos/${d.url || ''}`;
-  return o;
+  mas.pesable = !!d.product_weighable;
+  mas.plu = String(d.sku_plu || '');
+  return Object.assign(o, mas);
 }
 
 (async () => {
