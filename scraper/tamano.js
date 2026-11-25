@@ -37,7 +37,7 @@ const sinTildes = s => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowe
 const FAMILIAS = [
   ['alcohol', [[/sin alcohol|\b0[.,]0\b|\bcero alcohol/, 'sin']]],
   ['azucar', [[/\bzero\b|sin azucar|\bdiet\b|\blight\b|\blite\b|reducid[oa] en azucar|\bligth\b/, 'sin']]],
-  ['aceite', [[/girasol/, 'girasol'], [/\bmaiz\b/, 'maiz'], [/oliva/, 'oliva'], [/canola/, 'canola'], [/\bsoja\b/, 'soja'], [/mezcla|\bmezclas\b/, 'mezcla'], [/\bcoco\b/, 'coco'], [/arroz/, 'arroz']]],
+  ['aceite', [[/mezcla|\bmezclas\b|girasol.{0,12}oliva|oliva.{0,12}girasol/, 'mezcla'], [/girasol/, 'girasol'], [/\bmaiz\b/, 'maiz'], [/oliva/, 'oliva'], [/canola/, 'canola'], [/\bsoja\b/, 'soja'], [/\bcoco\b/, 'coco'], [/arroz/, 'arroz']]],
   ['leche', [[/parcialmente descremad|semi ?descremad/, 'parcial'], [/descremad/, 'descremada'], [/\bentera\b/, 'entera']]],
   ['lactosa', [[/sin lactosa|deslactosad|lactose free|0% lactosa/, 'sin']]],
   ['tacc', [[/sin tacc|sin gluten|gluten free/, 'sin']]],
