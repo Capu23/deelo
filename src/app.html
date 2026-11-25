@@ -108,7 +108,8 @@ body.conLista{overflow:hidden}
 .vsList .pz{display:flex;flex-direction:column;align-items:flex-end;gap:3px;text-align:right}
 .vsList .pz b{font-size:16px}
 .vsList .pz .x{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--ink3);white-space:nowrap}
-.vsList .pz .d{font-size:12px;font-weight:700;white-space:nowrap}
+.vsList .pz .d{font-size:12.5px;font-weight:700;white-space:nowrap;line-height:1.2}
+.vsList .pz .d small{display:block;font-size:11px;font-weight:600;opacity:.8}
 .vsList .pz .d.mas{color:var(--green-text)}.vsList .pz .d.menos{color:var(--bad)}
 .vsList li.top .pz b{color:var(--green-text)}
 .vsFijo{position:sticky;top:58px;z-index:1;background:var(--bg);padding-bottom:4px;display:flex;flex-direction:column;gap:8px}
@@ -3233,14 +3234,16 @@ details.others[open] summary{margin-bottom:10px}
     const otros = filas.filter(x => x !== base);
     const fila = (x, i) => {
       const img = x.q.i ? `<img src="${esc(x.q.i.replace(/(\/ids\/\d+)\//, '$1-120-120/'))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '';
-      const dif = base && x !== base ? Math.round((x.u / base.u - 1) * 100) : 0;
+      // Diferencia en pesos contra tu producto, llevando el similar a tu mismo tamaño.
+      const mismo = base && x.q.t[0] === base.q.t[0];
+      const dif = base && x !== base ? Math.round(x.b.fin * base.q.t[0] / x.q.t[0] - base.b.fin) : 0;
       return `<li class="${x === base ? 'base' : ''}${i === 0 && x.u < (base ? base.u : Infinity) ? ' top' : ''}"><span class="cimg">${img}</span>
         <span class="nm">${x === base ? '<span class="yo">Este producto</span><br>' : ''}${esc(x.q.n)}<small>${tamTxt(x.q.t)} · ${fmt(x.u)}${uTxt(x.q.t)}</small></span>
-        <span class="pz"><b>${fmt(x.b.fin)}</b><span class="x">${sbadge(x.b.s)}${esc(D.supers[x.b.s].n)}</span>${x !== base && dif ? `<span class="d ${dif < 0 ? 'mas' : 'menos'}">${dif < 0 ? '' : '+'}${dif}%${uTxt(x.q.t)}</span>` : ''}${qtyCtrl(x.q.e)}</span></li>`;
+        <span class="pz"><b>${fmt(x.b.fin)}</b><span class="x">${sbadge(x.b.s)}${esc(D.supers[x.b.s].n)}</span>${x !== base && Math.abs(dif) >= 1 ? `<span class="d ${dif < 0 ? 'mas' : 'menos'}" title="${mismo ? '' : `Llevado a ${tamTxt(base.q.t)}, como el tuyo`}">${fmt(Math.abs(dif))} ${dif < 0 ? 'menos' : 'más'}<small>que el tuyo${mismo ? '' : '*'}</small></span>` : ''}${qtyCtrl(x.q.e)}</span></li>`;
     };
     document.getElementById('vsBase').innerHTML = base ? fila(base, -1) : '';
     document.getElementById('vsItems').innerHTML = otros.length ? otros.map(fila).join('') : '<li class="vacio">No hay similares en tus súper.</li>';
-    document.getElementById('vsNota').textContent = (pxModo === 'mias' && hasProfile() ? 'Precio más bajo con tus tarjetas en tus súper' : 'Precio de lista más bajo en tus súper') + '. El % compara el precio por kilo, litro o unidad contra tu producto. Similares: mismo tipo y variante, y tamaño a ±15%.';
+    document.getElementById('vsNota').textContent = (pxModo === 'mias' && hasProfile() ? 'Precio más bajo con tus tarjetas en tus súper' : 'Precio de lista más bajo en tus súper') + '. La diferencia compara contra tu producto; * cuando el tamaño es distinto, se calcula como si fuera del mismo tamaño que el tuyo. Similares: mismo tipo y variante, y tamaño a ±15%.';
   }
   function abrirVs(e){ vsBase = e; document.getElementById('vsVer').hidden = false; document.body.classList.add('conLista'); pintarVs(); document.getElementById('vsVer').scrollTop = 0; }
   function cerrarVs(){ vsBase = null; document.getElementById('vsVer').hidden = true; if(document.getElementById('lsVer').hidden) document.body.classList.remove('conLista'); }
