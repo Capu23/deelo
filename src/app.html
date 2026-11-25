@@ -3143,7 +3143,7 @@ details.others[open] summary{margin-bottom:10px}
     document.getElementById('pxDays').innerHTML = days.map(d => `<button class="fchip plain" data-pd="${iso(d)}" aria-pressed="${iso(d)===iso(pxDay)}">${iso(d)===iso(TODAY) ? 'Hoy' : DC[isoDow(d)] + ' ' + d.getDate()}</button>`).join('');
     if(!hasProfile()) pxModo = 'lista'; else if(!pxModo) pxModo = 'mias';
     const misMedios = Object.keys(P.ents).map(k => D.entidades[k] ? D.entidades[k].n : k).concat(P.jubilado ? ['Jubilados'] : []);
-    document.getElementById('pxCuantos').innerHTML = [0, 2, 3, 5].map(n => `<button class="fchip plain" data-pcu="${n}" aria-pressed="${pxCuantos === n}">${n ? n : 'Todos'}</button>`).join('');
+    document.getElementById('pxCuantos').innerHTML = [0, 1, 2, 3, 4, 5].map(n => `<button class="fchip plain" data-pcu="${n}" aria-pressed="${pxCuantos === n}">${n ? n : 'Todos'}</button>`).join('');
     document.getElementById('pxModoG').hidden = !hasProfile();
     document.getElementById('pxModo').innerHTML = hasProfile()
       ? `<div class="col" style="gap:8px"><div class="mineTog" role="group" aria-label="Qué precio mostrar"><button data-pm="mias" aria-pressed="${pxModo==='mias'}">Con mis tarjetas</button><button data-pm="lista" aria-pressed="${pxModo==='lista'}">Precio de lista</button></div>
