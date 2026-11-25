@@ -627,6 +627,7 @@ details.others[open] summary{margin-bottom:10px}
     <div class="pxFiltros" id="pxFiltros" hidden>
       <div class="pxFG"><span class="pxFL">Tipo de producto</span><div class="fscroll" id="pxCats" role="group" aria-label="Tipo de producto"></div></div>
       <div class="pxFG"><span class="pxFL">Supermercados</span><div class="fscroll" id="pxSups" role="group" aria-label="Supermercados"></div></div>
+      <div class="pxFG"><span class="pxFL">Súper por producto · los más baratos</span><div class="fscroll" id="pxCuantos" role="group" aria-label="Cuántos súper mostrar por producto"></div></div>
       <div class="pxFG" id="pxModoG"><span class="pxFL">Precio</span><div id="pxModo"></div></div>
     </div>
     <div id="pxNote"></div>
@@ -3142,6 +3143,7 @@ details.others[open] summary{margin-bottom:10px}
     document.getElementById('pxDays').innerHTML = days.map(d => `<button class="fchip plain" data-pd="${iso(d)}" aria-pressed="${iso(d)===iso(pxDay)}">${iso(d)===iso(TODAY) ? 'Hoy' : DC[isoDow(d)] + ' ' + d.getDate()}</button>`).join('');
     if(!hasProfile()) pxModo = 'lista'; else if(!pxModo) pxModo = 'mias';
     const misMedios = Object.keys(P.ents).map(k => D.entidades[k] ? D.entidades[k].n : k).concat(P.jubilado ? ['Jubilados'] : []);
+    document.getElementById('pxCuantos').innerHTML = [0, 2, 3, 5].map(n => `<button class="fchip plain" data-pcu="${n}" aria-pressed="${pxCuantos === n}">${n ? n : 'Todos'}</button>`).join('');
     document.getElementById('pxModoG').hidden = !hasProfile();
     document.getElementById('pxModo').innerHTML = hasProfile()
       ? `<div class="col" style="gap:8px"><div class="mineTog" role="group" aria-label="Qué precio mostrar"><button data-pm="mias" aria-pressed="${pxModo==='mias'}">Con mis tarjetas</button><button data-pm="lista" aria-pressed="${pxModo==='lista'}">Precio de lista</button></div>
@@ -3185,13 +3187,15 @@ details.others[open] summary{margin-bottom:10px}
           <span class="w">${sbadge(x.s)}<span>${esc(D.supers[x.s].n)}${x === best ? '<span class="tag">Más barato</span>' : ''}<span class="why${x.pr || x.lista ? '' : ' off'}"${x.via ? ` title="Con ${esc(x.via.map(b => D.entidades[b].n).join(', '))}"` : ''}>${!x.disp ? '' : (x.pr ? `−${x.pr.pct}% con ${esc(entName(x.pr))}` : x.lista ? `Oferta del súper −${Math.floor((1 - x.precio / x.lista) * 100 + 0.05)}%${x.pierde ? ` · mejor que tu −${x.pierde.pct}%` : ''}` : '') || (x.m ? '' : pxModo === 'mias' ? 'Sin descuento' : '')}</span>${x.disp && x.m ? `<span class="why multi">${esc(x.m.t)}: ${fmt(x.m.u)} c/u llevando ${x.m.n}</span>` : ''}</span></span>
           <span class="pr"><b>${fmt(x.fin)}</b>${x.pr || x.lista ? `<s>${fmt(x.lista || x.precio)}</s>` : ''}</span></a>`;
       return `<article class="prod"><div class="ph">${p.i ? `<img src="${esc(p.i.replace(/(\/ids\/\d+)\//, '$1-120-120/'))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<span class="ni"><b>${esc(p.n)}</b><small>${esc(p.c)}</small></span><span class="phR">${ahorro >= 1 ? `<span class="save" title="En ${esc(D.supers[best.s].n)}: ${fmt(orig)} → ${fmt(best.fin)}">Ahorrás<br><b>${fmt(ahorro)}</b></span>` : ''}${qtyCtrl(p.e)}</span></div>
-        ${fs.map(row).join('')}${(() => { const n = similares(p).length; return n ? `<button class="vsBtn" data-vs="${esc(p.e)}" type="button"><b>VS</b> similares <span>${n}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>` : ''; })()}</article>`;
+        ${fs.slice(0, pxCuantos || fs.length).map(row).join('')}${(() => { const n = similares(p).length; return n ? `<button class="vsBtn" data-vs="${esc(p.e)}" type="button"><b>VS</b> similares <span>${n}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>` : ''; })()}</article>`;
     }).join('') : `<div class="empty">No encontramos ese producto. Probá con otra palabra, por ejemplo la marca.</div>`);
   }
   // Filtros de Precios: se muestran u ocultan con un botón; se recuerda la elección en este dispositivo.
   let pxFAbiertos = store.get('deelo-px-filtros', false);
+  // Cuántos súper mostrar por producto (0 = todos). Se recuerda en este dispositivo.
+  let pxCuantos = store.get('deelo-px-cuantos', 0);
   function pintarFiltrosBtn(){
-    const n = (pxCat ? 1 : 0) + ((P.supers && P.supers.length) ? 1 : 0) + (hasProfile() && pxModo === 'lista' ? 1 : 0);
+    const n = (pxCat ? 1 : 0) + ((P.supers && P.supers.length) ? 1 : 0) + (hasProfile() && pxModo === 'lista' ? 1 : 0) + (pxCuantos ? 1 : 0);
     const b = document.getElementById('pxFBtn');
     b.setAttribute('aria-expanded', pxFAbiertos);
     b.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg><span class="t">${pxFAbiertos ? 'Ocultar filtros' : 'Ver filtros'}</span>${n ? `<span class="n" aria-label="${n} activos">${n}</span>` : ''}<svg class="ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>`;
@@ -3258,6 +3262,7 @@ details.others[open] summary{margin-bottom:10px}
   document.getElementById('view-precios').addEventListener('click', ev => {
     const c = ev.target.closest('[data-pc]'); if(c){ pxCat = c.dataset.pc; renderPrecios(); return; }
     const xs = ev.target.closest('[data-pxs]'); if(xs){ const k = xs.dataset.pxs; if(!k) P.supers = []; else { const cur = (P.supers && P.supers.length) ? P.supers : []; P.supers = cur.includes(k) ? cur.filter(x => x !== k) : [...cur, k]; } save(); renderSupPrefs(); renderAll(); return; }
+    const cu = ev.target.closest('[data-pcu]'); if(cu){ pxCuantos = Number(cu.dataset.pcu); store.set('deelo-px-cuantos', pxCuantos); renderPrecios(); return; }
     const pm = ev.target.closest('[data-pm]'); if(pm){ pxModo = pm.dataset.pm; renderPrecios(); return; }
     const d = ev.target.closest('[data-pd]'); if(d){ const [y,m,dd] = d.dataset.pd.split('-').map(Number); pxDay = new Date(y, m-1, dd); renderPrecios(); }
   });
