@@ -19,6 +19,31 @@ try {
   else console.log('precios-coto.json tiene más de 15 días: no se usa.');
 } catch { console.log('Sin data/precios-coto.json: Coto queda afuera.'); }
 
+// Ofertas de Coto de su web (data/coto-ofertas.json, se arma desde Argentina). Pisan el precio de SEPA del
+// producto: "25%Dto"/"Oferta" son rebajas directas; "Llevando 2 2x1", "Llevando 2 70% 2da" y
+// "Llevando 3 25%Dto" son promos por cantidad. Se ignoran las de cuotas ("1 Pago 20%", electro).
+let cotoOf = {};
+try {
+  const c = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/coto-ofertas.json'), 'utf8'));
+  if ((Date.now() - new Date(c.actualizado)) / 864e5 < 15) {
+    for (const o of c.ofertas) {
+      if (!o.ean || !(o.precio > 0) || !(o.precioOferta > 0) || o.precioOferta >= o.precio || /pago/i.test(o.texto)) continue;
+      let promo = null, m;
+      const n = o.unidades || ((m = o.texto.match(/llevando\s*(\d+)/i)) ? +m[1] : 0);
+      if (n > 1) {
+        let t;
+        if ((m = o.texto.match(/(\d)\s*x\s*(\d)/i))) t = `${m[1]}x${m[2]}`;
+        else if ((m = o.texto.match(/(\d{2,3})\s*%\s*(\d)\s*d/i))) t = `${m[2] === '2' ? '2da' : m[2] + 'ra'} al ${m[1]}%`;
+        else if ((m = o.texto.match(/(\d{1,3})\s*%/))) t = `−${m[1]}% llevando ${n}`;
+        else t = `Llevando ${n}`;
+        promo = { t, n, u: Math.round(o.precioOferta * 100) / 100 };
+      }
+      cotoOf[o.ean] = promo ? [o.precio, 0, 1, o.url, promo] : [o.precioOferta, o.precio, 1, o.url];
+    }
+    console.log('ofertas de Coto (web):', Object.keys(cotoOf).length);
+  } else console.log('coto-ofertas.json tiene más de 15 días: no se usa.');
+} catch {}
+
 (async () => {
   const out = [];
   let descartados = 0;
@@ -56,7 +81,8 @@ try {
       precios[s] = [r.precio, r.lista || 0, r.disponible ? 1 : 0, slug, ...(r.promo ? [r.promo] : [])];
       if (!img && r.img) img = r.img.replace(/-\d+-\d+\//, '-200-200/');
     }
-    if (coto && coto.p[p.ean]) {
+    if (cotoOf[p.ean]) precios.coto = cotoOf[p.ean];
+    else if (coto && coto.p[p.ean]) {
       const [pc, lc, m] = coto.p[p.ean];
       precios.coto = [pc, lc, 1, COTO_URL + p.ean, ...(m ? [m] : [])];
     }
@@ -69,7 +95,7 @@ try {
   }
   const data = {
     actualizado: new Date().toISOString().slice(0, 10),
-    supers: { ...Object.fromEntries(sups.map(s => [s, SUPERS[s]])), ...(coto ? { coto: 'https://www.cotodigital.com.ar' } : {}) },
+    supers: { ...Object.fromEntries(sups.map(s => [s, SUPERS[s]])), ...(coto || Object.keys(cotoOf).length ? { coto: 'https://www.cotodigital.com.ar' } : {}) },
     ...(coto ? { coto: { actualizado: coto.actualizado, sucursal: coto.sucursal, sucursales: coto.sucursales } } : {}),
     nota: 'Precios online de cada súper (pueden variar por sucursal). Formato de p: [precio, precio de lista si hay rebaja, disponible, slug].',
     sinPrecio: errores,

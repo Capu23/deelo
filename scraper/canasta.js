@@ -23,6 +23,7 @@ for (const [s, ps] of Object.entries(crudo)) for (const [e, p] of Object.entries
 // Coto (SEPA) también cuenta como cadena si ya tenemos su precio.
 let coto = {};
 try { coto = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/precios-coto.json'), 'utf8')).p; } catch {}
+try { for (const o of JSON.parse(fs.readFileSync(path.join(ROOT, 'data/coto-ofertas.json'), 'utf8')).ofertas) if (o.ean && !/pago/i.test(o.texto)) coto[o.ean] = coto[o.ean] || [o.precio, 0]; } catch {}
 
 const productos = [];
 let propias = 0;
