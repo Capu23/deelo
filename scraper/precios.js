@@ -49,10 +49,10 @@ if (!cotoInfo) console.log('Sin datos de Coto vigentes: Coto queda afuera.');
   const res = Object.fromEntries(canasta.map(p => [p.ean, {}]));
   // Si está el catálogo completo recién recorrido (catalogo.js), los precios salen de ahí: es mucho más rápido
   // que consultar producto por producto. Si no, se consulta cada código de barras.
-  let crudo = null;
+  let crudo = null, fechaCrudo = null;
   try {
     const c = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/catalogo-crudo.json'), 'utf8'));
-    if ((Date.now() - new Date(c.actualizado)) / 864e5 < 3) crudo = c.supers;
+    if ((Date.now() - new Date(c.actualizado)) / 864e5 < 3) { crudo = c.supers; fechaCrudo = c.actualizado; }
   } catch {}
   if (crudo) {
     for (const s of sups) for (const p of canasta) {
@@ -94,7 +94,8 @@ if (!cotoInfo) console.log('Sin datos de Coto vigentes: Coto queda afuera.');
     out.push({ e: p.ean, n: p.nombre, c: p.categoria, i: img, ...(g !== undefined ? { g } : {}), ...(t ? { t } : {}), v: k, p: precios });
   }
   const data = {
-    actualizado: new Date().toISOString().slice(0, 10),
+    // Fecha en que se leyeron los precios (la del recorrido del catálogo, si se usó).
+    actualizado: fechaCrudo || new Date().toISOString().slice(0, 10),
     supers: { ...Object.fromEntries(sups.map(s => [s, SUPERS[s]])), ...(cotoInfo ? { coto: 'https://www.coto.com.ar' } : {}) },
     ...(cotoInfo ? { coto: cotoInfo } : {}),
     nota: 'Precios online de cada súper (pueden variar por sucursal). Formato de p: [precio, precio de lista si hay rebaja, disponible, slug].',
