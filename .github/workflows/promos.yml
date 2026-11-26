@@ -51,13 +51,21 @@ jobs:
         run: |
           git config user.name "deelo-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data src/app.html index.html
-          if git diff --cached --quiet; then
-            echo "Sin cambios en las promos."
-          else
-            git commit -m "deelo: promos actualizadas $(date -u +%Y-%m-%d)"
-            git push
-          fi
+          # Si mientras corría se publicó otro cambio en main, se toma la última versión, se copian los
+          # datos nuevos encima y se vuelve a armar la página (hasta 3 intentos).
+          cp -r data "$RUNNER_TEMP/data-nueva"
+          for i in 1 2 3; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            cp -r "$RUNNER_TEMP/data-nueva/." data/
+            node scraper/build.js > /dev/null
+            git add data src/app.html index.html
+            if git diff --cached --quiet; then echo "Sin cambios en las promos."; exit 0; fi
+            git commit -q -m "deelo: promos actualizadas $(date -u +%Y-%m-%d)"
+            if git push -q; then echo "Publicado."; exit 0; fi
+            echo "El push falló (intento $i): reintento."; sleep 10
+          done
+          exit 1
 
       # Si los precios fallaron, la página queda con los de la semana anterior: el workflow se marca
       # en rojo para que GitHub avise por mail.
