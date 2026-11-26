@@ -37,12 +37,15 @@ jobs:
         run: node scraper/build.js
 
       - name: Traer precios de la canasta (Jumbo, Disco, Vea, Carrefour, Día y Coto)
+        id: precios
         continue-on-error: true   # si falla, la página sigue con los precios de la semana anterior
         run: |
           # Recorre el catálogo completo de cada súper (unos 25 min), renueva la lista de productos
           # (en 3 o más cadenas, sin marcas propias) y saca los precios de ese recorrido.
           node scraper/catalogo.js && node scraper/canasta.js 3 || echo "catálogo falló: se mantiene la canasta anterior"
-          node scraper/precios.js
+          node scraper/precios.js | tee precios.log
+          # Resumen visible en la pestaña Actions
+          { echo "### deelo · precios del $(date -u +%Y-%m-%d)"; echo '```'; tail -n 8 precios.log; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Guardar si hubo cambios
         run: |
@@ -55,3 +58,11 @@ jobs:
             git commit -m "deelo: promos actualizadas $(date -u +%Y-%m-%d)"
             git push
           fi
+
+      # Si los precios fallaron, la página queda con los de la semana anterior: el workflow se marca
+      # en rojo para que GitHub avise por mail.
+      - name: Avisar si fallaron los precios
+        if: steps.precios.outcome == 'failure'
+        run: |
+          echo "::error::Fallaron los precios: la página sigue con los de la semana anterior."
+          exit 1
