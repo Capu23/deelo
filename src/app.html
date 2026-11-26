@@ -738,11 +738,6 @@ details.others[open] summary{margin-bottom:10px}
    "n": "Día",
    "c": "#e2001a",
    "m": "Dí"
-  },
-  "changomas": {
-   "n": "ChangoMás",
-   "c": "#6a3fb5",
-   "m": "CM"
   }
  },
  "entidades": {
@@ -2591,174 +2586,12 @@ details.others[open] summary{margin-bottom:10px}
    }
   },
   {
-   "id": "bna-chango-lun",
-   "ent": "nacion",
-   "sup": [
-    "changomas"
-   ],
-   "dias": [
-    1
-   ],
-   "pct": 20,
-   "tope": {
-    "m": 25000,
-    "p": "mes"
-   },
-   "min": 75000,
-   "medio": "BNA+ MODO (presencial y online)",
-   "tj": [],
-   "conf": "media",
-   "fu": [
-    "eldestape-jub"
-   ],
-   "vig": {
-    "desde": "2026-11-01",
-    "hasta": "2026-11-30"
-   }
-  },
-  {
-   "id": "bna-chango-dom",
-   "ent": "nacion",
-   "sup": [
-    "changomas"
-   ],
-   "dias": [
-    7
-   ],
-   "pct": 20,
-   "tope": {
-    "m": 20000,
-    "p": "mes"
-   },
-   "min": 30000,
-   "medio": "BNA+ MODO",
-   "tj": [],
-   "conf": "media",
-   "fu": [
-    "eldestape-jub"
-   ],
-   "canal": "online",
-   "vig": {
-    "desde": "2026-11-01",
-    "hasta": "2026-11-30"
-   }
-  },
-  {
-   "id": "bp-chango-jue",
-   "ent": "provincia",
-   "sup": [
-    "changomas"
-   ],
-   "dias": [
-    4
-   ],
-   "pct": 20,
-   "tope": null,
-   "medio": "Saldo Cuenta DNI o Visa crédito por NFC",
-   "tj": [],
-   "conf": "media",
-   "fu": [
-    "eldestape-dni",
-    "cs-dni"
-   ],
-   "nota": "Incluye sucursales MasGO.",
-   "vig": {
-    "desde": "2026-11-01",
-    "hasta": "2026-11-30"
-   }
-  },
-  {
-   "id": "mp-chango-mar",
-   "ent": "mercadopago",
-   "sup": [
-    "changomas"
-   ],
-   "dias": [
-    2
-   ],
-   "pct": 15,
-   "tope": "app",
-   "medio": "QR Mercado Pago",
-   "tj": [],
-   "conf": "media",
-   "fu": [
-    "eldestape-mp"
-   ],
-   "vig": {
-    "desde": "2026-11-01",
-    "hasta": "2026-11-30"
-   }
-  },
-  {
-   "id": "sv-chango-mar",
-   "ent": "supervielle",
-   "sup": [
-    "changomas"
-   ],
-   "dias": [
-    2
-   ],
-   "pct": 20,
-   "tope": {
-    "m": 25000,
-    "p": "compra"
-   },
-   "medio": "Crédito Supervielle",
-   "tj": [
-    "visa",
-    "master"
-   ],
-   "conf": "baja",
-   "fu": [
-    "mdz-jub"
-   ],
-   "nota": "Las notas la presentan para jubilados que cobran en Supervielle.",
-   "vig": {
-    "desde": "2026-11-01",
-    "hasta": "2026-11-30"
-   }
-  },
-  {
-   "id": "anses-chango",
-   "ent": "anses",
-   "sup": [
-    "changomas"
-   ],
-   "dias": [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7
-   ],
-   "pct": 10,
-   "tope": {
-    "m": 15000,
-    "p": "mes"
-   },
-   "medio": "Jubilados ANSES",
-   "tj": [],
-   "conf": "media",
-   "fu": [
-    "diariouno-jub"
-   ],
-   "req": "jubilado",
-   "nota": "Días no confirmados.",
-   "vig": {
-    "desde": "2026-11-01",
-    "hasta": "2026-11-30"
-   }
-  },
-  {
    "id": "bna-jub-5",
    "ent": "nacion",
    "sup": [
     "carrefour",
     "disco",
     "vea",
-    "changomas",
     "coto"
    ],
    "dias": [
@@ -2791,8 +2624,7 @@ details.others[open] summary{margin-bottom:10px}
    "id": "galicia-gen",
    "ent": "galicia",
    "sup": [
-    "coto",
-    "changomas"
+    "coto"
    ],
    "dias": [],
    "pct": 25,
@@ -2831,6 +2663,12 @@ details.others[open] summary{margin-bottom:10px}
   // ---------- perfil ----------
   let P = store.get(KEY, null);
   if(!P || !P.ents) P = {ents:{}, jubilado:false, online:false};
+  // Si el perfil guardado menciona un súper o una entidad que ya no está (ej.: ChangoMás), se ignora.
+  const limpiarPerfil = () => {
+    if(Array.isArray(P.supers)) P.supers = P.supers.filter(s => D.supers[s]);
+    for(const k of Object.keys(P.ents || {})) if(!D.entidades[k]) delete P.ents[k];
+  };
+  limpiarPerfil();
   let gasto = store.get(KEY+'-gasto', 80000);
   // Si hay sesión iniciada, deeloCuenta (script de cuentas) guarda el perfil también en la nube.
   const sync = () => { try{ window.deeloCuenta && window.deeloCuenta.guardar({perfil:P, gasto}); }catch(e){} };
@@ -3167,10 +3005,10 @@ details.others[open] summary{margin-bottom:10px}
       const TEMPORADA = /halloween|navid|navide|pascua|huevo de chocolate|pan dulce|panettone|budin|turr[oó]n|garrapi|sidra|ana[aá]na fizz|fiesta|carnaval|d[ií]a del (padre|ni[nñ]o|madre)|san valent/i;
       // Primero los básicos de la compra de todas las semanas.
       const BASICOS = /^(leche (entera|descremada|parcial|en polvo|larga)|leche$|yerba|aceite|arroz|fideos?|harina|az[uú]car|caf[eé]|t[eé] |mate cocido|galletitas|pur[eé] de tomate|at[uú]n|mayonesa|dulce de leche|yogur|manteca|queso|crema de leche|gaseosa|agua mineral|cerveza|detergente|lavandina|jab[oó]n|suavizante|papel higi[eé]nico|rollo de cocina|shampoo|acondicionador|pasta dental|desodorante|pa[nñ]ales|toallitas|huevos|pan lactal|polenta|lentejas|sal )/i;
-      const cuenta = {};
+      const cuenta = {}, nMis = Object.keys(PX.supers).filter(miSuper).length, minSup = Math.max(2, Math.min(4, nMis));
       list = list.filter(p => !TEMPORADA.test(p.n))
         .map(p => { const f = filas(p).filter(x => x.disp); return {p, n: f.length, d: f.length > 1 ? 1 - f[0].fin / f[f.length-1].fin : 0}; })
-        .filter(x => x.n >= 4 && x.d >= 0.08 && x.d <= 0.6)
+        .filter(x => x.n >= minSup && x.d >= 0.08 && x.d <= 0.6)
         .map(x => ({...x, b: BASICOS.test(x.p.n) ? 1 : 0}))
         .sort((a,b) => (b.b - a.b) || (b.d - a.d))
         .filter(x => (cuenta[x.p.c] = (cuenta[x.p.c] || 0) + 1) <= 2)
@@ -3188,7 +3026,7 @@ details.others[open] summary{margin-bottom:10px}
           <span class="pr"><b>${fmt(x.fin)}</b>${x.pr || x.lista ? `<s>${fmt(x.lista || x.precio)}</s>` : ''}</span></a>`;
       return `<article class="prod"><div class="ph">${p.i ? `<img src="${esc(p.i.replace(/(\/ids\/\d+)\//, '$1-120-120/'))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<span class="ni"><b>${esc(p.n)}</b><small>${esc(p.c)}</small></span><span class="phR">${ahorro >= 1 ? `<span class="save" title="En ${esc(D.supers[best.s].n)}: ${fmt(orig)} → ${fmt(best.fin)}">Ahorrás<br><b>${fmt(ahorro)}</b></span>` : ''}${qtyCtrl(p.e)}</span></div>
         ${fs.slice(0, pxCuantos || fs.length).map(row).join('')}${(() => { const n = similares(p).length; return n ? `<button class="vsBtn" data-vs="${esc(p.e)}" type="button"><b>VS</b> similares <span>${n}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>` : ''; })()}</article>`;
-    }).join('') : `<div class="empty">No encontramos ese producto. Probá con otra palabra, por ejemplo la marca.</div>`);
+    }).join('') : (!q.length && !pxCat && Object.keys(PX.supers).filter(miSuper).length < 2 ? `<div class="empty">Para comparar, marcá al menos 2 súper en <button class="linkBtn" data-go="tarjetas">Mi billetera</button>, o buscá un producto.</div>` : `<div class="empty">No encontramos ese producto. Probá con otra palabra, por ejemplo la marca.</div>`));
   }
   // Filtros de Precios: se muestran u ocultan con un botón; se recuerda la elección en este dispositivo.
   let pxFAbiertos = store.get('deelo-px-filtros', false);
@@ -3301,7 +3139,7 @@ details.others[open] summary{margin-bottom:10px}
     return best;
   }
   // Google Maps busca la cadena cerca de la ubicación del usuario (en el celular abre la app de Maps).
-  const MAPA_Q = {jumbo:'Jumbo supermercado', disco:'Disco supermercado', vea:'Supermercado Vea', coto:'Coto supermercado', carrefour:'Carrefour supermercado', dia:'Supermercado Día', changomas:'ChangoMás'};
+  const MAPA_Q = {jumbo:'Jumbo supermercado', disco:'Disco supermercado', vea:'Supermercado Vea', coto:'Coto supermercado', carrefour:'Carrefour supermercado', dia:'Supermercado Día'};
   const mapaUrl = s => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(MAPA_Q[s] || (D.supers[s] ? D.supers[s].n : s));
   function renderCarrito(){
     renderListas();
@@ -3516,6 +3354,7 @@ details.others[open] summary{margin-bottom:10px}
     estado: () => ({perfil:P, gasto}),
     aplicar(d){
       if(d && d.perfil && d.perfil.ents){ P = {ents:d.perfil.ents, jubilado:!!d.perfil.jubilado, online:!!d.perfil.online, supers:Array.isArray(d.perfil.supers) ? d.perfil.supers : [], carrito:Array.isArray(d.perfil.carrito) ? d.perfil.carrito : (P.carrito || []), listas:Array.isArray(d.perfil.listas) ? d.perfil.listas : (P.listas || []), listaActual:d.perfil.listaActual || null}; store.set(KEY, P); }
+      limpiarPerfil();
       if(d && typeof d.gasto === 'number' && d.gasto > 0){ gasto = d.gasto; store.set(KEY+'-gasto', gasto); }
       renderEnts(); renderAll();
     }

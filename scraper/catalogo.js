@@ -53,6 +53,7 @@ async function recorrer(sup) {
   let prev = {}; try { prev = JSON.parse(fs.readFileSync(file, 'utf8')).supers || {}; } catch {}
   const res = await Promise.all(sups.map(s => recorrer(s).catch(e => { console.log(s, 'falló:', e.message); return null; })));
   sups.forEach((s, i) => { if (res[i] && Object.keys(res[i]).length) prev[s] = res[i]; });
+  for (const s of Object.keys(prev)) if (!SUPERS[s]) delete prev[s]; // súper que ya no se usan
   fs.writeFileSync(file, JSON.stringify({ actualizado: new Date().toISOString().slice(0, 10), supers: prev }));
   console.log('guardado', file);
 })();
