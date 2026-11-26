@@ -105,6 +105,16 @@ if (!cotoInfo) console.log('Sin datos de Coto vigentes: Coto queda afuera.');
     productos: out,
   };
   fs.writeFileSync(path.join(ROOT, 'data/precios.json'), JSON.stringify(data));
+
+  // Historial: una foto chica por semana en data/historial/AAAA-MM-DD.json, base para "subió/bajó",
+  // alertas de precio y el plan Plus. Por producto, el precio de cada súper en el orden de `supers` (0 = sin precio).
+  // Se guarda el precio del súper (con su oferta si la hay), sin descuentos de bancos.
+  const supsH = Object.keys(data.supers);
+  const hist = { fecha: data.actualizado, supers: supsH, p: {} };
+  for (const x of out) hist.p[x.e] = supsH.map(s => (x.p[s] ? Math.round(x.p[s][0] * 100) / 100 : 0));
+  fs.mkdirSync(path.join(ROOT, 'data/historial'), { recursive: true });
+  fs.writeFileSync(path.join(ROOT, 'data/historial', data.actualizado + '.json'), JSON.stringify(hist));
+  console.log('historial guardado:', 'data/historial/' + data.actualizado + '.json', Object.keys(hist.p).length, 'productos');
   console.log('productos con precio en 2+ súper:', out.length, '/', canasta.length);
   console.log('precios absurdos descartados:', descartados);
   console.log('sin precio por súper:', JSON.stringify(errores));

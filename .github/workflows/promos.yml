@@ -37,21 +37,40 @@ jobs:
         run: node scraper/build.js
 
       - name: Traer precios de la canasta (Jumbo, Disco, Vea, Carrefour, Día y Coto)
+        id: precios
         continue-on-error: true   # si falla, la página sigue con los precios de la semana anterior
         run: |
           # Recorre el catálogo completo de cada súper (unos 25 min), renueva la lista de productos
           # (en 3 o más cadenas, sin marcas propias) y saca los precios de ese recorrido.
           node scraper/catalogo.js && node scraper/canasta.js 3 || echo "catálogo falló: se mantiene la canasta anterior"
-          node scraper/precios.js
+          node scraper/precios.js | tee precios.log
+          # Resumen visible en la pestaña Actions
+          { echo "### deelo · precios del $(date -u +%Y-%m-%d)"; echo '```'; tail -n 8 precios.log; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Guardar si hubo cambios
         run: |
           git config user.name "deelo-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data src/app.html index.html
-          if git diff --cached --quiet; then
-            echo "Sin cambios en las promos."
-          else
-            git commit -m "deelo: promos actualizadas $(date -u +%Y-%m-%d)"
-            git push
-          fi
+          # Si mientras corría se publicó otro cambio en main, se toma la última versión, se copian los
+          # datos nuevos encima y se vuelve a armar la página (hasta 3 intentos).
+          cp -r data "$RUNNER_TEMP/data-nueva"
+          for i in 1 2 3; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            cp -r "$RUNNER_TEMP/data-nueva/." data/
+            node scraper/build.js > /dev/null
+            git add data src/app.html index.html
+            if git diff --cached --quiet; then echo "Sin cambios en las promos."; exit 0; fi
+            git commit -q -m "deelo: promos actualizadas $(date -u +%Y-%m-%d)"
+            if git push -q; then echo "Publicado."; exit 0; fi
+            echo "El push falló (intento $i): reintento."; sleep 10
+          done
+          exit 1
+
+      # Si los precios fallaron, la página queda con los de la semana anterior: el workflow se marca
+      # en rojo para que GitHub avise por mail.
+      - name: Avisar si fallaron los precios
+        if: steps.precios.outcome == 'failure'
+        run: |
+          echo "::error::Fallaron los precios: la página sigue con los de la semana anterior."
+          exit 1
