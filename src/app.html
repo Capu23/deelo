@@ -203,11 +203,19 @@ body[data-vista="tarjetas"] #banners{display:none}
   .logo-word{font-size:29px}
   .acctBtn{padding:7px 12px}
 }
-dialog#authDlg{border:0;border-radius:22px;padding:24px 22px 22px;width:min(400px,calc(100vw - 32px));background:var(--paper);color:var(--ink);box-shadow:0 20px 60px -20px rgba(0,0,0,.5)}
-dialog#authDlg::backdrop{background:rgba(12,18,32,.55);backdrop-filter:blur(2px)}
+dialog#authDlg,dialog#shDlg{border:0;border-radius:22px;padding:24px 22px 22px;width:min(400px,calc(100vw - 32px));background:var(--paper);color:var(--ink);box-shadow:0 20px 60px -20px rgba(0,0,0,.5)}
+dialog#authDlg::backdrop,dialog#shDlg::backdrop{background:rgba(12,18,32,.55);backdrop-filter:blur(2px)}
 .dlgClose{position:absolute;top:10px;right:10px;margin:0}
 .dlgClose button{border:0;background:var(--sunk);width:32px;height:32px;border-radius:50%;cursor:pointer;color:var(--ink2)}
 .auth{display:flex;flex-direction:column;gap:14px}
+.sh{display:flex;flex-direction:column;gap:12px}
+.sh h2{font-size:20px;padding-right:34px}
+.sh p{color:var(--ink2);font-size:14px}
+.shBtns{display:flex;flex-direction:column;gap:8px}
+.shBtns .btn{text-decoration:none;justify-content:center;padding:12px 16px;font-size:15px}
+.shItems{list-style:none;margin:0;padding:10px 12px;background:var(--sunk);border-radius:12px;font-size:13.5px;display:flex;flex-direction:column;gap:4px;max-height:220px;overflow-y:auto}
+.shItems b{font-variant-numeric:tabular-nums}
+.shOk{color:var(--green-text);font-size:13px;font-weight:600;text-align:center}
 .auth h2{font-size:21px;padding-right:30px}
 .auth p{color:var(--ink2);font-size:14px}
 .gbtn{display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid var(--rule);background:var(--paper);border-radius:12px;padding:11px;font-weight:600;cursor:pointer}
@@ -568,7 +576,7 @@ details.others[open] summary{margin-bottom:10px}
       <button data-go="precios">Precios</button>
       <button data-go="carrito">Carrito<span class="cbadge" data-cbadge hidden></span></button>
       <div class="masWrap"><button class="masBtn" type="button" data-mas="mDesk" aria-haspopup="true" aria-expanded="false">Más<svg class="ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
-        <div class="masMenu" id="mDesk" hidden><button data-go="tarjetas">Mi billetera</button><button data-go="todas">Todas las promos</button><button data-tour="1">Cómo usar deelo</button></div></div>
+        <div class="masMenu" id="mDesk" hidden><button data-go="tarjetas">Mi billetera</button><button data-go="todas">Todas las promos</button><button data-tour="1">Cómo usar deelo</button><button data-share="deelo">Compartir deelo</button></div></div>
     </nav>
     <div class="topRight">
       <button class="profileBtn" id="profileBtn" data-go="tarjetas"></button>
@@ -681,6 +689,11 @@ details.others[open] summary{margin-bottom:10px}
   <div id="authBody"></div>
 </dialog>
 
+<dialog id="shDlg" aria-labelledby="shTit">
+  <form method="dialog" class="dlgClose"><button aria-label="Cerrar">✕</button></form>
+  <div class="sh" id="shBody"></div>
+</dialog>
+
 <section class="lsVer" id="vsVer" hidden role="dialog" aria-modal="true" aria-labelledby="vsTit">
   <div class="lsVerIn">
     <header class="lsVerHead"><div class="col" style="gap:2px;min-width:0"><h2 id="vsTit"><b class="vsTag">VS</b> similares</h2><p class="muted" id="vsSub" style="font-size:13px"></p></div><button class="btn ghost sm" id="vsCerrar" type="button">Cerrar</button></header>
@@ -695,7 +708,7 @@ details.others[open] summary{margin-bottom:10px}
     <header class="lsVerHead"><div class="col" style="gap:2px;min-width:0"><h2 id="lsVerTit"></h2><p class="muted" id="lsVerSub" style="font-size:13px"></p></div><button class="btn ghost sm" id="lsVerCerrar" type="button">Cerrar</button></header>
     <div class="lsProg" aria-hidden="true"><i id="lsVerBar"></i></div>
     <ul class="lsChk" id="lsVerItems"></ul>
-    <div class="lsVerPie"><button class="btn ghost sm" id="lsVerReset" type="button">Desmarcar todo</button><button class="btn green sm" id="lsVerCarrito" type="button">Ver en qué súper conviene</button></div>
+    <div class="lsVerPie"><button class="btn ghost sm" id="lsVerReset" type="button">Desmarcar todo</button><button class="btn ghost sm" id="lsVerComp" type="button">Compartir</button><button class="btn green sm" id="lsVerCarrito" type="button">Ver en qué súper conviene</button></div>
   </div>
 </section>
 
@@ -705,7 +718,7 @@ details.others[open] summary{margin-bottom:10px}
   <button data-go="carrito"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h2.6l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1l1.6-6.8H6.2"/></svg><span class="cbadge" data-cbadge hidden></span></span>Carrito</button>
   <button type="button" data-mas="mBottom" aria-haspopup="true" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></svg>Más</button>
 </nav>
-<div class="masMenu abajo" id="mBottom" hidden><button data-go="tarjetas">Mi billetera</button><button data-go="todas">Todas las promos</button><button data-tour="1">Cómo usar deelo</button></div>
+<div class="masMenu abajo" id="mBottom" hidden><button data-go="tarjetas">Mi billetera</button><button data-go="todas">Todas las promos</button><button data-tour="1">Cómo usar deelo</button><button data-share="deelo">Compartir deelo</button></div>
 
 <script id="promo-data" type="application/json">
 {
@@ -2639,7 +2652,47 @@ details.others[open] summary{margin-bottom:10px}
   let gasto = store.get(KEY+'-gasto', 80000);
   // Si hay sesión iniciada, deeloCuenta (script de cuentas) guarda el perfil también en la nube.
   const sync = () => { try{ window.deeloCuenta && window.deeloCuenta.guardar({perfil:P, gasto}); }catch(e){} };
-  const save = () => { store.set(KEY, P); sync(); };
+  const save = () => { store.set(KEY, P); sync(); medirPerfilLuego(); };
+
+  // ---------- Google Analytics 4 ----------
+  // Mide cómo se usa deelo: con qué cuenta se entra, qué súper y billeteras se eligen, qué se busca y compara,
+  // listas y carritos. No se mandan mails, nombres ni datos de tarjetas. Sin GA_ID no se carga nada.
+  // El ID sale de Firebase → Configuración del proyecto → Integraciones → Google Analytics (G-XXXXXXXXXX).
+  var GA_ID = '';
+  function ga(){ if(!GA_ID) return; window.dataLayer = window.dataLayer || []; window.dataLayer.push(arguments); }
+  if(GA_ID){
+    const s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID; document.head.appendChild(s);
+    ga('js', new Date());
+    ga('config', GA_ID, {send_page_view: false, allow_google_signals: false, allow_ad_personalization_signals: false});
+  }
+  // Evento solo para GA4 (nombres con guion bajo, hasta 40 caracteres).
+  function medir(n, params){ try{ ga('event', String(n).replace(/-/g, '_').slice(0, 40), params || {}); }catch(e){} }
+  // Configuración del perfil: propiedades del usuario (para cruzar todo lo demás) y, una vez por semana o cuando
+  // cambia, un evento por súper y por billetera elegidos (así GA cuenta cuántos usuarios usan cada uno).
+  var medirT = null;
+  function medirPerfilLuego(){ clearTimeout(medirT); medirT = setTimeout(medirPerfil, 2500); }
+  function medirPerfil(){
+    if(!GA_ID) return;
+    try{
+      const sups = (P.supers && P.supers.length ? P.supers : Object.keys(D.supers)).slice().sort();
+      const ents = Object.keys(P.ents || {}).sort();
+      const listasN = Array.isArray(P.listas) ? P.listas.length : 0, carritoN = Array.isArray(P.carrito) ? P.carrito.length : 0;
+      const login = window.deeloLogin || 'sin_cuenta';
+      ga('set', 'user_properties', {
+        login, cant_supers: String(P.supers && P.supers.length ? P.supers.length : 0), cant_billeteras: String(ents.length),
+        jubilado: P.jubilado ? 'si' : 'no', tiene_listas: listasN ? 'si' : 'no', configurado: hasProfile() ? 'si' : 'no'
+      });
+      const sem = iso(mondayOf(TODAY)), firma = [login, sups.join(','), ents.join(','), P.jubilado ? 1 : 0, listasN, carritoN].join('|');
+      const prev = store.get('deelo-ga-perfil', {});
+      if(prev.sem === sem && prev.firma === firma) return;
+      store.set('deelo-ga-perfil', {sem, firma});
+      medir('perfil', {login, supers: sups.join(',').slice(0, 100), billeteras: ents.join(',').slice(0, 100), cant_supers: P.supers && P.supers.length ? P.supers.length : 0, cant_billeteras: ents.length, listas: listasN, productos_carrito: carritoN, jubilado: P.jubilado ? 'si' : 'no'});
+      if(P.supers && P.supers.length) P.supers.forEach(s => medir('usa_super', {super: s}));
+      ents.forEach(k => medir('usa_billetera', {billetera: k, tipo: (D.entidades[k] && D.entidades[k].t) || '', tarjetas: ((P.ents[k] && P.ents[k].cards) || []).join(',').slice(0, 100)}));
+    }catch(e){}
+  }
+  window.addEventListener('deelo:sesion', ev => { window.deeloLogin = ev.detail.metodo || (ev.detail.sesion ? 'cuenta' : 'sin_cuenta'); medirPerfilLuego(); });
+  setTimeout(medirPerfil, 4000);
   const hasProfile = () => Object.keys(P.ents).length > 0 || P.jubilado;
 
   function match(pr){
@@ -3062,7 +3115,7 @@ details.others[open] summary{margin-bottom:10px}
     document.getElementById('vsItems').innerHTML = otros.length ? otros.map(fila).join('') : '<li class="vacio">No hay similares en tus súper.</li>';
     document.getElementById('vsNota').textContent = (pxModo === 'mias' && hasProfile() ? 'Precio más bajo con tus tarjetas en tus súper' : 'Precio de lista más bajo en tus súper') + '. −/+ es cuánto menos o más pagás que por tu producto; * cuando el tamaño es distinto, se calcula como si fuera del mismo tamaño que el tuyo. Similares: mismo tipo y variante, y tamaño a ±15%.';
   }
-  function abrirVs(e){ vsBase = e; document.getElementById('vsVer').hidden = false; document.body.classList.add('conLista'); pintarVs(); document.getElementById('vsVer').scrollTop = 0; }
+  function abrirVs(e){ vsBase = e; const pv = PX && PX.productos.find(x => x.e === e); evento('vs-similares', pv ? {item_id: e, item_name: pv.n.slice(0, 100), categoria: pv.c || ''} : {}); document.getElementById('vsVer').hidden = false; document.body.classList.add('conLista'); pintarVs(); document.getElementById('vsVer').scrollTop = 0; }
   function cerrarVs(){ vsBase = null; document.getElementById('vsVer').hidden = true; if(document.getElementById('lsVer').hidden) document.body.classList.remove('conLista'); }
   document.getElementById('vsCerrar').addEventListener('click', cerrarVs);
   document.addEventListener('keydown', ev => { if(ev.key === 'Escape' && vsBase) cerrarVs(); });
@@ -3071,6 +3124,9 @@ details.others[open] summary{margin-bottom:10px}
   document.getElementById('pxQ').addEventListener('input', () => { clearTimeout(pxT); pxT = setTimeout(renderPrecios, 150); });
   // Enter o la lupa: busca ya y cierra el teclado del celular.
   const pxBuscarYa = () => { clearTimeout(pxT); renderPrecios(); document.getElementById('pxQ').blur(); };
+  // Qué se busca (una vez por búsqueda: al apretar Enter o al salir del buscador).
+  let pxUltimaBusq = '';
+  document.getElementById('pxQ').addEventListener('change', ev => { const t = ev.target.value.trim().toLowerCase().slice(0, 60); if(t.length >= 2 && t !== pxUltimaBusq){ pxUltimaBusq = t; medir('search', {search_term: t}); } });
   document.getElementById('pxQ').addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); pxBuscarYa(); } });
   document.getElementById('pxLupa').addEventListener('click', e => { pxBuscarYa(); e.currentTarget.blur(); });
   document.getElementById('view-precios').addEventListener('click', ev => {
@@ -3091,7 +3147,7 @@ details.others[open] summary{margin-bottom:10px}
     const c = cart(), it = c.find(x => x.e === e);
     if(q <= 0) P.carrito = c.filter(x => x.e !== e);
     else if(it) it.q = Math.min(q, 99);
-    else c.push({e, q: 1, n: nombre || ''});
+    else { c.push({e, q: 1, n: nombre || ''}); const pa = PX && PX.productos.find(x => x.e === e); medir('add_to_cart', {items: [{item_id: e, item_name: (nombre || '').slice(0, 100), item_category: (pa && pa.c) || ''}]}); }
     save(); pintarBadge();
   }
   function pintarBadge(){
@@ -3117,6 +3173,13 @@ details.others[open] summary{margin-bottom:10px}
   // Google Maps busca la cadena cerca de la ubicación del usuario (en el celular abre la app de Maps).
   const MAPA_Q = {jumbo:'Jumbo supermercado', disco:'Disco supermercado', vea:'Supermercado Vea', coto:'Coto supermercado', carrefour:'Carrefour supermercado', dia:'Supermercado Día'};
   const mapaUrl = s => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(MAPA_Q[s] || (D.supers[s] ? D.supers[s].n : s));
+  // Resultado del carrito: en qué súper conviene (una vez por carrito distinto).
+  let cxFirma = '';
+  function medirCarrito(best, n){
+    if(!best) return; const f = best.s + '|' + n + '|' + Math.round(best.fin / 1000);
+    if(f === cxFirma) return; cxFirma = f;
+    medir('carrito_resultado', {mejor_super: best.s, productos: n, total: Math.round(best.fin), con_descuento: best.pr ? 'si' : 'no', billetera: best.pr ? (best.pr.pr.ent || '') : '', modo: pxModo || ''});
+  }
   function renderCarrito(){
     renderListas();
     pintarBadge();
@@ -3152,6 +3215,7 @@ details.others[open] summary{margin-bottom:10px}
       return {s, sub, tiene, faltan, promosQ, pr, pierde: resto > 0 ? pierde : null, fin: resto + B - (pr ? pr.v : 0)};
     }).filter(r => r.tiene).sort((a,b) => (b.tiene - a.tiene) || (a.fin - b.fin));
     const best = res[0];
+    medirCarrito(best, items.length);
     const fmtPr = r => r.pr ? `${r.pierde ? `<span>En los productos en oferta se usa la oferta del súper (no se suma con el banco).</span>` : ''}<span class="g">−${fmt(r.pr.v)} con ${esc(entName(r.pr.pr))}${r.pr.via ? ' (' + esc(r.pr.via.map(b => D.entidades[b].n).join(', ')) + ')' : ''} · ${r.pr.pr.pct}%${r.pr.cap ? ', llegás al tope' : ''}</span>` : (r.pierde ? `<span>Las ofertas del súper te convienen más que tu −${r.pierde.pct}% con ${esc(entName(r.pierde))} (no se suman)</span>` : pxModo === 'mias' && hasProfile() ? '<span>Sin descuento con tus tarjetas ese día</span>' : '');
     rank.innerHTML = res.map((r,i) => `<div class="rk${i === 0 ? ' best' : ''}">
         <span class="t">${sbadge(r.s,'lg')}<span>${esc(D.supers[r.s].n)}${i === 0 ? ' <span class="tag" style="font-size:10.5px;font-weight:700;text-transform:uppercase;background:var(--green-soft);color:var(--green-text);border-radius:999px;padding:2px 7px">Más conveniente</span>' : ''}</span></span>
@@ -3197,7 +3261,7 @@ details.others[open] summary{margin-bottom:10px}
     let h = '';
     if(hay){
       if(lsForm) h += `<form class="lsForm" id="lsForm"><label class="sr" for="lsNombre">Nombre de la lista</label><input id="lsNombre" maxlength="40" autocomplete="off" enterkeyhint="done" placeholder="Nombre (ej.: Compra del mes)"><button class="btn green sm" type="submit">Guardar</button><button class="btn ghost sm" type="button" data-ls="cancelar">Cancelar</button></form>`;
-      else h += `<div class="lsBar">${act ? `<span class="muted">Usando la lista <b>${esc(act.n)}</b></span><button class="btn ghost sm" data-ls="actualizar">Guardar cambios</button><button class="btn ghost sm" data-ls="nueva">Guardar como nueva</button>` : `<button class="btn ghost sm" data-ls="nueva">+ Guardar como lista</button>`}${lsMsg ? `<span class="lsOk" role="status">${esc(lsMsg)}</span>` : ''}</div>`;
+      else h += `<div class="lsBar">${act ? `<span class="muted">Usando la lista <b>${esc(act.n)}</b></span><button class="btn ghost sm" data-ls="actualizar">Guardar cambios</button><button class="btn ghost sm" data-ls="nueva">Guardar como nueva</button>` : `<button class="btn ghost sm" data-ls="nueva">+ Guardar como lista</button>`}<button class="btn ghost sm" data-ls="compartir">Compartir</button>${lsMsg ? `<span class="lsOk" role="status">${esc(lsMsg)}</span>` : ''}</div>`;
     }
     if(L.length) h += `<h3 class="lsTit">Mis listas <small>${L.length} ${L.length === 1 ? 'lista' : 'listas'}</small></h3><div class="lsGrid">${L.map(l => {
         const cc = lsConf && lsConf.id === l.id ? lsConf.tipo : '';
@@ -3212,6 +3276,7 @@ details.others[open] summary{margin-bottom:10px}
     const b = ev.target.closest('[data-ls]'); if(!b) return;
     const L = listas(), id = b.dataset.id, l = L.find(x => x.id === id), t = b.dataset.ls;
     if(t === 'ver' && l){ abrirLista(l.id); return; }
+    if(t === 'compartir'){ const a = L.find(x => x.id === P.listaActual); compartirLista(a ? a.n : 'Mi compra', copiaCarrito()); return; }
     if(t === 'nueva'){ lsForm = true; lsConf = null; renderListas(); return; }
     if(t === 'cancelar'){ lsForm = false; renderListas(); return; }
     if(t === 'actualizar'){ const a = L.find(x => x.id === P.listaActual); if(a){ a.items = copiaCarrito(); a.f = iso(TODAY); save(); lsAviso('Lista actualizada'); } return; }
@@ -3229,8 +3294,125 @@ details.others[open] summary{margin-bottom:10px}
     ev.preventDefault();
     const L = listas(), n = (document.getElementById('lsNombre').value || '').trim().slice(0, 40) || `Lista ${L.length + 1}`;
     const l = {id: Date.now().toString(36), n, items: copiaCarrito(), f: iso(TODAY)};
-    L.unshift(l); P.listaActual = l.id; lsForm = false; save(); lsAviso('Lista guardada');
+    L.unshift(l); P.listaActual = l.id; lsForm = false; save(); evento('lista-guardada'); lsAviso('Lista guardada');
   });
+
+  // ---------- compartir y medición ----------
+  // Eventos anónimos en GoatCounter (sin datos personales): qué se usa, cuántos comparten y cuántos vuelven.
+  // Si el script de GoatCounter todavía no cargó, se reintenta unos segundos.
+  function evento(n, params, intento){
+    if(!intento) medir(n, params);
+    try{
+      if(window.goatcounter && window.goatcounter.count){ window.goatcounter.count({path: '#ev-' + n, title: 'deelo · ' + n, event: true}); return; }
+      if((intento || 0) < 10) setTimeout(() => evento(n, params, (intento || 0) + 1), 1000);
+    }catch(e){}
+  }
+  window.deeloEvento = evento;
+  // Vuelve otra semana: se guarda la semana de la primera visita y de la última (solo en este dispositivo).
+  (function(){
+    const k = 'deelo-visitas', v = store.get(k, null), sem = iso(mondayOf(TODAY));
+    if(!v || !v.u){ store.set(k, {p: sem, u: sem}); evento('nuevo'); return; }
+    if(v.u === sem) return;
+    evento(v.u === iso(addDays(mondayOf(TODAY), -7)) ? 'vuelve-semana-siguiente' : 'vuelve-otra-semana');
+    v.u = sem; store.set(k, v);
+  })();
+  let yaAgrego = false;
+  document.addEventListener('click', ev => {
+    if(ev.target.closest('#billeteraListo')) evento('billetera-lista');
+    if(!yaAgrego && ev.target.closest('[data-cadd]')){ yaAgrego = true; evento('carrito-agrega'); }
+  }, true);
+
+  const DEELO_URL = 'https://deelo.ar/';
+  const shDlg = document.getElementById('shDlg'), shBody = document.getElementById('shBody');
+  const abrirSh = html => { shBody.innerHTML = html; if(!shDlg.open){ try{ shDlg.showModal(); }catch(e){ shDlg.setAttribute('open', ''); } } };
+  const cerrarSh = () => { try{ shDlg.close(); }catch(e){ shDlg.removeAttribute('open'); } };
+  // Compartir: en el celu abre el menú de compartir del teléfono; en la compu, WhatsApp o copiar link.
+  async function compartir(tipo, titulo, texto, url, nota){
+    evento('compartir-' + tipo);
+    if(navigator.share && matchMedia('(pointer:coarse)').matches){
+      try{ await navigator.share({title: titulo, text: texto, url}); evento('compartir-' + tipo + '-enviado'); return; }
+      catch(e){ if(e && e.name === 'AbortError') return; }
+    }
+    abrirSh(`<h2 id="shTit">${esc(titulo)}</h2>${nota || ''}<div class="shBtns"><a class="btn green" href="https://wa.me/?text=${encodeURIComponent(texto + '\n' + url)}" target="_blank" rel="noopener" data-shvia="whatsapp">Mandar por WhatsApp</a><button class="btn ghost" type="button" data-shcopiar="${esc(url)}">Copiar link</button></div><p class="shOk" id="shOk" role="status"></p>`);
+    shBody.dataset.tipo = tipo;
+  }
+  function compartirDeelo(){
+    compartir('deelo', 'Compartir deelo', 'Mirá deelo: compara precios de los súper de CABA y te dice qué banco o billetera te conviene usar cada día. Pagá menos, siempre.', DEELO_URL + '?ref=compartir',
+      '<p>Pasale deelo a quien hace las compras: es gratis y le muestra en qué súper y con qué tarjeta le conviene comprar.</p>');
+  }
+  // Lista compartida: va en el link (#lista=nombre|ean.cantidad,ean.cantidad), no se guarda en ningún servidor.
+  const MAX_COMP = 100;
+  const linkLista = (n, items) => DEELO_URL + '?ref=lista#lista=' + encodeURIComponent(n.slice(0, 40)) + '|' + items.slice(0, MAX_COMP).map(x => x.e + '.' + x.q).join(',');
+  function compartirLista(n, items){
+    if(!items.length) return;
+    const nom = x => { const p = PX && PX.productos.find(y => y.e === x.e); return (p && p.n) || x.n || ''; };
+    const lineas = items.slice(0, 12).map(x => `• ${x.q} × ${nom(x)}`).join('\n') + (items.length > 12 ? `\n… y ${items.length - 12} más` : '');
+    compartir('lista', `Compartir "${n}"`, `Te paso mi lista "${n}" (${items.length} ${items.length === 1 ? 'producto' : 'productos'}):\n${lineas}\n\nAbrila en deelo y fijate en qué súper te conviene:`, linkLista(n, items),
+      `<p>Le llega con un link: al abrirlo puede guardar la lista y ver en qué súper le conviene, con sus propias tarjetas.</p>`);
+  }
+  document.addEventListener('click', async ev => {
+    const s = ev.target.closest('[data-share]'); if(s){ cerrarMas(); compartirDeelo(); return; }
+    const w = ev.target.closest('[data-shvia]'); if(w){ evento('compartir-' + (shBody.dataset.tipo || '') + '-whatsapp'); return; }
+    const c = ev.target.closest('[data-shcopiar]'); if(c){
+      const url = c.dataset.shcopiar; let ok = false;
+      try{ await navigator.clipboard.writeText(url); ok = true; }catch(e){
+        try{ const t = document.createElement('textarea'); t.value = url; document.body.appendChild(t); t.select(); ok = document.execCommand('copy'); t.remove(); }catch(e2){}
+      }
+      const m = document.getElementById('shOk'); if(m) m.textContent = ok ? '¡Link copiado! Pegalo donde quieras.' : url;
+      if(ok) evento('compartir-' + (shBody.dataset.tipo || '') + '-copiado');
+      return;
+    }
+  });
+
+  // Al abrir un link de lista compartida: se muestra qué trae y se puede guardar en Mis listas.
+  let recibida = null;
+  function leerLista(h){
+    try{
+      const raw = decodeURIComponent(h), i = raw.lastIndexOf('|'); if(i < 0) return null;
+      const n = raw.slice(0, i).trim().slice(0, 40) || 'Lista compartida';
+      const items = [], vistos = new Set();
+      raw.slice(i + 1).split(',').slice(0, MAX_COMP).forEach(t => { const [e, q] = t.split('.'); if(/^\d{4,20}$/.test(e) && !vistos.has(e)){ vistos.add(e); items.push({e, q: Math.max(1, Math.min(99, parseInt(q, 10) || 1))}); } });
+      return items.length ? {n, items} : null;
+    }catch(e){ return null; }
+  }
+  async function recibirLista(h){
+    const l = leerLista(h); if(!l) return;
+    evento('lista-recibida');
+    abrirSh(`<h2 id="shTit">Te compartieron una lista</h2><p>Cargando productos…</p>`);
+    if(!PX) await cargarPrecios().catch(() => {});
+    const items = l.items.map(x => { const p = PX && PX.productos.find(y => y.e === x.e); return p ? {e: x.e, q: x.q, n: p.n} : null; }).filter(Boolean);
+    if(!items.length){ abrirSh(`<h2 id="shTit">Te compartieron una lista</h2><p>Los productos de esta lista ya no están en deelo.</p><div class="shBtns"><button class="btn ghost" type="button" data-shcerrar>Cerrar</button></div>`); return; }
+    recibida = {n: l.n, items};
+    const u = items.reduce((a, x) => a + x.q, 0);
+    abrirSh(`<h2 id="shTit">Te compartieron "${esc(l.n)}"</h2><p>${items.length} ${items.length === 1 ? 'producto' : 'productos'} · ${u} u.${items.length < l.items.length ? ` (${l.items.length - items.length} ya no están en deelo)` : ''}</p>
+      <ul class="shItems">${items.map(x => `<li><b>${x.q} ×</b> ${esc(x.n)}</li>`).join('')}</ul>
+      <div class="shBtns"><button class="btn green" type="button" data-shguardar>Guardar y ver dónde conviene</button><button class="btn ghost" type="button" data-shcerrar>Ahora no</button></div>`);
+  }
+  function guardarRecibida(){
+    if(!recibida) return;
+    const l = {id: Date.now().toString(36), n: recibida.n, items: recibida.items.map(x => ({...x})), f: iso(TODAY)};
+    listas().unshift(l); recibida.id = l.id;
+    // Si el carrito está vacío, la lista queda cargada para ver directo en qué súper conviene.
+    if(!cart().length){ P.carrito = l.items.map(x => ({...x})); P.listaActual = l.id; }
+    save(); pintarBadge(); evento('lista-recibida-guardada');
+    if(!document.getElementById('hola').hidden){
+      abrirSh(`<h2 id="shTit">¡Lista guardada!</h2><p>La vas a encontrar en <b>Carrito → Mis listas</b>. Antes, configurá tus súper y tarjetas para ver los precios con tus descuentos.</p><div class="shBtns"><button class="btn green" type="button" data-shcerrar>Seguir</button></div>`);
+    } else { cerrarSh(); show('carrito'); }
+  }
+  // Si después llega el perfil guardado en la cuenta, la lista recién guardada no se pierde.
+  function reAgregarRecibida(){
+    if(recibida && recibida.id && !listas().some(x => x.id === recibida.id)){ listas().unshift({id: recibida.id, n: recibida.n, items: recibida.items.map(x => ({...x})), f: iso(TODAY)}); save(); }
+  }
+  shBody.addEventListener('click', ev => {
+    if(ev.target.closest('[data-shguardar]')){ guardarRecibida(); return; }
+    if(ev.target.closest('[data-shcerrar]')){ cerrarSh(); return; }
+  });
+  // Devuelve la pestaña a mostrar según el link (#precios, #carrito…); un #lista=… abre la lista compartida.
+  function vistaDelHash(){
+    const h = location.hash;
+    if(h.startsWith('#lista=')){ recibirLista(h.slice(7)); return 'hoy'; }
+    return h.slice(1);
+  }
 
   // Lista del súper: se abre una lista guardada a pantalla completa y se van tildando los productos.
   // Lo tildado se guarda en la lista (l.ok), así no se pierde si se bloquea el celular.
@@ -3249,7 +3431,7 @@ details.others[open] summary{margin-bottom:10px}
     }).join('');
   }
   async function abrirLista(id){
-    lsVerId = id; if(!PX) await cargarPrecios().catch(() => {});
+    lsVerId = id; evento('lista-modo-super'); if(!PX) await cargarPrecios().catch(() => {});
     document.getElementById('lsVer').hidden = false; document.body.classList.add('conLista'); pintarLista();
     try{ if(navigator.wakeLock) lsWake = await navigator.wakeLock.request('screen'); }catch(e){} // pantalla prendida mientras comprás
   }
@@ -3261,6 +3443,7 @@ details.others[open] summary{margin-bottom:10px}
   });
   document.getElementById('lsVerCerrar').addEventListener('click', cerrarLista);
   document.getElementById('lsVerReset').addEventListener('click', () => { const l = listas().find(x => x.id === lsVerId); if(l){ l.ok = []; save(); pintarLista(); } });
+  document.getElementById('lsVerComp').addEventListener('click', () => { const l = listas().find(x => x.id === lsVerId); if(l) compartirLista(l.n, l.items); });
   document.getElementById('lsVerCarrito').addEventListener('click', () => { const l = listas().find(x => x.id === lsVerId); if(!l) return; P.carrito = l.items.map(x => ({e:x.e, q:x.q, n:x.n})); P.listaActual = l.id; save(); pintarBadge(); cerrarLista(); show('carrito'); });
   document.addEventListener('keydown', ev => { if(ev.key === 'Escape' && lsVerId) cerrarLista(); });
   let vaciarPaso = 0;
@@ -3298,6 +3481,7 @@ details.others[open] summary{margin-bottom:10px}
     document.querySelectorAll('[data-mas]').forEach(b => b.setAttribute('aria-current', ['tarjetas','todas'].includes(v) ? 'page' : 'false'));
     cerrarMas();
     if(location.hash.slice(1) !== v){ try{ history.replaceState(null, '', '#' + v); }catch(e){} }
+    medir('page_view', {page_title: 'deelo · ' + v, page_location: location.origin + location.pathname + '#' + v});
     if(show.listo){ try{ window.goatcounter && window.goatcounter.count && window.goatcounter.count({path: location.pathname + '#' + v, title: 'deelo · ' + v}); }catch(e){} }
     show.listo = true;
     window.scrollTo(0, 0);
@@ -3320,7 +3504,7 @@ details.others[open] summary{margin-bottom:10px}
     const o = optionsFor(sel); uid = 0; renderHero(o); renderList(o); renderQuick();
   });
   document.getElementById('gasto').addEventListener('blur', ev => { ev.target.value = gasto.toLocaleString('es-AR'); });
-  window.addEventListener('hashchange', () => show(location.hash.slice(1)));
+  window.addEventListener('hashchange', () => show(vistaDelHash()));
 
   try{ localStorage.removeItem('deelo-tema'); }catch(e){}
 
@@ -3330,12 +3514,12 @@ details.others[open] summary{margin-bottom:10px}
     estado: () => ({perfil:P, gasto}),
     aplicar(d){
       if(d && d.perfil && d.perfil.ents){ P = {ents:d.perfil.ents, jubilado:!!d.perfil.jubilado, online:!!d.perfil.online, supers:Array.isArray(d.perfil.supers) ? d.perfil.supers : [], carrito:Array.isArray(d.perfil.carrito) ? d.perfil.carrito : (P.carrito || []), listas:Array.isArray(d.perfil.listas) ? d.perfil.listas : (P.listas || []), listaActual:d.perfil.listaActual || null}; store.set(KEY, P); }
-      limpiarPerfil();
+      limpiarPerfil(); reAgregarRecibida();
       if(d && typeof d.gasto === 'number' && d.gasto > 0){ gasto = d.gasto; store.set(KEY+'-gasto', gasto); }
       renderEnts(); renderAll();
     }
   };
-  show(location.hash.slice(1) || 'hoy');
+  show(vistaDelHash() || 'hoy');
 
   // ---------- inicio (bienvenida) ----------
   // Se muestra a quien entra sin sesión, sin tarjetas elegidas y sin haberla salteado antes.
@@ -3409,6 +3593,7 @@ details.others[open] summary{margin-bottom:10px}
     tourI = -1; tourLuz && tourLuz.remove(); tourBox && tourBox.remove(); tourLuz = tourBox = null;
     store.set('deelo-tour', como);
     try{ window.goatcounter && window.goatcounter.count && window.goatcounter.count({path: '#tour-' + como, title: 'deelo · tour ' + como, event: true}); }catch(e){}
+    medir('tour_' + como);
   }
   window.deeloTour = (desde = 0) => { cerrarMas(); tourPaso(desde); };
   document.addEventListener('click', ev => {
