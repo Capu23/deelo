@@ -1,0 +1,48 @@
+# Recibe el catálogo de Coto que sube la compu (scripts/coto-semanal.bat) a la rama "coto-semanal",
+# lo valida y, si está bien, lo pasa a main. Solo toma data/coto-catalogo.json; ignora todo lo demás.
+# Si no pasa la validación se marca en rojo y GitHub avisa por mail. Lo usa la actualización de los lunes.
+name: "deelo: catálogo de Coto"
+
+on:
+  push:
+    branches: [coto-semanal]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deelo-coto
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Traer el catálogo subido
+        run: |
+          git fetch -q origin coto-semanal
+          git show origin/coto-semanal:data/coto-catalogo.json > "$RUNNER_TEMP/coto.json"
+      - name: Validar
+        run: node scraper/validar-coto.js "$RUNNER_TEMP/coto.json" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Publicar en main
+        run: |
+          git config user.name "deelo-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for i in 1 2 3; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/coto.json" data/coto-catalogo.json
+            git add data/coto-catalogo.json
+            if git diff --cached --quiet; then echo "Sin cambios."; exit 0; fi
+            git commit -q -m "Coto: catálogo del $(node -p "require('./data/coto-catalogo.json').actualizado")"
+            if git push -q; then echo "Publicado en main."; exit 0; fi
+            sleep 10
+          done
+          exit 1
