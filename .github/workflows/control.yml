@@ -1,12 +1,10 @@
-# Control de precios: compara una muestra de precios de deelo con la web de cada súper a mitad de semana,
-# cuando suelen empezar las ofertas. Si cambió más del 25% de la muestra se marca en rojo (GitHub avisa por mail).
+# Control de precios: todos los días compara una muestra de precios de deelo con la web de cada súper. Si cambió más del 25% de la muestra se marca en rojo (GitHub avisa por mail).
 # También se puede correr a mano desde Actions -> "deelo: control de precios" -> Run workflow.
 name: "deelo: control de precios"
 
 on:
   schedule:
-    - cron: "23 15 * * 4"   # jueves 15:23 UTC = 12:23 en Argentina
-    - cron: "23 15 * * 6"   # sábado
+    - cron: "23 15 * * *"   # todos los días 15:23 UTC = 12:23 en Argentina
   workflow_dispatch:
 
 permissions:
@@ -15,7 +13,7 @@ permissions:
 jobs:
   control:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -24,4 +22,4 @@ jobs:
       - name: Instalar Playwright
         run: npm install --no-save --no-package-lock playwright@1.63.0
       - name: Comparar precios de deelo con la web de cada súper
-        run: node scraper/control.js 40
+        run: node scraper/control.js 1000

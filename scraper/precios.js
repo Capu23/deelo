@@ -12,10 +12,13 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 // Coto no es VTEX: sus precios salen de su web (ver scraper/coto-lee.js).
 const { cotoOf, cotoInfo } = require('./coto-lee')(ROOT);
+const { promosCencosud, aplicarPromo } = require('./promos-lee')(ROOT);
 if (!cotoInfo) console.log('Sin datos de Coto vigentes: Coto queda afuera.');
 
 (async () => {
   const out = [];
+  // EAN → SKU de Jumbo, Disco y Vea: lo usa cencosud-promos.js para pedir las promos.
+  const SKU_CENCOSUD = { jumbo: {}, disco: {}, vea: {} };
   const grupos = [], grupoIdx = new Map(), claves = [], claveIdx = new Map();
   let descartados = 0;
   const errores = Object.fromEntries(sups.map(s => [s, 0]));
@@ -49,7 +52,9 @@ if (!cotoInfo) console.log('Sin datos de Coto vigentes: Coto queda afuera.');
       if (!r.precio) continue;
       const slug = r.url.slice(SUPERS[s].length + 1, -2);
       // 5º elemento: promo por cantidad {t: texto, n: unidades, u: precio c/u} (como en Coto).
-      precios[s] = [r.precio, r.lista || 0, r.disponible ? 1 : 0, slug, ...(r.promo ? [r.promo] : [])];
+      const pc = promosCencosud[s] && promosCencosud[s][p.ean];
+      precios[s] = [r.precio, r.lista || 0, r.disponible ? 1 : 0, slug, ...(r.promo ? [r.promo] : pc ? [aplicarPromo(pc, r.precio)] : [])];
+      if (r.sku && SKU_CENCOSUD[s]) SKU_CENCOSUD[s][p.ean] = r.sku;
       if (!img && r.img) img = r.img.replace(/-\d+-\d+\//, '-200-200/');
     }
     if (cotoOf[p.ean]) precios.coto = cotoOf[p.ean];
@@ -80,6 +85,7 @@ if (!cotoInfo) console.log('Sin datos de Coto vigentes: Coto queda afuera.');
     productos: out,
   };
   fs.writeFileSync(path.join(ROOT, 'data/precios.json'), JSON.stringify(data));
+  if (Object.values(SKU_CENCOSUD).some(m => Object.keys(m).length)) fs.writeFileSync(path.join(ROOT, 'data/skus-cencosud.json'), JSON.stringify(SKU_CENCOSUD));
 
   // Historial: una foto chica por semana en data/historial/AAAA-MM-DD.json, base para "subió/bajó",
   // alertas de precio y el plan Plus. Por producto, el precio de cada súper en el orden de `supers` (0 = sin precio).

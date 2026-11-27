@@ -59,6 +59,7 @@ function normalizar(sup, p) {
     url: SUPERS[sup] + '/' + (p.linkText || '') + '/p',
     img: ((it.images || [])[0] || {}).imageUrl || '',
     promo: promoCantidad(p, o, precio > 0 ? precio : 0),
+    sku: it.itemId || '',
   };
 }
 async function vtexBuscar(sup, termino, n = 10) {
