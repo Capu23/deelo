@@ -1,0 +1,48 @@
+# Promos del súper de mitad de semana: Jumbo, Disco y Vea suelen lanzar ofertas de jueves a domingo
+# (3x2, "2do al 50%", "25%"). Este workflow las lee el jueves temprano y las aplica a los precios, sin volver a
+# recorrer los catálogos (eso es los lunes). También se puede correr a mano desde Actions.
+name: "deelo: promos de mitad de semana"
+
+on:
+  schedule:
+    - cron: "17 9 * * 4"   # jueves 9:17 UTC = 6:17 en Argentina
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deelo-promos
+  cancel-in-progress: false
+
+jobs:
+  promos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Instalar Playwright
+        run: npm install --no-save --no-package-lock playwright@1.63.0
+      - name: Leer promos de Jumbo, Disco y Vea
+        run: |
+          node scraper/cencosud-promos.js | tee -a "$GITHUB_STEP_SUMMARY"
+          node scraper/actualizar-promos.js | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Publicar
+        run: |
+          git config user.name "deelo-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp data/promos-cencosud.json data/precios.json "$RUNNER_TEMP/"
+          for i in 1 2 3; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/promos-cencosud.json" data/promos-cencosud.json
+            node scraper/actualizar-promos.js > /dev/null
+            git add data/promos-cencosud.json data/precios.json
+            if git diff --cached --quiet; then echo "Sin cambios."; exit 0; fi
+            git commit -q -m "deelo: promos de mitad de semana $(date -u +%Y-%m-%d)"
+            if git push -q; then echo "Publicado."; exit 0; fi
+            sleep 10
+          done
+          exit 1

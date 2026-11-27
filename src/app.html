@@ -2662,6 +2662,14 @@ details.others[open] summary{margin-bottom:10px}
   }
 
   // ---------- fechas ----------
+  // Promos del súper con fecha (Jumbo, Disco y Vea): solo valen entre m.d y m.h. Con n = 1 es una rebaja directa.
+  // Devuelve [precio, lista, promoPorCantidad] para ese día.
+  const conPromo = (r, d) => {
+    let [precio, lista, , , m] = r;
+    if(m && m.d && d && (iso(d) < m.d || iso(d) > m.h)) m = null;
+    if(m && m.n === 1){ if(m.u < precio){ lista = lista || precio; precio = m.u; } m = null; }
+    return [precio, lista, m || null];
+  };
   const iso = d => d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
   const isoDow = d => ((d.getDay()+6)%7)+1;
   const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate()+n); return x; };
@@ -2959,7 +2967,7 @@ details.others[open] summary{margin-bottom:10px}
     const q = normTxt(document.getElementById('pxQ').value.trim()).split(/\s+/).filter(Boolean);
     let list = PX.productos.filter(p => (!pxCat || p.c === pxCat) && q.every(w => p.k.includes(w)) && Object.keys(p.p).some(miSuper));
     const desc = Object.fromEntries(Object.keys(PX.supers).map(s => [s, pxModo === 'mias' ? mejorDescuento(s, pxDay) : null]));
-    const filas = p => Object.entries(p.p).filter(([s]) => miSuper(s)).map(([s, [precio, lista, disp, slug, m]]) => {
+    const filas = p => Object.entries(p.p).filter(([s]) => miSuper(s)).map(([s, r]) => { const [, , disp, slug] = r, [precio, lista, m] = conPromo(r, pxDay);
       // El descuento del súper y el del banco no se suman: se toma el que deje el precio más bajo.
       const dd = desc[s], pb = dd && dd.pr, conBanco = pb ? (lista || precio) * (1 - pb.pct/100) : Infinity;
       const pr = conBanco < precio ? pb : null, fin = pr ? conBanco : precio;
@@ -2989,7 +2997,7 @@ details.others[open] summary{margin-bottom:10px}
       const orig = best ? (best.lista || best.precio) : 0; // precio original, sin oferta del súper ni promo
       const ahorro = best ? orig - best.fin : 0;
       const row = (x, i) => `<a class="px${x === best ? ' best' : ''}${x.disp ? '' : ' na'}" href="${esc(/^https?:/.test(x.slug) ? x.slug : PX.supers[x.s] + '/' + x.slug + '/p')}" target="_blank" rel="noopener">
-          <span class="w">${sbadge(x.s)}<span>${esc(D.supers[x.s].n)}${x === best ? '<span class="tag">Más barato</span>' : ''}<span class="why${x.pr || x.lista ? '' : ' off'}"${x.via ? ` title="Con ${esc(x.via.map(b => D.entidades[b].n).join(', '))}"` : ''}>${!x.disp ? '' : (x.pr ? `−${x.pr.pct}% con ${esc(entName(x.pr))}` : x.lista ? `Oferta del súper −${Math.floor((1 - x.precio / x.lista) * 100 + 0.05)}%${x.pierde ? ` · mejor que tu −${x.pierde.pct}%` : ''}` : '') || (x.m ? '' : pxModo === 'mias' ? 'Sin descuento' : '')}</span>${x.disp && x.m ? `<span class="why multi">${esc(x.m.t)}: ${fmt(x.m.u)} c/u llevando ${x.m.n}</span>` : ''}</span></span>
+          <span class="w">${sbadge(x.s)}<span>${esc(D.supers[x.s].n)}${x === best ? '<span class="tag">Más barato</span>' : ''}<span class="why${x.pr || x.lista ? '' : ' off'}"${x.via ? ` title="Con ${esc(x.via.map(b => D.entidades[b].n).join(', '))}"` : ''}>${!x.disp ? '' : (x.pr ? `−${x.pr.pct}% con ${esc(entName(x.pr))}` : x.lista ? `Oferta del súper −${Math.floor((1 - x.precio / x.lista) * 100 + 0.05)}%${x.pierde ? ` · mejor que tu −${x.pierde.pct}%` : ''}` : '') || (x.m ? '' : pxModo === 'mias' ? 'Sin descuento' : '')}</span>${x.disp && x.m ? `<span class="why multi">${esc(x.m.t)}: ${fmt(x.m.u)} c/u llevando ${x.m.n}${x.m.h ? ` · hasta el ${Number(x.m.h.slice(8))}/${Number(x.m.h.slice(5,7))}` : ''}</span>` : ''}</span></span>
           <span class="pr"><b>${fmt(x.fin)}</b>${x.pr || x.lista ? `<s>${fmt(x.lista || x.precio)}</s>` : ''}</span></a>`;
       return `<article class="prod"><div class="ph">${p.i ? `<img src="${esc(p.i.replace(/(\/ids\/\d+)\//, '$1-120-120/'))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<span class="ni"><b>${esc(p.n)}</b><small>${esc(p.c)}</small></span><span class="phR">${ahorro >= 1 ? `<span class="save" title="En ${esc(D.supers[best.s].n)}: ${fmt(orig)} → ${fmt(best.fin)}">Ahorrás<br><b>${fmt(ahorro)}</b></span>` : ''}${qtyCtrl(p.e)}</span></div>
         ${fs.slice(0, pxCuantos || fs.length).map(row).join('')}${(() => { const n = similares(p).length; return n ? `<button class="vsBtn" data-vs="${esc(p.e)}" type="button"><b>VS</b> similares <span>${n}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>` : ''; })()}</article>`;
@@ -3021,7 +3029,8 @@ details.others[open] summary{margin-bottom:10px}
   // Precio final más bajo del producto en tus súper (oferta del súper o descuento del banco, el mayor).
   function mejorDe(q){
     let b = null;
-    for(const [s, [precio, lista, disp]] of Object.entries(q.p)){
+    for(const [s, r] of Object.entries(q.p)){
+      const disp = r[2], [precio, lista] = conPromo(r, pxDay || new Date(sel));
       if(!miSuper(s) || !disp) continue;
       const dd = pxModo === 'mias' ? mejorDescuento(s, pxDay || new Date(sel)) : null;
       const fin = Math.min(precio, dd ? (lista || precio) * (1 - dd.pr.pct/100) : Infinity);
@@ -3074,7 +3083,7 @@ details.others[open] summary{margin-bottom:10px}
 
   // ---------- carrito ----------
   // Costo de q unidades: si hay promo por cantidad (2x1, 2da al 80%…) se aplica a cada grupo completo.
-  const costo = (r, q) => { const m = r[4]; if(!m || q < m.n) return r[0] * q; const g = Math.floor(q / m.n) * m.n; return g * m.u + (q - g) * r[0]; };
+  const costo = (r, q) => { const [precio, , m] = conPromo(r, cxDay); if(!m || q < m.n) return precio * q; const g = Math.floor(q / m.n) * m.n; return g * m.u + (q - g) * precio; };
   // P.carrito: [{e: EAN, q: cantidad, n: nombre}] — se guarda con el perfil (y en la cuenta, si hay sesión)
   const cart = () => (P.carrito = Array.isArray(P.carrito) ? P.carrito : []);
   const cantidad = e => (cart().find(x => x.e === e) || {}).q || 0;
@@ -3132,7 +3141,7 @@ details.others[open] summary{margin-bottom:10px}
     const res = sups.map(s => {
       let sub = 0, tiene = 0; const faltan = [], promosQ = [];
       const filasS = [];
-      items.forEach(x => { const r = x.p.p[s]; if(r && r[2]){ const st = costo(r, x.q); sub += st; filasS.push({st, base: (r[1] || r[0]) * x.q, oferta: r[1] > 0 || (r[4] && x.q >= r[4].n)}); if(r[4] && x.q >= r[4].n) promosQ.push(x.p.n); tiene++; } else faltan.push(x.p.n); });
+      items.forEach(x => { const r = x.p.p[s]; if(r && r[2]){ const [pr0, li0, m0] = conPromo(r, cxDay), st = costo(r, x.q); sub += st; filasS.push({st, base: (li0 || pr0) * x.q, oferta: li0 > 0 || (m0 && x.q >= m0.n)}); if(m0 && x.q >= m0.n) promosQ.push(x.p.n); tiene++; } else faltan.push(x.p.n); });
       // Descuento del banco y oferta del súper no se suman: en cada producto en oferta se queda lo que más conviene.
       const pr0 = mejorPromoTotal(s, cxDay, filasS.reduce((a,f) => a + f.base, 0));
       if(!pr0) return {s, sub, tiene, faltan, promosQ, pr: null, fin: sub};
@@ -3155,7 +3164,7 @@ details.others[open] summary{margin-bottom:10px}
     let split = 0, donde = new Set(), cubiertos = 0;
     items.forEach(x => {
       let mejor = null;
-      sups.forEach(s => { const r = x.p.p[s]; if(!r || !r[2]) return; const d = pxModo === 'mias' ? mejorDescuento(s, cxDay) : null; const st = costo(r, x.q) / x.q, u = d ? Math.min(st, (r[1] || r[0]) * (1 - d.pr.pct/100)) : st; if(!mejor || u < mejor.u) mejor = {u, s}; });
+      sups.forEach(s => { const r = x.p.p[s]; if(!r || !r[2]) return; const d = pxModo === 'mias' ? mejorDescuento(s, cxDay) : null; const [pr0, li0] = conPromo(r, cxDay), st = costo(r, x.q) / x.q, u = d ? Math.min(st, (li0 || pr0) * (1 - d.pr.pct/100)) : st; if(!mejor || u < mejor.u) mejor = {u, s}; });
       if(mejor){ split += mejor.u * x.q; donde.add(mejor.s); cubiertos++; }
     });
     if(best && donde.size > 1 && split < best.fin - 1) rank.innerHTML += `<div class="split">Si repartís la compra y llevás cada producto donde está más barato, pagarías <b>${fmt(split)}</b> (en ${[...donde].map(s => esc(D.supers[s].n)).join(', ')}). Es una estimación sin topes: sirve si igual pasás por varios súper.</div>`;

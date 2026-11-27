@@ -44,6 +44,8 @@ jobs:
           # (en 3 o más cadenas, sin marcas propias) y saca los precios de ese recorrido.
           node scraper/catalogo.js && node scraper/canasta.js 3 || echo "catálogo falló: se mantiene la canasta anterior"
           node scraper/precios.js | tee precios.log
+          # Promos del súper de Jumbo, Disco y Vea (3x2, 2do al 50%…) con sus fechas
+          node scraper/cencosud-promos.js | tee -a precios.log && node scraper/actualizar-promos.js | tee -a precios.log || echo "promos de Cencosud fallaron: siguen las anteriores"
           # Resumen visible en la pestaña Actions
           { echo "### deelo · precios del $(date -u +%Y-%m-%d)"; echo '```'; tail -n 8 precios.log; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
 
