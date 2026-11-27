@@ -1,11 +1,13 @@
-# Promos del súper de mitad de semana: Jumbo, Disco y Vea suelen lanzar ofertas de jueves a domingo
-# (3x2, "2do al 50%", "25%"). Este workflow las lee el jueves temprano y las aplica a los precios, sin volver a
-# recorrer los catálogos (eso es los lunes). También se puede correr a mano desde Actions.
+# Promos del súper de mitad de semana de Jumbo, Disco y Vea (3x2, "2do al 50%", "−25%"). Según sus fechas,
+# arrancan los miércoles (semanales, de miércoles a martes) y los viernes (de fin de semana, de viernes a domingo).
+# Este workflow las lee esos días temprano y las aplica a los precios, sin volver a recorrer los catálogos
+# (eso es los lunes). También se puede correr a mano desde Actions.
 name: "deelo: promos de mitad de semana"
 
 on:
   schedule:
-    - cron: "17 9 * * 4"   # jueves 9:17 UTC = 6:17 en Argentina
+    - cron: "17 9 * * 3"   # miércoles 9:17 UTC = 6:17 en Argentina
+    - cron: "17 9 * * 5"   # viernes
   workflow_dispatch:
 
 permissions:
