@@ -227,6 +227,7 @@ body.conLista{overflow:hidden}
 .lEj{width:100%;background:var(--green-soft);border-radius:14px;padding:14px 16px;font-size:14.5px;line-height:1.5;color:var(--ink);text-align:left}
 .lEj b{color:var(--green-text)}
 .lSups{font-weight:700;font-size:15px;color:var(--ink);line-height:1.5}
+.lTodas{display:inline-block;margin-top:8px;font-size:13.5px;font-weight:600;color:var(--green-text)}
 .lSups small{display:block;font-weight:400;font-size:13px;color:var(--ink3);margin-top:4px}
 .lFaq{width:100%;text-align:left;display:flex;flex-direction:column;gap:8px}
 .lFaq h2{text-align:center;margin-bottom:4px}
@@ -619,7 +620,7 @@ details.others[open] summary{margin-bottom:10px}
       <li><span class="lIco" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h2.6l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1l1.6-6.8H6.2"/></svg></span><span><b>Carrito</b>Armá tu compra y te decimos en qué súper te conviene hacerla entera. Guardala como lista, compartila y tildala en el súper.</span></li>
     </ol>
     <div class="lEj" id="lEj" hidden></div>
-    <p class="lSups">Coto · Jumbo · Disco · Vea · Carrefour · Día<br><small>Banco Nación, Provincia, Galicia, Santander, BBVA, Macro, MODO, Mercado Pago, Naranja X, Ualá, Cuenta DNI y muchos más.</small></p>
+    <p class="lSups">Coto · Jumbo · Disco · Vea · Carrefour · Día<br><small>Banco Nación, Provincia, Galicia, Santander, BBVA, Macro, MODO, Mercado Pago, Naranja X, Ualá, Cuenta DNI y muchos más.</small><a class="lTodas" href="/descuentos/">Ver todas las promos de la semana →</a></p>
     <section class="lFaq" id="faq" aria-labelledby="faqTit">
       <h2 id="faqTit">Preguntas frecuentes</h2>
       <details><summary>¿deelo es gratis?</summary><p>Sí. Podés usar deelo gratis, con o sin cuenta.</p></details>
@@ -3551,7 +3552,7 @@ details.others[open] summary{margin-bottom:10px}
     if(iso(TODAY) > VIG.hasta) b.push(`<div class="banner warn"><span class="grow">Las promos cargadas son de <b>${esc(D.periodo)}</b> y ya vencieron. Se actualizan al empezar el mes.</span></div>`);
     if(!hasProfile()) b.push(`<div class="banner"><span class="grow"><b>Elegí con qué pagás</b> y te mostramos solo tus descuentos, con lo que ahorrás en pesos.</span><button class="btn green" data-go="tarjetas">Elegir</button></div>`);
     document.getElementById('banners').innerHTML = b.join('');
-    document.getElementById('foot').innerHTML = `<span>Actualizado el ${D.actualizado.split('-').reverse().join('/')} desde los sitios oficiales de cada súper (se actualiza solo todos los lunes). Algunas promos salen de notas de prensa.</span>
+    document.getElementById('foot').innerHTML = `<span>Actualizado el ${D.actualizado.split('-').reverse().join('/')} desde los sitios oficiales de cada súper (se actualiza solo los lunes y miércoles). Algunas promos salen de notas de prensa. <a href="/descuentos/">Descuentos de la semana por súper y por banco</a>.</span>
       <span><b>✓ Oficial</b>: figura en el sitio del súper. <b>Confirmar en app</b>: solo notas de prensa. <b>Verificar</b>: una sola fuente o dato viejo. El ahorro es una estimación para una compra; los topes mensuales o semanales se comparten entre compras.</span>
       <span>deelo no está afiliado a ningún supermercado, banco ni billetera. Las marcas pertenecen a sus dueños. <a href="/acerca.html">Cómo funciona, aviso legal y privacidad</a>.</span>`;
   }

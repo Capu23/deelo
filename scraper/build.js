@@ -237,3 +237,6 @@ fs.writeFileSync(path.join(ROOT, 'index.html'), head + app.slice(0, cut).replace
 console.log(`promos: ${promos.length} (${promos.length - extrasVig.length} oficiales, ${extrasVig.length} manuales)`);
 console.log('fuentes:', JSON.stringify(data.estado));
 if (skipped.length) console.log('sin mapear (' + skipped.length + '):\n  ' + skipped.join('\n  '));
+
+// Páginas para Google (una por súper y por banco o billetera) y sitemap.xml, con las promos recién armadas.
+require('./paginas');

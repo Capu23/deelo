@@ -63,7 +63,7 @@ jobs:
             git reset -q --hard origin/main
             cp -r "$RUNNER_TEMP/data-nueva/." data/
             node scraper/build.js > /dev/null
-            git add data src/app.html index.html
+            git add data src/app.html index.html descuentos promos sitemap.xml
             if git diff --cached --quiet; then echo "Sin cambios en las promos."; exit 0; fi
             git commit -q -m "deelo: promos actualizadas $(date -u +%Y-%m-%d)"
             if git push -q; then echo "Publicado."; exit 0; fi
