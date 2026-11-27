@@ -22,4 +22,4 @@ jobs:
       - name: Instalar Playwright
         run: npm install --no-save --no-package-lock playwright@1.63.0
       - name: Comparar precios de deelo con la web de cada súper
-        run: node scraper/control.js 40
+        run: node scraper/control.js 200
