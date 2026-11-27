@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { SUPERS, vtexPorEan } = require('./vtex');
 const { tamano, claveSimilar } = require('./tamano');
+const { sacarPreciosViejos } = require('./sin-stock');
 
 const ROOT = path.join(__dirname, '..');
 const canasta = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/canasta.json'), 'utf8')).productos;
@@ -20,7 +21,7 @@ if (!cotoInfo) console.log('Sin datos de Coto vigentes: Coto queda afuera.');
   // EAN → SKU de Jumbo, Disco y Vea: lo usa cencosud-promos.js para pedir las promos.
   const SKU_CENCOSUD = { jumbo: {}, disco: {}, vea: {} };
   const grupos = [], grupoIdx = new Map(), claves = [], claveIdx = new Map();
-  let descartados = 0;
+  let descartados = 0, viejosSinStock = 0;
   const errores = Object.fromEntries(sups.map(s => [s, 0]));
   // Un "carril" por súper en paralelo; dentro de cada súper, de a una consulta con una pausa corta.
   const res = Object.fromEntries(canasta.map(p => [p.ean, {}]));
@@ -63,6 +64,8 @@ if (!cotoInfo) console.log('Sin datos de Coto vigentes: Coto queda afuera.');
     const vals = Object.values(precios).map(v => v[0]).sort((a, b) => a - b);
     const med = vals[Math.floor(vals.length / 2)];
     for (const [s, v] of Object.entries(precios)) if (vals.length >= 3 && (v[0] < med / 3 || v[0] > med * 3)) { delete precios[s]; descartados++; }
+    // Sin stock con precio viejo (muy por debajo de los que sí tienen stock, o nadie lo tiene): se saca.
+    viejosSinStock += sacarPreciosViejos(precios);
     if (Object.keys(precios).length < 2) continue;
     // Para "VS similares": subcategoría (árbol de Jumbo/Disco/Vea; si no está, el de Carrefour) y tamaño.
     const rr = res[p.ean], ref = rr.jumbo || rr.disco || rr.vea, refC = rr.carrefour;
@@ -98,5 +101,6 @@ if (!cotoInfo) console.log('Sin datos de Coto vigentes: Coto queda afuera.');
   console.log('historial guardado:', 'data/historial/' + data.actualizado + '.json', Object.keys(hist.p).length, 'productos');
   console.log('productos con precio en 2+ súper:', out.length, '/', canasta.length);
   console.log('precios absurdos descartados:', descartados);
+  console.log('precios viejos sin stock sacados:', viejosSinStock);
   console.log('sin precio por súper:', JSON.stringify(errores));
 })();
