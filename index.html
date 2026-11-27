@@ -3569,7 +3569,7 @@ details.others[open] summary{margin-bottom:10px}
   const primero = sel => [...document.querySelectorAll(sel)].find(seVe);
   const TOUR = [
     {v:'tarjetas', el:'#supPrefs', t:'Elegí tus súper', d:'Marcá los súper donde comprás. Si no marcás ninguno, te mostramos todos.', grupo:'Configurá deelo'},
-    {v:'tarjetas', el:'#entGroups .ent', t:'Activá tus bancos y billeteras', d:'Prendé el interruptor de cada banco o billetera que usás (más abajo hay más) y, en cada banco, elegí tus tarjetas. Así te mostramos solo los descuentos que podés aprovechar.', grupo:'Configurá deelo'},
+    {v:'tarjetas', el:'#entGroups', alto:true, t:'Activá tus bancos y billeteras', d:'Deslizá para ver todas: bancos, billeteras, tarjetas de súper y programas (como jubilados). Prendé las que usás y, en cada banco, elegí tus tarjetas.', grupo:'Configurá deelo'},
     {v:'tarjetas', el:'#billeteraListo', t:'¡Listo!', d:'Cuando termines, tocá acá para ver tu semana.', grupo:'Configurá deelo', toca:true},
     {v:'hoy', el:'#days', t:'Tu semana', d:'Cada día muestra el mejor descuento con tus tarjetas. Tocá un día para ver sus promos.', grupo:'Conocé deelo'},
     {v:'hoy', el:'#hero', t:'Lo mejor del día', d:'Dónde y con qué pagar ese día, y cuánto ahorrás en pesos según lo que gastes.', grupo:'Conocé deelo'},
@@ -3590,7 +3590,9 @@ details.others[open] summary{margin-bottom:10px}
     for(let k = 0; k < 20 && !(el = primero(st.el)); k++) await espera(150); // Precios carga sus datos
     if(tourI !== i) return;
     if(!el) return tourPaso(i + 1); // si esa parte no está, se saltea
-    el.scrollIntoView({block: 'center', behavior: 'instant'});
+    // Una sección larga (la lista de bancos) se muestra desde arriba y se ilumina toda mientras se desliza.
+    el.scrollIntoView({block: st.alto ? 'start' : 'center', behavior: 'instant'});
+    if(st.alto) scrollBy(0, -80);
     await espera(60);
     pintarTour(el, st, i);
   }
@@ -3598,7 +3600,8 @@ details.others[open] summary{margin-bottom:10px}
     if(!tourLuz){ tourLuz = document.createElement('div'); tourLuz.className = 'tourLuz'; document.body.appendChild(tourLuz); }
     if(!tourBox){ tourBox = document.createElement('div'); tourBox.className = 'tourBox'; tourBox.setAttribute('role', 'dialog'); tourBox.setAttribute('aria-live', 'polite'); document.body.appendChild(tourBox); }
     const r = el.getBoundingClientRect(), pad = 6, vw = innerWidth, vh = innerHeight;
-    const L = {top: Math.max(4, r.top - pad), left: Math.max(4, r.left - pad), w: Math.min(vw - 8, r.width + pad * 2), h: Math.min(vh - 8, r.height + pad * 2)};
+    const top0 = Math.max(4, r.top - pad), bot0 = Math.min(vh - 4, r.bottom + pad);
+    const L = {top: top0, left: Math.max(4, r.left - pad), w: Math.min(vw - 8, r.width + pad * 2), h: Math.max(0, bot0 - top0)};
     Object.assign(tourLuz.style, {top: L.top + 'px', left: L.left + 'px', width: L.w + 'px', height: L.h + 'px'});
     const ult = i === TOUR.length - 1;
     tourBox.innerHTML = `<span class="tN">${esc(st.grupo)} · ${i + 1} de ${TOUR.length}</span><h3>${esc(st.t)}</h3><p>${esc(st.d)}</p>
@@ -3607,10 +3610,13 @@ details.others[open] summary{margin-bottom:10px}
       ${i > 0 ? '<button class="btn ghost sm" data-tour-atras>Atrás</button>' : ''}${st.toca ? '' : `<button class="btn green sm" data-tour-sig>${ult ? 'Terminar' : 'Siguiente'}</button>`}</div><i class="tFlecha"></i>`;
     const bw = tourBox.offsetWidth, bh = tourBox.offsetHeight, abajo = L.top + L.h + 14 + bh < vh - 70 || L.top < bh + 20;
     const left = Math.min(Math.max(16, r.left + r.width / 2 - bw / 2), vw - bw - 16);
-    const top = abajo ? Math.min(L.top + L.h + 14, vh - bh - 8) : Math.max(8, L.top - bh - 14);
+    const nav = document.querySelector('.bottomNav'), piso = nav && seVe(nav) ? nav.getBoundingClientRect().height + 12 : 16;
+    // Sección larga: el globito queda fijo abajo, sin flecha, para que se pueda deslizar la lista iluminada.
+    const top = st.alto ? vh - bh - piso : abajo ? Math.min(L.top + L.h + 14, vh - bh - 8) : Math.max(8, L.top - bh - 14);
     Object.assign(tourBox.style, {left: left + 'px', top: top + 'px'});
     const f = tourBox.querySelector('.tFlecha'), fx = Math.min(Math.max(16, r.left + r.width / 2 - left - 7), bw - 30);
-    Object.assign(f.style, abajo ? {top: '-7px', left: fx + 'px'} : {bottom: '-7px', left: fx + 'px'});
+    if(st.alto) f.style.display = 'none';
+    else Object.assign(f.style, abajo ? {top: '-7px', left: fx + 'px'} : {bottom: '-7px', left: fx + 'px'});
     tourBox.dataset.el = st.el;
   }
   function tourFin(como){
