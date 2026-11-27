@@ -5,7 +5,8 @@ const firebaseConfig = {
   projectId: "deelo-6e0e9",
   storageBucket: "deelo-6e0e9.firebasestorage.app",
   messagingSenderId: "670030404709",
-  appId: "1:670030404709:web:068a90d261baf82669ba8c"
+  appId: "1:670030404709:web:068a90d261baf82669ba8c",
+  measurementId: "G-K91SZSCVKH"
 };
 const V = '10.12.2';
 const $ = id => document.getElementById(id);
