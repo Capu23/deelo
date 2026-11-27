@@ -61,6 +61,12 @@ const msg = e => ERRORES[e && e.code] || 'Algo salió mal. Probá de nuevo en un
     crear: (mail, pass) => A.createUserWithEmailAndPassword(A.a, mail, pass),
     reset: mail => A.sendPasswordResetEmail(A.a, mail),
   };
+  // Comentarios ("Contanos qué mejorar"): se guardan en la colección comentarios (solo se pueden crear, no leer).
+  window.deeloComentar = d => F.addDoc(F.collection(F.db, 'comentarios'), {
+    tipo: ['idea', 'error', 'otro'].includes(d.tipo) ? d.tipo : 'otro',
+    texto: String(d.texto || '').slice(0, 1500), contacto: String(d.contacto || '').slice(0, 120), vista: String(d.vista || '').slice(0, 20),
+    uid: user ? user.uid : null, fecha: F.serverTimestamp(),
+  });
   window.dispatchEvent(new CustomEvent('deelo:auth-listo'));
   btn.addEventListener('click', () => { borrarPaso = 0; render(); dlg.showModal(); });
 
