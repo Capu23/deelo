@@ -1,0 +1,1237 @@
+{
+ "actualizado": "2026-11-27",
+ "items": [
+  {
+   "id": "banana",
+   "n": "Banana",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 3599,
+     "nombre": "Banana Ecuador X Kg",
+     "url": "https://www.jumbo.com.ar/banana-ecuador-x-kg-2/p"
+    },
+    "disco": {
+     "precio": 3599,
+     "nombre": "Banana Ecuador X Kg",
+     "url": "https://www.disco.com.ar/banana-ecuador-x-kg-2/p"
+    },
+    "vea": {
+     "precio": 3299,
+     "nombre": "Banana Ecuador X Kg",
+     "url": "https://www.vea.com.ar/banana-ecuador-x-kg-2/p"
+    },
+    "carrefour": {
+     "precio": 2299,
+     "nombre": "Banana selección x kg.",
+     "url": "https://www.carrefour.com.ar/banana-seleccion-x-kg-719074/p"
+    },
+    "dia": {
+     "precio": 2790,
+     "nombre": "Banana x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/banana-x-kg-90110/p"
+    },
+    "coto": {
+     "precio": 1699.15,
+     "nombre": "Banana Cavendish X Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000446-00000446-200"
+    }
+   }
+  },
+  {
+   "id": "manzana-roja",
+   "n": "Manzana roja",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 3899,
+     "nombre": "Manzana Roja Por Kg",
+     "url": "https://www.jumbo.com.ar/manzana-roja-por-kg-2/p"
+    },
+    "disco": {
+     "precio": 3899,
+     "nombre": "Manzana Roja Por Kg",
+     "url": "https://www.disco.com.ar/manzana-roja-por-kg-2/p"
+    },
+    "vea": {
+     "precio": 3699,
+     "nombre": "Manzana Roja Por Kg",
+     "url": "https://www.vea.com.ar/manzana-roja-por-kg-2/p"
+    },
+    "carrefour": {
+     "precio": 3299,
+     "nombre": "Manzana roja x kg.",
+     "url": "https://www.carrefour.com.ar/manzana-red-x-kg-432782/p"
+    },
+    "dia": {
+     "precio": 4990,
+     "nombre": "Manzana Roja x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/manzana-roja-x-kg-90039/p"
+    },
+    "coto": {
+     "precio": 2974.15,
+     "nombre": "Manzana Red . Xkg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000529-00000529-200"
+    }
+   }
+  },
+  {
+   "id": "manzana-verde",
+   "n": "Manzana verde",
+   "u": "kg",
+   "p": {
+    "carrefour": {
+     "precio": 4999,
+     "nombre": "Manzana granny especial x kg.",
+     "url": "https://www.carrefour.com.ar/manzana-granny-especial-x-kg-61585/p"
+    },
+    "dia": {
+     "precio": 5990,
+     "nombre": "Manzana Verde x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/manzana-verde-x-kg-90112/p"
+    },
+    "coto": {
+     "precio": 3824.15,
+     "nombre": "Manzana.G.Smith . Xkg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000527-00000527-200"
+    }
+   }
+  },
+  {
+   "id": "naranja",
+   "n": "Naranja",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 1999,
+     "nombre": "Naranja Ombligo Elegida Por Kg",
+     "url": "https://www.jumbo.com.ar/naranja-ombligo-elegida-por-kg-2/p"
+    },
+    "disco": {
+     "precio": 1999,
+     "nombre": "Naranja Ombligo Elegida Por Kg",
+     "url": "https://www.disco.com.ar/naranja-ombligo-elegida-por-kg-2/p"
+    },
+    "vea": {
+     "precio": 599,
+     "nombre": "Naranja Oferta X 1 Kg",
+     "url": "https://www.vea.com.ar/naranja-oferta-x-1-kg/p"
+    },
+    "carrefour": {
+     "precio": 1799,
+     "nombre": "Naranja ombligo premiun x kg.",
+     "url": "https://www.carrefour.com.ar/naranja-ombligo-premiun-x-kg-337021/p"
+    },
+    "dia": {
+     "precio": 2490,
+     "nombre": "Naranja Ombligo x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/naranja-ombligo-x-kg-90118/p"
+    },
+    "coto": {
+     "precio": 1799,
+     "nombre": "Naranja Ombl. . Xkg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000420-00000420-200"
+    }
+   }
+  },
+  {
+   "id": "mandarina",
+   "n": "Mandarina",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 1999,
+     "nombre": "Mandarina Murcot Por Kg",
+     "url": "https://www.jumbo.com.ar/mandarina-murcot-por-kg/p"
+    },
+    "disco": {
+     "precio": 1999,
+     "nombre": "Mandarina Murcot Por Kg",
+     "url": "https://www.disco.com.ar/mandarina-murcot-por-kg/p"
+    },
+    "vea": {
+     "precio": 599,
+     "nombre": "Mandarina X Kg.",
+     "url": "https://www.vea.com.ar/mandarina-x-kg/p"
+    },
+    "dia": {
+     "precio": 1990,
+     "nombre": "Mandarina x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/mandarina-x-kg-90119/p"
+    },
+    "coto": {
+     "precio": 1499,
+     "nombre": "Mandarina Murcot Xkg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000516-00000516-200"
+    }
+   }
+  },
+  {
+   "id": "limon",
+   "n": "Limón",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 2499,
+     "nombre": "Limón X Kg",
+     "url": "https://www.jumbo.com.ar/limon-x-kg/p"
+    },
+    "disco": {
+     "precio": 2499,
+     "nombre": "Limón X Kg",
+     "url": "https://www.disco.com.ar/limon-x-kg/p"
+    },
+    "vea": {
+     "precio": 2299,
+     "nombre": "Limón X Kg",
+     "url": "https://www.vea.com.ar/limon-x-kg/p"
+    },
+    "carrefour": {
+     "precio": 2299,
+     "nombre": "Limón x kg.",
+     "url": "https://www.carrefour.com.ar/limon-x-kg-8312/p"
+    },
+    "dia": {
+     "precio": 1890,
+     "nombre": "Limón x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/limon-x-kg-90114/p"
+    },
+    "coto": {
+     "precio": 1699.15,
+     "nombre": "Limón x Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00061007-00061007-200"
+    }
+   }
+  },
+  {
+   "id": "pera",
+   "n": "Pera",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 3899,
+     "nombre": "Pera Packhan Elegida Por Kg",
+     "url": "https://www.jumbo.com.ar/pera-packhan-elegida-por-kg-2/p"
+    },
+    "disco": {
+     "precio": 3899,
+     "nombre": "Pera Packhan Elegida Por Kg",
+     "url": "https://www.disco.com.ar/pera-packhan-elegida-por-kg-2/p"
+    },
+    "vea": {
+     "precio": 3699,
+     "nombre": "Pera Packhan Elegida Por Kg",
+     "url": "https://www.vea.com.ar/pera-packhan-elegida-por-kg-2/p"
+    },
+    "carrefour": {
+     "precio": 3699,
+     "nombre": "Pera x kg.",
+     "url": "https://www.carrefour.com.ar/pera-x-kg/p"
+    },
+    "dia": {
+     "precio": 3290,
+     "nombre": "Pera x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/pera-x-kg-90113/p"
+    },
+    "coto": {
+     "precio": 2549.15,
+     "nombre": "Pera D'Anjou X Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00059439-00059439-200"
+    }
+   }
+  },
+  {
+   "id": "pomelo",
+   "n": "Pomelo",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 1899,
+     "nombre": "Pomelo Blanco 1 Kg",
+     "url": "https://www.jumbo.com.ar/pomelo-blanco-1-kg-2/p"
+    },
+    "disco": {
+     "precio": 1899,
+     "nombre": "Pomelo Rosado por Kg",
+     "url": "https://www.disco.com.ar/pomelo-rosado-por-kg/p"
+    },
+    "vea": {
+     "precio": 1899,
+     "nombre": "Pomelo Ruby Star X Kg",
+     "url": "https://www.vea.com.ar/pomelo-ruby-star-x-kg-2/p"
+    },
+    "dia": {
+     "precio": 1390,
+     "nombre": "Pomelo x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/pomelo-x-kg-90115/p"
+    },
+    "coto": {
+     "precio": 1699,
+     "nombre": "Pomelo Blanco X Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000548-00000548-200"
+    }
+   }
+  },
+  {
+   "id": "kiwi",
+   "n": "Kiwi",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 14999,
+     "nombre": "Kiwi Elegido X Kg",
+     "url": "https://www.jumbo.com.ar/kiwi-elegido-x-kg-2/p"
+    },
+    "disco": {
+     "precio": 14999,
+     "nombre": "Kiwi Elegido X Kg",
+     "url": "https://www.disco.com.ar/kiwi-elegido-x-kg-2/p"
+    },
+    "vea": {
+     "precio": 13999,
+     "nombre": "Kiwi Elegido X Kg",
+     "url": "https://www.vea.com.ar/kiwi-elegido-x-kg-2/p"
+    },
+    "carrefour": {
+     "precio": 9999,
+     "nombre": "Kiwi elegido x kg.",
+     "url": "https://www.carrefour.com.ar/kiwi-elegido-x-kg/p"
+    },
+    "coto": {
+     "precio": 9999,
+     "nombre": "Kiwi Selección X Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000496-00000496-200"
+    }
+   }
+  },
+  {
+   "id": "uva",
+   "n": "Uva",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 13999,
+     "nombre": "Uva Negra X Kg",
+     "url": "https://www.jumbo.com.ar/uva-negra-x-kg-2/p"
+    },
+    "disco": {
+     "precio": 13999,
+     "nombre": "Uva Negra X Kg",
+     "url": "https://www.disco.com.ar/uva-negra-x-kg-2/p"
+    },
+    "vea": {
+     "precio": 11999,
+     "nombre": "Uva Negra X Kg",
+     "url": "https://www.vea.com.ar/uva-negra-x-kg-2/p"
+    },
+    "carrefour": {
+     "precio": 11999,
+     "nombre": "Uva roja x kg.",
+     "url": "https://www.carrefour.com.ar/uva-roja-x-kg-19031/p"
+    },
+    "dia": {
+     "precio": 9990,
+     "nombre": "Uvas x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/uvas-x-kg-90142/p"
+    },
+    "coto": {
+     "precio": 11999,
+     "nombre": "Uva Negra importada x Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00011806-00011806-200"
+    }
+   }
+  },
+  {
+   "id": "durazno",
+   "n": "Durazno",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 5999,
+     "nombre": "Durazno Amarillo Especial Por Kg",
+     "url": "https://www.jumbo.com.ar/durazno-amarillo-especial-por-kg/p"
+    },
+    "disco": {
+     "precio": 5999,
+     "nombre": "Durazno Amarillo Especial Por Kg",
+     "url": "https://www.disco.com.ar/durazno-amarillo-especial-por-kg/p"
+    },
+    "vea": {
+     "precio": 3499,
+     "nombre": "Durazno Amarillo Común S/e 1 Kg",
+     "url": "https://www.vea.com.ar/durazno-amarillo-comun-s-e-1-kg/p"
+    },
+    "carrefour": {
+     "precio": 5999,
+     "nombre": "Durazno x kg.",
+     "url": "https://www.carrefour.com.ar/durazno-x-kg-10732/p"
+    },
+    "dia": {
+     "precio": 6590,
+     "nombre": "Durazno x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/durazno-x-kg-90135/p"
+    },
+    "coto": {
+     "precio": 6799.15,
+     "nombre": "Durazno Amarillo Grande X Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000702-00000702-200"
+    }
+   }
+  },
+  {
+   "id": "ciruela",
+   "n": "Ciruela",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 3999,
+     "nombre": "Ciruela Comun X 1 Kg",
+     "url": "https://www.jumbo.com.ar/ciruela-comun-x-1-kg-2/p"
+    },
+    "disco": {
+     "precio": 3999,
+     "nombre": "Ciruela Comun X 1 Kg",
+     "url": "https://www.disco.com.ar/ciruela-comun-x-1-kg-2/p"
+    },
+    "vea": {
+     "precio": 3999,
+     "nombre": "Ciruela Comun X 1 Kg",
+     "url": "https://www.vea.com.ar/ciruela-comun-x-1-kg-2/p"
+    },
+    "carrefour": {
+     "precio": 7999,
+     "nombre": "Ciruela x kg.",
+     "url": "https://www.carrefour.com.ar/ciruela-x-kg/p"
+    },
+    "dia": {
+     "precio": 6990,
+     "nombre": "Ciruela x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/ciruela-x-kg-90138/p"
+    },
+    "coto": {
+     "precio": 7649.15,
+     "nombre": "Ciruela X Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00063594-00063594-200"
+    }
+   }
+  },
+  {
+   "id": "frutilla",
+   "n": "Frutilla",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 11996,
+     "nombre": "Frutilla Cubeta 250 Gr",
+     "url": "https://www.jumbo.com.ar/frutilla-cubeta-250-gr-2/p"
+    },
+    "disco": {
+     "precio": 11996,
+     "nombre": "Frutilla Cubeta 250 Gr",
+     "url": "https://www.disco.com.ar/frutilla-cubeta-250-gr-2/p"
+    },
+    "vea": {
+     "precio": 9499,
+     "nombre": "Frutilla Por Kg",
+     "url": "https://www.vea.com.ar/frutilla-por-kg-2/p"
+    },
+    "dia": {
+     "precio": 11980,
+     "nombre": "Frutilla En Cubeta Finca Pilar 500 Gr.",
+     "url": "https://diaonline.supermercadosdia.com.ar/frutilla-en-cubeta-finca-pilar-500-gr-100819/p"
+    },
+    "coto": {
+     "precio": 7999,
+     "nombre": "Frutillas Selección X Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000497-00000497-200"
+    }
+   }
+  },
+  {
+   "id": "melon",
+   "n": "Melón",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 3999,
+     "nombre": "Melón Blanco Por Kg",
+     "url": "https://www.jumbo.com.ar/melon-blanco-por-kg-3/p"
+    },
+    "disco": {
+     "precio": 3999,
+     "nombre": "Melón Blanco Por Kg",
+     "url": "https://www.disco.com.ar/melon-blanco-por-kg-3/p"
+    },
+    "vea": {
+     "precio": 3999,
+     "nombre": "Melón Blanco Por Kg",
+     "url": "https://www.vea.com.ar/melon-blanco-por-kg-3/p"
+    },
+    "carrefour": {
+     "precio": 2999,
+     "nombre": "Melón blanco x kg.",
+     "url": "https://www.carrefour.com.ar/melon-blanco-x-kg/p"
+    },
+    "dia": {
+     "precio": 4690,
+     "nombre": "Melón x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/melon-x-kg-90136/p"
+    },
+    "coto": {
+     "precio": 3399.15,
+     "nombre": "Melón Amarillo X Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000538-00000538-200"
+    }
+   }
+  },
+  {
+   "id": "sandia",
+   "n": "Sandía",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 1499,
+     "nombre": "Sandía Por Kg",
+     "url": "https://www.jumbo.com.ar/sandia-por-kg/p"
+    },
+    "disco": {
+     "precio": 1499,
+     "nombre": "Sandía Por Kg",
+     "url": "https://www.disco.com.ar/sandia-por-kg/p"
+    },
+    "vea": {
+     "precio": 1399,
+     "nombre": "Sandía Por Kg",
+     "url": "https://www.vea.com.ar/sandia-por-kg/p"
+    },
+    "carrefour": {
+     "precio": 999,
+     "nombre": "Sandía x kg.",
+     "url": "https://www.carrefour.com.ar/sandia-x-kg-38178-8337/p"
+    },
+    "dia": {
+     "precio": 3990,
+     "nombre": "Sandía x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/sandia-x-kg-90192/p"
+    },
+    "coto": {
+     "precio": 999,
+     "nombre": "Sandia Nacional Xkg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000456-00000456-200"
+    }
+   }
+  },
+  {
+   "id": "anana",
+   "n": "Ananá",
+   "u": "un",
+   "p": {
+    "jumbo": {
+     "precio": 4999,
+     "nombre": "Ananá En Rodajas Pote 100 Gr",
+     "url": "https://www.jumbo.com.ar/anana-en-rodajas-pote-100-gr/p"
+    },
+    "disco": {
+     "precio": 4000,
+     "nombre": "Ananá En Rodajas 140 Grs Cuisine & Co",
+     "url": "https://www.disco.com.ar/anana-en-rodajas-140-grs-cuisine-co/p"
+    },
+    "vea": {
+     "precio": 4990,
+     "nombre": "Ananá En Rodajas 340 Grs Cuisine & Co",
+     "url": "https://www.vea.com.ar/anana-en-rodajas-340-grs-cuisine-co/p"
+    },
+    "carrefour": {
+     "precio": 4850.5,
+     "nombre": "Ananá en rodajas Carrefour Classic 567 grs",
+     "url": "https://www.carrefour.com.ar/anana-en-rodajas-carrefour-classic-567-grs-103774/p"
+    }
+   }
+  },
+  {
+   "id": "palta",
+   "n": "Palta",
+   "u": "un",
+   "p": {
+    "jumbo": {
+     "precio": 1199,
+     "nombre": "Palta Hass Elegida X Un",
+     "url": "https://www.jumbo.com.ar/palta-hass-elegida-x-un/p"
+    },
+    "disco": {
+     "precio": 1199,
+     "nombre": "Palta Hass Elegida X Un",
+     "url": "https://www.disco.com.ar/palta-hass-elegida-x-un/p"
+    },
+    "vea": {
+     "precio": 999,
+     "nombre": "Palta Hass Elegida X Un",
+     "url": "https://www.vea.com.ar/palta-hass-elegida-x-un/p"
+    },
+    "carrefour": {
+     "precio": 1199,
+     "nombre": "Palta x uni",
+     "url": "https://www.carrefour.com.ar/palta-x-uni-698808/p"
+    }
+   }
+  },
+  {
+   "id": "tomate-redondo",
+   "n": "Tomate redondo",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 5599,
+     "nombre": "Tomate Redondo Grande Por Kg",
+     "url": "https://www.jumbo.com.ar/tomate-redondo-grande-por-kg-2/p"
+    },
+    "disco": {
+     "precio": 5599,
+     "nombre": "Tomate Redondo Grande Por Kg",
+     "url": "https://www.disco.com.ar/tomate-redondo-grande-por-kg-2/p"
+    },
+    "vea": {
+     "precio": 4999,
+     "nombre": "Tomate Redondo Por Kg",
+     "url": "https://www.vea.com.ar/tomate-redondo-por-kg-2/p"
+    },
+    "carrefour": {
+     "precio": 4999,
+     "nombre": "Tomate x kg.",
+     "url": "https://www.carrefour.com.ar/tomate-x-kg/p"
+    },
+    "dia": {
+     "precio": 4490,
+     "nombre": "Tomate Redondo x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/tomate-redondo-x-kg-90127/p"
+    },
+    "coto": {
+     "precio": 3699,
+     "nombre": "Tomate Red X Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000684-00000684-200"
+    }
+   }
+  },
+  {
+   "id": "tomate-perita",
+   "n": "Tomate perita",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 7499,
+     "nombre": "Tomate Perita Por Kg",
+     "url": "https://www.jumbo.com.ar/tomate-perita-por-kg-4/p"
+    },
+    "disco": {
+     "precio": 7699,
+     "nombre": "Tomate Perita x Kg",
+     "url": "https://www.disco.com.ar/tomate-perita-por-kg/p"
+    },
+    "vea": {
+     "precio": 7399,
+     "nombre": "Tomate Perita x Kg",
+     "url": "https://www.vea.com.ar/tomate-perita-por-kg/p"
+    },
+    "carrefour": {
+     "precio": 5699,
+     "nombre": "Tomate perita x kg.",
+     "url": "https://www.carrefour.com.ar/tomate-perita-x-kg/p"
+    },
+    "dia": {
+     "precio": 6290,
+     "nombre": "Tomate Perita x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/tomate-perita-x-kg-90074/p"
+    },
+    "coto": {
+     "precio": 5899,
+     "nombre": "Tomate Perit . Xkg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000683-00000683-200"
+    }
+   }
+  },
+  {
+   "id": "papa",
+   "n": "Papa",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 2699,
+     "nombre": "Papa Cepillada Granel Por Kg",
+     "url": "https://www.jumbo.com.ar/papa-cepillada-granel-por-kg-2/p"
+    },
+    "disco": {
+     "precio": 2699,
+     "nombre": "Papa Cepillada Granel Por Kg",
+     "url": "https://www.disco.com.ar/papa-cepillada-granel-por-kg-2/p"
+    },
+    "vea": {
+     "precio": 2499,
+     "nombre": "Papa Cepillada Granel Por Kg",
+     "url": "https://www.vea.com.ar/papa-cepillada-granel-por-kg-2/p"
+    },
+    "carrefour": {
+     "precio": 2699,
+     "nombre": "Papa cepillada x kg.",
+     "url": "https://www.carrefour.com.ar/papa-cepillada-x-kg/p"
+    },
+    "dia": {
+     "precio": 2990,
+     "nombre": "Papa Negra x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/papa-negra-x-kg-90094/p"
+    },
+    "coto": {
+     "precio": 2699,
+     "nombre": "Papa Blanca . Xkg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000695-00000695-200"
+    }
+   }
+  },
+  {
+   "id": "batata",
+   "n": "Batata",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 3999,
+     "nombre": "Batata  Por Kg",
+     "url": "https://www.jumbo.com.ar/batata-por-kg-2/p"
+    },
+    "disco": {
+     "precio": 3999,
+     "nombre": "Batata  Por Kg",
+     "url": "https://www.disco.com.ar/batata-por-kg-2/p"
+    },
+    "vea": {
+     "precio": 3799,
+     "nombre": "Batata  Por Kg",
+     "url": "https://www.vea.com.ar/batata-por-kg-2/p"
+    },
+    "carrefour": {
+     "precio": 2999,
+     "nombre": "Batata x kg.",
+     "url": "https://www.carrefour.com.ar/batata-x-kg/p"
+    },
+    "dia": {
+     "precio": 3790,
+     "nombre": "Batata x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/batata-x-kg-90062/p"
+    },
+    "coto": {
+     "precio": 3229.15,
+     "nombre": "Batata X Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00072041-00072041-200"
+    }
+   }
+  },
+  {
+   "id": "cebolla",
+   "n": "Cebolla",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 1999,
+     "nombre": "Cebolla Superior Por Kg",
+     "url": "https://www.jumbo.com.ar/cebolla-superior-por-kg/p"
+    },
+    "disco": {
+     "precio": 1999,
+     "nombre": "Cebolla Superior Por Kg",
+     "url": "https://www.disco.com.ar/cebolla-superior-por-kg/p"
+    },
+    "vea": {
+     "precio": 1499,
+     "nombre": "Cebolla Por Kg",
+     "url": "https://www.vea.com.ar/cebolla-por-kg/p"
+    },
+    "carrefour": {
+     "precio": 1989,
+     "nombre": "Cebolla x kg.",
+     "url": "https://www.carrefour.com.ar/cebolla-x-kg/p"
+    },
+    "coto": {
+     "precio": 1999,
+     "nombre": "Cebolla A Granel X Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000602-00000602-200"
+    }
+   }
+  },
+  {
+   "id": "cebolla-morada",
+   "n": "Cebolla morada",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 4999,
+     "nombre": "Cebolla Morada Por Kg",
+     "url": "https://www.jumbo.com.ar/cebolla-morada-por-kg-2/p"
+    },
+    "disco": {
+     "precio": 4999,
+     "nombre": "Cebolla Morada Por Kg",
+     "url": "https://www.disco.com.ar/cebolla-morada-por-kg-2/p"
+    },
+    "vea": {
+     "precio": 4699,
+     "nombre": "Cebolla Morada Por Kg",
+     "url": "https://www.vea.com.ar/cebolla-morada-por-kg-2/p"
+    },
+    "carrefour": {
+     "precio": 4999,
+     "nombre": "Cebolla morada x kg.",
+     "url": "https://www.carrefour.com.ar/cebolla-morada-x-kg/p"
+    },
+    "dia": {
+     "precio": 4490,
+     "nombre": "Cebolla Morada x 1 Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/cebolla-morada-x-1-kg-263485/p"
+    },
+    "coto": {
+     "precio": 4499,
+     "nombre": "Cebolla Roja Xkg",
+     "url": "https://www.coto.com.ar/productos/_/R-00036144-00036144-200"
+    }
+   }
+  },
+  {
+   "id": "zanahoria",
+   "n": "Zanahoria",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 1499,
+     "nombre": "Zanahoria Por Kg",
+     "url": "https://www.jumbo.com.ar/zanahoria-por-kg-4/p"
+    },
+    "disco": {
+     "precio": 1499,
+     "nombre": "Zanahoria Por Kg",
+     "url": "https://www.disco.com.ar/zanahoria-por-kg-4/p"
+    },
+    "vea": {
+     "precio": 1499,
+     "nombre": "Zanahoria Por Kg",
+     "url": "https://www.vea.com.ar/zanahoria-por-kg-4/p"
+    },
+    "carrefour": {
+     "precio": 1599,
+     "nombre": "Zanahoria x kg.",
+     "url": "https://www.carrefour.com.ar/zanahoria-x-kg-630573/p"
+    },
+    "dia": {
+     "precio": 1990,
+     "nombre": "Zanahoria x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/zanahoria-x-kg-90122/p"
+    },
+    "coto": {
+     "precio": 1359.15,
+     "nombre": "Zanahoria Seleccion Xkg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000686-00000686-200"
+    }
+   }
+  },
+  {
+   "id": "lechuga",
+   "n": "Lechuga",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 2499,
+     "nombre": "Lechuga Capuchina Por Kg",
+     "url": "https://www.jumbo.com.ar/lechuga-capuchina-por-kg-2/p"
+    },
+    "disco": {
+     "precio": 2499,
+     "nombre": "Lechuga Capuchina Por Kg",
+     "url": "https://www.disco.com.ar/lechuga-capuchina-por-kg-2/p"
+    },
+    "vea": {
+     "precio": 2499,
+     "nombre": "Lechuga Capuchina Por Kg",
+     "url": "https://www.vea.com.ar/lechuga-capuchina-por-kg-2/p"
+    },
+    "carrefour": {
+     "precio": 2999,
+     "nombre": "Lechuga criolla x kg.",
+     "url": "https://www.carrefour.com.ar/lechuga-criolla-x-kg/p"
+    },
+    "dia": {
+     "precio": 3990,
+     "nombre": "Lechuga x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/lechuga-x-kg-90079/p"
+    },
+    "coto": {
+     "precio": 1954.15,
+     "nombre": "Lechuga Capuchina X Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000648-00000648-200"
+    }
+   }
+  },
+  {
+   "id": "zapallito",
+   "n": "Zapallito",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 1599,
+     "nombre": "Zapallito Redondo Por Kg",
+     "url": "https://www.jumbo.com.ar/zapallito-redondo-por-kg-2/p"
+    },
+    "disco": {
+     "precio": 1599,
+     "nombre": "Zapallito Redondo Por Kg",
+     "url": "https://www.disco.com.ar/zapallito-redondo-por-kg-2/p"
+    },
+    "vea": {
+     "precio": 1599,
+     "nombre": "Zapallito Redondo Por Kg",
+     "url": "https://www.vea.com.ar/zapallito-redondo-por-kg-2/p"
+    },
+    "carrefour": {
+     "precio": 2299,
+     "nombre": "Zapallito largo x kg.",
+     "url": "https://www.carrefour.com.ar/zapallito-largo-x-kg/p"
+    },
+    "dia": {
+     "precio": 1890,
+     "nombre": "Zapallito Redondo x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/zapallito-redondo-x-kg-90121/p"
+    },
+    "coto": {
+     "precio": 1189.15,
+     "nombre": "Zapallito Largo X Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000690-00000690-200"
+    }
+   }
+  },
+  {
+   "id": "zapallo",
+   "n": "Zapallo anco",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 2999,
+     "nombre": "Zapallo Inglés Por Kg",
+     "url": "https://www.jumbo.com.ar/zapallo-ingles-por-kg-2/p"
+    },
+    "disco": {
+     "precio": 2999,
+     "nombre": "Zapallo Inglés Por Kg",
+     "url": "https://www.disco.com.ar/zapallo-ingles-por-kg-2/p"
+    },
+    "vea": {
+     "precio": 2799,
+     "nombre": "Zapallo Inglés Por Kg",
+     "url": "https://www.vea.com.ar/zapallo-ingles-por-kg-2/p"
+    },
+    "carrefour": {
+     "precio": 2399,
+     "nombre": "Zapallo japones cabutian x kg",
+     "url": "https://www.carrefour.com.ar/zapallo-japones-cabutian-x-kg-718894/p"
+    },
+    "dia": {
+     "precio": 2490,
+     "nombre": "Zapallo x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/zapallo-x-kg-94087/p"
+    },
+    "coto": {
+     "precio": 1499,
+     "nombre": "Zapallo Kuky Xkg",
+     "url": "https://www.coto.com.ar/productos/_/R-00053155-00053155-200"
+    }
+   }
+  },
+  {
+   "id": "berenjena",
+   "n": "Berenjena",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 3599,
+     "nombre": "Berenjena Negra Por Kg",
+     "url": "https://www.jumbo.com.ar/berenjena-negra-por-kg-2/p"
+    },
+    "disco": {
+     "precio": 3599,
+     "nombre": "Berenjena Negra Por Kg",
+     "url": "https://www.disco.com.ar/berenjena-negra-por-kg-2/p"
+    },
+    "vea": {
+     "precio": 3299,
+     "nombre": "Berenjena Negra Por Kg",
+     "url": "https://www.vea.com.ar/berenjena-negra-por-kg-2/p"
+    },
+    "carrefour": {
+     "precio": 3799,
+     "nombre": "Berenjena negra x kg.",
+     "url": "https://www.carrefour.com.ar/berenjena-negra-x-kg-2/p"
+    },
+    "dia": {
+     "precio": 4390,
+     "nombre": "Berenjena x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/berenjena-x-kg-90179/p"
+    },
+    "coto": {
+     "precio": 3229.15,
+     "nombre": "Berenjena x kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000593-00000593-200"
+    }
+   }
+  },
+  {
+   "id": "morron-rojo",
+   "n": "Morrón rojo",
+   "u": "kg",
+   "p": {
+    "carrefour": {
+     "precio": 6599,
+     "nombre": "Pimiento rojo x kg",
+     "url": "https://www.carrefour.com.ar/pimiento-rojo-x-kg-2/p"
+    },
+    "dia": {
+     "precio": 4690,
+     "nombre": "Morrón Rojo x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/morron-rojo-x-kg-90123/p"
+    },
+    "coto": {
+     "precio": 3899,
+     "nombre": "Pimiento Rojo Xkg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000671-00000671-200"
+    }
+   }
+  },
+  {
+   "id": "morron-verde",
+   "n": "Morrón verde",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 6699,
+     "nombre": "Pimiento Verde Por Kg",
+     "url": "https://www.jumbo.com.ar/pimiento-verde-por-kg-4/p"
+    },
+    "disco": {
+     "precio": 6699,
+     "nombre": "Pimiento Verde Por Kg",
+     "url": "https://www.disco.com.ar/pimiento-verde-por-kg-4/p"
+    },
+    "vea": {
+     "precio": 6299,
+     "nombre": "Pimiento Verde Por Kg",
+     "url": "https://www.vea.com.ar/pimiento-verde-por-kg-4/p"
+    },
+    "dia": {
+     "precio": 4990,
+     "nombre": "Morrón Verde x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/morron-verde-x-kg-90124/p"
+    },
+    "coto": {
+     "precio": 2974.15,
+     "nombre": "Pimiento Verde Xkg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000672-00000672-200"
+    }
+   }
+  },
+  {
+   "id": "pepino",
+   "n": "Pepino",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 2999,
+     "nombre": "Pepino Por Kg",
+     "url": "https://www.jumbo.com.ar/pepino-por-kg-2/p"
+    },
+    "disco": {
+     "precio": 2999,
+     "nombre": "Pepino Por Kg",
+     "url": "https://www.disco.com.ar/pepino-por-kg-2/p"
+    },
+    "vea": {
+     "precio": 2799,
+     "nombre": "Pepino Por Kg",
+     "url": "https://www.vea.com.ar/pepino-por-kg-2/p"
+    },
+    "carrefour": {
+     "precio": 4299,
+     "nombre": "Pepino x kg.",
+     "url": "https://www.carrefour.com.ar/pepino-x-kg-8391/p"
+    },
+    "dia": {
+     "precio": 2990,
+     "nombre": "Pepino x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/pepino-x-kg-90145/p"
+    },
+    "coto": {
+     "precio": 1444.15,
+     "nombre": "Pepino . Xkg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000665-00000665-200"
+    }
+   }
+  },
+  {
+   "id": "choclo",
+   "n": "Choclo",
+   "u": "un",
+   "p": {
+    "jumbo": {
+     "precio": 1399,
+     "nombre": "Choclo X Unidad",
+     "url": "https://www.jumbo.com.ar/choclo-x-unidad/p"
+    },
+    "disco": {
+     "precio": 1399,
+     "nombre": "Choclo X Unidad",
+     "url": "https://www.disco.com.ar/choclo-x-unidad/p"
+    },
+    "vea": {
+     "precio": 1399,
+     "nombre": "Choclo X Unidad",
+     "url": "https://www.vea.com.ar/choclo-x-unidad/p"
+    },
+    "carrefour": {
+     "precio": 1690,
+     "nombre": "Choclo x uni",
+     "url": "https://www.carrefour.com.ar/choclo-x-uni/p"
+    }
+   }
+  },
+  {
+   "id": "brocoli",
+   "n": "Brócoli",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 5499,
+     "nombre": "Brócoli x 500 Grs",
+     "url": "https://www.jumbo.com.ar/brocoli/p"
+    },
+    "disco": {
+     "precio": 5499,
+     "nombre": "Brócoli x 500 Grs",
+     "url": "https://www.disco.com.ar/brocoli/p"
+    },
+    "vea": {
+     "precio": 4999,
+     "nombre": "Brócoli x 500 Grs",
+     "url": "https://www.vea.com.ar/brocoli/p"
+    },
+    "carrefour": {
+     "precio": 4990,
+     "nombre": "Brócoli x kg.",
+     "url": "https://www.carrefour.com.ar/brocoli-x-kg/p"
+    },
+    "coto": {
+     "precio": 2974.15,
+     "nombre": "Brocoli X Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000598-00000598-200"
+    }
+   }
+  },
+  {
+   "id": "coliflor",
+   "n": "Coliflor",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 3999,
+     "nombre": "Coliflór Por Kg",
+     "url": "https://www.jumbo.com.ar/coliflor-x-kg/p"
+    },
+    "disco": {
+     "precio": 3999,
+     "nombre": "Coliflór Por Kg",
+     "url": "https://www.disco.com.ar/coliflor-x-kg/p"
+    },
+    "vea": {
+     "precio": 3699,
+     "nombre": "Coliflór Por Kg",
+     "url": "https://www.vea.com.ar/coliflor-x-kg/p"
+    },
+    "carrefour": {
+     "precio": 3999,
+     "nombre": "Coliflor x kg.",
+     "url": "https://www.carrefour.com.ar/coliflor-x-kg/p"
+    },
+    "coto": {
+     "precio": 2804.15,
+     "nombre": "Coliflor X Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000619-00000619-200"
+    }
+   }
+  },
+  {
+   "id": "repollo",
+   "n": "Repollo",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 1999,
+     "nombre": "Repollo Blanco Por Kg",
+     "url": "https://www.jumbo.com.ar/repollo-blanco-por-kg/p"
+    },
+    "disco": {
+     "precio": 1999,
+     "nombre": "Repollo Blanco Por Kg",
+     "url": "https://www.disco.com.ar/repollo-blanco-por-kg/p"
+    },
+    "vea": {
+     "precio": 1999,
+     "nombre": "Repollo Blanco Por Kg",
+     "url": "https://www.vea.com.ar/repollo-blanco-por-kg/p"
+    },
+    "carrefour": {
+     "precio": 2499,
+     "nombre": "Repollo blanco x kg.",
+     "url": "https://www.carrefour.com.ar/repollo-blanco-x-kg/p"
+    },
+    "dia": {
+     "precio": 2690,
+     "nombre": "Repollo x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/repollo-x-kg-90144/p"
+    },
+    "coto": {
+     "precio": 1699.15,
+     "nombre": "Repollo Blanco X Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000678-00000678-200"
+    }
+   }
+  },
+  {
+   "id": "remolacha",
+   "n": "Remolacha",
+   "u": "kg",
+   "p": {
+    "jumbo": {
+     "precio": 2299,
+     "nombre": "Remolacha Por Kg",
+     "url": "https://www.jumbo.com.ar/remolacha-por-kg-2/p"
+    },
+    "disco": {
+     "precio": 2299,
+     "nombre": "Remolacha Por Kg",
+     "url": "https://www.disco.com.ar/remolacha-por-kg-2/p"
+    },
+    "vea": {
+     "precio": 2299,
+     "nombre": "Remolacha Por Kg",
+     "url": "https://www.vea.com.ar/remolacha-por-kg-2/p"
+    },
+    "carrefour": {
+     "precio": 2990,
+     "nombre": "Remolacha x kg.",
+     "url": "https://www.carrefour.com.ar/remolacha-x-kg/p"
+    },
+    "dia": {
+     "precio": 4590,
+     "nombre": "Remolacha x Kg.",
+     "url": "https://diaonline.supermercadosdia.com.ar/remolacha-x-kg-90125/p"
+    },
+    "coto": {
+     "precio": 1699.15,
+     "nombre": "Remolacha X Kg",
+     "url": "https://www.coto.com.ar/productos/_/R-00000677-00000677-200"
+    }
+   }
+  }
+ ]
+}

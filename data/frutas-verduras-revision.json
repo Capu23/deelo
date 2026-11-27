@@ -1,0 +1,1483 @@
+[
+ {
+  "id": "banana",
+  "s": "jumbo",
+  "elegido": "Banana Ecuador X Kg · $3599",
+  "otros": []
+ },
+ {
+  "id": "banana",
+  "s": "disco",
+  "elegido": "Banana Ecuador X Kg · $3599",
+  "otros": []
+ },
+ {
+  "id": "banana",
+  "s": "vea",
+  "elegido": "Banana Ecuador X Kg · $3299",
+  "otros": []
+ },
+ {
+  "id": "banana",
+  "s": "carrefour",
+  "elegido": "Banana selección x kg. · $2299",
+  "otros": []
+ },
+ {
+  "id": "banana",
+  "s": "dia",
+  "elegido": "Banana x Kg. · $2790",
+  "otros": []
+ },
+ {
+  "id": "banana",
+  "s": "coto",
+  "elegido": "Banana Cavendish X Kg · $1699",
+  "otros": []
+ },
+ {
+  "id": "manzana-roja",
+  "s": "jumbo",
+  "elegido": "Manzana Roja Por Kg · $3899",
+  "otros": []
+ },
+ {
+  "id": "manzana-roja",
+  "s": "disco",
+  "elegido": "Manzana Roja Por Kg · $3899",
+  "otros": [
+   "Manzana Red Delicious por Kg · $4299"
+  ]
+ },
+ {
+  "id": "manzana-roja",
+  "s": "vea",
+  "elegido": "Manzana Roja Por Kg · $3699",
+  "otros": []
+ },
+ {
+  "id": "manzana-roja",
+  "s": "carrefour",
+  "elegido": "Manzana roja x kg. · $3299",
+  "otros": []
+ },
+ {
+  "id": "manzana-roja",
+  "s": "dia",
+  "elegido": "Manzana Roja x Kg. · $4990",
+  "otros": []
+ },
+ {
+  "id": "manzana-roja",
+  "s": "coto",
+  "elegido": "Manzana Red . Xkg · $2974",
+  "otros": [
+   "Manzana Red Cosecha Criolla x Kg · $3399",
+   "Manzana Red Elegida X Kg · $4999",
+   "Manzana red TRES ASES 1 Kg · $5999"
+  ]
+ },
+ {
+  "id": "manzana-verde",
+  "s": "jumbo",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "manzana-verde",
+  "s": "disco",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "manzana-verde",
+  "s": "vea",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "manzana-verde",
+  "s": "carrefour",
+  "elegido": "Manzana granny especial x kg. · $4999",
+  "otros": []
+ },
+ {
+  "id": "manzana-verde",
+  "s": "dia",
+  "elegido": "Manzana Verde x Kg. · $5990",
+  "otros": []
+ },
+ {
+  "id": "manzana-verde",
+  "s": "coto",
+  "elegido": "Manzana.G.Smith . Xkg · $3824",
+  "otros": []
+ },
+ {
+  "id": "naranja",
+  "s": "jumbo",
+  "elegido": "Naranja Ombligo Elegida Por Kg · $1999",
+  "otros": []
+ },
+ {
+  "id": "naranja",
+  "s": "disco",
+  "elegido": "Naranja Ombligo Elegida Por Kg · $1999",
+  "otros": []
+ },
+ {
+  "id": "naranja",
+  "s": "vea",
+  "elegido": "Naranja Oferta X 1 Kg · $599",
+  "otros": [
+   "Naranja Ombligo Elegida Por Kg · $1899"
+  ]
+ },
+ {
+  "id": "naranja",
+  "s": "carrefour",
+  "elegido": "Naranja ombligo premiun x kg. · $1799",
+  "otros": []
+ },
+ {
+  "id": "naranja",
+  "s": "dia",
+  "elegido": "Naranja Ombligo x Kg. · $2490",
+  "otros": []
+ },
+ {
+  "id": "naranja",
+  "s": "coto",
+  "elegido": "Naranja Ombl. . Xkg · $1799",
+  "otros": [
+   "Naranja Cosecha Criolla x Kg · $1999"
+  ]
+ },
+ {
+  "id": "mandarina",
+  "s": "jumbo",
+  "elegido": "Mandarina Murcot Por Kg · $1999",
+  "otros": []
+ },
+ {
+  "id": "mandarina",
+  "s": "disco",
+  "elegido": "Mandarina Murcot Por Kg · $1999",
+  "otros": []
+ },
+ {
+  "id": "mandarina",
+  "s": "vea",
+  "elegido": "Mandarina X Kg. · $599",
+  "otros": []
+ },
+ {
+  "id": "mandarina",
+  "s": "carrefour",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "mandarina",
+  "s": "dia",
+  "elegido": "Mandarina x Kg. · $1990",
+  "otros": []
+ },
+ {
+  "id": "mandarina",
+  "s": "coto",
+  "elegido": "Mandarina Murcot Xkg · $1499",
+  "otros": [
+   "Mandarina COSECHA CRIOLLA (Peso Aproximado 1.5kg) · $1133"
+  ]
+ },
+ {
+  "id": "limon",
+  "s": "jumbo",
+  "elegido": "Limón X Kg · $2499",
+  "otros": []
+ },
+ {
+  "id": "limon",
+  "s": "disco",
+  "elegido": "Limón X Kg · $2499",
+  "otros": []
+ },
+ {
+  "id": "limon",
+  "s": "vea",
+  "elegido": "Limón X Kg · $2299",
+  "otros": []
+ },
+ {
+  "id": "limon",
+  "s": "carrefour",
+  "elegido": "Limón x kg. · $2299",
+  "otros": []
+ },
+ {
+  "id": "limon",
+  "s": "dia",
+  "elegido": "Limón x Kg. · $1890",
+  "otros": []
+ },
+ {
+  "id": "limon",
+  "s": "coto",
+  "elegido": "Limón x Kg · $1699",
+  "otros": [
+   "Limón Caipirinha X Kg · $5099",
+   "Limón COSECHA CRIOLLA (Peso Aproximado 1.5 Kg) · $2466"
+  ]
+ },
+ {
+  "id": "pera",
+  "s": "jumbo",
+  "elegido": "Pera Packhan Elegida Por Kg · $3899",
+  "otros": []
+ },
+ {
+  "id": "pera",
+  "s": "disco",
+  "elegido": "Pera Packhan Elegida Por Kg · $3899",
+  "otros": [
+   "Pera Asiatica X Kg · $9999"
+  ]
+ },
+ {
+  "id": "pera",
+  "s": "vea",
+  "elegido": "Pera Packhan Elegida Por Kg · $3699",
+  "otros": []
+ },
+ {
+  "id": "pera",
+  "s": "carrefour",
+  "elegido": "Pera x kg. · $3699",
+  "otros": [
+   "Pera asiática x kg. · $9999"
+  ]
+ },
+ {
+  "id": "pera",
+  "s": "dia",
+  "elegido": "Pera x Kg. · $3290",
+  "otros": []
+ },
+ {
+  "id": "pera",
+  "s": "coto",
+  "elegido": "Pera D'Anjou X Kg · $2549",
+  "otros": [
+   "Pera Packams X Kg · $2719",
+   "Pera Roja Bartlet X Kg · $2999",
+   "Pera Williams Seleccion X Kg · $4999"
+  ]
+ },
+ {
+  "id": "pomelo",
+  "s": "jumbo",
+  "elegido": "Pomelo Blanco 1 Kg · $1899",
+  "otros": [
+   "Pomelo Ruby Star X Kg · $1999"
+  ]
+ },
+ {
+  "id": "pomelo",
+  "s": "disco",
+  "elegido": "Pomelo Rosado por Kg · $1899",
+  "otros": [
+   "Pomelo Ruby Star X Kg · $1999"
+  ]
+ },
+ {
+  "id": "pomelo",
+  "s": "vea",
+  "elegido": "Pomelo Ruby Star X Kg · $1899",
+  "otros": []
+ },
+ {
+  "id": "pomelo",
+  "s": "carrefour",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "pomelo",
+  "s": "dia",
+  "elegido": "Pomelo x Kg. · $1390",
+  "otros": []
+ },
+ {
+  "id": "pomelo",
+  "s": "coto",
+  "elegido": "Pomelo Blanco X Kg · $1699",
+  "otros": [
+   "Pomelo Rojo . Xkg · $1699",
+   "Pomelo Rosado . Xkg · $1699"
+  ]
+ },
+ {
+  "id": "kiwi",
+  "s": "jumbo",
+  "elegido": "Kiwi Elegido X Kg · $14999",
+  "otros": [
+   "Kiwi-italia-sin Atributo-s/e-kg-1 · $14999"
+  ]
+ },
+ {
+  "id": "kiwi",
+  "s": "disco",
+  "elegido": "Kiwi Elegido X Kg · $14999",
+  "otros": []
+ },
+ {
+  "id": "kiwi",
+  "s": "vea",
+  "elegido": "Kiwi Elegido X Kg · $13999",
+  "otros": []
+ },
+ {
+  "id": "kiwi",
+  "s": "carrefour",
+  "elegido": "Kiwi elegido x kg. · $9999",
+  "otros": []
+ },
+ {
+  "id": "kiwi",
+  "s": "dia",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "kiwi",
+  "s": "coto",
+  "elegido": "Kiwi Selección X Kg · $9999",
+  "otros": [
+   "Kiwi Haywa MOÑO AZUL 500g · $8498"
+  ]
+ },
+ {
+  "id": "uva",
+  "s": "jumbo",
+  "elegido": "Uva Negra X Kg · $13999",
+  "otros": [
+   "Uva Red Globe X Kg · $14999",
+   "Uva Blanca X Kg · $19999"
+  ]
+ },
+ {
+  "id": "uva",
+  "s": "disco",
+  "elegido": "Uva Negra X Kg · $13999",
+  "otros": [
+   "Uva Blanca X Kg · $19999"
+  ]
+ },
+ {
+  "id": "uva",
+  "s": "vea",
+  "elegido": "Uva Negra X Kg · $11999",
+  "otros": [
+   "Uva Blanca X Kg · $18999"
+  ]
+ },
+ {
+  "id": "uva",
+  "s": "carrefour",
+  "elegido": "Uva roja x kg. · $11999",
+  "otros": [
+   "Uva blanca x kg. · $16999"
+  ]
+ },
+ {
+  "id": "uva",
+  "s": "dia",
+  "elegido": "Uvas x Kg. · $9990",
+  "otros": []
+ },
+ {
+  "id": "uva",
+  "s": "coto",
+  "elegido": "Uva Negra importada x Kg · $11999",
+  "otros": [
+   "Uva Red Globe Xkg · $11999",
+   "Uva Roja importada x Kg · $11999",
+   "Uva Blanca importada x Kg · $16999"
+  ]
+ },
+ {
+  "id": "durazno",
+  "s": "jumbo",
+  "elegido": "Durazno Amarillo Especial Por Kg · $5999",
+  "otros": [
+   "Duraznos Dieteticos 800 Grs Cuisine & Co · $4813"
+  ]
+ },
+ {
+  "id": "durazno",
+  "s": "disco",
+  "elegido": "Durazno Amarillo Especial Por Kg · $5999",
+  "otros": [
+   "Duraznos Dieteticos 800 Grs Cuisine & Co · $4938"
+  ]
+ },
+ {
+  "id": "durazno",
+  "s": "vea",
+  "elegido": "Durazno Amarillo Común S/e 1 Kg · $3499",
+  "otros": [
+   "Durazno Amarillo Especial Por Kg · $7499",
+   "Duraznos Dieteticos 800 Grs Cuisine & Co · $4613"
+  ]
+ },
+ {
+  "id": "durazno",
+  "s": "carrefour",
+  "elegido": "Durazno x kg. · $5999",
+  "otros": []
+ },
+ {
+  "id": "durazno",
+  "s": "dia",
+  "elegido": "Durazno x Kg. · $6590",
+  "otros": []
+ },
+ {
+  "id": "durazno",
+  "s": "coto",
+  "elegido": "Durazno Amarillo Grande X Kg · $6799",
+  "otros": []
+ },
+ {
+  "id": "ciruela",
+  "s": "jumbo",
+  "elegido": "Ciruela Comun X 1 Kg · $3999",
+  "otros": [
+   "Ciruela Negra Elegida Por Kg · $7999",
+   "Ciruela Especial Roysun X Kg. · $9999"
+  ]
+ },
+ {
+  "id": "ciruela",
+  "s": "disco",
+  "elegido": "Ciruela Comun X 1 Kg · $3999",
+  "otros": [
+   "Ciruela Especial Roysun X Kg. · $9999"
+  ]
+ },
+ {
+  "id": "ciruela",
+  "s": "vea",
+  "elegido": "Ciruela Comun X 1 Kg · $3999",
+  "otros": []
+ },
+ {
+  "id": "ciruela",
+  "s": "carrefour",
+  "elegido": "Ciruela x kg. · $7999",
+  "otros": []
+ },
+ {
+  "id": "ciruela",
+  "s": "dia",
+  "elegido": "Ciruela x Kg. · $6990",
+  "otros": []
+ },
+ {
+  "id": "ciruela",
+  "s": "coto",
+  "elegido": "Ciruela X Kg · $7649",
+  "otros": [
+   "Ciruela Especial X Kg · $8999",
+   "Ciruela D'Ag Cc88/110 x Kg · $13499",
+   "Ciruela D'Ag Sc110/32 Xkg · $13999"
+  ]
+ },
+ {
+  "id": "frutilla",
+  "s": "jumbo",
+  "elegido": "Frutilla Cubeta 250 Gr · $11996",
+  "otros": []
+ },
+ {
+  "id": "frutilla",
+  "s": "disco",
+  "elegido": "Frutilla Cubeta 250 Gr · $11996",
+  "otros": []
+ },
+ {
+  "id": "frutilla",
+  "s": "vea",
+  "elegido": "Frutilla Por Kg · $9499",
+  "otros": [
+   "Frutilla Cubeta 250 Gr · $10796"
+  ]
+ },
+ {
+  "id": "frutilla",
+  "s": "carrefour",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "frutilla",
+  "s": "dia",
+  "elegido": "Frutilla En Cubeta Finca Pilar 500 Gr. · $11980",
+  "otros": [
+   "Frutilla en Cubeta 250 Gr. · $18360"
+  ]
+ },
+ {
+  "id": "frutilla",
+  "s": "coto",
+  "elegido": "Frutillas Selección X Kg · $7999",
+  "otros": [
+   "Frutillas x 250g · $13996"
+  ]
+ },
+ {
+  "id": "melon",
+  "s": "jumbo",
+  "elegido": "Melón Blanco Por Kg · $3999",
+  "otros": [
+   "Melón Amarillo Por Kg · $4899",
+   "Melón Escrito Por Kg · $5499",
+   "Melón Orange Por Kg · $6499"
+  ]
+ },
+ {
+  "id": "melon",
+  "s": "disco",
+  "elegido": "Melón Blanco Por Kg · $3999",
+  "otros": [
+   "Melón Amarillo Por Kg · $4899",
+   "Melón Lazaro X Kg. · $6499"
+  ]
+ },
+ {
+  "id": "melon",
+  "s": "vea",
+  "elegido": "Melón Blanco Por Kg · $3999",
+  "otros": [
+   "Melón Amarillo Por Kg · $4699",
+   "Melón Escrito Por Kg · $5299"
+  ]
+ },
+ {
+  "id": "melon",
+  "s": "carrefour",
+  "elegido": "Melón blanco x kg. · $2999",
+  "otros": [
+   "Melón amarillo x kg. · $4499"
+  ]
+ },
+ {
+  "id": "melon",
+  "s": "dia",
+  "elegido": "Melón x Kg. · $4690",
+  "otros": []
+ },
+ {
+  "id": "melon",
+  "s": "coto",
+  "elegido": "Melón Amarillo X Kg · $3399",
+  "otros": [
+   "Melon Blanco . Xkg · $3399"
+  ]
+ },
+ {
+  "id": "sandia",
+  "s": "jumbo",
+  "elegido": "Sandía Por Kg · $1499",
+  "otros": [
+   "Sandía por Kg · $2999"
+  ]
+ },
+ {
+  "id": "sandia",
+  "s": "disco",
+  "elegido": "Sandía Por Kg · $1499",
+  "otros": [
+   "Sandía por Kg · $2999"
+  ]
+ },
+ {
+  "id": "sandia",
+  "s": "vea",
+  "elegido": "Sandía Por Kg · $1399",
+  "otros": []
+ },
+ {
+  "id": "sandia",
+  "s": "carrefour",
+  "elegido": "Sandía x kg. · $999",
+  "otros": []
+ },
+ {
+  "id": "sandia",
+  "s": "dia",
+  "elegido": "Sandía x Kg. · $3990",
+  "otros": []
+ },
+ {
+  "id": "sandia",
+  "s": "coto",
+  "elegido": "Sandia Nacional Xkg · $999",
+  "otros": []
+ },
+ {
+  "id": "anana",
+  "s": "jumbo",
+  "elegido": "Ananá En Rodajas Pote 100 Gr · $4999",
+  "otros": [
+   "Ananá En Rodajas 340 Grs Cuisine & Co · $5000",
+   "Anana Liofilizada Bañada En Chocolate Picks 90 · $10200"
+  ]
+ },
+ {
+  "id": "anana",
+  "s": "disco",
+  "elegido": "Ananá En Rodajas 140 Grs Cuisine & Co · $4000",
+  "otros": [
+   "Ananá En Rodajas Pote 100 Gr · $4999",
+   "Ananá En Rodajas 340 Grs Cuisine & Co · $5000"
+  ]
+ },
+ {
+  "id": "anana",
+  "s": "vea",
+  "elegido": "Ananá En Rodajas 340 Grs Cuisine & Co · $4990",
+  "otros": [
+   "Ananá En Rodajas Pote 100 Gr · $4999"
+  ]
+ },
+ {
+  "id": "anana",
+  "s": "carrefour",
+  "elegido": "Ananá en rodajas Carrefour Classic 567 grs · $4851",
+  "otros": []
+ },
+ {
+  "id": "anana",
+  "s": "dia",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "anana",
+  "s": "coto",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "palta",
+  "s": "jumbo",
+  "elegido": "Palta Hass Elegida X Un · $1199",
+  "otros": []
+ },
+ {
+  "id": "palta",
+  "s": "disco",
+  "elegido": "Palta Hass Elegida X Un · $1199",
+  "otros": []
+ },
+ {
+  "id": "palta",
+  "s": "vea",
+  "elegido": "Palta Hass Elegida X Un · $999",
+  "otros": []
+ },
+ {
+  "id": "palta",
+  "s": "carrefour",
+  "elegido": "Palta x uni · $1199",
+  "otros": []
+ },
+ {
+  "id": "palta",
+  "s": "dia",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "palta",
+  "s": "coto",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "tomate-redondo",
+  "s": "jumbo",
+  "elegido": "Tomate Redondo Grande Por Kg · $5599",
+  "otros": []
+ },
+ {
+  "id": "tomate-redondo",
+  "s": "disco",
+  "elegido": "Tomate Redondo Grande Por Kg · $5599",
+  "otros": []
+ },
+ {
+  "id": "tomate-redondo",
+  "s": "vea",
+  "elegido": "Tomate Redondo Por Kg · $4999",
+  "otros": [
+   "Tomate 1 Kg · $9699"
+  ]
+ },
+ {
+  "id": "tomate-redondo",
+  "s": "carrefour",
+  "elegido": "Tomate x kg. · $4999",
+  "otros": []
+ },
+ {
+  "id": "tomate-redondo",
+  "s": "dia",
+  "elegido": "Tomate Redondo x Kg. · $4490",
+  "otros": []
+ },
+ {
+  "id": "tomate-redondo",
+  "s": "coto",
+  "elegido": "Tomate Red X Kg · $3699",
+  "otros": []
+ },
+ {
+  "id": "tomate-perita",
+  "s": "jumbo",
+  "elegido": "Tomate Perita Por Kg · $7499",
+  "otros": [
+   "Tomate Perita x Kg · $7699"
+  ]
+ },
+ {
+  "id": "tomate-perita",
+  "s": "disco",
+  "elegido": "Tomate Perita x Kg · $7699",
+  "otros": []
+ },
+ {
+  "id": "tomate-perita",
+  "s": "vea",
+  "elegido": "Tomate Perita x Kg · $7399",
+  "otros": []
+ },
+ {
+  "id": "tomate-perita",
+  "s": "carrefour",
+  "elegido": "Tomate perita x kg. · $5699",
+  "otros": []
+ },
+ {
+  "id": "tomate-perita",
+  "s": "dia",
+  "elegido": "Tomate Perita x Kg. · $6290",
+  "otros": []
+ },
+ {
+  "id": "tomate-perita",
+  "s": "coto",
+  "elegido": "Tomate Perit . Xkg · $5899",
+  "otros": [
+   "Tomate Perita Cosecha Criolla x kg · $6899"
+  ]
+ },
+ {
+  "id": "papa",
+  "s": "jumbo",
+  "elegido": "Papa Cepillada Granel Por Kg · $2699",
+  "otros": []
+ },
+ {
+  "id": "papa",
+  "s": "disco",
+  "elegido": "Papa Cepillada Granel Por Kg · $2699",
+  "otros": [
+   "Papa Lavada Por Kg · $4499"
+  ]
+ },
+ {
+  "id": "papa",
+  "s": "vea",
+  "elegido": "Papa Cepillada Granel Por Kg · $2499",
+  "otros": []
+ },
+ {
+  "id": "papa",
+  "s": "carrefour",
+  "elegido": "Papa cepillada x kg. · $2699",
+  "otros": []
+ },
+ {
+  "id": "papa",
+  "s": "dia",
+  "elegido": "Papa Negra x Kg. · $2990",
+  "otros": []
+ },
+ {
+  "id": "papa",
+  "s": "coto",
+  "elegido": "Papa Blanca . Xkg · $2699",
+  "otros": []
+ },
+ {
+  "id": "batata",
+  "s": "jumbo",
+  "elegido": "Batata  Por Kg · $3999",
+  "otros": []
+ },
+ {
+  "id": "batata",
+  "s": "disco",
+  "elegido": "Batata  Por Kg · $3999",
+  "otros": []
+ },
+ {
+  "id": "batata",
+  "s": "vea",
+  "elegido": "Batata  Por Kg · $3799",
+  "otros": []
+ },
+ {
+  "id": "batata",
+  "s": "carrefour",
+  "elegido": "Batata x kg. · $2999",
+  "otros": []
+ },
+ {
+  "id": "batata",
+  "s": "dia",
+  "elegido": "Batata x Kg. · $3790",
+  "otros": []
+ },
+ {
+  "id": "batata",
+  "s": "coto",
+  "elegido": "Batata X Kg · $3229",
+  "otros": [
+   "Batata Americana X Kg · $4599"
+  ]
+ },
+ {
+  "id": "cebolla",
+  "s": "jumbo",
+  "elegido": "Cebolla Superior Por Kg · $1999",
+  "otros": [
+   "Cebolla Fraccionada Por 1 Kg · $2999",
+   "Cebolla Blanca Por Kg · $4999"
+  ]
+ },
+ {
+  "id": "cebolla",
+  "s": "disco",
+  "elegido": "Cebolla Superior Por Kg · $1999",
+  "otros": [
+   "Cebolla Fraccionada Por 1 Kg · $2999",
+   "Cebolla Blanca Por Kg · $4999"
+  ]
+ },
+ {
+  "id": "cebolla",
+  "s": "vea",
+  "elegido": "Cebolla Por Kg · $1499",
+  "otros": [
+   "Cebolla Superior Por Kg · $1999",
+   "Cebolla Blanca Por Kg · $4799"
+  ]
+ },
+ {
+  "id": "cebolla",
+  "s": "carrefour",
+  "elegido": "Cebolla x kg. · $1989",
+  "otros": [
+   "Cebolla blanca x kg. · $3999"
+  ]
+ },
+ {
+  "id": "cebolla",
+  "s": "dia",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "cebolla",
+  "s": "coto",
+  "elegido": "Cebolla A Granel X Kg · $1999",
+  "otros": [
+   "Cebolla Blanca X Kg · $4499"
+  ]
+ },
+ {
+  "id": "cebolla-morada",
+  "s": "jumbo",
+  "elegido": "Cebolla Morada Por Kg · $4999",
+  "otros": []
+ },
+ {
+  "id": "cebolla-morada",
+  "s": "disco",
+  "elegido": "Cebolla Morada Por Kg · $4999",
+  "otros": []
+ },
+ {
+  "id": "cebolla-morada",
+  "s": "vea",
+  "elegido": "Cebolla Morada Por Kg · $4699",
+  "otros": []
+ },
+ {
+  "id": "cebolla-morada",
+  "s": "carrefour",
+  "elegido": "Cebolla morada x kg. · $4999",
+  "otros": []
+ },
+ {
+  "id": "cebolla-morada",
+  "s": "dia",
+  "elegido": "Cebolla Morada x 1 Kg. · $4490",
+  "otros": []
+ },
+ {
+  "id": "cebolla-morada",
+  "s": "coto",
+  "elegido": "Cebolla Roja Xkg · $4499",
+  "otros": []
+ },
+ {
+  "id": "zanahoria",
+  "s": "jumbo",
+  "elegido": "Zanahoria Por Kg · $1499",
+  "otros": []
+ },
+ {
+  "id": "zanahoria",
+  "s": "disco",
+  "elegido": "Zanahoria Por Kg · $1499",
+  "otros": []
+ },
+ {
+  "id": "zanahoria",
+  "s": "vea",
+  "elegido": "Zanahoria Por Kg · $1499",
+  "otros": []
+ },
+ {
+  "id": "zanahoria",
+  "s": "carrefour",
+  "elegido": "Zanahoria x kg. · $1599",
+  "otros": []
+ },
+ {
+  "id": "zanahoria",
+  "s": "dia",
+  "elegido": "Zanahoria x Kg. · $1990",
+  "otros": []
+ },
+ {
+  "id": "zanahoria",
+  "s": "coto",
+  "elegido": "Zanahoria Seleccion Xkg · $1359",
+  "otros": [
+   "Zanahoria Bolsita X Kg · $2499"
+  ]
+ },
+ {
+  "id": "lechuga",
+  "s": "jumbo",
+  "elegido": "Lechuga Capuchina Por Kg · $2499",
+  "otros": [
+   "Lechuga Francesa Por Kg · $2899",
+   "Lechuga Criolla Por Kg · $4699",
+   "Lechuga Morada Por Kg · $4899"
+  ]
+ },
+ {
+  "id": "lechuga",
+  "s": "disco",
+  "elegido": "Lechuga Capuchina Por Kg · $2499",
+  "otros": [
+   "Lechuga Francesa Por Kg · $2899",
+   "Lechuga Criolla Por Kg · $4699",
+   "Lechuga Mantecosa Por Kg · $4899"
+  ]
+ },
+ {
+  "id": "lechuga",
+  "s": "vea",
+  "elegido": "Lechuga Capuchina Por Kg · $2499",
+  "otros": [
+   "Lechuga Francesa Por Kg · $3899",
+   "Lechuga Morada Por Kg · $4699",
+   "Lechuga Mantecosa Por Kg · $4699"
+  ]
+ },
+ {
+  "id": "lechuga",
+  "s": "carrefour",
+  "elegido": "Lechuga criolla x kg. · $2999",
+  "otros": [
+   "Lechuga francesa x kg. · $3499",
+   "Lechuga morada kg. · $3699",
+   "Lechuga escarola x kg. · $3699"
+  ]
+ },
+ {
+  "id": "lechuga",
+  "s": "dia",
+  "elegido": "Lechuga x Kg. · $3990",
+  "otros": [
+   "Lechuga Mantecosa x Kg. · $4890"
+  ]
+ },
+ {
+  "id": "lechuga",
+  "s": "coto",
+  "elegido": "Lechuga Capuchina X Kg · $1954",
+  "otros": [
+   "Lechuga Criolla X Kg · $2999",
+   "Lechuga Francesa X Kg · $3299",
+   "Lechuga Mantecosa X Kg · $3499"
+  ]
+ },
+ {
+  "id": "zapallito",
+  "s": "jumbo",
+  "elegido": "Zapallito Redondo Por Kg · $1599",
+  "otros": [
+   "Zapallito Largo X Kg · $2499"
+  ]
+ },
+ {
+  "id": "zapallito",
+  "s": "disco",
+  "elegido": "Zapallito Redondo Por Kg · $1599",
+  "otros": [
+   "Zapallito Largo X Kg · $2499"
+  ]
+ },
+ {
+  "id": "zapallito",
+  "s": "vea",
+  "elegido": "Zapallito Redondo Por Kg · $1599",
+  "otros": [
+   "Zapallito Largo X Kg · $2299"
+  ]
+ },
+ {
+  "id": "zapallito",
+  "s": "carrefour",
+  "elegido": "Zapallito largo x kg. · $2299",
+  "otros": []
+ },
+ {
+  "id": "zapallito",
+  "s": "dia",
+  "elegido": "Zapallito Redondo x Kg. · $1890",
+  "otros": []
+ },
+ {
+  "id": "zapallito",
+  "s": "coto",
+  "elegido": "Zapallito Largo X Kg · $1189",
+  "otros": [
+   "Zapallito Redondo Xkg · $1299"
+  ]
+ },
+ {
+  "id": "zapallo",
+  "s": "jumbo",
+  "elegido": "Zapallo Inglés Por Kg · $2999",
+  "otros": [
+   "Zapallo Coreano Por Kg · $3999",
+   "Zapallo Coreano x Kg · $4699",
+   "Zapallo Delica · $5999"
+  ]
+ },
+ {
+  "id": "zapallo",
+  "s": "disco",
+  "elegido": "Zapallo Inglés Por Kg · $2999",
+  "otros": [
+   "Zapallo Coreano Por Kg · $3999",
+   "Zapallo Coreano x Kg · $4699",
+   "Zapallo Delica · $5999"
+  ]
+ },
+ {
+  "id": "zapallo",
+  "s": "vea",
+  "elegido": "Zapallo Inglés Por Kg · $2799",
+  "otros": [
+   "Zapallo Coreano Por Kg · $3799"
+  ]
+ },
+ {
+  "id": "zapallo",
+  "s": "carrefour",
+  "elegido": "Zapallo japones cabutian x kg · $2399",
+  "otros": [
+   "Zapallo anco x kg · $3299"
+  ]
+ },
+ {
+  "id": "zapallo",
+  "s": "dia",
+  "elegido": "Zapallo x Kg. · $2490",
+  "otros": []
+ },
+ {
+  "id": "zapallo",
+  "s": "coto",
+  "elegido": "Zapallo Kuky Xkg · $1499",
+  "otros": [
+   "Zapallo Plomo (Criollo) X Kg · $1499",
+   "Zapallo Pumkin Xkg · $1499",
+   "Zapallo Japones Xkg · $2499"
+  ]
+ },
+ {
+  "id": "berenjena",
+  "s": "jumbo",
+  "elegido": "Berenjena Negra Por Kg · $3599",
+  "otros": [
+   "Berenjena Violeta Por Kg · $3999"
+  ]
+ },
+ {
+  "id": "berenjena",
+  "s": "disco",
+  "elegido": "Berenjena Negra Por Kg · $3599",
+  "otros": [
+   "Berenjena Violeta Por Kg · $3999"
+  ]
+ },
+ {
+  "id": "berenjena",
+  "s": "vea",
+  "elegido": "Berenjena Negra Por Kg · $3299",
+  "otros": []
+ },
+ {
+  "id": "berenjena",
+  "s": "carrefour",
+  "elegido": "Berenjena negra x kg. · $3799",
+  "otros": [
+   "Berenjena rayada kg. · $3899"
+  ]
+ },
+ {
+  "id": "berenjena",
+  "s": "dia",
+  "elegido": "Berenjena x Kg. · $4390",
+  "otros": []
+ },
+ {
+  "id": "berenjena",
+  "s": "coto",
+  "elegido": "Berenjena x kg · $3229",
+  "otros": [
+   "Berenjena Veteada x Kg · $3899"
+  ]
+ },
+ {
+  "id": "morron-rojo",
+  "s": "jumbo",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "morron-rojo",
+  "s": "disco",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "morron-rojo",
+  "s": "vea",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "morron-rojo",
+  "s": "carrefour",
+  "elegido": "Pimiento rojo x kg · $6599",
+  "otros": []
+ },
+ {
+  "id": "morron-rojo",
+  "s": "dia",
+  "elegido": "Morrón Rojo x Kg. · $4690",
+  "otros": []
+ },
+ {
+  "id": "morron-rojo",
+  "s": "coto",
+  "elegido": "Pimiento Rojo Xkg · $3899",
+  "otros": [
+   "Pimiento Rojo Cosecha Criolla x kg · $4699"
+  ]
+ },
+ {
+  "id": "morron-verde",
+  "s": "jumbo",
+  "elegido": "Pimiento Verde Por Kg · $6699",
+  "otros": []
+ },
+ {
+  "id": "morron-verde",
+  "s": "disco",
+  "elegido": "Pimiento Verde Por Kg · $6699",
+  "otros": []
+ },
+ {
+  "id": "morron-verde",
+  "s": "vea",
+  "elegido": "Pimiento Verde Por Kg · $6299",
+  "otros": []
+ },
+ {
+  "id": "morron-verde",
+  "s": "carrefour",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "morron-verde",
+  "s": "dia",
+  "elegido": "Morrón Verde x Kg. · $4990",
+  "otros": []
+ },
+ {
+  "id": "morron-verde",
+  "s": "coto",
+  "elegido": "Pimiento Verde Xkg · $2974",
+  "otros": []
+ },
+ {
+  "id": "pepino",
+  "s": "jumbo",
+  "elegido": "Pepino Por Kg · $2999",
+  "otros": []
+ },
+ {
+  "id": "pepino",
+  "s": "disco",
+  "elegido": "Pepino Por Kg · $2999",
+  "otros": [
+   "Pepinos Gherkins Kuhne 670 Gr · $13060"
+  ]
+ },
+ {
+  "id": "pepino",
+  "s": "vea",
+  "elegido": "Pepino Por Kg · $2799",
+  "otros": []
+ },
+ {
+  "id": "pepino",
+  "s": "carrefour",
+  "elegido": "Pepino x kg. · $4299",
+  "otros": []
+ },
+ {
+  "id": "pepino",
+  "s": "dia",
+  "elegido": "Pepino x Kg. · $2990",
+  "otros": []
+ },
+ {
+  "id": "pepino",
+  "s": "coto",
+  "elegido": "Pepino . Xkg · $1444",
+  "otros": []
+ },
+ {
+  "id": "choclo",
+  "s": "jumbo",
+  "elegido": "Choclo X Unidad · $1399",
+  "otros": []
+ },
+ {
+  "id": "choclo",
+  "s": "disco",
+  "elegido": "Choclo X Unidad · $1399",
+  "otros": []
+ },
+ {
+  "id": "choclo",
+  "s": "vea",
+  "elegido": "Choclo X Unidad · $1399",
+  "otros": []
+ },
+ {
+  "id": "choclo",
+  "s": "carrefour",
+  "elegido": "Choclo x uni · $1690",
+  "otros": []
+ },
+ {
+  "id": "choclo",
+  "s": "dia",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "choclo",
+  "s": "coto",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "brocoli",
+  "s": "jumbo",
+  "elegido": "Brócoli x 500 Grs · $5499",
+  "otros": []
+ },
+ {
+  "id": "brocoli",
+  "s": "disco",
+  "elegido": "Brócoli x 500 Grs · $5499",
+  "otros": []
+ },
+ {
+  "id": "brocoli",
+  "s": "vea",
+  "elegido": "Brócoli x 500 Grs · $4999",
+  "otros": []
+ },
+ {
+  "id": "brocoli",
+  "s": "carrefour",
+  "elegido": "Brócoli x kg. · $4990",
+  "otros": []
+ },
+ {
+  "id": "brocoli",
+  "s": "dia",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "brocoli",
+  "s": "coto",
+  "elegido": "Brocoli X Kg · $2974",
+  "otros": []
+ },
+ {
+  "id": "coliflor",
+  "s": "jumbo",
+  "elegido": "Coliflór Por Kg · $3999",
+  "otros": []
+ },
+ {
+  "id": "coliflor",
+  "s": "disco",
+  "elegido": "Coliflór Por Kg · $3999",
+  "otros": []
+ },
+ {
+  "id": "coliflor",
+  "s": "vea",
+  "elegido": "Coliflór Por Kg · $3699",
+  "otros": []
+ },
+ {
+  "id": "coliflor",
+  "s": "carrefour",
+  "elegido": "Coliflor x kg. · $3999",
+  "otros": []
+ },
+ {
+  "id": "coliflor",
+  "s": "dia",
+  "elegido": null,
+  "otros": []
+ },
+ {
+  "id": "coliflor",
+  "s": "coto",
+  "elegido": "Coliflor X Kg · $2804",
+  "otros": []
+ },
+ {
+  "id": "repollo",
+  "s": "jumbo",
+  "elegido": "Repollo Blanco Por Kg · $1999",
+  "otros": []
+ },
+ {
+  "id": "repollo",
+  "s": "disco",
+  "elegido": "Repollo Blanco Por Kg · $1999",
+  "otros": []
+ },
+ {
+  "id": "repollo",
+  "s": "vea",
+  "elegido": "Repollo Blanco Por Kg · $1999",
+  "otros": []
+ },
+ {
+  "id": "repollo",
+  "s": "carrefour",
+  "elegido": "Repollo blanco x kg. · $2499",
+  "otros": []
+ },
+ {
+  "id": "repollo",
+  "s": "dia",
+  "elegido": "Repollo x Kg. · $2690",
+  "otros": []
+ },
+ {
+  "id": "repollo",
+  "s": "coto",
+  "elegido": "Repollo Blanco X Kg · $1699",
+  "otros": []
+ },
+ {
+  "id": "remolacha",
+  "s": "jumbo",
+  "elegido": "Remolacha Por Kg · $2299",
+  "otros": [
+   "Remolacha Cocida al Vacío 500 Grs · $15198"
+  ]
+ },
+ {
+  "id": "remolacha",
+  "s": "disco",
+  "elegido": "Remolacha Por Kg · $2299",
+  "otros": [
+   "Remolacha Cocida al Vacío 500 Grs · $15198"
+  ]
+ },
+ {
+  "id": "remolacha",
+  "s": "vea",
+  "elegido": "Remolacha Por Kg · $2299",
+  "otros": []
+ },
+ {
+  "id": "remolacha",
+  "s": "carrefour",
+  "elegido": "Remolacha x kg. · $2990",
+  "otros": []
+ },
+ {
+  "id": "remolacha",
+  "s": "dia",
+  "elegido": "Remolacha x Kg. · $4590",
+  "otros": []
+ },
+ {
+  "id": "remolacha",
+  "s": "coto",
+  "elegido": "Remolacha X Kg · $1699",
+  "otros": [
+   "Remolacha HUERCASA BIO Al Vapor 500g · $5948",
+   "Remolacha Cocida Al Vacío Sueño Verde 500g · $15198"
+  ]
+ }
+]
