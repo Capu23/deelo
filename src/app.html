@@ -184,6 +184,42 @@ body.conLista{overflow:hidden}
 .hSkip{border:0;background:none;color:var(--ink2);font-weight:600;font-size:15px;cursor:pointer;padding:8px}
 .hSkip:hover{color:var(--ink)}
 .hLegal{font-size:12px;color:var(--ink3);max-width:34ch}
+/* Landing: debajo del ingreso, para quien todavía no conoce deelo */
+.hola{flex-direction:column;align-items:center;justify-content:flex-start}
+#holaLogin{min-height:calc(100svh - 56px);justify-content:center;margin:0 auto}
+.lMas{display:inline-flex;align-items:center;gap:6px;margin-top:6px;color:var(--green-text);font-weight:600;font-size:14px;text-decoration:none}
+.lMas svg{width:16px;height:16px;animation:lBaja 1.6s ease-in-out infinite}
+@keyframes lBaja{50%{transform:translateY(3px)}}
+@media (prefers-reduced-motion:reduce){.lMas svg{animation:none}}
+.landing{margin:24px auto 8px;max-width:440px;gap:18px;scroll-margin-top:16px}
+.landing h2{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.2;text-wrap:balance}
+.lSub{color:var(--ink2);font-size:15.5px;line-height:1.5}
+.lStats{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.lStats span{background:var(--paper);border:1px solid var(--rule);border-radius:999px;padding:7px 13px;font-size:13.5px;color:var(--ink2)}
+.lStats b{color:var(--ink);font-weight:800}
+.lFeat{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;width:100%;text-align:left}
+.lFeat li{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:14px;font-size:14px;color:var(--ink2);line-height:1.45}
+.lFeat b{display:block;color:var(--ink);font-size:15.5px;margin-bottom:2px}
+.lIco{width:34px;height:34px;border-radius:10px;background:var(--green-soft);color:var(--green-text);display:grid;place-items:center}
+.lIco svg{width:19px;height:19px}
+.lEj{width:100%;background:var(--green-soft);border-radius:14px;padding:14px 16px;font-size:14.5px;line-height:1.5;color:var(--ink);text-align:left}
+.lEj b{color:var(--green-text)}
+.lSups{font-weight:700;font-size:15px;color:var(--ink);line-height:1.5}
+.lSups small{display:block;font-weight:400;font-size:13px;color:var(--ink3);margin-top:4px}
+.lFaq{width:100%;text-align:left;display:flex;flex-direction:column;gap:8px}
+.lFaq h2{text-align:center;margin-bottom:4px}
+.lFaq details{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:0 14px}
+.lFaq summary{cursor:pointer;font-weight:600;font-size:14.5px;padding:13px 0;list-style:none;display:flex;justify-content:space-between;gap:10px}
+.lFaq summary::-webkit-details-marker{display:none}
+.lFaq summary::after{content:"+";color:var(--ink3);font-weight:400;font-size:18px;line-height:1}
+.lFaq details[open] summary::after{content:"−"}
+.lFaq details p{font-size:14px;color:var(--ink2);line-height:1.5;padding-bottom:13px}
+.lFin{width:100%;max-width:330px;display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:4px}
+.shFaq{max-height:60vh;overflow-y:auto}
+.shFaq h2{display:none}
+.shForm{display:flex;flex-direction:column;gap:10px}
+.shForm textarea,.shForm input{width:100%;border:1px solid var(--rule);border-radius:11px;padding:11px 12px;font:inherit;font-size:15px;background:var(--bg);color:var(--ink);resize:vertical}
+.shTipos{display:flex;gap:6px;flex-wrap:wrap}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 body.conHola{overflow:hidden}
 body[data-vista="tarjetas"] #banners{display:none}
@@ -542,6 +578,37 @@ details.others[open] summary{margin-bottom:10px}
     </div>
     <button class="hSkip" id="holaSkip" type="button">Seguir sin cuenta →</button>
     <p class="hLegal">Al continuar aceptás el <a href="/acerca.html">aviso legal y la política de privacidad</a>. deelo no está afiliado a ningún súper ni banco.</p>
+    <a class="lMas" href="#landing" id="lMasBtn">¿Qué es deelo? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
+  </div>
+  <div class="holaIn landing" id="landing" aria-labelledby="lTit">
+    <h2 id="lTit">Todos tus descuentos del súper en un solo lugar</h2>
+    <p class="lSub">Cada banco, tarjeta y billetera tiene promos distintas según el día y el súper. deelo las junta todas, te muestra solo las que podés usar y te dice cuánto ahorrás en pesos.</p>
+    <div class="lStats" id="lStats">
+      <span><b>6</b> súper</span>
+      <span><b id="lEnts">30+</b> bancos y billeteras</span>
+      <span><b>+8.000</b> productos</span>
+    </div>
+    <ol class="lFeat">
+      <li><span class="lIco" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span><span><b>Mi semana</b>Cada día, dónde y con qué pagar: el mejor descuento con tus tarjetas, el tope y cuánto ahorrás según lo que gastes.</span></li>
+      <li><span class="lIco" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span><span><b>Precios</b>Buscá cualquier producto y mirá el precio en cada súper, del más barato al más caro, con tus descuentos y las ofertas por cantidad (2x1, 2da al 50%…).</span></li>
+      <li><span class="lIco" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h2.6l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1l1.6-6.8H6.2"/></svg></span><span><b>Carrito</b>Armá tu compra y te decimos en qué súper te conviene hacerla entera. Guardala como lista, compartila y tildala en el súper.</span></li>
+    </ol>
+    <div class="lEj" id="lEj" hidden></div>
+    <p class="lSups">Coto · Jumbo · Disco · Vea · Carrefour · Día<br><small>Banco Nación, Provincia, Galicia, Santander, BBVA, Macro, MODO, Mercado Pago, Naranja X, Ualá, Cuenta DNI y muchos más.</small></p>
+    <section class="lFaq" id="faq" aria-labelledby="faqTit">
+      <h2 id="faqTit">Preguntas frecuentes</h2>
+      <details><summary>¿deelo es gratis?</summary><p>Sí. Podés usar deelo gratis, con o sin cuenta.</p></details>
+      <details><summary>¿Necesito crear una cuenta?</summary><p>No. Sin cuenta, lo que elegís queda guardado en tu navegador. Con cuenta (Google o mail), tus tarjetas, súper y listas se guardan y los ves en todos tus dispositivos.</p></details>
+      <details><summary>¿De dónde salen las promos y los precios?</summary><p>Las promos salen de las páginas oficiales de cada súper, banco y billetera. Los precios son los de la web de cada súper. Cada promo muestra su fuente.</p></details>
+      <details><summary>¿Cada cuánto se actualiza?</summary><p>Los precios y las promos se actualizan los lunes y miércoles, las ofertas de fin de semana los viernes, y todos los días controlamos que los precios sigan iguales.</p></details>
+      <details><summary>¿El precio es el mismo en la sucursal?</summary><p>Usamos el precio online de cada súper. En la sucursal puede variar un poco, y algunas promos excluyen productos puntuales. Antes de pagar, confirmá en la app de tu banco o billetera.</p></details>
+      <details><summary>¿Necesito darles datos de mis tarjetas?</summary><p>No. Solo marcás qué bancos y billeteras usás (por ejemplo, "Galicia Visa"). Nunca te pedimos números de tarjeta ni claves.</p></details>
+      <details><summary>¿deelo es de algún súper o banco?</summary><p>No. deelo es independiente y no está afiliado a ningún súper, banco ni billetera.</p></details>
+    </section>
+    <div class="lFin">
+      <button class="hBtn hP" type="button" id="lEmpezar">Empezar gratis</button>
+      <button class="hSkip" type="button" data-hola-sin-cuenta>Ver las promos de hoy sin cuenta →</button>
+    </div>
   </div>
   <div class="holaIn holaIntro" id="holaIntro" hidden>
     <div class="holaLogo chico"><svg viewBox="0 0 66 48" aria-hidden="true">
@@ -580,7 +647,7 @@ details.others[open] summary{margin-bottom:10px}
       <button data-go="precios">Precios</button>
       <button data-go="carrito">Carrito<span class="cbadge" data-cbadge hidden></span></button>
       <div class="masWrap"><button class="masBtn" type="button" data-mas="mDesk" aria-haspopup="true" aria-expanded="false">Más<svg class="ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
-        <div class="masMenu" id="mDesk" hidden><button data-go="tarjetas">Mi billetera</button><button data-go="todas">Todas las promos</button><button data-tour="1">Cómo usar deelo</button><button data-share="deelo">Compartir deelo</button></div></div>
+        <div class="masMenu" id="mDesk" hidden><button data-go="tarjetas">Mi billetera</button><button data-go="todas">Todas las promos</button><button data-tour="1">Cómo usar deelo</button><button data-share="deelo">Compartir deelo</button><button data-faq="1">Preguntas frecuentes</button><button data-comentar="1">Contanos qué mejorar</button></div></div>
     </nav>
     <div class="topRight">
       <button class="profileBtn" id="profileBtn" data-go="tarjetas"></button>
@@ -720,7 +787,7 @@ details.others[open] summary{margin-bottom:10px}
   <button data-go="carrito"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h2.6l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1l1.6-6.8H6.2"/></svg><span class="cbadge" data-cbadge hidden></span></span>Carrito</button>
   <button type="button" data-mas="mBottom" aria-haspopup="true" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></svg>Más</button>
 </nav>
-<div class="masMenu abajo" id="mBottom" hidden><button data-go="tarjetas">Mi billetera</button><button data-go="todas">Todas las promos</button><button data-tour="1">Cómo usar deelo</button><button data-share="deelo">Compartir deelo</button></div>
+<div class="masMenu abajo" id="mBottom" hidden><button data-go="tarjetas">Mi billetera</button><button data-go="todas">Todas las promos</button><button data-tour="1">Cómo usar deelo</button><button data-share="deelo">Compartir deelo</button><button data-faq="1">Preguntas frecuentes</button><button data-comentar="1">Contanos qué mejorar</button></div>
 
 <script id="promo-data" type="application/json">
 {
@@ -3529,7 +3596,7 @@ details.others[open] summary{margin-bottom:10px}
   if(!hasProfile() && !holaVista() && !window.deeloSesion) abrirHola();
   // Segundo paso de la bienvenida: qué es deelo y el botón para elegir bancos y tarjetas.
   function abrirIntro(){
-    document.getElementById('holaLogin').hidden = true; document.getElementById('holaIntro').hidden = false;
+    document.getElementById('holaLogin').hidden = true; document.getElementById('landing').hidden = true; document.getElementById('holaIntro').hidden = false;
     hola.scrollTop = 0;
     hola.setAttribute('aria-labelledby', 'holaIntroTit');
   }
@@ -3659,5 +3726,68 @@ details.others[open] summary{margin-bottom:10px}
   });
   function alertaOk(t){ const e = document.getElementById('holaErr'); e.style.color = 'var(--green-text)'; e.textContent = t; setTimeout(() => { e.style.color = ''; }, 6000); }
   document.getElementById('holaSkip').addEventListener('click', abrirIntro);
+
+  // ---------- landing (debajo del ingreso) ----------
+  (function(){
+    const land = document.getElementById('landing'); if(!land) return;
+    document.getElementById('lEnts').textContent = Object.keys(D.entidades).length;
+    // Ejemplo con datos reales: la mejor promo oficial de hoy en una compra de $80.000.
+    try{
+      const hoy = D.promos.filter(pr => aplicaEn(pr, TODAY) && pr.canal !== 'online' && pr.conf === 'oficial' && pr.ent !== 'anses');
+      const mejor = hoy.map(pr => ({pr, a: ahorro(pr, 80000)})).sort((a, b) => b.a.v - a.a.v)[0];
+      if(mejor && mejor.a.v > 0){
+        const ej = document.getElementById('lEj');
+        ej.innerHTML = `<b>Hoy hay ${hoy.length} promos en el súper.</b> Por ejemplo, ${mejor.pr.pct}% en ${esc(mejor.pr.sup.map(s => D.supers[s].n).join(', '))} con ${esc(entName(mejor.pr))}: en una compra de ${fmt(80000)} ahorrás <b>${fmt(mejor.a.v)}</b>.`;
+        ej.hidden = false;
+      }
+    }catch(e){}
+    document.getElementById('lMasBtn').addEventListener('click', ev => { ev.preventDefault(); land.scrollIntoView({behavior: 'smooth', block: 'start'}); });
+    document.getElementById('lEmpezar').addEventListener('click', () => { evento('landing-empezar'); hola.scrollTo({top: 0, behavior: 'smooth'}); setTimeout(() => { const m = document.getElementById('holaMail'); if(m && seVe(m)) m.focus({preventScroll: true}); }, 500); });
+    land.addEventListener('click', ev => { if(ev.target.closest('[data-hola-sin-cuenta]')){ evento('landing-sin-cuenta'); document.getElementById('holaSkip').click(); } });
+    land.addEventListener('toggle', ev => { if(ev.target.open) evento('faq', {pregunta: ev.target.querySelector('summary').textContent.slice(0, 80)}); }, true);
+    // Cuántos bajan a ver la landing (una vez por visita).
+    if('IntersectionObserver' in window){ const io = new IntersectionObserver(es => { if(es.some(e => e.isIntersecting)){ evento('landing-ver'); io.disconnect(); } }, {root: hola, threshold: 0.15}); io.observe(land); }
+  })();
+
+  // ---------- Más: preguntas frecuentes y comentarios ----------
+  function abrirFaq(){
+    const f = document.getElementById('faq'); if(!f) return;
+    evento('faq-abrir');
+    abrirSh(`<h2 id="shTit">Preguntas frecuentes</h2><div class="shFaq lFaq">${f.innerHTML.replace(/ id="[^"]*"/g, '')}</div><p class="muted" style="font-size:13px">¿Algo más? <button class="linkBtn" type="button" data-comentar>Escribinos</button>.</p>`);
+  }
+  let comTipo = 'idea';
+  function abrirComentarios(){
+    evento('comentarios-abrir');
+    const tipos = [['idea', 'Una idea'], ['error', 'Algo no anda'], ['otro', 'Otra cosa']];
+    abrirSh(`<h2 id="shTit">Contanos qué mejorar</h2><p>Leemos todos los mensajes. Nos ayuda mucho saber qué te sirve, qué falta y qué no anda.</p>
+      <form class="shForm" id="comForm">
+        <div class="shTipos" role="group" aria-label="Tipo de comentario">${tipos.map(([k, t]) => `<button type="button" class="fchip plain" data-comtipo="${k}" aria-pressed="${k === comTipo}">${t}</button>`).join('')}</div>
+        <label class="sr" for="comTexto">Tu comentario</label>
+        <textarea id="comTexto" rows="5" maxlength="1500" required placeholder="Escribí acá tu comentario"></textarea>
+        <label class="sr" for="comMail">Tu mail (opcional)</label>
+        <input id="comMail" type="email" maxlength="120" autocomplete="email" placeholder="Tu mail (opcional, para responderte)">
+        <button class="btn green" type="submit" id="comEnviar" style="justify-content:center;padding:12px 16px">Enviar</button>
+        <p class="shOk" id="comOk" role="status"></p>
+      </form>`);
+    setTimeout(() => { const t = document.getElementById('comTexto'); if(t) t.focus(); }, 50);
+  }
+  document.addEventListener('click', ev => {
+    if(ev.target.closest('[data-faq]')){ cerrarMas(); abrirFaq(); return; }
+    if(ev.target.closest('[data-comentar]')){ cerrarMas(); abrirComentarios(); return; }
+    const t = ev.target.closest('[data-comtipo]'); if(t){ comTipo = t.dataset.comtipo; document.querySelectorAll('[data-comtipo]').forEach(b => b.setAttribute('aria-pressed', b === t)); }
+  });
+  shBody.addEventListener('submit', async ev => {
+    if(ev.target.id !== 'comForm') return;
+    ev.preventDefault();
+    const texto = document.getElementById('comTexto').value.trim(), contacto = document.getElementById('comMail').value.trim(), ok = document.getElementById('comOk'), btn = document.getElementById('comEnviar');
+    if(texto.length < 3){ ok.textContent = 'Escribí tu comentario.'; return; }
+    if(!window.deeloComentar){ ok.textContent = 'No pudimos enviarlo ahora. Probá de nuevo en un rato.'; return; }
+    btn.disabled = true; ok.textContent = 'Enviando…';
+    try{
+      await window.deeloComentar({tipo: comTipo, texto: texto.slice(0, 1500), contacto: contacto.slice(0, 120), vista: (document.body.dataset.vista || '').slice(0, 20)});
+      evento('comentario-enviado', {tipo: comTipo});
+      abrirSh(`<h2 id="shTit">¡Gracias!</h2><p>Recibimos tu comentario.${contacto ? ' Si hace falta, te respondemos a tu mail.' : ''}</p><div class="shBtns"><button class="btn green" type="button" data-shcerrar>Listo</button></div>`);
+    }catch(e){ btn.disabled = false; ok.textContent = 'No pudimos enviarlo. Probá de nuevo en un rato.'; }
+  });
 })();
 </script>
