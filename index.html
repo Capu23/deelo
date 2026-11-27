@@ -2682,7 +2682,7 @@ details.others[open] summary{margin-bottom:10px}
   // Mide cómo se usa deelo: con qué cuenta se entra, qué súper y billeteras se eligen, qué se busca y compara,
   // listas y carritos. No se mandan mails, nombres ni datos de tarjetas. Sin GA_ID no se carga nada.
   // El ID sale de Firebase → Configuración del proyecto → Integraciones → Google Analytics (G-XXXXXXXXXX).
-  var GA_ID = '';
+  var GA_ID = 'G-K91SZSCVKH';
   function ga(){ if(!GA_ID) return; window.dataLayer = window.dataLayer || []; window.dataLayer.push(arguments); }
   if(GA_ID){
     const s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID; document.head.appendChild(s);
