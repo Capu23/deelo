@@ -2676,7 +2676,47 @@ details.others[open] summary{margin-bottom:10px}
   let gasto = store.get(KEY+'-gasto', 80000);
   // Si hay sesión iniciada, deeloCuenta (script de cuentas) guarda el perfil también en la nube.
   const sync = () => { try{ window.deeloCuenta && window.deeloCuenta.guardar({perfil:P, gasto}); }catch(e){} };
-  const save = () => { store.set(KEY, P); sync(); };
+  const save = () => { store.set(KEY, P); sync(); medirPerfilLuego(); };
+
+  // ---------- Google Analytics 4 ----------
+  // Mide cómo se usa deelo: con qué cuenta se entra, qué súper y billeteras se eligen, qué se busca y compara,
+  // listas y carritos. No se mandan mails, nombres ni datos de tarjetas. Sin GA_ID no se carga nada.
+  // El ID sale de Firebase → Configuración del proyecto → Integraciones → Google Analytics (G-XXXXXXXXXX).
+  var GA_ID = '';
+  function ga(){ if(!GA_ID) return; window.dataLayer = window.dataLayer || []; window.dataLayer.push(arguments); }
+  if(GA_ID){
+    const s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID; document.head.appendChild(s);
+    ga('js', new Date());
+    ga('config', GA_ID, {send_page_view: false, allow_google_signals: false, allow_ad_personalization_signals: false});
+  }
+  // Evento solo para GA4 (nombres con guion bajo, hasta 40 caracteres).
+  function medir(n, params){ try{ ga('event', String(n).replace(/-/g, '_').slice(0, 40), params || {}); }catch(e){} }
+  // Configuración del perfil: propiedades del usuario (para cruzar todo lo demás) y, una vez por semana o cuando
+  // cambia, un evento por súper y por billetera elegidos (así GA cuenta cuántos usuarios usan cada uno).
+  var medirT = null;
+  function medirPerfilLuego(){ clearTimeout(medirT); medirT = setTimeout(medirPerfil, 2500); }
+  function medirPerfil(){
+    if(!GA_ID) return;
+    try{
+      const sups = (P.supers && P.supers.length ? P.supers : Object.keys(D.supers)).slice().sort();
+      const ents = Object.keys(P.ents || {}).sort();
+      const listasN = Array.isArray(P.listas) ? P.listas.length : 0, carritoN = Array.isArray(P.carrito) ? P.carrito.length : 0;
+      const login = window.deeloLogin || 'sin_cuenta';
+      ga('set', 'user_properties', {
+        login, cant_supers: String(P.supers && P.supers.length ? P.supers.length : 0), cant_billeteras: String(ents.length),
+        jubilado: P.jubilado ? 'si' : 'no', tiene_listas: listasN ? 'si' : 'no', configurado: hasProfile() ? 'si' : 'no'
+      });
+      const sem = iso(mondayOf(TODAY)), firma = [login, sups.join(','), ents.join(','), P.jubilado ? 1 : 0, listasN, carritoN].join('|');
+      const prev = store.get('deelo-ga-perfil', {});
+      if(prev.sem === sem && prev.firma === firma) return;
+      store.set('deelo-ga-perfil', {sem, firma});
+      medir('perfil', {login, supers: sups.join(',').slice(0, 100), billeteras: ents.join(',').slice(0, 100), cant_supers: P.supers && P.supers.length ? P.supers.length : 0, cant_billeteras: ents.length, listas: listasN, productos_carrito: carritoN, jubilado: P.jubilado ? 'si' : 'no'});
+      if(P.supers && P.supers.length) P.supers.forEach(s => medir('usa_super', {super: s}));
+      ents.forEach(k => medir('usa_billetera', {billetera: k, tipo: (D.entidades[k] && D.entidades[k].t) || '', tarjetas: ((P.ents[k] && P.ents[k].cards) || []).join(',').slice(0, 100)}));
+    }catch(e){}
+  }
+  window.addEventListener('deelo:sesion', ev => { window.deeloLogin = ev.detail.metodo || (ev.detail.sesion ? 'cuenta' : 'sin_cuenta'); medirPerfilLuego(); });
+  setTimeout(medirPerfil, 4000);
   const hasProfile = () => Object.keys(P.ents).length > 0 || P.jubilado;
 
   function match(pr){
@@ -3099,7 +3139,7 @@ details.others[open] summary{margin-bottom:10px}
     document.getElementById('vsItems').innerHTML = otros.length ? otros.map(fila).join('') : '<li class="vacio">No hay similares en tus súper.</li>';
     document.getElementById('vsNota').textContent = (pxModo === 'mias' && hasProfile() ? 'Precio más bajo con tus tarjetas en tus súper' : 'Precio de lista más bajo en tus súper') + '. −/+ es cuánto menos o más pagás que por tu producto; * cuando el tamaño es distinto, se calcula como si fuera del mismo tamaño que el tuyo. Similares: mismo tipo y variante, y tamaño a ±15%.';
   }
-  function abrirVs(e){ vsBase = e; evento('vs-similares'); document.getElementById('vsVer').hidden = false; document.body.classList.add('conLista'); pintarVs(); document.getElementById('vsVer').scrollTop = 0; }
+  function abrirVs(e){ vsBase = e; const pv = PX && PX.productos.find(x => x.e === e); evento('vs-similares', pv ? {item_id: e, item_name: pv.n.slice(0, 100), categoria: pv.c || ''} : {}); document.getElementById('vsVer').hidden = false; document.body.classList.add('conLista'); pintarVs(); document.getElementById('vsVer').scrollTop = 0; }
   function cerrarVs(){ vsBase = null; document.getElementById('vsVer').hidden = true; if(document.getElementById('lsVer').hidden) document.body.classList.remove('conLista'); }
   document.getElementById('vsCerrar').addEventListener('click', cerrarVs);
   document.addEventListener('keydown', ev => { if(ev.key === 'Escape' && vsBase) cerrarVs(); });
@@ -3108,6 +3148,9 @@ details.others[open] summary{margin-bottom:10px}
   document.getElementById('pxQ').addEventListener('input', () => { clearTimeout(pxT); pxT = setTimeout(renderPrecios, 150); });
   // Enter o la lupa: busca ya y cierra el teclado del celular.
   const pxBuscarYa = () => { clearTimeout(pxT); renderPrecios(); document.getElementById('pxQ').blur(); };
+  // Qué se busca (una vez por búsqueda: al apretar Enter o al salir del buscador).
+  let pxUltimaBusq = '';
+  document.getElementById('pxQ').addEventListener('change', ev => { const t = ev.target.value.trim().toLowerCase().slice(0, 60); if(t.length >= 2 && t !== pxUltimaBusq){ pxUltimaBusq = t; medir('search', {search_term: t}); } });
   document.getElementById('pxQ').addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); pxBuscarYa(); } });
   document.getElementById('pxLupa').addEventListener('click', e => { pxBuscarYa(); e.currentTarget.blur(); });
   document.getElementById('view-precios').addEventListener('click', ev => {
@@ -3128,7 +3171,7 @@ details.others[open] summary{margin-bottom:10px}
     const c = cart(), it = c.find(x => x.e === e);
     if(q <= 0) P.carrito = c.filter(x => x.e !== e);
     else if(it) it.q = Math.min(q, 99);
-    else c.push({e, q: 1, n: nombre || ''});
+    else { c.push({e, q: 1, n: nombre || ''}); const pa = PX && PX.productos.find(x => x.e === e); medir('add_to_cart', {items: [{item_id: e, item_name: (nombre || '').slice(0, 100), item_category: (pa && pa.c) || ''}]}); }
     save(); pintarBadge();
   }
   function pintarBadge(){
@@ -3154,6 +3197,13 @@ details.others[open] summary{margin-bottom:10px}
   // Google Maps busca la cadena cerca de la ubicación del usuario (en el celular abre la app de Maps).
   const MAPA_Q = {jumbo:'Jumbo supermercado', disco:'Disco supermercado', vea:'Supermercado Vea', coto:'Coto supermercado', carrefour:'Carrefour supermercado', dia:'Supermercado Día'};
   const mapaUrl = s => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(MAPA_Q[s] || (D.supers[s] ? D.supers[s].n : s));
+  // Resultado del carrito: en qué súper conviene (una vez por carrito distinto).
+  let cxFirma = '';
+  function medirCarrito(best, n){
+    if(!best) return; const f = best.s + '|' + n + '|' + Math.round(best.fin / 1000);
+    if(f === cxFirma) return; cxFirma = f;
+    medir('carrito_resultado', {mejor_super: best.s, productos: n, total: Math.round(best.fin), con_descuento: best.pr ? 'si' : 'no', billetera: best.pr ? (best.pr.pr.ent || '') : '', modo: pxModo || ''});
+  }
   function renderCarrito(){
     renderListas();
     pintarBadge();
@@ -3189,6 +3239,7 @@ details.others[open] summary{margin-bottom:10px}
       return {s, sub, tiene, faltan, promosQ, pr, pierde: resto > 0 ? pierde : null, fin: resto + B - (pr ? pr.v : 0)};
     }).filter(r => r.tiene).sort((a,b) => (b.tiene - a.tiene) || (a.fin - b.fin));
     const best = res[0];
+    medirCarrito(best, items.length);
     const fmtPr = r => r.pr ? `${r.pierde ? `<span>En los productos en oferta se usa la oferta del súper (no se suma con el banco).</span>` : ''}<span class="g">−${fmt(r.pr.v)} con ${esc(entName(r.pr.pr))}${r.pr.via ? ' (' + esc(r.pr.via.map(b => D.entidades[b].n).join(', ')) + ')' : ''} · ${r.pr.pr.pct}%${r.pr.cap ? ', llegás al tope' : ''}</span>` : (r.pierde ? `<span>Las ofertas del súper te convienen más que tu −${r.pierde.pct}% con ${esc(entName(r.pierde))} (no se suman)</span>` : pxModo === 'mias' && hasProfile() ? '<span>Sin descuento con tus tarjetas ese día</span>' : '');
     rank.innerHTML = res.map((r,i) => `<div class="rk${i === 0 ? ' best' : ''}">
         <span class="t">${sbadge(r.s,'lg')}<span>${esc(D.supers[r.s].n)}${i === 0 ? ' <span class="tag" style="font-size:10.5px;font-weight:700;text-transform:uppercase;background:var(--green-soft);color:var(--green-text);border-radius:999px;padding:2px 7px">Más conveniente</span>' : ''}</span></span>
@@ -3273,10 +3324,11 @@ details.others[open] summary{margin-bottom:10px}
   // ---------- compartir y medición ----------
   // Eventos anónimos en GoatCounter (sin datos personales): qué se usa, cuántos comparten y cuántos vuelven.
   // Si el script de GoatCounter todavía no cargó, se reintenta unos segundos.
-  function evento(n, intento){
+  function evento(n, params, intento){
+    if(!intento) medir(n, params);
     try{
       if(window.goatcounter && window.goatcounter.count){ window.goatcounter.count({path: '#ev-' + n, title: 'deelo · ' + n, event: true}); return; }
-      if((intento || 0) < 10) setTimeout(() => evento(n, (intento || 0) + 1), 1000);
+      if((intento || 0) < 10) setTimeout(() => evento(n, params, (intento || 0) + 1), 1000);
     }catch(e){}
   }
   window.deeloEvento = evento;
@@ -3453,6 +3505,7 @@ details.others[open] summary{margin-bottom:10px}
     document.querySelectorAll('[data-mas]').forEach(b => b.setAttribute('aria-current', ['tarjetas','todas'].includes(v) ? 'page' : 'false'));
     cerrarMas();
     if(location.hash.slice(1) !== v){ try{ history.replaceState(null, '', '#' + v); }catch(e){} }
+    medir('page_view', {page_title: 'deelo · ' + v, page_location: location.origin + location.pathname + '#' + v});
     if(show.listo){ try{ window.goatcounter && window.goatcounter.count && window.goatcounter.count({path: location.pathname + '#' + v, title: 'deelo · ' + v}); }catch(e){} }
     show.listo = true;
     window.scrollTo(0, 0);
@@ -3564,6 +3617,7 @@ details.others[open] summary{margin-bottom:10px}
     tourI = -1; tourLuz && tourLuz.remove(); tourBox && tourBox.remove(); tourLuz = tourBox = null;
     store.set('deelo-tour', como);
     try{ window.goatcounter && window.goatcounter.count && window.goatcounter.count({path: '#tour-' + como, title: 'deelo · tour ' + como, event: true}); }catch(e){}
+    medir('tour_' + como);
   }
   window.deeloTour = (desde = 0) => { cerrarMas(); tourPaso(desde); };
   document.addEventListener('click', ev => {

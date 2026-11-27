@@ -138,10 +138,19 @@ const msg = e => ERRORES[e && e.code] || 'Algo salió mal. Probá de nuevo en un
   }
 
   A.getRedirectResult(A.a).catch(() => {});
+  let primera = true;
   A.onAuthStateChanged(A.a, async u => {
+    const antes = user;
     user = u;
     window.deeloSesion = !!u;
-    window.dispatchEvent(new CustomEvent('deelo:sesion', { detail: { sesion: !!u } }));
+    // Para medir: cómo entró (Google o mail) y si acaba de ingresar o crear la cuenta (sin datos personales).
+    const metodo = u ? ((u.providerData || []).some(p => p.providerId === 'google.com') ? 'google' : 'mail') : 'sin_cuenta';
+    window.dispatchEvent(new CustomEvent('deelo:sesion', { detail: { sesion: !!u, metodo } }));
+    if (u && !antes && !primera && window.deeloEvento) {
+      const m = u.metadata || {}, nuevo = m.creationTime && m.lastSignInTime && Math.abs(Date.parse(m.lastSignInTime) - Date.parse(m.creationTime)) < 120000;
+      window.deeloEvento(nuevo ? 'sign_up' : 'login', { method: metodo });
+    }
+    primera = false;
     if (!u) {
       window.deeloCuenta = null;
       btn.classList.remove('in');
