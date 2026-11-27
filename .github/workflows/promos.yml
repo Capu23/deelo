@@ -1,10 +1,12 @@
-# Actualiza las promos de deelo (deelo.ar) todos los lunes a las 8:00 de Argentina.
+# Actualiza deelo (deelo.ar) completo los lunes y miércoles a las 8:00 de Argentina (las ofertas semanales de
+# Carrefour, Jumbo, Disco y Vea arrancan los miércoles).
 # También se puede correr a mano desde la pestaña Actions -> "deelo: actualizar promos" -> Run workflow.
 name: "deelo: actualizar promos"
 
 on:
   schedule:
     - cron: "7 11 * * 1"   # lunes 11:07 UTC = 8:07 en Argentina
+    - cron: "7 11 * * 3"   # miércoles
   workflow_dispatch:
 
 permissions:

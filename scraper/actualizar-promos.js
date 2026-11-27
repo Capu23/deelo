@@ -1,5 +1,5 @@
 // Actualización liviana de las promos de Jumbo, Disco y Vea en data/precios.json, sin volver a recorrer
-// los catálogos. Se corre después de cencosud-promos.js (miércoles y viernes, cuando arrancan las de mitad de semana).
+// los catálogos. Se corre después de cencosud-promos.js (viernes, cuando arrancan las de fin de semana).
 // Uso: node scraper/actualizar-promos.js
 const fs = require('fs');
 const path = require('path');

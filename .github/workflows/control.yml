@@ -1,12 +1,10 @@
-# Control de precios: compara una muestra de precios de deelo con la web de cada súper a mitad de semana,
-# cuando suelen empezar las ofertas. Si cambió más del 25% de la muestra se marca en rojo (GitHub avisa por mail).
+# Control de precios: todos los días compara una muestra de precios de deelo con la web de cada súper. Si cambió más del 25% de la muestra se marca en rojo (GitHub avisa por mail).
 # También se puede correr a mano desde Actions -> "deelo: control de precios" -> Run workflow.
 name: "deelo: control de precios"
 
 on:
   schedule:
-    - cron: "23 15 * * 4"   # jueves 15:23 UTC = 12:23 en Argentina
-    - cron: "23 15 * * 6"   # sábado
+    - cron: "23 15 * * *"   # todos los días 15:23 UTC = 12:23 en Argentina
   workflow_dispatch:
 
 permissions:
