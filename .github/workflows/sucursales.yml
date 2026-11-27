@@ -1,0 +1,44 @@
+# Sucursales de los 6 súper (Coto, Jumbo, Disco, Vea, Carrefour y Día) desde OpenStreetMap, para mostrar en deelo
+# la más cercana. Las sucursales cambian poco: corre una vez por mes y también se puede correr a mano desde Actions.
+name: "deelo: sucursales"
+
+on:
+  schedule:
+    - cron: "41 13 3 * *"   # día 3 de cada mes, 13:41 UTC = 10:41 en Argentina
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deelo-sucursales
+  cancel-in-progress: false
+
+jobs:
+  sucursales:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Leer sucursales de OpenStreetMap
+        run: node scraper/sucursales.js | tee sucursales.log
+      - name: Guardar si hubo cambios
+        run: |
+          { echo "### deelo · sucursales del $(date -u +%Y-%m-%d)"; echo '```'; cat sucursales.log; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          git config user.name "deelo-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp data/sucursales.json "$RUNNER_TEMP/sucursales.json"
+          for i in 1 2 3; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/sucursales.json" data/sucursales.json
+            git add data/sucursales.json
+            if git diff --cached --quiet; then echo "Sin cambios en las sucursales."; exit 0; fi
+            git commit -q -m "deelo: sucursales $(date -u +%Y-%m-%d)"
+            if git push -q; then echo "Publicado."; exit 0; fi
+            echo "El push falló (intento $i): reintento."; sleep 10
+          done
+          exit 1
