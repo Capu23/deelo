@@ -87,6 +87,8 @@ if (!cotoInfo) console.log('Sin datos de Coto vigentes: Coto queda afuera.');
     grupos: grupos.map(x => x.replace(/^c:/, '').split('/').filter(Boolean).pop() || x),
     productos: out,
   };
+  // Frutas y verduras (canasta fija por kilo, de frutas-verduras.js) como una categoría más.
+  console.log('frutas y verduras:', require('./sumar-fv').sumarFV(data));
   fs.writeFileSync(path.join(ROOT, 'data/precios.json'), JSON.stringify(data));
   if (Object.values(SKU_CENCOSUD).some(m => Object.keys(m).length)) fs.writeFileSync(path.join(ROOT, 'data/skus-cencosud.json'), JSON.stringify(SKU_CENCOSUD));
 

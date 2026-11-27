@@ -45,6 +45,8 @@ jobs:
           # Recorre el catálogo completo de cada súper (unos 25 min), renueva la lista de productos
           # (en 3 o más cadenas, sin marcas propias) y saca los precios de ese recorrido.
           node scraper/catalogo.js && node scraper/canasta.js 3 || echo "catálogo falló: se mantiene la canasta anterior"
+          # Frutas y verduras: canasta fija comparada por kilo (si falla, siguen las de la vez anterior)
+          node scraper/frutas-verduras.js | tail -n 1 || echo "frutas y verduras fallaron: siguen las anteriores"
           node scraper/precios.js | tee precios.log
           # Promos del súper de Jumbo, Disco y Vea (3x2, 2do al 50%…) con sus fechas
           node scraper/cencosud-promos.js | tee -a precios.log && node scraper/actualizar-promos.js | tee -a precios.log || echo "promos de Cencosud fallaron: siguen las anteriores"
