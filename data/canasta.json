@@ -542,12 +542,6 @@
    "marca": "Quaker"
   },
   {
-   "ean": "7790199604587",
-   "nombre": "Avena tradicional Morixe 400 g.",
-   "categoria": "Almacén",
-   "marca": "Morixe"
-  },
-  {
    "ean": "7792170555499",
    "nombre": "Avena tradicional Quaker en caja 280 grs",
    "categoria": "Almacén",
@@ -1800,6 +1794,12 @@
    "nombre": "Galletitas de chocolate Macucas 110 g.",
    "categoria": "Almacén",
    "marca": "Macucas"
+  },
+  {
+   "ean": "7622202843594",
+   "nombre": "Galletitas de granola Cerealitas 243 grs",
+   "categoria": "Almacén",
+   "marca": "Cerealitas"
   },
   {
    "ean": "7790040143555",
@@ -3176,12 +3176,6 @@
    "marca": "Lactal"
   },
   {
-   "ean": "7790040127272",
-   "nombre": "Pan dulce Arcor con frutas 400 g.",
-   "categoria": "Almacén",
-   "marca": "Arcor"
-  },
-  {
    "ean": "7795735601006",
    "nombre": "Pan dulce Don Satur con chips 400 g.",
    "categoria": "Almacén",
@@ -3432,12 +3426,6 @@
    "nombre": "Pasta con salsa de hongos Knorr 200 grs",
    "categoria": "Almacén",
    "marca": "Knorr"
-  },
-  {
-   "ean": "7798151952332",
-   "nombre": "Pasta de maní Maní King 485 g. sin TACC",
-   "categoria": "Almacén",
-   "marca": "Maní King"
   },
   {
    "ean": "7794000009547",
@@ -4868,12 +4856,6 @@
    "marca": "Zummy"
   },
   {
-   "ean": "7798181641428",
-   "nombre": "Sancor Bebé 1 ADV Brick 500 ml",
-   "categoria": "Bebés",
-   "marca": "Sancor"
-  },
-  {
    "ean": "7798181641435",
    "nombre": "Sancor Bebé 2 ADV Brick 200 ml",
    "categoria": "Bebés",
@@ -5660,10 +5642,10 @@
    "marca": "Powerade"
   },
   {
-   "ean": "7790895651649",
-   "nombre": "Bebida isotónica Powerado Zero Mountain Blast pet 500 ml",
+   "ean": "7898953990157",
+   "nombre": "Cerveza Lager Estrella Galicia en lata 473 ml",
    "categoria": "Bebidas",
-   "marca": "Powerade"
+   "marca": "Estrella Galicia"
   },
   {
    "ean": "7790197120218",
@@ -6656,6 +6638,12 @@
    "marca": "Santa Julia"
   },
   {
+   "ean": "7792319972224",
+   "nombre": "Vino blanco Cosecha Tardía 750 ml",
+   "categoria": "Bebidas",
+   "marca": "Cosecha Tardía"
+  },
+  {
    "ean": "7790314080463",
    "nombre": "Vino blanco dulce Blend Canciller en botella 1.125 ml",
    "categoria": "Bebidas",
@@ -6810,6 +6798,12 @@
    "nombre": "Vino rosado Callia Criolla 750 ml",
    "categoria": "Bebidas",
    "marca": "Callia"
+  },
+  {
+   "ean": "7792319972248",
+   "nombre": "Vino rosado Cosecha Tardía 750 ml",
+   "categoria": "Bebidas",
+   "marca": "Cosecha Tardía"
   },
   {
    "ean": "7790070760630",
@@ -6980,12 +6974,6 @@
    "marca": "Putruele"
   },
   {
-   "ean": "7791728247732",
-   "nombre": "Vino tinto Cabernet Sauvignon Santa Julia 750 ml",
-   "categoria": "Bebidas",
-   "marca": "Santa Julia"
-  },
-  {
    "ean": "7790168904434",
    "nombre": "Vino tinto Cabernet Sauvignon Syrah Colón 750 ml",
    "categoria": "Bebidas",
@@ -7022,26 +7010,20 @@
    "marca": "Viñas de Alvear"
   },
   {
+   "ean": "7792319972231",
+   "nombre": "Vino tinto Cosecha Tardía 750 ml",
+   "categoria": "Bebidas",
+   "marca": "Cosecha Tardía"
+  },
+  {
    "ean": "7791540000690",
    "nombre": "Vino tinto de verano Dadá en lata 355 ml",
    "categoria": "Bebidas",
    "marca": "Dadá"
   },
   {
-   "ean": "7790703204968",
-   "nombre": "Vino tinto Don Valentín Lacrado 750 ml",
-   "categoria": "Bebidas",
-   "marca": "Don Valentín"
-  },
-  {
    "ean": "7791728248265",
    "nombre": "Vino tinto Dulce Santa Julia 750 ml",
-   "categoria": "Bebidas",
-   "marca": "Santa Julia"
-  },
-  {
-   "ean": "7791728239331",
-   "nombre": "Vino tinto dulce Santa Julia en lata 269 ml",
    "categoria": "Bebidas",
    "marca": "Santa Julia"
   },
@@ -7398,12 +7380,6 @@
    "nombre": "Vino tinto Malbec San Telmo 750 ml",
    "categoria": "Bebidas",
    "marca": "San Telmo"
-  },
-  {
-   "ean": "7791728247114",
-   "nombre": "Vino tinto Malbec Santa Julia 750 ml",
-   "categoria": "Bebidas",
-   "marca": "Santa Julia"
   },
   {
    "ean": "7791728247671",
@@ -9662,6 +9638,12 @@
    "marca": "Glade"
   },
   {
+   "ean": "7793253007638",
+   "nombre": "Aromatizante de tela Poett Huellitas de Frescura 250 ml",
+   "categoria": "Limpieza",
+   "marca": "Poett"
+  },
+  {
    "ean": "7793253098773",
    "nombre": "Aromatizante para tela Poett sedosa primavera 250 cc.",
    "categoria": "Limpieza",
@@ -11078,6 +11060,12 @@
    "marca": "Comfort"
   },
   {
+   "ean": "7891150028944",
+   "nombre": "Suavizante para ropa Comfort Frescor Intenso 1 lt",
+   "categoria": "Limpieza",
+   "marca": "Comfort"
+  },
+  {
    "ean": "7791905000921",
    "nombre": "Suavizante para ropa Querubín flores silvestres 900 cc.",
    "categoria": "Limpieza",
@@ -12264,12 +12252,6 @@
    "nombre": "Desodorante en aerosol para todo el cuerpo Rexona All Body Deo Wild Rose 150 ml",
    "categoria": "Perfumería",
    "marca": "Rexona"
-  },
-  {
-   "ean": "7791293049700",
-   "nombre": "Desodorante en Aerosol Patrichs Grand Prix 230 ml",
-   "categoria": "Perfumería",
-   "marca": "Patrichs"
   },
   {
    "ean": "75083694",
@@ -14306,12 +14288,6 @@
    "marca": "Zuccardi"
   },
   {
-   "ean": "7791728246544",
-   "nombre": "Aceite de oliva genovesa Familia Zuccardi 500 cc",
-   "categoria": "Almacén",
-   "marca": "Zuccardi"
-  },
-  {
    "ean": "7798080520077",
    "nombre": "Aceite de oliva La Toscana extra virgen 500 cc",
    "categoria": "Almacén",
@@ -14378,6 +14354,12 @@
    "marca": "Oliovita"
   },
   {
+   "ean": "7791728246575",
+   "nombre": "Aceite de oliva picual familia Zuccardi 250 cc",
+   "categoria": "Almacén",
+   "marca": "Zuccardi"
+  },
+  {
    "ean": "7790272008417",
    "nombre": "Aceite de oliva virgen Natura extra fuerte 500 cc",
    "categoria": "Almacén",
@@ -14400,12 +14382,6 @@
    "nombre": "Aceite en aerosol Cocinero Fritolim sabor manteca 120 grs",
    "categoria": "Almacén",
    "marca": "Cocinero"
-  },
-  {
-   "ean": "7792180131959",
-   "nombre": "Aceite en aerosol Mamá Cocina manteca con harina 150 g",
-   "categoria": "Almacén",
-   "marca": "Mamá Cocina"
   },
   {
    "ean": "7790272000848",
@@ -15458,6 +15434,12 @@
    "marca": "Blue Diamond"
   },
   {
+   "ean": "8410223902821",
+   "nombre": "Almendras rellenas El Almendro 150 grs",
+   "categoria": "Almacén",
+   "marca": "El Almendro"
+  },
+  {
    "ean": "41570029701",
    "nombre": "Almendras saladas Blue Diamond lata 150 grs",
    "categoria": "Almacén",
@@ -15582,6 +15564,12 @@
    "nombre": "Aritos de cereal 3 Arroyos frutado bolsa 160 g.",
    "categoria": "Almacén",
    "marca": "3 Arroyos"
+  },
+  {
+   "ean": "7790045826965",
+   "nombre": "Aritos de cereal frutado Granix bolsa 130 g.",
+   "categoria": "Almacén",
+   "marca": "Granix"
   },
   {
    "ean": "7798169802797",
@@ -15832,6 +15820,12 @@
   {
    "ean": "7790199604594",
    "nombre": "Avena instantanea Morixe 400 g.",
+   "categoria": "Almacén",
+   "marca": "Morixe"
+  },
+  {
+   "ean": "7790199604587",
+   "nombre": "Avena tradicional Morixe 400 g.",
    "categoria": "Almacén",
    "marca": "Morixe"
   },
@@ -16622,6 +16616,12 @@
    "marca": "Bon O Bon"
   },
   {
+   "ean": "7790580155773",
+   "nombre": "Bombones de chocolate rellenos con pasta de avellanas Aguila 100 grs",
+   "categoria": "Almacén",
+   "marca": "Aguila"
+  },
+  {
    "ean": "7790580151553",
    "nombre": "Bombones de chocolate Rocklets Halloween 140 grs",
    "categoria": "Almacén",
@@ -16802,6 +16802,12 @@
    "marca": "Bonafide"
   },
   {
+   "ean": "7792360097877",
+   "nombre": "Budin con frutas Bonafide 180 grs",
+   "categoria": "Almacén",
+   "marca": "Bonafide"
+  },
+  {
    "ean": "7792360097884",
    "nombre": "Budin de limón Bonafide 180 grs",
    "categoria": "Almacén",
@@ -16836,6 +16842,12 @@
    "nombre": "Budín marmolado Smams 250 g. sin TACC",
    "categoria": "Almacén",
    "marca": "Smams"
+  },
+  {
+   "ean": "7791150013769",
+   "nombre": "Budín Musel chips de chocolate 250 g.",
+   "categoria": "Almacén",
+   "marca": "Musel"
   },
   {
    "ean": "7790077000487",
@@ -16896,12 +16908,6 @@
    "nombre": "Budín Steinhauser vainilla 250 g.",
    "categoria": "Almacén",
    "marca": "Steinhauser"
-  },
-  {
-   "ean": "7790580138585",
-   "nombre": "Caballa al natural La campagnola 300 g.",
-   "categoria": "Almacén",
-   "marca": "La Campagnola"
   },
   {
    "ean": "7793323004802",
@@ -17690,6 +17696,12 @@
    "marca": "Sugus"
   },
   {
+   "ean": "7790580155902",
+   "nombre": "Caramelos mini tubitos Halloween Mogul Hechizados 100 grs",
+   "categoria": "Almacén",
+   "marca": "Mogul"
+  },
+  {
    "ean": "7790580104382",
    "nombre": "Caramelos Mogul Masti confitados 30 grs",
    "categoria": "Almacén",
@@ -17784,6 +17796,12 @@
    "nombre": "Cereal Bon o Bon superbolls 80 g.",
    "categoria": "Almacén",
    "marca": "Bon O Bon"
+  },
+  {
+   "ean": "7792360097129",
+   "nombre": "Cereal Bonafide cubierto con leche 80 grs",
+   "categoria": "Almacén",
+   "marca": "Bonafide"
   },
   {
    "ean": "7896004004990",
@@ -18906,6 +18924,12 @@
    "nombre": "Crocante Georgalos de mani y almendras 100 g.",
    "categoria": "Almacén",
    "marca": "Georgalos"
+  },
+  {
+   "ean": "7790580156329",
+   "nombre": "Crunchy mix Aguila almendras maní y arándanos 90 grs",
+   "categoria": "Almacén",
+   "marca": "Aguila"
   },
   {
    "ean": "7790580146948",
@@ -20438,12 +20462,6 @@
    "marca": "Smams"
   },
   {
-   "ean": "7622202843594",
-   "nombre": "Galletitas de granola Cerealitas 243 grs",
-   "categoria": "Almacén",
-   "marca": "Cerealitas"
-  },
-  {
    "ean": "7793450000142",
    "nombre": "Galletitas de hojaldre Hojalmar 250 g.",
    "categoria": "Almacén",
@@ -21104,6 +21122,12 @@
    "marca": "Georgalos"
   },
   {
+   "ean": "7790070100740",
+   "nombre": "Gelatina en polvo Exquisita sabor durazno 25 grs",
+   "categoria": "Almacén",
+   "marca": "Exquisita"
+  },
+  {
    "ean": "7790070432452",
    "nombre": "Gelatina Exquisita de cereza 25 g.",
    "categoria": "Almacén",
@@ -21118,12 +21142,6 @@
   {
    "ean": "7790070432537",
    "nombre": "Gelatina Exquisita de frambuesa 40 g.",
-   "categoria": "Almacén",
-   "marca": "Exquisita"
-  },
-  {
-   "ean": "7790070432490",
-   "nombre": "Gelatina Exquisita de frutilla 40 g.",
    "categoria": "Almacén",
    "marca": "Exquisita"
   },
@@ -22718,6 +22736,12 @@
    "marca": "Dr. Cormillot"
   },
   {
+   "ean": "7793046007296",
+   "nombre": "Mermelada Dr. Cormillot de frutilla sin azúcar 390 g.",
+   "categoria": "Almacén",
+   "marca": "Dr. Cormillot"
+  },
+  {
    "ean": "7798088960271",
    "nombre": "Mermelada El Brocal de ciruela y naranja 420 g.",
    "categoria": "Almacén",
@@ -22798,6 +22822,12 @@
   {
    "ean": "7793046007777",
    "nombre": "Mermelada light Dr. Cormillot de ciruela frasco 390 g.",
+   "categoria": "Almacén",
+   "marca": "Dr. Cormillot"
+  },
+  {
+   "ean": "7793046007340",
+   "nombre": "Mermelada light Dr. Cormillot higo sin azúcar agregada 390 g.",
    "categoria": "Almacén",
    "marca": "Dr. Cormillot"
   },
@@ -24038,6 +24068,12 @@
    "marca": "Noly"
   },
   {
+   "ean": "7790040127272",
+   "nombre": "Pan dulce Arcor con frutas 400 g.",
+   "categoria": "Almacén",
+   "marca": "Arcor"
+  },
+  {
    "ean": "7793890261974",
    "nombre": "Pan dulce Artesano 700 grs",
    "categoria": "Almacén",
@@ -24064,6 +24100,12 @@
   {
    "ean": "7792360091912",
    "nombre": "Pan dulce Bonafide con frutas 400 g.",
+   "categoria": "Almacén",
+   "marca": "Bonafide"
+  },
+  {
+   "ean": "7792360094784",
+   "nombre": "Pan dulce Bonafide sin frutas 400 g.",
    "categoria": "Almacén",
    "marca": "Bonafide"
   },
@@ -24188,6 +24230,12 @@
    "marca": "Noly"
   },
   {
+   "ean": "7793890262650",
+   "nombre": "Pan Para Hamburguesas De Papa X 210 Gr Fargo",
+   "categoria": "Almacén",
+   "marca": "FARGO"
+  },
+  {
    "ean": "7793890259087",
    "nombre": "Pan para pancho Bimbo 6 uni",
    "categoria": "Almacén",
@@ -24310,6 +24358,12 @@
   {
    "ean": "7794520868853",
    "nombre": "Papas fritas Krachitos sabor jamón serrano 90 g.",
+   "categoria": "Almacén",
+   "marca": "Krachitos"
+  },
+  {
+   "ean": "7794520868891",
+   "nombre": "Papas fritas Krachitos sabor ketchup 90 g.",
    "categoria": "Almacén",
    "marca": "Krachitos"
   },
@@ -24452,10 +24506,10 @@
    "marca": "Croppers"
   },
   {
-   "ean": "736684208714",
-   "nombre": "Pasta de maní Entrenuts cacao frasco 370 g.",
+   "ean": "7798151952332",
+   "nombre": "Pasta de maní Maní King 485 g. sin TACC",
    "categoria": "Almacén",
-   "marca": "Entrenuts"
+   "marca": "Maní King"
   },
   {
    "ean": "7798151953117",
@@ -24836,6 +24890,24 @@
    "marca": "Mantecol"
   },
   {
+   "ean": "7790380270133",
+   "nombre": "Postre de maní Mantecol caramel 111 grs",
+   "categoria": "Almacén",
+   "marca": "Mantecol"
+  },
+  {
+   "ean": "7790380270126",
+   "nombre": "Postre de maní Mantecol coco 111 grs",
+   "categoria": "Almacén",
+   "marca": "Mantecol"
+  },
+  {
+   "ean": "7790380270119",
+   "nombre": "Postre de maní Mantecol con café 111 grs",
+   "categoria": "Almacén",
+   "marca": "Mantecol"
+  },
+  {
    "ean": "7622201812676",
    "nombre": "Postre de maní marmolado Mantecol 111 g.",
    "categoria": "Almacén",
@@ -24876,6 +24948,12 @@
    "nombre": "Postre light Exquisita dulce de leche en sobre 60 g.",
    "categoria": "Almacén",
    "marca": "Exquisita"
+  },
+  {
+   "ean": "7790580155780",
+   "nombre": "Postre mousse de avellanas con maní Aguila 160 grs",
+   "categoria": "Almacén",
+   "marca": "Aguila"
   },
   {
    "ean": "7622201705107",
@@ -25050,12 +25128,6 @@
    "nombre": "Premezcla para pizza Dicomere sin gluten 450 grs",
    "categoria": "Almacén",
    "marca": "Dicomere"
-  },
-  {
-   "ean": "7792180004833",
-   "nombre": "Premezcla para pizza Mamá Cocina fortificado 500 g",
-   "categoria": "Almacén",
-   "marca": "Mamá Cocina"
   },
   {
    "ean": "7790580122300",
@@ -25646,12 +25718,6 @@
    "marca": "Dos Anclas"
   },
   {
-   "ean": "7792900990095",
-   "nombre": "Sal light Dos Anclas con hierbas salero 200 g.",
-   "categoria": "Almacén",
-   "marca": "Dos Anclas"
-  },
-  {
    "ean": "7792900990088",
    "nombre": "Sal light Dos Anclas salero 250 g.",
    "categoria": "Almacén",
@@ -25752,6 +25818,12 @@
    "nombre": "Salsa barbacoa Pampagourmet premium 300 g.",
    "categoria": "Almacén",
    "marca": "Pampagourmet"
+  },
+  {
+   "ean": "134093510006",
+   "nombre": "Salsa BBQ Sweet No Spicy Sweet Baby Rays 510 grs",
+   "categoria": "Almacén",
+   "marca": "Sweet Baby Rays"
   },
   {
    "ean": "7790150580424",
@@ -26126,6 +26198,12 @@
    "marca": "LA CAMPAGNOLA"
   },
   {
+   "ean": "134099181040",
+   "nombre": "Salsa para alitas buffalo wing Tgi Fridays 340 grs",
+   "categoria": "Almacén",
+   "marca": "Tgi Fridays"
+  },
+  {
    "ean": "8005110551215",
    "nombre": "Salsa para pizza Mutti en lata 400 g.",
    "categoria": "Almacén",
@@ -26304,6 +26382,12 @@
    "nombre": "Sardinas en aceite vegetal Gomes da Costa 125 grs",
    "categoria": "Almacén",
    "marca": "Gomes Da Costa"
+  },
+  {
+   "ean": "633148100099",
+   "nombre": "Sazonador Tajín clásico en polvo 45 grs",
+   "categoria": "Almacén",
+   "marca": "Tajin"
   },
   {
    "ean": "7798199870100",
@@ -27290,12 +27374,6 @@
    "marca": "Big Ben"
   },
   {
-   "ean": "7792280005631",
-   "nombre": "Té en saquitos Cachamai O'Clock hibiscus rosa mosqueta canela 20 u.",
-   "categoria": "Almacén",
-   "marca": "Cachamai"
-  },
-  {
    "ean": "7798104307707",
    "nombre": "Té en saquitos Inti Zen chaman chai 15 u.",
    "categoria": "Almacén",
@@ -27962,6 +28040,12 @@
    "marca": "Dos Hermanos"
   },
   {
+   "ean": "7798082743726",
+   "nombre": "Tostaditas de arroz Tía Maruca 120 g.",
+   "categoria": "Almacén",
+   "marca": "Tía Maruca"
+  },
+  {
    "ean": "7791476080001",
    "nombre": "Trigo pelado Egran 500 g",
    "categoria": "Almacén",
@@ -28122,6 +28206,12 @@
    "nombre": "Turrón de Maní y almendras semiblando Georgalos 80 g.",
    "categoria": "Almacén",
    "marca": "Georgalos"
+  },
+  {
+   "ean": "7790580156299",
+   "nombre": "Turrón de pistacho y caramel Arcor 100 grs",
+   "categoria": "Almacén",
+   "marca": "Arcor"
   },
   {
    "ean": "8410223872971",
@@ -29726,6 +29816,12 @@
    "marca": "Zummy"
   },
   {
+   "ean": "7798181641428",
+   "nombre": "Sancor Bebé 1 ADV Brick 500 ml",
+   "categoria": "Bebés",
+   "marca": "Sancor"
+  },
+  {
    "ean": "7798181641466",
    "nombre": "Sancor Bebé 3 ADV Brick 1 lt",
    "categoria": "Bebés",
@@ -29886,12 +29982,6 @@
    "nombre": "Toallitas húmedas Algabo Baby 48 u.",
    "categoria": "Bebés",
    "marca": "Algabo"
-  },
-  {
-   "ean": "7790064104679",
-   "nombre": "Toallitas húmedas Estrella cuidado relajante baby x 50 uni",
-   "categoria": "Bebés",
-   "marca": "Estrella"
   },
   {
    "ean": "7790064104693",
@@ -30680,6 +30770,12 @@
    "marca": "Powerade"
   },
   {
+   "ean": "7790895651649",
+   "nombre": "Bebida isotónica Powerado Zero Mountain Blast pet 500 ml",
+   "categoria": "Bebidas",
+   "marca": "Powerade"
+  },
+  {
    "ean": "7798383430028",
    "nombre": "Bebida Yaci Frutos Rojos Lata",
    "categoria": "Bebidas",
@@ -30858,12 +30954,6 @@
    "nombre": "Cerveza ipa citrica Antares sin alcohol 473 ml",
    "categoria": "Bebidas",
    "marca": "Antares"
-  },
-  {
-   "ean": "7898953990157",
-   "nombre": "Cerveza Lager Estrella Galicia en lata 473 ml",
-   "categoria": "Bebidas",
-   "marca": "Estrella Galicia"
   },
   {
    "ean": "7898953990140",
@@ -31104,6 +31194,12 @@
    "nombre": "Elegido tinto de tintas 750 cc.",
    "categoria": "Bebidas",
    "marca": "Elegido"
+  },
+  {
+   "ean": "9002490301408",
+   "nombre": "Energizante Red Bull White Peach lata 250 ml",
+   "categoria": "Bebidas",
+   "marca": "Red Bull"
   },
   {
    "ean": "7791560074084",
@@ -33230,12 +33326,6 @@
    "marca": "Santa Julia"
   },
   {
-   "ean": "7792319972224",
-   "nombre": "Vino blanco Cosecha Tardía 750 ml",
-   "categoria": "Bebidas",
-   "marca": "Cosecha Tardía"
-  },
-  {
    "ean": "7790703204982",
    "nombre": "Vino blanco Don Valentín Lacrado 750 ml",
    "categoria": "Bebidas",
@@ -33536,6 +33626,12 @@
    "marca": "Marcus"
   },
   {
+   "ean": "7792319971128",
+   "nombre": "Vino blanco Sauvignon Blanc Norton select 750 ml",
+   "categoria": "Bebidas",
+   "marca": "Norton"
+  },
+  {
    "ean": "7790577001700",
    "nombre": "Vino blanco Sauvignon Blanc Ruttini 750 ml",
    "categoria": "Bebidas",
@@ -33776,12 +33872,6 @@
    "marca": "Callia"
   },
   {
-   "ean": "7792319972248",
-   "nombre": "Vino rosado Cosecha Tardía 750 ml",
-   "categoria": "Bebidas",
-   "marca": "Cosecha Tardía"
-  },
-  {
    "ean": "7790314080036",
    "nombre": "Vino rosado de Bonarda Finca Magnolia 750 ml",
    "categoria": "Bebidas",
@@ -34014,12 +34104,6 @@
    "nombre": "Vino Rosé Nieto Senetiner 750 ml",
    "categoria": "Bebidas",
    "marca": "Nieto Senetiner"
-  },
-  {
-   "ean": "7791728242577",
-   "nombre": "Vino Rosé Santa Julia en lata 269 ml",
-   "categoria": "Bebidas",
-   "marca": "Santa Julia"
   },
   {
    "ean": "7790070106292",
@@ -34350,12 +34434,6 @@
    "nombre": "Vino Tinto Cabernet Franc Salentein Reserva 750 ml",
    "categoria": "Bebidas",
    "marca": "Salentein"
-  },
-  {
-   "ean": "7791728247787",
-   "nombre": "Vino tinto Cabernet Franc Santa Julia 750 ml",
-   "categoria": "Bebidas",
-   "marca": "Santa Julia"
   },
   {
    "ean": "7792319972750",
@@ -34880,6 +34958,12 @@
    "marca": "San Telmo"
   },
   {
+   "ean": "7791728247732",
+   "nombre": "Vino tinto Cabernet Sauvignon Santa Julia 750 ml",
+   "categoria": "Bebidas",
+   "marca": "Santa Julia"
+  },
+  {
    "ean": "7791728247688",
    "nombre": "Vino tinto Cabernet Sauvignon Santa Julia 750 ml",
    "categoria": "Bebidas",
@@ -35030,12 +35114,6 @@
    "marca": "Salentein"
   },
   {
-   "ean": "7792319972231",
-   "nombre": "Vino tinto Cosecha Tardía 750 ml",
-   "categoria": "Bebidas",
-   "marca": "Cosecha Tardía"
-  },
-  {
    "ean": "7791540000898",
    "nombre": "Vino tinto Dadá Sweet Red bajo alcohol en botella 750 ml",
    "categoria": "Bebidas",
@@ -35048,6 +35126,12 @@
    "marca": "Don Nicanor"
   },
   {
+   "ean": "7790703204968",
+   "nombre": "Vino tinto Don Valentín Lacrado 750 ml",
+   "categoria": "Bebidas",
+   "marca": "Don Valentín"
+  },
+  {
    "ean": "7798108834193",
    "nombre": "Vino tinto Dulce Callia Tadío 750 ml",
    "categoria": "Bebidas",
@@ -35058,6 +35142,12 @@
    "nombre": "Vino tinto dulce Cosecha Alaris 750 ml",
    "categoria": "Bebidas",
    "marca": "Alaris"
+  },
+  {
+   "ean": "7791728239331",
+   "nombre": "Vino tinto dulce Santa Julia en lata 269 ml",
+   "categoria": "Bebidas",
+   "marca": "Santa Julia"
   },
   {
    "ean": "7790314054099",
@@ -35880,6 +35970,12 @@
    "nombre": "Vino tinto Malbec San Felipe Roble 750 ml",
    "categoria": "Bebidas",
    "marca": "San Felipe"
+  },
+  {
+   "ean": "7791728247114",
+   "nombre": "Vino tinto Malbec Santa Julia 750 ml",
+   "categoria": "Bebidas",
+   "marca": "Santa Julia"
   },
   {
    "ean": "7794450000781",
@@ -37010,6 +37106,12 @@
    "marca": "Lucchetti"
   },
   {
+   "ean": "7790070109712",
+   "nombre": "Bocaditos de pollo Patitas sabor barbacoa 400 grs",
+   "categoria": "Congelados",
+   "marca": "Patitas"
+  },
+  {
    "ean": "7790070036605",
    "nombre": "Bocaditos de pollo Patitas sabor original fp 1.1 kg",
    "categoria": "Congelados",
@@ -37056,6 +37158,12 @@
    "nombre": "Chipa Mamá Cocina x 15 uni",
    "categoria": "Congelados",
    "marca": "Mamá Cocina"
+  },
+  {
+   "ean": "7896074607695",
+   "nombre": "Chipa tradicional Forno de Minas 400 grs",
+   "categoria": "Congelados",
+   "marca": "Forno de Minas"
   },
   {
    "ean": "7798342151926",
@@ -38026,6 +38134,12 @@
   {
    "ean": "7797906055007",
    "nombre": "Papas crispers Mc Cain gourmet en bolsa 600 grs",
+   "categoria": "Congelados",
+   "marca": "Mc Cain"
+  },
+  {
+   "ean": "7797906055069",
+   "nombre": "Papas estilo artesanal Mc Cain Air Fryer 700 grs",
    "categoria": "Congelados",
    "marca": "Mc Cain"
   },
@@ -39158,6 +39272,12 @@
    "marca": "Paladini"
   },
   {
+   "ean": "7790079024139",
+   "nombre": "Panceta ahumada feteada Espuña 180 g.",
+   "categoria": "Lácteos y frescos",
+   "marca": "Espuña"
+  },
+  {
    "ean": "7790625005353",
    "nombre": "Panceta feteada Lario ahumada 150 g.",
    "categoria": "Lácteos y frescos",
@@ -39276,12 +39396,6 @@
    "nombre": "Queso azul San ignacio 120 g.",
    "categoria": "Lácteos y frescos",
    "marca": "San Ignacio"
-  },
-  {
-   "ean": "7798096213772",
-   "nombre": "Queso azul untable Wapi 180 grs",
-   "categoria": "Lácteos y frescos",
-   "marca": "Wapi"
   },
   {
    "ean": "7798183020412",
@@ -40394,6 +40508,12 @@
    "marca": "Milkaut"
   },
   {
+   "ean": "7794820904206",
+   "nombre": "Yogur descremado Milkaut Zero natural pote 180 grs",
+   "categoria": "Lácteos y frescos",
+   "marca": "Milkaut"
+  },
+  {
    "ean": "7794820903711",
    "nombre": "Yogur descremado natural cremoso Milkaut en pote 300 grs",
    "categoria": "Lácteos y frescos",
@@ -40538,6 +40658,12 @@
    "marca": "Milkaut"
   },
   {
+   "ean": "7798136871825",
+   "nombre": "Yogur entero natural estilo griego Dahi pote 500 grs",
+   "categoria": "Lácteos y frescos",
+   "marca": "Dahi"
+  },
+  {
    "ean": "7793913013689",
    "nombre": "Yogur entero natural Tregar sin azúcar en pote 140 g.",
    "categoria": "Lácteos y frescos",
@@ -40560,12 +40686,6 @@
    "nombre": "Yogur entero Tregar natural 140 g.",
    "categoria": "Lácteos y frescos",
    "marca": "Tregar"
-  },
-  {
-   "ean": "744430256322",
-   "nombre": "Yogur entero Yogurade sin azúcar vainilla 150 g.",
-   "categoria": "Lácteos y frescos",
-   "marca": "Yogurade"
   },
   {
    "ean": "7798136870552",
@@ -40674,6 +40794,12 @@
    "nombre": "Yogur natural con granola Manfrey en pote 172 g.",
    "categoria": "Lácteos y frescos",
    "marca": "Manfrey"
+  },
+  {
+   "ean": "7798136871832",
+   "nombre": "Yogur natural estilo griego Dahi sin azúcar pote 500 grs",
+   "categoria": "Lácteos y frescos",
+   "marca": "Dahi"
   },
   {
    "ean": "7790787960361",
@@ -41078,12 +41204,6 @@
    "marca": "Poett"
   },
   {
-   "ean": "7793253007638",
-   "nombre": "Aromatizante de tela Poett Huellitas de Frescura 250 ml",
-   "categoria": "Limpieza",
-   "marca": "Poett"
-  },
-  {
    "ean": "7793253170615",
    "nombre": "Aromatizante natural Poett blends frutal 400 cc.",
    "categoria": "Limpieza",
@@ -41442,6 +41562,12 @@
    "nombre": "Desodorante de ambientes Glade Floral Vibes aerosol 360 ml",
    "categoria": "Limpieza",
    "marca": "Glade"
+  },
+  {
+   "ean": "7790520031716",
+   "nombre": "Desodorante spray block Pato Purific Lavanda 60 ml",
+   "categoria": "Limpieza",
+   "marca": "Pato Purific"
   },
   {
    "ean": "7790520031723",
@@ -42662,6 +42788,12 @@
    "marca": "Cif"
   },
   {
+   "ean": "7793253007607",
+   "nombre": "Limpiador desinfectante Poett Huellitas de Frescura 1.8 lts",
+   "categoria": "Limpieza",
+   "marca": "Poett"
+  },
+  {
    "ean": "7791290796928",
    "nombre": "Limpiador destructor de grasa Cif dp 450 ml",
    "categoria": "Limpieza",
@@ -42678,6 +42810,12 @@
    "nombre": "Limpiador en crema Cif Multiuso Rosas y Jazmines 250 ml",
    "categoria": "Limpieza",
    "marca": "Cif"
+  },
+  {
+   "ean": "7798184582568",
+   "nombre": "Limpiador en polvo multiuso con percabonato I Love Percabonato 40 grs",
+   "categoria": "Limpieza",
+   "marca": "I Love Bicarbonato"
   },
   {
    "ean": "7790520026309",
@@ -44024,12 +44162,6 @@
    "marca": "Comfort"
   },
   {
-   "ean": "7891150028944",
-   "nombre": "Suavizante para ropa Comfort Frescor Intenso 1 lt",
-   "categoria": "Limpieza",
-   "marca": "Comfort"
-  },
-  {
    "ean": "7798124362540",
    "nombre": "Suavizante para ropa Ecovita orquideas y muguet 900 cc.",
    "categoria": "Limpieza",
@@ -45130,6 +45262,12 @@
   {
    "ean": "7791293051475",
    "nombre": "Acondicionador Sedal Luminous UV 650 ml",
+   "categoria": "Perfumería",
+   "marca": "Sedal"
+  },
+  {
+   "ean": "7791293052267",
+   "nombre": "Acondicionador Sedal Mega Crecimiento 650 ml",
    "categoria": "Perfumería",
    "marca": "Sedal"
   },
@@ -47200,6 +47338,12 @@
   {
    "ean": "7791293046792",
    "nombre": "Desodorante en Aerosol Patrichs Aviator 150 ml",
+   "categoria": "Perfumería",
+   "marca": "Patrichs"
+  },
+  {
+   "ean": "7791293049700",
+   "nombre": "Desodorante en Aerosol Patrichs Grand Prix 230 ml",
    "categoria": "Perfumería",
    "marca": "Patrichs"
   },
@@ -49388,12 +49532,6 @@
    "marca": "Elvive"
   },
   {
-   "ean": "7509552851625",
-   "nombre": "Mascarilla Elvive Oleo Extraordinario Coco 300 grs",
-   "categoria": "Perfumería",
-   "marca": "Elvive"
-  },
-  {
    "ean": "7509552902464",
    "nombre": "Mascarilla Elvive RT Extreme 300 grs",
    "categoria": "Perfumería",
@@ -50336,6 +50474,12 @@
    "marca": "Dermaglós"
   },
   {
+   "ean": "7793742004926",
+   "nombre": "Protector Solar Facial Bruma F50 75ml Dermaglos",
+   "categoria": "Perfumería",
+   "marca": "DERMAGLOS"
+  },
+  {
    "ean": "7793742004759",
    "nombre": "Protector solar facial Dermaglós F50 sin color 50 grs",
    "categoria": "Perfumería",
@@ -50798,6 +50942,12 @@
    "marca": "Go To Be"
   },
   {
+   "ean": "7791274202377",
+   "nombre": "Set Glow In Progress Go To Be 3 uni",
+   "categoria": "Perfumería",
+   "marca": "Go To Be"
+  },
+  {
    "ean": "7791274201950",
    "nombre": "Set The Plot Twist Go To Be body splash + crema corporal + shower gel",
    "categoria": "Perfumería",
@@ -50966,6 +51116,18 @@
    "marca": "Dove"
   },
   {
+   "ean": "7791293051970",
+   "nombre": "Shampoo Dove Humectación + Coco Antioxi 650 ml",
+   "categoria": "Perfumería",
+   "marca": "Dove"
+  },
+  {
+   "ean": "7791293047034",
+   "nombre": "Shampoo Dove Humectación + Coco y Antioxi 200 ml",
+   "categoria": "Perfumería",
+   "marca": "Dove"
+  },
+  {
    "ean": "7791293045511",
    "nombre": "Shampoo Dove Men 2 en 1 Fuerza Resistente 400 ml",
    "categoria": "Perfumería",
@@ -50998,6 +51160,12 @@
   {
    "ean": "7791293052007",
    "nombre": "Shampoo Dove Regeneración + Retinol 650 ml",
+   "categoria": "Perfumería",
+   "marca": "Dove"
+  },
+  {
+   "ean": "7791293047461",
+   "nombre": "Shampoo Dove ritual de crecimiento 400 cc.",
    "categoria": "Perfumería",
    "marca": "Dove"
   },
@@ -51688,6 +51856,12 @@
   {
    "ean": "7791293049885",
    "nombre": "Shampoo Tresemme Brillo Lamelar 880 ml",
+   "categoria": "Perfumería",
+   "marca": "Tresemmé"
+  },
+  {
+   "ean": "7791293049991",
+   "nombre": "Shampoo Tresemme Cauterización Reparadora 250 ml",
    "categoria": "Perfumería",
    "marca": "Tresemmé"
   },
