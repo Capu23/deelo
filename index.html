@@ -495,6 +495,9 @@ details.others[open] summary{margin-bottom:10px}
 .rk .mapa{grid-column:1/-1;justify-self:start;display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:7px 12px;border:1px solid var(--rule);border-radius:999px;font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;background:var(--paper)}
 .rk .mapa:hover{background:var(--sunk)}
 .rk .mapa svg{width:16px;height:16px;color:var(--green-text)}
+.rk button.mapa,button.cpSuc{font:inherit;cursor:pointer}
+.cpSuc{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border:1px solid var(--rule);border-radius:999px;font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;background:var(--paper)}
+.cpSuc svg{flex:none;width:15px;height:15px;color:var(--green-text)}
 .split{background:var(--sunk);border-radius:var(--r);padding:12px 14px;font-size:13.5px;color:var(--ink2)}
 .split b{color:var(--ink)}
 .ci{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 14px;border-top:1px solid var(--rule)}
@@ -2939,6 +2942,7 @@ details.others[open] summary{margin-bottom:10px}
         ${opt ? `<div class="col" style="gap:4px"><span>Con ${fmt(gasto)} usás el ${Math.round(pctUse)}% del tope. Para aprovecharlo entero, gastá <b>${fmt(opt)}</b>${pr.tope.p==='mes' ? ' en el mes' : pr.tope.p==='semana' ? ' en la semana' : pr.tope.p==='dia' ? ' ese día' : ' en esa compra'}.</span><div class="meter"><i style="width:${pctUse}%"></i></div></div>` : ''}
         ${pr.tope && pr.tope.extra ? `<span>Tope adicional ${esc(pr.tope.extra)}.</span>` : ''}
         ${pr.nota ? `<span>${esc(pr.nota)}</span>` : ''}
+        ${sucHTML(s, 'cpSuc')}
         <span class="muted">Vigencia: ${pr.fechas ? 'solo el ' + pr.fechas.map(ddmm).join(' y ') : pr.vig ? 'hasta el ' + ddmm(pr.vig.hasta) : 'mientras el súper la publique (la revisamos cada lunes)'}. Fuentes: ${fu}</span>
       </div>
     </li>`;
@@ -3307,6 +3311,43 @@ details.others[open] summary{margin-bottom:10px}
   // Google Maps busca la cadena cerca de la ubicación del usuario (en el celular abre la app de Maps).
   const MAPA_Q = {jumbo:'Jumbo supermercado', disco:'Disco supermercado', vea:'Supermercado Vea', coto:'Coto supermercado', carrefour:'Carrefour supermercado', dia:'Supermercado Día'};
   const mapaUrl = s => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(MAPA_Q[s] || (D.supers[s] ? D.supers[s].n : s));
+  // ---------- sucursal más cercana ----------
+  // Sucursales de OpenStreetMap (data/sucursales.json, una vez por mes). La ubicación se pide solo cuando la persona
+  // toca "Ver la sucursal más cercana", se redondea (~100 m) y queda guardada solo en este dispositivo: no se envía.
+  let SUC = null, sucCargando = null;
+  let miPos = store.get('deelo-ubicacion', null);
+  const cargarSuc = () => sucCargando || (sucCargando = fetch('data/sucursales.json', {cache: 'no-cache'}).then(r => r.ok ? r.json() : null).then(d => { SUC = d && d.s ? d : null; return SUC; }).catch(() => null));
+  if(miPos) cargarSuc().then(() => { if(SUC) repintarSuc(); });
+  function distM(a, b, c, d){ const R = 6371e3, r = x => x * Math.PI / 180, x = r(c - a), y = r(d - b), h = Math.sin(x / 2) ** 2 + Math.cos(r(a)) * Math.cos(r(c)) * Math.sin(y / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); }
+  // La sucursal de esa cadena más cerca de la persona: {d (metros), dir, lat, lon} o null.
+  function cercana(s){
+    if(!miPos || !SUC || !SUC.s[s] || !SUC.s[s].length) return null;
+    let m = null;
+    for(const x of SUC.s[s]){ const d = distM(miPos.lat, miPos.lon, x[0], x[1]); if(!m || d < m.d) m = {d, lat: x[0], lon: x[1], dir: x[2] || ''}; }
+    return m && m.d < 15000 ? m : null;
+  }
+  const fmtDist = d => d < 1000 ? `${Math.max(100, Math.round(d / 50) * 50)} m` : `${(d / 1000).toLocaleString('es-AR', {maximumFractionDigits: 1})} km`;
+  const PIN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
+  // Botón de sucursal para una cadena: la más cercana con distancia y "Cómo llegar", o el pedido de ubicación.
+  function sucHTML(s, cls){
+    const c = cercana(s);
+    if(c) return `<a class="${cls}" href="https://www.google.com/maps/dir/?api=1&destination=${c.lat},${c.lon}" target="_blank" rel="noopener" data-suc="${s}" data-slot="${s}">${PIN}<span>${esc(c.dir || D.supers[s].n)} · a ${fmtDist(c.d)} · <u>Cómo llegar</u></span></a>`;
+    if(store.get('deelo-ubicacion-no', false) || !('geolocation' in navigator)) return `<a class="${cls}" href="${mapaUrl(s)}" target="_blank" rel="noopener" data-slot="${s}">${PIN}Ver sucursales cercanas</a>`;
+    return `<button class="${cls}" type="button" data-ubic data-slot="${s}">${PIN}Ver la sucursal más cercana</button>`;
+  }
+  // Cambia solo los botones de sucursal (sin volver a dibujar la lista, así no se cierra lo que estaba abierto).
+  function repintarSuc(){ document.querySelectorAll('[data-slot]').forEach(el => { el.outerHTML = sucHTML(el.dataset.slot, el.classList[0]); }); }
+  document.addEventListener('click', ev => {
+    const b = ev.target.closest('[data-ubic]'); if(!b) return;
+    b.disabled = true; b.lastChild.textContent = 'Buscando tu ubicación…';
+    cargarSuc();
+    navigator.geolocation.getCurrentPosition(async p => {
+      miPos = {lat: Math.round(p.coords.latitude * 1000) / 1000, lon: Math.round(p.coords.longitude * 1000) / 1000, t: Date.now()};
+      store.set('deelo-ubicacion', miPos); store.set('deelo-ubicacion-no', false);
+      await cargarSuc(); evento('ubicacion', {ok: SUC ? 'si' : 'sin_datos'}); repintarSuc();
+    }, () => { store.set('deelo-ubicacion-no', true); evento('ubicacion', {ok: 'no'}); repintarSuc(); }, {enableHighAccuracy: false, timeout: 12000, maximumAge: 600000});
+  });
+  document.addEventListener('click', ev => { const a = ev.target.closest('[data-suc]'); if(a) evento('como-llegar', {super: a.dataset.suc}); });
   // Resultado del carrito: en qué súper conviene (una vez por carrito distinto).
   let cxFirma = '';
   function medirCarrito(best, n){
@@ -3354,7 +3395,7 @@ details.others[open] summary{margin-bottom:10px}
         <span class="tot"><b>${fmt(r.fin)}</b>${r.pr ? `<s>${fmt(r.sub)}</s>` : ''}</span>
         <span class="d">${fmtPr(r)}${r.pr && r.pr.pr.tope && r.pr.pr.tope.p && ['mes','semana'].includes(r.pr.pr.tope.p) ? `<span class="muted">El tope de ${fmt(r.pr.pr.tope.m)} es por ${r.pr.pr.tope.p}: se comparte con otras compras.</span>` : ''}${r.pr && r.pr.pr.min ? `<span class="muted">Compra mínima ${fmt(r.pr.pr.min)}.</span>` : ''}${r.promosQ.length ? `<span class="g">Incluye promo por cantidad en ${esc(r.promosQ.slice(0,2).join(', '))}${r.promosQ.length > 2 ? ' y ' + (r.promosQ.length - 2) + ' más' : ''}</span>` : ''}
           ${r.faltan.length ? `<span class="w">Tiene ${r.tiene} de ${items.length} · falta: ${esc(r.faltan.slice(0,3).join(', '))}${r.faltan.length > 3 ? ' y ' + (r.faltan.length - 3) + ' más' : ''}</span>` : `<span>${items.length === 1 ? 'Tiene el producto' : `Tiene los ${items.length} productos`}</span>`}</span>
-        <a class="mapa" href="${mapaUrl(r.s)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Ver sucursales cercanas</a>
+        ${sucHTML(r.s, 'mapa')}
       </div>`).join('');
     // Comprando cada cosa donde está más barata (sin topes)
     let split = 0, donde = new Set(), cubiertos = 0;
