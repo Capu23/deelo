@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-26",
+ "actualizado": "2026-11-27",
  "periodo": "Noviembre 2026",
  "vigencia": {
   "desde": "2020-06-01",
@@ -766,6 +766,30 @@
    }
   },
   {
+   "id": "mercadopago-carrefour-5",
+   "ent": "mercadopago",
+   "sup": [
+    "carrefour"
+   ],
+   "dias": [
+    5
+   ],
+   "pct": 10,
+   "tope": null,
+   "medio": "QR Mercado Pago con dinero en cuenta",
+   "tj": [],
+   "nota": "Exclusivo con dinero en cuenta.",
+   "conf": "oficial",
+   "fu": [
+    "of-carrefour"
+   ],
+   "origen": "carrefour",
+   "vig": {
+    "desde": "2026-09-01",
+    "hasta": "2026-12-01"
+   }
+  },
+  {
    "id": "anses-carrefour-123-jubilado",
    "ent": "anses",
    "sup": [
@@ -785,30 +809,6 @@
    "tj": [],
    "nota": "Tope de devolución: $35.000. No incluye carnicería, huevos de gallina, ni electro",
    "req": "jubilado",
-   "conf": "oficial",
-   "fu": [
-    "of-carrefour"
-   ],
-   "origen": "carrefour",
-   "vig": {
-    "desde": "2026-09-01",
-    "hasta": "2026-12-01"
-   }
-  },
-  {
-   "id": "mercadopago-carrefour-5",
-   "ent": "mercadopago",
-   "sup": [
-    "carrefour"
-   ],
-   "dias": [
-    5
-   ],
-   "pct": 10,
-   "tope": null,
-   "medio": "QR Mercado Pago con dinero en cuenta",
-   "tj": [],
-   "nota": "Exclusivo con dinero en cuenta.",
    "conf": "oficial",
    "fu": [
     "of-carrefour"
@@ -1212,6 +1212,28 @@
    "origen": "dia"
   },
   {
+   "id": "mercadopago-coto-67-presencial",
+   "ent": "mercadopago",
+   "sup": [
+    "coto"
+   ],
+   "dias": [
+    6,
+    7
+   ],
+   "pct": 15,
+   "tope": "app",
+   "medio": "Utilizando todos los medios de pago dentro de la app",
+   "tj": [],
+   "canal": "presencial",
+   "nota": "No válido para venta online (Coto Digital).",
+   "conf": "oficial",
+   "fu": [
+    "of-coto-dia"
+   ],
+   "origen": "coto-vigentes"
+  },
+  {
    "id": "visanfc-coto-4-presencial",
    "ent": "visanfc",
    "sup": [
@@ -1334,6 +1356,28 @@
    "origen": "coto-vigentes"
   },
   {
+   "id": "icbc-coto-67-presencial",
+   "ent": "icbc",
+   "sup": [
+    "coto"
+   ],
+   "dias": [
+    6,
+    7
+   ],
+   "pct": 20,
+   "tope": null,
+   "medio": "En un pago con tarjetas de crédito Visa y Mastercard",
+   "tj": [],
+   "canal": "presencial",
+   "nota": "Sin tope de reintegro. Válido para el Sábado 28/11/2026 y Domingo 29/11/2026.",
+   "conf": "oficial",
+   "fu": [
+    "of-coto-dia"
+   ],
+   "origen": "coto-vigentes"
+  },
+  {
    "id": "modo-coto-2-presencial",
    "ent": "modo",
    "sup": [
@@ -1425,6 +1469,27 @@
    "tj": [],
    "canal": "presencial",
    "nota": "Sin tope de reintegro. No acumula con promo Modo martes. Aplica para compras presenciales en un pago, en los productos sin oferta.",
+   "conf": "oficial",
+   "fu": [
+    "of-coto-dia"
+   ],
+   "origen": "coto-vigentes"
+  },
+  {
+   "id": "credito-coto-5-presencial",
+   "ent": "credito",
+   "sup": [
+    "coto"
+   ],
+   "dias": [
+    5
+   ],
+   "pct": 15,
+   "tope": null,
+   "medio": "En un pago con tarjetas de crédito.",
+   "tj": [],
+   "canal": "presencial",
+   "nota": "Sin tope de reintegro.",
    "conf": "oficial",
    "fu": [
     "of-coto-dia"
@@ -1795,28 +1860,6 @@
    ],
    "origen": "coto-vigentes",
    "hasta": true
-  },
-  {
-   "id": "icbc-coto-2026-11-282026-11-29-presencial",
-   "ent": "icbc",
-   "sup": [
-    "coto"
-   ],
-   "dias": [],
-   "fechas": [
-    "2026-11-28",
-    "2026-11-29"
-   ],
-   "pct": 20,
-   "tope": null,
-   "medio": "BANCO ICBC FIN DE SEMANA",
-   "tj": [],
-   "canal": "presencial",
-   "conf": "oficial",
-   "fu": [
-    "of-coto"
-   ],
-   "origen": "coto"
   },
   {
    "id": "cotoapp-coto-mie",
